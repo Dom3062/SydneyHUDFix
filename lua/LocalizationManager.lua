@@ -13,7 +13,7 @@ function LocalizationManager:text(string_id, ...)
 end
 
 function LocalizationManager:hud_assault_enhanced()
-	SydneyHUD._current_wave = managers.groupai:state()._wave_counter or 0
+	SydneyHUD._current_wave = managers.hud._hud_assault_corner._wave_number or 0
 
 	if managers.groupai:state():get_hunt_mode() then
 		SydneyHUD._current_phase = "Endless"
@@ -63,7 +63,7 @@ function LocalizationManager:hud_assault_enhanced()
 			end
 		end
 		if SydneyHUD:GetOption("enhanced_assault_count") then
-			finaltext = finaltext .. " /// Wave: " .. string.format("%d", groupaistate._wave_counter or 0)
+			finaltext = finaltext .. " /// Wave: " .. string.format("%d", SydneyHUD._current_wave)
 		end
 		return finaltext
 	end

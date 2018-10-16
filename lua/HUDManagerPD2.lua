@@ -113,7 +113,6 @@ end
 
 function HUDManager:sync_start_assault(...)
 	self._hud_heist_timer._heist_timer_panel:set_visible(not SydneyHUD:GetOption("center_assault_banner"))
-	managers.groupai:state()._wave_counter = (managers.groupai:state()._wave_counter or 0) + 1
 	sync_start_assault_original(self, ...)
 end
 

@@ -1,5 +1,3 @@
-
-local init_original = GroupAIStateBase.init
 local register_turret_original = GroupAIStateBase.register_turret
 local unregister_turret_original = GroupAIStateBase.unregister_turret
 local update_original = GroupAIStateBase.update
@@ -9,11 +7,6 @@ local convert_hostage_to_criminal_original = GroupAIStateBase.convert_hostage_to
 local sync_converted_enemy_original = GroupAIStateBase.sync_converted_enemy
 local set_whisper_mode_original = GroupAIStateBase.set_whisper_mode
 local _upd_criminal_suspicion_progress_original = GroupAIStateBase._upd_criminal_suspicion_progress
-
-function GroupAIStateBase:init(...)
-	self._wave_counter = 0
-	return init_original(self, ...)
-end
 
 function GroupAIStateBase:register_turret(unit, ...)
 	managers.gameinfo:event("turret", "add", tostring(unit:key()), unit)
@@ -72,7 +65,7 @@ end
 
 function GroupAIStateBase:set_whisper_mode(enabled, ...)
 	set_whisper_mode_original(self, enabled, ...)
-	if (enabled) then
+	if enabled then
 		managers.hud:set_hud_mode("stealth")
 	else
 		managers.hud:set_hud_mode("loud")
