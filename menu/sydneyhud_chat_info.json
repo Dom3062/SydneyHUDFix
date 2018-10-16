@@ -1,0 +1,140 @@
+{
+	"menu_id": "sydneyhud_chat_info",
+	"parent_menu_id": "sydneyhud_options",
+	"title": "sydneyhud_chat_info",
+	"description": "sydneyhud_chat_info_desc",
+	"items": [
+		{
+			"type": "toggle",
+			"id": "show_heist_time",
+			"title": "show_heist_time",
+			"description": "show_heist_time_desc",
+			"callback": "callback_show_heist_time",
+			"value": "show_heist_time",
+			"default_value": true
+		},
+		{
+			"type": "divider",
+			"size": 16
+		},
+		{
+			"type": "toggle",
+			"id": "assault_phase_chat_info",
+			"title": "assault_phase_chat_info",
+			"description": "assault_phase_chat_info_desc",
+			"callback": "callback_assault_phase_chat_info",
+			"value": "assault_phase_chat_info",
+			"default_value": true
+		},
+		{
+			"type": "toggle",
+			"id": "assault_phase_chat_info_feed",
+			"title": "assault_phase_chat_info_feed",
+			"description": "assault_phase_chat_info_feed_desc",
+			"callback": "callback_assault_phase_chat_info_feed",
+			"value": "assault_phase_chat_info_feed",
+			"default_value": true
+		},
+		{
+			"type": "divider",
+			"size": 16
+		},
+		{
+			"type": "toggle",
+			"id": "ecm_battery_chat_info",
+			"title": "ecm_battery_chat_info",
+			"description": "ecm_battery_chat_info_desc",
+			"callback": "callback_ecm_battery_chat_info",
+			"value": "ecm_battery_chat_info",
+			"default_value": true
+		},
+		{
+			"type": "toggle",
+			"id": "ecm_battery_chat_info_feed",
+			"title": "ecm_battery_chat_info_feed",
+			"description": "ecm_battery_chat_info_feed_desc",
+			"callback": "callback_ecm_battery_chat_info_feed",
+			"value": "ecm_battery_chat_info_feed",
+			"default_value": true
+		},
+		{
+			"type": "divider",
+			"size": 16
+		},
+		{
+			"type": "toggle",
+			"id": "down_warning_chat_info",
+			"title": "down_warning_chat_info",
+			"description": "down_warning_chat_info_desc",
+			"callback": "callback_down_warning_chat_info",
+			"value": "down_warning_chat_info",
+			"default_value": true
+		},
+		{
+			"type": "toggle",
+			"id": "down_warning_chat_info_feed",
+			"title": "down_warning_chat_info_feed",
+			"description": "down_warning_chat_info_feed_desc",
+			"callback": "callback_down_warning_chat_info_feed",
+			"value": "down_warning_chat_info_feed",
+			"default_value": true
+		},
+		{
+			"type": "divider",
+			"size": 16
+		},
+		{
+			"type": "toggle",
+			"id": "critical_down_warning_chat_info",
+			"title": "critical_down_warning_chat_info",
+			"description": "critical_down_warning_chat_info_desc",
+			"callback": "callback_critical_down_warning_chat_info",
+			"value": "critical_down_warning_chat_info",
+			"default_value": true
+		},
+		{
+			"type": "toggle",
+			"id": "critical_down_warning_chat_info_feed",
+			"title": "critical_down_warning_chat_info_feed",
+			"description": "critical_down_warning_chat_info_feed_desc",
+			"callback": "callback_critical_down_warning_chat_info_feed",
+			"value": "critical_down_warning_chat_info_feed",
+			"default_value": true
+		},
+		{
+			"type": "divider",
+			"size": 16
+		},
+		{
+			"type": "toggle",
+			"id": "replenished_chat_info",
+			"title": "replenished_chat_info",
+			"description": "replenished_chat_info_desc",
+			"callback": "callback_replenished_chat_info",
+			"value": "replenished_chat_info",
+			"default_value": true
+		},
+		{
+			"type": "toggle",
+			"id": "replenished_chat_info_feed",
+			"title": "replenished_chat_info_feed",
+			"description": "replenished_chat_info_feed_desc",
+			"callback": "callback_replenished_chat_info_feed",
+			"value": "replenished_chat_info_feed",
+			"default_value": true
+		},
+		{
+			"type": "divider",
+			"size": 16
+		},
+		{
+			"type": "toggle",
+			"id": "inspire_ace_chat_info",
+			"title": "inspire_ace_chat_info",
+			"description": "inspire_ace_chat_info_desc",
+			"callback": "callback_inspire_ace_chat_info",
+			"value": "inspire_ace_chat_info",
+			"default_value": true
+		}
+	]
+}
