@@ -1,4 +1,3 @@
-
 local init_original = HUDAssaultCorner.init
 local _start_assault_original = HUDAssaultCorner._start_assault
 
@@ -99,4 +98,23 @@ function HUDAssaultCorner:_start_assault(text_list, ...)
 		end
 	end
 	return _start_assault_original(self, text_list, ...)
+end
+
+function HUDAssaultCorner:_set_hostage_offseted(is_offseted)
+	local hostage_panel = self._hud_panel:child("hostages_panel")
+	self._remove_hostage_offset = nil
+
+    if not SydneyHUD:GetOption("center_assault_banner") then
+	    hostage_panel:stop()
+        hostage_panel:animate(callback(self, self, "_offset_hostage", is_offseted))
+    end
+
+	local wave_panel = self._hud_panel:child("wave_panel")
+
+    if wave_panel then
+        if not SydneyHUD:GetOption("center_assault_banner") then
+		    wave_panel:stop()
+            wave_panel:animate(callback(self, self, "_offset_hostage", is_offseted))
+        end
+	end
 end
