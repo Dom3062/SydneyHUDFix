@@ -20,8 +20,8 @@
 		{
 			"type": "slider",
 			"id": "laser_color_r_snipers",
-			"title": "laser_color_r_snipers",
-			"description": "laser_color_r_snipers_desc",
+			"title": "color_red",
+			"description": "laser_color_laser_color",
 			"callback": "callback_laser_color_r_snipers",
 			"value": "laser_color_r_snipers",
 			"max": 1,
@@ -32,8 +32,8 @@
 		{
 			"type": "slider",
 			"id": "laser_color_g_snipers",
-			"title": "laser_color_g_snipers",
-			"description": "laser_color_g_snipers_desc",
+			"title": "color_green",
+			"description": "laser_color_laser_color",
 			"callback": "callback_laser_color_g_snipers",
 			"value": "laser_color_g_snipers",
 			"max": 1,
@@ -44,8 +44,8 @@
 		{
 			"type": "slider",
 			"id": "laser_color_b_snipers",
-			"title": "laser_color_b_snipers",
-			"description": "laser_color_b_snipers_desc",
+			"title": "color_blue",
+			"description": "laser_color_laser_color",
 			"callback": "callback_laser_color_b_snipers",
 			"value": "laser_color_b_snipers",
 			"max": 1,
@@ -60,8 +60,8 @@
 		{
 			"type": "toggle",
 			"id": "laser_color_rainbow_snipers",
-			"title": "laser_color_rainbow_snipers",
-			"description": "laser_color_rainbow_snipers_desc",
+			"title": "laser_color_rainbow",
+			"description": "laser_color_rainbow_desc",
 			"callback": "callback_laser_color_rainbow_snipers",
 			"value": "laser_color_rainbow_snipers",
 			"default_value": true
@@ -69,8 +69,8 @@
 		{
 			"type": "slider",
 			"id": "laser_color_a_snipers",
-			"title": "laser_color_a_snipers",
-			"description": "laser_color_a_snipers_desc",
+			"title": "laser_color_ray_alpha",
+			"description": "laser_color_ray_alpha_desc",
 			"callback": "callback_laser_color_a_snipers",
 			"value": "laser_color_a_snipers",
 			"max": 1,
@@ -81,8 +81,8 @@
 		{
 			"type": "slider",
 			"id": "laser_glow_snipers",
-			"title": "laser_glow_snipers",
-			"description": "laser_glow_snipers_desc",
+			"title": "laser_glow",
+			"description": "laser_glow_desc",
 			"callback": "callback_laser_glow_snipers",
 			"value": "laser_glow_snipers",
 			"max": 1,
@@ -93,8 +93,8 @@
 		{
 			"type": "slider",
 			"id": "laser_light_snipers",
-			"title": "laser_light_snipers",
-			"description": "laser_light_snipers_desc",
+			"title": "laser_light",
+			"description": "laser_light_desc",
 			"callback": "callback_laser_light_snipers",
 			"value": "laser_light_snipers",
 			"max": 10,

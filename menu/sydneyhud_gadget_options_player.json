@@ -20,8 +20,8 @@
 		{
 			"type": "slider",
 			"id": "laser_color_r",
-			"title": "laser_color_r",
-			"description": "laser_color_r_desc",
+			"title": "color_red",
+			"description": "laser_color_laser_color",
 			"callback": "callback_laser_color_r",
 			"value": "laser_color_r",
 			"max": 1,
@@ -32,8 +32,8 @@
 		{
 			"type": "slider",
 			"id": "laser_color_g",
-			"title": "laser_color_g",
-			"description": "laser_color_g_desc",
+			"title": "color_green",
+			"description": "laser_color_laser_color",
 			"callback": "callback_laser_color_g",
 			"value": "laser_color_g",
 			"max": 1,
@@ -44,8 +44,8 @@
 		{
 			"type": "slider",
 			"id": "laser_color_b",
-			"title": "laser_color_b",
-			"description": "laser_color_b_desc",
+			"title": "color_blue",
+			"description": "laser_color_laser_color",
 			"callback": "callback_laser_color_b",
 			"value": "laser_color_b",
 			"max": 1,
@@ -69,8 +69,8 @@
 		{
 			"type": "slider",
 			"id": "laser_color_a",
-			"title": "laser_color_a",
-			"description": "laser_color_a_desc",
+			"title": "laser_color_ray_alpha",
+			"description": "laser_color_ray_alpha_desc",
 			"callback": "callback_laser_color_a",
 			"value": "laser_color_a",
 			"max": 1,

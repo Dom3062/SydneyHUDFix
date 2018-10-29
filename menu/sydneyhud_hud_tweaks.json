@@ -58,8 +58,8 @@
 			"description": "health_bar_color_desc",
 			"callback": "callback_health_bar_color",
 			"items": [
-				"health_bar_color_green",
-				"health_bar_color_blue",
+				"color_green",
+				"color_blue",
 				"health_bar_color_mix_green",
 				"health_bar_color_mix_blue"
 			],
