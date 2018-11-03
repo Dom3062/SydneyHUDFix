@@ -38,5 +38,5 @@ function DoctorBagBase:destroy(...)
 end
 
 Hooks:PostHook(DoctorBagBase, "take", "SydneyHUD:DoctorBag", function(self, unit)
-	SydneyHUD:Replenish(_G.LuaNetworking:LocalPeerID())
+	SydneyHUD:Replenish(LuaNetworking:LocalPeerID())
 end)

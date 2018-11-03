@@ -1,4 +1,3 @@
-
 local hudsuspicion_init_original = HUDSuspicion.init
 local hudsuspicions_animate_eye_original = HUDSuspicion.animate_eye
 local hudsuspicion_hide_original = HUDSuspicion.hide
@@ -106,7 +105,7 @@ end
 
 function HUDSuspicion:hide(...)
 	hudsuspicion_hide_original(self, ...)
-	if (self._text_animation) then
+	if self._text_animation then
 		self._animating_text = false
 		self._text_animation = nil
 	end
