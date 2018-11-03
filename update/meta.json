@@ -1,8 +1,8 @@
 [
     {
         "ident": "SydneyHUD",
-        "hash": "43e7cd36567c755be88e60bde45ba418527c692af982d45fbedb8b5a8c792772",
-        "patchnotes_url": "https://example.com/other-patchnotes.html",
-        "download_url": "https://example.com/other-download.zip"
+        "hash": "db6d475fb0be4b8c804436b4cc1a3e0639a216df2fcc45ffd37fce2029d99dce",
+        "patchnotes_url": "https://modworkshop.net/mydownloads.php?action=view_down&did=23831#changelog",
+        "download_url": "https://raw.githubusercontent.com/dominikvyhnak/SydneyHUDFix/master/update/SydneyHUD.zip"
     }
 ]
