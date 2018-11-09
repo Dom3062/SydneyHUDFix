@@ -2,6 +2,7 @@
 	"menu_id": "sydneyhud_options",
 	"parent_menu_id": "blt_options",
 	"title": "sydneyhud_options",
-	"description": "sydneyhud_options_desc",
+    "description": "sydneyhud_options_desc",
+    "back_callback" : "SydneyHUDSave",
 	"items": []
 }
