@@ -24,7 +24,8 @@ Hooks:Add("LocalizationManagerPostInit", "LocalizationManagerPostInit_sydneyhud"
 			break
 		end
 	end
-	loc:load_localization_file(SydneyHUD._path .. "lang/english.json", false)
+    loc:load_localization_file(SydneyHUD._path .. "lang/english.json", false)
+    loc:load_localization_file(SydneyHUD._path .. "lang/languages.json")
 end)
 
 Hooks:Add("MenuManagerBuildCustomMenus", "MenuManagerBuildCustomMenus_sydneyhud", function(menu_manager, nodes)
