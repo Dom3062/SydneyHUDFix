@@ -250,8 +250,7 @@ if not SydneyHUD.setup then
 	end
 
 	function SydneyHUD:DelayedCallsRemove(id)
-		local data = self._calls[id]
-		if data == nil then
+		if self._calls[id] == nil then
 			removals[id] = true
 		else
 			self._calls[id] = nil
@@ -276,13 +275,13 @@ if not SydneyHUD.setup then
 		self:LoadDefaults()
 		local file = io.open(self._data_path, "r")
 		if file then
-			local configt = json.decode(file:read("*all"))
-			file:close()
-			for k,v in pairs(configt) do
-				self._data[k] = v
-			end
+            for k, v in pairs(json.decode(file:read("*all"))) do
+                if self._data[k] ~= nil then
+                    self._data[k] = v
+                end
+            end
+            file:close()
 		end
-		self:Save()
 		self:CheckPoco()
 	end
 
@@ -297,7 +296,7 @@ if not SydneyHUD.setup then
 	end
 
 	function SydneyHUD:InitAllMenus()
-		for _,menu in pairs(self._menus) do
+		for _, menu in pairs(self._menus) do
 			MenuHelper:LoadFromJsonFile(self._path .. "menu/" .. menu .. ".json", self, self._data)
 		end
 	end
