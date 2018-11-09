@@ -328,11 +328,11 @@ if not SydneyHUD.setup then
 		if file and self._fixed_poco_conf then
 			file:write(json.encode(self._fixed_poco_conf))
 			file:close()
-			local menu_title = "SydneyHUD: PocoHUD config fixed"
-			local menu_message = "Config fixed. You NEED to restart the game NOW, to finish the process."
+			local menu_title = managers.localization:text("sydneyhud_pocohud_config_fixed")
+			local menu_message = managers.localization:text("sydneyhud_pocohud_confix_fixed_desc")
 			local menu_options = {
 				[1] = {
-					text = "ok, i understand",
+					text = managers.localization:text("sydneyhud_pocohud_i_understand"),
 					is_cancel_button = true,
 				}
 			}
