@@ -3,7 +3,6 @@ local init_original = WeaponLaser.init
 local update_original = WeaponLaser.update
 
 WeaponLaser._suffix_map = {
-	player = "",
 	default = "_others",
 	cop_sniper = "_snipers",
 	turret_module_active = "_turret",
@@ -37,7 +36,7 @@ function WeaponLaser:update(unit, t, dt, ...)
 			self._themes[theme] = self._default_themes[theme]
 		end
 	else
-		log("[SydneyHUD Warn] Ignoring unknown laser theme: \"" .. theme .. "\".")
+		--log("[SydneyHUD Warn] Ignoring unknown laser theme: \"" .. theme .. "\".")
 	end
 	self:set_color_by_theme(theme)
 end

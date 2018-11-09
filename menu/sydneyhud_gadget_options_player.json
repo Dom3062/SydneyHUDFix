@@ -15,46 +15,6 @@
 		},
 		{
 			"type": "divider",
-			"size": 32
-		},
-		{
-			"type": "slider",
-			"id": "laser_color_r",
-			"title": "color_red",
-			"description": "laser_color_laser_color",
-			"callback": "callback_laser_color_r",
-			"value": "laser_color_r",
-			"max": 1,
-			"min": 0,
-			"step": 0.01,
-			"default_value": 0
-		},
-		{
-			"type": "slider",
-			"id": "laser_color_g",
-			"title": "color_green",
-			"description": "laser_color_laser_color",
-			"callback": "callback_laser_color_g",
-			"value": "laser_color_g",
-			"max": 1,
-			"min": 0,
-			"step": 0.01,
-			"default_value": 1
-		},
-		{
-			"type": "slider",
-			"id": "laser_color_b",
-			"title": "color_blue",
-			"description": "laser_color_laser_color",
-			"callback": "callback_laser_color_b",
-			"value": "laser_color_b",
-			"max": 1,
-			"min": 0,
-			"step": 0.01,
-			"default_value": 0
-		},
-		{
-			"type": "divider",
 			"size": 16
 		},
 		{
