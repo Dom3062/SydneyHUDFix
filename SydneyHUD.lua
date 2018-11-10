@@ -146,7 +146,6 @@ if not SydneyHUD.setup then
 		["lib/units/beings/player/states/playerdriving"] = "PlayerDriving.lua",
 		["lib/units/beings/player/states/playermaskoff"] = "PlayerMaskOff.lua",
 		["lib/units/beings/player/states/playerstandard"] = "PlayerStandard.lua",
-		["lib/units/civilians/civiliandamage"] = "CivilianDamage.lua",
 		["lib/units/enemies/cop/copdamage"] = "CopDamage.lua",
 		["lib/units/equipment/ammo_bag/ammobagbase"] = "AmmoBagBase.lua",
 		["lib/units/equipment/bodybags_bag/bodybagsbagbase"] = "BodyBagBase.lua",
