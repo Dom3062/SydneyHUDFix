@@ -3,7 +3,6 @@ local init_original = WeaponLaser.init
 local update_original = WeaponLaser.update
 
 WeaponLaser._suffix_map = {
-	default = "_others",
 	cop_sniper = "_snipers",
 	turret_module_active = "_turret",
 	turret_module_rearming = "_turretr",
@@ -11,7 +10,7 @@ WeaponLaser._suffix_map = {
 }
 
 function WeaponLaser:init(...)
-	init_original(self, ...)
+    init_original(self, ...)
 	self._themes.player = deep_clone(self._themes.default)
 	self._default_themes = deep_clone(self._themes)
 	self:set_color_by_theme(self._theme_type)
@@ -19,8 +18,8 @@ end
 
 function WeaponLaser:update(unit, t, dt, ...)
 	update_original(self, unit, t, dt, ...)
-	local theme = self._theme_type
-	local suffix = self._suffix_map[theme]
+    local theme = self._theme_type
+    local suffix = self._suffix_map[theme]
 	if suffix then
 		if SydneyHUD:GetOption("enable_laser_options" .. suffix) then
 			local r, g, b = SydneyHUD:GetOption("laser_color_r" .. suffix), SydneyHUD:GetOption("laser_color_g" .. suffix), SydneyHUD:GetOption("laser_color_b" .. suffix)
