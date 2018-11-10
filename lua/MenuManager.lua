@@ -1,6 +1,6 @@
 local is_dlc_latest_locked_original = MenuCallbackHandler.is_dlc_latest_locked
 function MenuCallbackHandler:is_dlc_latest_locked(...)
-    return SydneyHUD:GetOption("remove_ads") or is_dlc_latest_locked_original(self, ...)
+    return SydneyHUD:GetOption("remove_ads") and false or is_dlc_latest_locked_original(self, ...)
 end
 
 --[[
