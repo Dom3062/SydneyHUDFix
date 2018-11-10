@@ -162,8 +162,8 @@
 		{
 			"type": "toggle",
 			"id": "laser_color_rainbow_turretr",
-			"title": "laser_color_rainbow_turretr",
-			"description": "laser_color_rainbow_turretr_desc",
+			"title": "laser_color_rainbow",
+			"description": "laser_color_rainbow_desc",
 			"callback": "callback_laser_color_rainbow_turretr",
 			"value": "laser_color_rainbow_turretr",
 			"default_value": true
