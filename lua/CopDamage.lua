@@ -130,9 +130,10 @@ function CopDamage:_process_kill(aggressor, i_body)
 		if panel_id then
 			local body_name = i_body and self._unit:body(i_body) and self._unit:body(i_body):name()
 			local headshot = self._head_body_name and body_name and body_name == self._ids_head_body_name or false
-			local is_special = managers.groupai:state()._special_unit_types[self._unit:base()._tweak_table] or false
-			managers.hud:increment_kill_count(panel_id, is_special, headshot)
-			return
+            local is_special = managers.groupai:state()._special_unit_types[self._unit:base()._tweak_table] or false
+            if not CopDamage.is_civilian(self._unit:base()._tweak_table) then
+                managers.hud:increment_kill_count(panel_id, is_special, headshot)
+            end
 		end
 	end
 end
