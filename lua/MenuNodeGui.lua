@@ -23,14 +23,12 @@ function MenuNodeMainGui:_setup_item_rows(node, ...)
 				end
 			end
 		end
-		local conflict_found = nil
 		local conflicts = {}
 		local buff = SydneyHUD._fixed_poco_conf.buff
 		if buff then
 			if buff.hideInteractionCircle ~= nil then
 				SydneyHUD._fixed_poco_conf.buff.hideInteractionCircle = nil
 				table.insert(conflicts, "buff.hideInteractionCircle")
-				conflict_found = true
 			end
 		end
 		local game = SydneyHUD._fixed_poco_conf.game
@@ -38,12 +36,10 @@ function MenuNodeMainGui:_setup_item_rows(node, ...)
 			if game.interactionClickStick ~= false then
 				SydneyHUD._fixed_poco_conf.game.interactionClickStick = false
 				table.insert(conflicts, "game.interactionClickStick")
-				conflict_found = true
 			end
 			if game.truncateNames ~= nil then
 				SydneyHUD._fixed_poco_conf.game.truncateNames = nil
 				table.insert(conflicts, "game.truncateNames")
-				conflict_found = true
 			end
 		end
 		local playerBottom = SydneyHUD._fixed_poco_conf.playerBottom
@@ -51,79 +47,65 @@ function MenuNodeMainGui:_setup_item_rows(node, ...)
 			if playerBottom.showRank ~= false then
 				SydneyHUD._fixed_poco_conf.playerBottom.showRank = false
 				table.insert(conflicts, "playerBottom.showRank")
-				conflict_found = true
 			end
 			if playerBottom.uppercaseNames ~= false then
 				SydneyHUD._fixed_poco_conf.playerBottom.uppercaseNames = false
 				table.insert(conflicts, "playerBottom.uppercaseNames")
-				conflict_found = true
 			end
-		end
-		if conflict_found then
-			local menu_title = "SydneyHUD: PocoHUD config incompatible"
-			local menu_message = "Found some conflicting PocoHUD settings: " .. json.encode(conflicts) ..  " - Fixing these now."
+        end
+		if #conflicts ~= 0 then -- Some conflicts were found better fix it
+			local menu_title = managers.localization:text("sydneyhud_pocohud_conflicts_found")
+			local menu_message = managers.localization:text("sydneyhud_pocohud_conflicts_found_desc_1") .. json.encode(conflicts) .. managers.localization:text("sydneyhud_pocohud_conflicts_found_desc_2")
 			local menu_options = {
 				[1] = {
-					text = "ok",
+					text = managers.localization:text("sydneyhud_ok"),
 					is_cancel_button = true
 				}
 			}
 			QuickMenu:new(menu_title, menu_message, menu_options, true)
 			SydneyHUD:ApplyFixedPocoSettings()
 		end
-		local recommendation_found = nil
 		local recommendations = {}
-		buff = SydneyHUD._fixed_poco_conf.buff
 		if buff then
 			if buff.showBoost ~= false then
 				SydneyHUD._fixed_poco_conf.buff.showBoost = false
 				table.insert(recommendations, "buff.showBoost")
-				recommendation_found = true
 			end
 			if buff.showCharge ~= false then
 				SydneyHUD._fixed_poco_conf.buff.showCharge = false
 				table.insert(recommendations, "buff.showCharge")
-				recommendation_found = true
 			end
 			if buff.showECM ~= false then
 				SydneyHUD._fixed_poco_conf.buff.showECM = false
 				table.insert(recommendations, "buff.showECM")
-				recommendation_found = true
 			end
 			if buff.showInteraction ~= false then
 				SydneyHUD._fixed_poco_conf.buff.showInteraction = false
 				table.insert(recommendations, "buff.showInteraction")
-				recommendation_found = true
 			end
 			if buff.showReload ~= false then
 				SydneyHUD._fixed_poco_conf.buff.showReload = false
 				table.insert(recommendations, "buff.showReload")
-				recommendation_found = true
 			end
 			if buff.showShield ~= false then
 				SydneyHUD._fixed_poco_conf.buff.showShield = false
 				table.insert(recommendations, "buff.showShield")
-				recommendation_found = true
 			end
 			if buff.showStamina ~= false then
 				SydneyHUD._fixed_poco_conf.buff.showStamina = false
 				table.insert(recommendations, "buff.showStamina")
-				recommendation_found = true
 			end
 			if buff.showSwanSong ~= false then
 				SydneyHUD._fixed_poco_conf.buff.showSwanSong = false
 				table.insert(recommendations, "buff.showSwanSong")
-				recommendation_found = true
 			end
 			if buff.showTapeLoop ~= false then
 				SydneyHUD._fixed_poco_conf.buff.showTapeLoop = false
 				table.insert(recommendations, "buff.showTapeLoop")
-				recommendation_found = true
 			end
 			if buff.simpleBusyIndicator ~= false then
 				SydneyHUD._fixed_poco_conf.buff.simpleBusyIndicator = false
 				table.insert(recommendations, "buff.simpleBusyIndicator")
-				recommendation_found = true
 			end
 		end
 		playerBottom = SydneyHUD._fixed_poco_conf.playerBottom
@@ -131,50 +113,44 @@ function MenuNodeMainGui:_setup_item_rows(node, ...)
 			if not playerBottom.showDetectionRisk or playerBottom.showDetectionRisk > 0 then
 				SydneyHUD._fixed_poco_conf.playerBottom.showDetectionRisk = 0
 				table.insert(recommendations, "playerBottom.showDetectionRisk")
-				recommendation_found = true
 			end
 			if not playerBottom.showDowns or playerBottom.showDowns > 0 then
 				SydneyHUD._fixed_poco_conf.playerBottom.showDowns = 0
 				table.insert(recommendations, "playerBottom.showDowns")
-				recommendation_found = true
 			end
 			if not playerBottom.showInteraction or playerBottom.showInteraction > 0 then
 				SydneyHUD._fixed_poco_conf.playerBottom.showInteraction = 0
 				table.insert(recommendations, "playerBottom.showInteraction")
-				recommendation_found = true
 			end
 			if not playerBottom.showInteractionTime or playerBottom.showInteractionTime > 0 then
 				SydneyHUD._fixed_poco_conf.playerBottom.showInteractionTime = 0
 				table.insert(recommendations, "playerBottom.showInteractionTime")
-				recommendation_found = true
 			end
 			if not playerBottom.showKill or playerBottom.showKill > 0 then
 				SydneyHUD._fixed_poco_conf.playerBottom.showKill = 0
 				table.insert(recommendations, "playerBottom.showKill")
-				recommendation_found = true
 			end
 			if not playerBottom.showSpecial or playerBottom.showSpecial > 0 then
 				SydneyHUD._fixed_poco_conf.playerBottom.showSpecial = 0
 				table.insert(recommendations, "playerBottom.showSpecial")
-				recommendation_found = true
 			end
-		end
-		if recommendation_found and SydneyHUD:GetOption("show_poco_recommendations") then
-			local menu_title = "SydneyHUD: PocoHUD config redundant"
-			local menu_message = "Found some redundant PocoHUD settings: " .. json.encode(recommendations) ..  " - You don't need to fix these, but it's recommended, since they would just clutter the screen."
+        end
+		if #recommendations ~= 0 and SydneyHUD:GetOption("show_poco_recommendations") then
+			local menu_title = managers.localization:text("sydneyhud_pocohud_recommendations_found")
+			local menu_message = managers.localization:text("sydneyhud_pocohud_recommendations_found_desc_1") .. json.encode(recommendations) .. managers.localization:text("sydneyhud_pocohud_recommendations_found_desc_2")
 			local menu_options = {
 				[1] = {
-					text = "ok, fix recommendations",
+					text = managers.localization:text("sydneyhud_pocohud_recommendations_found_fix"),
 					callback = function()
 						SydneyHUD:ApplyFixedPocoSettings()
 					end
 				},
 				[2] = {
-					text = "no, keep these",
+					text = managers.localization:text("sydneyhud_pocohud_recommendations_found_keep"),
 					is_cancel_button = true
 				},
 				[3] = {
-					text = "no, keep these and don't remind me later",
+					text = managers.localization:text("sydneyhud_pocohud_recommendations_found_keep_and_dont_remind"),
 					callback = function()
 						SydneyHUD._data.show_poco_recommendations = false
 						SydneyHUD:Save()

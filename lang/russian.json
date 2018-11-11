@@ -310,7 +310,7 @@
 	"sydneyhud_reset_cancel": "Отмена",
 	"sydneyhud_reset_desc": "Вернуть настройки SydneyHUD по умолчанию",
 	"sydneyhud_reset_message": "Вы действительно хотите сбросить настройки SydneyHUD?\nNote: Требуется перезапустить игру!",
-	"sydneyhud_reset_ok": "Да",
+	"sydneyhud_reset_yes": "Да",
 	"tab_font_size": "Шрифт статистики",
 	"tab_font_size_desc": "Изменить размер шрифта статистики (горячая клавиша Tab)",
 	"truncate_name_tags": "Удалять теги из имен",

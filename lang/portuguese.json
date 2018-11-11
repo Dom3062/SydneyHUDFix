@@ -310,7 +310,7 @@
 	"sydneyhud_reset_cancel": "Cancelar",
 	"sydneyhud_reset_desc": "Configura todas as opções do SydneyHUD para o padrão",
 	"sydneyhud_reset_message": "Você quer resetar todas as opções do SydneyHUD?\nNota: Precisa reiniciar!",
-	"sydneyhud_reset_ok": "Sim",
+	"sydneyhud_reset_yes": "Sim",
 	"tab_font_size": "Tamanho da fonte do Tab stats",
 	"tab_font_size_desc": "Altera o Tamanho da fonte do Tab stats",
 	"truncate_name_tags": "Truncar tags",

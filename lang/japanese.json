@@ -310,7 +310,7 @@
 	"sydneyhud_reset_cancel": "キャンセル",
 	"sydneyhud_reset_desc": "SydneyHUDの全ての設定をデフォルトに戻します。",
 	"sydneyhud_reset_message": "本当にSydneyHUDの全ての設定をデフォルトに戻しますか?\n注意: 再起動が必要です!",
-	"sydneyhud_reset_ok": "はい",
+	"sydneyhud_reset_yes": "はい",
 	"tab_font_size": "Tabステータスフォントの大きさ",
 	"tab_font_size_desc": "Tabメニューのフォントの大きさを変更します。",
 	"truncate_name_tags": "Truncate name tags",

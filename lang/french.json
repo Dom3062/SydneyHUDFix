@@ -310,7 +310,7 @@
 	"sydneyhud_reset_cancel": "Annuler",
 	"sydneyhud_reset_desc": "Définit toutes les options de SydneyHUD par défaut",
 	"sydneyhud_reset_message": "Êtes-vous sûr de réinitialiser toutes les options de SydneyHUD?\nNote: Redémarrage requis!",
-	"sydneyhud_reset_ok": "Oui",
+	"sydneyhud_reset_yes": "Oui",
 	"tab_font_size": "Taille de la police des stats",
 	"tab_font_size_desc": "Change la taille de la police du menu Tab",
 	"truncate_name_tags": "Tronque les tags de clans",

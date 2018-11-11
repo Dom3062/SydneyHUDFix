@@ -236,46 +236,10 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_sydneyhud", function(m
     MenuCallbackHandler.callback_auto_laser = function(self, item)
         SydneyHUD._data.auto_laser = item:value() == "on"
     end
+    MenuCallbackHandler.callback_set_gadget_id_on = function(self, item)
+        SydneyHUD._data.set_gadget_id_on = item:value()
+    end
 
-    MenuCallbackHandler.callback_enable_laser_options = function(self, item)
-        SydneyHUD._data.enable_laser_options = item:value() == "on"
-    end
-    MenuCallbackHandler.callback_laser_color_rainbow = function(self, item)
-        SydneyHUD._data.laser_color_rainbow = item:value() == "on"
-    end
-    MenuCallbackHandler.callback_laser_color_a = function(self, item)
-        SydneyHUD._data.laser_color_a = item:value()
-    end
-    MenuCallbackHandler.callback_laser_glow = function(self, item)
-        SydneyHUD._data.laser_glow = item:value()
-    end
-    MenuCallbackHandler.callback_laser_light = function(self, item)
-        SydneyHUD._data.laser_light = item:value()
-    end
-    MenuCallbackHandler.callback_enable_laser_options_others = function(self, item)
-        SydneyHUD._data.enable_laser_options_others = item:value() == "on"
-    end
-    MenuCallbackHandler.callback_laser_color_r_others = function(self, item)
-        SydneyHUD._data.laser_color_r_others = item:value()
-    end
-    MenuCallbackHandler.callback_laser_color_g_others = function(self, item)
-        SydneyHUD._data.laser_color_g_others = item:value()
-    end
-    MenuCallbackHandler.callback_laser_color_b_others = function(self, item)
-        SydneyHUD._data.laser_color_b_others = item:value()
-    end
-    MenuCallbackHandler.callback_laser_color_rainbow_others = function(self, item)
-        SydneyHUD._data.laser_color_rainbow_others = item:value() == "on"
-    end
-    MenuCallbackHandler.callback_laser_color_a_others = function(self, item)
-        SydneyHUD._data.laser_color_a_others = item:value()
-    end
-    MenuCallbackHandler.callback_laser_glow_others = function(self, item)
-        SydneyHUD._data.laser_glow_others = item:value()
-    end
-    MenuCallbackHandler.callback_laser_light_others = function(self, item)
-        SydneyHUD._data.laser_light_others = item:value()
-    end
     MenuCallbackHandler.callback_enable_laser_options_snipers = function(self, item)
         SydneyHUD._data.enable_laser_options_snipers = item:value() == "on"
     end
@@ -613,7 +577,7 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_sydneyhud", function(m
         local menu_message = managers.localization:text("sydneyhud_reset_message")
         local menu_options = {
             [1] = {
-                text = managers.localization:text("sydneyhud_reset_ok"),
+                text = managers.localization:text("sydneyhud_reset_yes"),
                 callback = function()
                     SydneyHUD:LoadDefaults()
                     SydneyHUD:ForceReloadAllMenus()
