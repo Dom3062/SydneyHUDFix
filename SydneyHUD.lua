@@ -368,8 +368,7 @@ if not SydneyHUD.setup then
 	end
 
 	function SydneyHUD:GetVersion()
-		local id = string.match(self._path, "(%w+)[\\/]$") or "SydneyHUD"
-		local mod = BLT.Mods:GetMod(id)
+		local mod = BLT.Mods:GetMod("SydneyHUD")
 		return tostring(mod and mod:GetVersion() or "(n/a)")
 	end
 
@@ -519,7 +518,6 @@ if not SydneyHUD.setup then
 		return peer and peer:id() or 0
 	end
 
-	SydneyHUD:Load()
 	SydneyHUD.setup = true
 	log(SydneyHUD.info .. "SydneyHUD loaded.")
 end
