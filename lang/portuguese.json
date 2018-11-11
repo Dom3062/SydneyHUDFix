@@ -178,8 +178,6 @@
 	"show_client_ranks_desc": "Mostrar o rank dos colegas de time antes do nome",
 	"show_damage_popup": "Popup de dano",
 	"show_damage_popup_desc": "Mostrar o popup de dano",
-	"show_detection_risk": "Risco de detecção / contador de quedas",
-	"show_detection_risk_desc": "Mostra o risco de detecção e a contagem de quedas",
 	"show_ecm_retrigger": "Mostrar o ECM reativado",
 	"show_ecm_retrigger_desc": "Atraso para contagem regressiva do seu próprio ECM feedback ativado",
 	"show_ecms": "Mostrar ECM's",

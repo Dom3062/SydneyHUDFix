@@ -53,6 +53,6 @@
 			"callback": "callback_auto_laser",
 			"value": "auto_laser",
 			"default_value": true
-		}
+        }
 	]
 }

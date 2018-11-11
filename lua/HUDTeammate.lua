@@ -77,16 +77,12 @@
 	end
 
 	function HUDTeammate:_animate_glow( glow )
+        local t = 0
 
-	local t = 0
-
-	while true do
-
-		t = t + coroutine.yield()
-		glow:set_alpha( ( math.abs( math.sin( ( 4 + t ) * 360 * 4 / 4 ) ) ) )
-
-	end
-
+        while true do
+            t = t + coroutine.yield()
+            glow:set_alpha( ( math.abs( math.sin( ( 4 + t ) * 360 * 4 / 4 ) ) ) )
+        end
 	end
 
 	function HUDTeammate:_init_stamina_meter()
@@ -121,14 +117,10 @@
 	end
 
 	function HUDTeammate:_init_revivecount()
-		local visibility = 1
-		if not SydneyHUD:GetOption("show_detection_risk") then
-			visibility = 0
-		end
 		self._detection_counter = self._player_panel:child("radial_health_panel"):text({
 			name = "detection_risk",
-			alpha = visibility,
-			visible = managers.groupai:state():whisper_mode(),
+			alpha = 1,
+			visible = SydneyHUD:GetOption("show_detection_rate") and managers.groupai:state():whisper_mode() or false,
 			layer = 1,
 			Color = Color.white,
 			w = self._player_panel:child("radial_health_panel"):w(),
@@ -142,8 +134,8 @@
 		})
 		self._revives_counter = self._player_panel:child("radial_health_panel"):text({
 			name = "revives_counter",
-			alpha = visibility,
-			visible = not managers.groupai:state():whisper_mode(),
+			alpha = 1,
+			visible = SydneyHUD:GetOption("show_downs_left") and not managers.groupai:state():whisper_mode() or false,
 			text = "0",
 			layer = 1,
 			color = Color.white,
@@ -528,13 +520,13 @@
 	end
 
 	function HUDTeammate:set_revive_visibility(visible)
-		if self._revives_counter then
+		if SydneyHUD:GetOption("show_downs_left") and self._revives_counter then
 			self._revives_counter:set_visible(not managers.groupai:state():whisper_mode() and visible and not self._is_in_custody)
 		end
 	end
 
 	function HUDTeammate:set_detection_visibility(visible)
-		if self._detection_counter then
+		if SydneyHUD:GetOption("show_detection_rate") and self._detection_counter then
 			self._detection_counter:set_visible(managers.groupai:state():whisper_mode() and visible and not self._is_in_custody)
 		end
 	end

@@ -428,8 +428,11 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_sydneyhud", function(m
     MenuCallbackHandler.callback_colorize_names = function(self, item)
         SydneyHUD._data.colorize_names = item:value() == "on"
     end
-    MenuCallbackHandler.callback_show_detection_risk = function(self, item)
-        SydneyHUD._data.show_detection_risk = item:value() == "on"
+    MenuCallbackHandler.callback_show_detection_rate = function(self, item)
+        SydneyHUD._data.show_detection_rate = item:value() == "on"
+    end
+    MenuCallbackHandler.callback_show_downs_left = function(self, item)
+        SydneyHUD._data.show_downs_left = item:value() == "on"
     end
     MenuCallbackHandler.callback_show_stamina_meter = function(self, item)
         SydneyHUD._data.show_stamina_meter = item:value() == "on"

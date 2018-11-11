@@ -34,15 +34,24 @@
 			"value": "show_armor_timer",
 			"default_value": true
 		},
-		{
-			"type": "toggle",
-			"id": "show_detection_risk",
-			"title": "show_detection_risk",
-			"description": "show_detection_risk_desc",
-			"callback": "callback_show_detection_risk",
-			"value": "show_detection_risk",
+        {
+            "type": "toggle",
+			"id": "show_detection_rate",
+			"title": "show_detection_rate",
+			"description": "show_detection_rate_desc",
+			"callback": "callback_show_detection_rate",
+			"value": "show_detection_rate",
 			"default_value": true
-		},
+        },
+        {
+            "type": "toggle",
+			"id": "show_downs_left",
+			"title": "show_downs_left",
+			"description": "show_downs_left_desc",
+			"callback": "callback_show_downs_left",
+			"value": "show_downs_left",
+			"default_value": true
+        }
 		{
 			"type": "toggle",
 			"id": "show_underdog_aced",
