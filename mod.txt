@@ -13,14 +13,14 @@
             "host": {
                 "meta": "https://raw.githubusercontent.com/dominikvyhnak/SydneyHUDFix/master/update/meta.json"
             }
-	    {
-		"identifier" : "fed_inv",
-		"install_dir" : "assets/mod_overrides/",
-		"install_folder" : "Federal Inventory",
-		"display_name" : "Federal Inventory"
+        },
+        {
+            "identifier" : "fed_inv",
+            "install_dir" : "assets/mod_overrides/",
+            "install_folder" : "Federal Inventory",
+            "display_name" : "Federal Inventory"
 	    }
-        }
-    ]
+    ],
 	"pre_hooks": [
 		{"script_path": "SydneyHUD.lua", "hook_id": "core/lib/utils/coreapp"},
 		{"script_path": "lua/Setup.lua", "hook_id": "lib/setups/setup"},
