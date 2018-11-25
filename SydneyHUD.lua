@@ -58,6 +58,7 @@ if not SydneyHUD.setup then
 	}
 
 	-- var for util
+	SydneyHUD.assets_path = "./assets/mod_overrides/"
 	SydneyHUD._calls = SydneyHUD._calls or {}
 	SydneyHUD._chat = {}
 	SydneyHUD._path = ModPath
