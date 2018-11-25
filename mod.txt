@@ -13,6 +13,12 @@
             "host": {
                 "meta": "https://raw.githubusercontent.com/dominikvyhnak/SydneyHUDFix/master/update/meta.json"
             }
+	    {
+		"identifier" : "fed_inv",
+		"install_dir" : "assets/mod_overrides/",
+		"install_folder" : "Federal Inventory",
+		"display_name" : "Federal Inventory"
+	    }
         }
     ]
 	"pre_hooks": [
