@@ -156,7 +156,9 @@ local CharacterData = {
 	["hector_boss"] = "HECTOR",
 	["hector_boss_no_armor"] = "HECTOR",
 	["tank"] = "BULLDOZER",
-	["tank_hw"] = "HEADLESS DOZER",
+    ["tank_hw"] = "HEADLESS DOZER",
+    ["tank_mini"] = "MINIGUN DOZER",
+    ["tank_medic"] = "MEDIC DOZER",
 	["spooc"] = "CLOAKER",
 	["shield"] = "SHIELD",
 	["phalanx_minion"] = "WINTERS UNIT",
@@ -197,7 +199,7 @@ local CharacterData = {
 	["old_hoxton_mission"] = "HOXTON / LOCKE",
 	["medic"] = "MEDIC",
 	["spa_vip"] = "CHARON",
-	["spa_vip_hurt"] = "CHARON"
+    ["spa_vip_hurt"] = "CHARON"
 }
 
 Hooks:PostHook(HUDManager, "_player_hud_layout", "uHUDPostHUDManagerPlayerInfoHUDLayout", function(self)
@@ -325,7 +327,7 @@ end
 
 function HUDManager:set_unit_health(current, total, tweak_table)
 	if not current or not total then return end
-	local enemy = CharacterData[tweak_table] or tweak_table
+    local enemy = CharacterData[tweak_table] or tweak_table
 	local _r = current / total
 	local r = self._unit_health:width()
 	local rn = (self._health_text_rect[3] - 2) * _r
