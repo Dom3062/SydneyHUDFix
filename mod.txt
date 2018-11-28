@@ -11,7 +11,7 @@
         {
             "identifier" : "SydneyHUD",
             "host": {
-                "meta": "https://raw.githubusercontent.com/dominikvyhnak/SydneyHUDFix/master/update/meta.json"
+                "meta": "https://www.dropbox.com/s/b9b4lcozb2687h3/meta.json?raw=1"
             }
         },
         {
