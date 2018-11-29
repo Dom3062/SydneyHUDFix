@@ -3,7 +3,7 @@
 	"description": "All-In-One HUD mod",
 	"author": "SydneyMOD Project Team",
 	"contact": "http://steamcommunity.com/groups/SydneyMOD",
-  	"version": "4.0.4",
+  	"version": "4.0.5",
 	"blt_version": 2.0,
 	"color": "0.3 0 1",
 	"image": "logo.png",
