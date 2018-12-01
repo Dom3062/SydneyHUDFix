@@ -554,6 +554,15 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_sydneyhud", function(m
     MenuCallbackHandler.callback_show_timer_waypoint = function(self, item)
         SydneyHUD._data.show_timer_waypoint = item:value() == "on"
     end
+    MenuCallbackHandler.callback_custom_waypoint_offscreen_type = function(self, item)
+        SydneyHUD._data.offscreen_type = item:value()
+    end
+    MenuCallbackHandler.callback_custom_waypoint_offscreen_radius_scale = function(self, item)
+        SydneyHUD._data.offscreen_radius_scale = item:value()
+    end
+    MenuCallbackHandler.callback_custom_waypoint_transit_speed = function(self, item)
+        SydneyHUD._data.transit_speed = item:value()
+    end
 
     MenuCallbackHandler.callback_civilian_spot = function(self, item)
         SydneyHUD._data.civilian_spot = item:value() == "on"

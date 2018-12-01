@@ -105,12 +105,18 @@ else
 		end
 	end
 
-
 	CustomWaypoint = CustomWaypoint or class()
 
-	CustomWaypoint.OFFSCREEN_TYPE = "border"	--circle, ellipse, border
-	CustomWaypoint.OFFSCREEN_RADIUS_SCALE = 1	--Radius multiplier for circle/ellipse offscreen size
-	CustomWaypoint.TRANSIT_SPEED = 0.35			--Transition time from offscreen position to onscreen position when not using border offscreen mode
+	local table =
+	{
+		[1] = "circle",
+		[2] = "ellipse",
+		[3] = "border"
+	}
+
+	CustomWaypoint.OFFSCREEN_TYPE = table[math.clamp(SydneyHUD:GetOption("offscreen_type"), 1, 3)]	--circle, ellipse, border
+	CustomWaypoint.OFFSCREEN_RADIUS_SCALE = SydneyHUD:GetOption("offscreen_radius_scale")	--Radius multiplier for circle/ellipse offscreen size
+	CustomWaypoint.TRANSIT_SPEED = SydneyHUD:GetOption("transit_speed")			--Transition time from offscreen position to onscreen position when not using border offscreen mode
 
 	function CustomWaypoint:init(id, ws, data)
 		data = data or {}
