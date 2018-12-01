@@ -52,7 +52,6 @@ end)
     Setup our menu callbacks, load our saved data, and build the menu from our json file.
 ]]
 Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_sydneyhud", function(menu_manager)
-
     --[[
         Setup our callbacks as defined in our item callback keys, and perform our logic on the data retrieved.
     ]]
@@ -555,6 +554,7 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_sydneyhud", function(m
     MenuCallbackHandler.callback_show_timer_waypoint = function(self, item)
         SydneyHUD._data.show_timer_waypoint = item:value() == "on"
     end
+
     MenuCallbackHandler.callback_civilian_spot = function(self, item)
         SydneyHUD._data.civilian_spot = item:value() == "on"
     end
@@ -602,6 +602,5 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_sydneyhud", function(m
     --[[
         Load our previously saved data from our save file.
     ]]
-    SydneyHUD:Load()
     SydneyHUD:InitAllMenus()
 end)

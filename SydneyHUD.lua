@@ -519,6 +519,7 @@ if not SydneyHUD.setup then
 		return peer and peer:id() or 0
 	end
 
+    SydneyHUD:Load()
 	SydneyHUD.setup = true
 	log(SydneyHUD.info .. "SydneyHUD loaded.")
 end
