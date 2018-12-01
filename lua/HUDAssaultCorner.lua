@@ -87,34 +87,23 @@ function HUDAssaultCorner:_show_hostages(...)
 	return
 end
 
-function HUDAssaultCorner:_start_assault(text_list, ...)
-	if Network:is_server() then
-		-- Hack for Enhanced Assault Banner
-		-- this allows the LocationManager to reroute the call for the assault banner text.
-		for i = 1, 1000 do
-			if text_list[i] == "hud_assault_assault" then
-				text_list[i] = "hud_assault_enhanced"
-			end
-		end
-	end
-	return _start_assault_original(self, text_list, ...)
+if SydneyHUD:GetOption("enhanced_assault_banner") then
+    function HUDAssaultCorner:_start_assault(text_list, ...)
+        if Network:is_server() then
+            -- Hack for Enhanced Assault Banner
+            -- this allows the LocationManager to reroute the call for the assault banner text.
+            for i = 1, 1000 do
+                if text_list[i] == "hud_assault_assault" then
+                    text_list[i] = "hud_assault_enhanced"
+                end
+            end
+        end
+        return _start_assault_original(self, text_list, ...)
+    end
 end
 
-function HUDAssaultCorner:_set_hostage_offseted(is_offseted)
-	local hostage_panel = self._hud_panel:child("hostages_panel")
-	self._remove_hostage_offset = nil
-
-    if not SydneyHUD:GetOption("center_assault_banner") then
-	    hostage_panel:stop()
-        hostage_panel:animate(callback(self, self, "_offset_hostage", is_offseted))
+if SydneyHUD:GetOption("center_assault_banner") then
+    function HUDAssaultCorner:_set_hostage_offseted(is_offseted)
+        self:start_assault_callback()
     end
-
-	local wave_panel = self._hud_panel:child("wave_panel")
-
-    if wave_panel then
-        if not SydneyHUD:GetOption("center_assault_banner") then
-		    wave_panel:stop()
-            wave_panel:animate(callback(self, self, "_offset_hostage", is_offseted))
-        end
-	end
 end
