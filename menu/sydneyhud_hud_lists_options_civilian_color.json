@@ -4,11 +4,21 @@
 	"title": "sydneyhud_hud_lists_options_civilian_color",
 	"description": "sydneyhud_hud_lists_options_civilian_color_desc",
 	"items": [
+        {
+            "type": "multiple_choice",
+            "id": "civilian_color",
+            "description": "civilian_color_desc",
+            "title": "",
+            "items": [
+                "civilian_color"
+            ],
+            "value": "civilian_color"
+        },
 		{
 			"type": "slider",
 			"id": "civilian_color_r",
-			"title": "civilian_color_r",
-			"description": "civilian_color_r_desc",
+			"title": "color_red",
+			"description": "",
 			"callback": "callback_civilian_color_r",
 			"value": "civilian_color_r",
 			"max": 1,
@@ -19,8 +29,8 @@
 		{
 			"type": "slider",
 			"id": "civilian_color_g",
-			"title": "civilian_color_g",
-			"description": "civilian_color_g_desc",
+			"title": "color_green",
+			"description": "",
 			"callback": "callback_civilian_color_g",
 			"value": "civilian_color_g",
 			"max": 1,
@@ -30,9 +40,9 @@
 		},
 		{
 			"type": "slider",
-			"id": "civilian_color_b",
-			"title": "civilian_color_b",
-			"description": "civilian_color_b_desc",
+			"id": "color_blue",
+			"title": "color_blue",
+			"description": "",
 			"callback": "callback_civilian_color_b",
 			"value": "civilian_color_b",
 			"max": 1,
