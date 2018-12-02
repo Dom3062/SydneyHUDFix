@@ -51,7 +51,7 @@
 			"callback": "callback_show_downs_left",
 			"value": "show_downs_left",
 			"default_value": true
-        }
+        },
 		{
 			"type": "toggle",
 			"id": "show_underdog_aced",
