@@ -1,6 +1,6 @@
 function Ping()
-	local _ping = 0
-	if managers and Network and Network:is_client() then
+    if managers and Network and Network:is_client() then
+        local _ping = 0
 		if managers.network then
 			if managers.network:session() then
 				local peer = managers.network:session():peer(1) or {}
@@ -31,7 +31,7 @@ function Ping()
 		end
 		if managers.system_menu then
 			managers.system_menu:show(_dialog_data)
-		end
+        end
 	end
 end
 
