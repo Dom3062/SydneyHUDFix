@@ -28,26 +28,6 @@ Hooks:Add("MenuManagerBuildCustomMenus", "MenuManagerBuildCustomMenus_sydneyhud"
     end
 end)
 
-Hooks:Add("MenuManagerPopulateCustomMenus", "MenuManagerPopulateCustomMenus_sydneyhud", function(menu_manager, menu_nodes)
-    --[[
-        Add "Reset all options" to the sydneyhud main menu.
-    ]]
-    MenuHelper:AddButton({
-        id = "sydneyhud_reset",
-        title = "sydneyhud_reset",
-        desc = "sydneyhud_reset_desc",
-        callback = "callback_sydneyhud_reset",
-        menu_id = "sydneyhud_options",
-        priority = 100
-    })
-    MenuHelper:AddDivider({
-        id = "sydneyhud_reset_divider",
-        size = 16,
-        menu_id = "sydneyhud_options",
-        priority = 99
-    })
-end)
-
 --[[
     Setup our menu callbacks, load our saved data, and build the menu from our json file.
 ]]

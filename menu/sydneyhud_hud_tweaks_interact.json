@@ -52,12 +52,22 @@
 		{
 			"type": "divider",
 			"size": 16
-		},
+        },
+        {
+            "type": "multiple_choice",
+            "id": "interaction_color",
+            "description": "interaction_color_desc",
+            "title": "",
+            "items": [
+                "interaction_color"
+            ],
+            "value": "interaction_color"
+        },
 		{
 			"type": "slider",
 			"id": "interaction_color_r",
-			"title": "interaction_color_r",
-			"description": "interaction_color_r_desc",
+			"title": "color_red",
+			"description": "",
 			"callback": "callback_interaction_color_r",
 			"value": "interaction_color_r",
 			"max": 1,
@@ -68,8 +78,8 @@
 		{
 			"type": "slider",
 			"id": "interaction_color_g",
-			"title": "interaction_color_g",
-			"description": "interaction_color_g_desc",
+			"title": "color_green",
+			"description": "",
 			"callback": "callback_interaction_color_g",
 			"value": "interaction_color_g",
 			"max": 1,
@@ -80,8 +90,8 @@
 		{
 			"type": "slider",
 			"id": "interaction_color_b",
-			"title": "interaction_color_b",
-			"description": "interaction_color_b_desc",
+			"title": "color_blue",
+			"description": "",
 			"callback": "callback_interaction_color_b",
 			"value": "interaction_color_b",
 			"max": 1,
