@@ -1,35 +1,35 @@
 {
-	"menu_id": "sydneyhud_experimental",
-	"parent_menu_id": "sydneyhud_options",
-	"title": "sydneyhud_experimental",
-	"description": "sydneyhud_experimental_desc",
-	"items": [
-		{
-			"type": "toggle",
-			"id": "civilian_spot",
-			"title": "civilian_spot",
-			"description": "civilian_spot_desc",
-			"callback": "callback_civilian_spot",
-			"value": "civilian_spot",
-			"default_value": false
-		},
-		{
-			"type": "toggle",
-			"id": "civilian_spot_voice",
-			"title": "civilian_spot_voice",
-			"description": "civilian_spot_voice_desc",
-			"callback": "callback_civilian_spot_voice",
-			"value": "civilian_spot_voice",
-			"default_value": false
-		},
-		{
-			"type": "toggle",
-			"id": "new_icon",
-			"title": "new_icon",
-			"description": "new_icon_desc",
-			"callback": "callback_new_icon",
-			"value": "new_icon",
-			"default_value": false
-		}
-	]
+    "menu_id": "sydneyhud_experimental",
+    "parent_menu_id": "sydneyhud_options",
+    "title": "sydneyhud_experimental",
+    "description": "sydneyhud_experimental_desc",
+    "items": [
+        {
+            "type": "toggle",
+            "id": "civilian_spot",
+            "title": "civilian_spot",
+            "description": "civilian_spot_desc",
+            "callback": "callback_civilian_spot",
+            "value": "civilian_spot",
+            "default_value": false
+        },
+        {
+            "type": "toggle",
+            "id": "civilian_spot_voice",
+            "title": "civilian_spot_voice",
+            "description": "civilian_spot_voice_desc",
+            "callback": "callback_civilian_spot_voice",
+            "value": "civilian_spot_voice",
+            "default_value": false
+        },
+        {
+            "type": "toggle",
+            "id": "new_icon",
+            "title": "new_icon",
+            "description": "new_icon_desc",
+            "callback": "callback_new_icon",
+            "value": "new_icon",
+            "default_value": false
+        }
+    ]
 }

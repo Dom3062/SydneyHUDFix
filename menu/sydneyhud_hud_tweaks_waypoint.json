@@ -1,9 +1,9 @@
 {
-	"menu_id": "sydneyhud_hud_tweaks_waypoint",
-	"parent_menu_id": "sydneyhud_hud_tweaks",
-	"title": "sydneyhud_hud_tweaks_waypoint",
-	"description": "sydneyhud_hud_tweaks_waypoint_desc",
-	"items": [
+    "menu_id": "sydneyhud_hud_tweaks_waypoint",
+    "parent_menu_id": "sydneyhud_hud_tweaks",
+    "title": "sydneyhud_hud_tweaks_waypoint",
+    "description": "sydneyhud_hud_tweaks_waypoint_desc",
+    "items": [
         {
             "type": "multiple_choice",
             "id": "waypoint_color",
@@ -14,101 +14,101 @@
             ],
             "value": "waypoint_color"
         },
-		{
-			"type": "slider",
-			"id": "waypoint_color_r",
-			"title": "color_red",
-			"description": "",
-			"callback": "callback_waypoint_color_r",
-			"value": "waypoint_color_r",
-			"max": 1,
-			"min": 0,
-			"step": 0.01,
-			"default_value": 0
-		},
-		{
-			"type": "slider",
-			"id": "waypoint_color_g",
-			"title": "color_green",
-			"description": "",
-			"callback": "callback_waypoint_color_g",
-			"value": "waypoint_color_g",
-			"max": 1,
-			"min": 0,
-			"step": 0.01,
-			"default_value": 0.5
-		},
-		{
-			"type": "slider",
-			"id": "waypoint_color_b",
-			"title": "color_blue",
-			"description": "",
-			"callback": "callback_waypoint_color_b",
-			"value": "waypoint_color_b",
-			"max": 1,
-			"min": 0,
-			"step": 0.01,
-			"default_value": 1
-		},
-		{
-			"type": "toggle",
-			"id": "waypoint_deploy",
-			"title": "waypoint_deploy",
-			"description": "waypoint_deploy_desc",
-			"callback": "callback_show_deployable_waypoint",
-			"value": "show_deployable_waypoint",
-			"default_value": true
-		},
-		{
-			"type": "toggle",
-			"id": "waypoint_timer",
-			"title": "waypoint_timer",
-			"description": "waypoint_timer_desc",
-			"callback": "callback_show_timer_waypoint",
-			"value": "show_timer_waypoint",
-			"default_value": true
-		},
-		{
-			"type": "divider",
-			"size" : 16
-		},
-		{
-			"type": "multiple_choice",
-			"id": "custom_waypoint_offscreen_type",
-			"title": "custom_waypoint_offscreen_type",
-			"description": "custom_waypoint_offscreen_type_desc",
-			"callback": "callback_custom_waypoint_offscreen_type",
-			"items": [
-				"custom_waypoint_offscreen_type_circle",
-				"custom_waypoint_offscreen_type_ellipse",
-				"custom_waypoint_offscreen_type_border"
-			],
-			"value": "offscreen_type",
-			"default_value": 3
-		},
-		{
-			"type": "slider",
-			"id": "custom_waypoint_offscreen_radius_scale",
-			"title": "custom_waypoint_offscreen_radius_scale",
-			"description": "custom_waypoint_offscreen_radius_scale_desc",
-			"callback": "callback_custom_waypoint_offscreen_radius_scale",
-			"value": "offscreen_radius_scale",
-			"max": 2,
-			"min": 1,
-			"step": 0.01,
-			"default_value": 1
-		},
-		{
-			"type": "slider",
-			"id": "custom_waypoint_transit_speed",
-			"title": "custom_waypoint_transit_speed",
-			"description": "custom_waypoint_transit_speed_desc",
-			"callback": "callback_custom_waypoint_transit_speed",
-			"value": "transit_speed",
-			"max": 1,
-			"min": 0,
-			"step": 0.01,
-			"default_value": 0.35
-		}
-	]
+        {
+            "type": "slider",
+            "id": "waypoint_color_r",
+            "title": "color_red",
+            "description": "",
+            "callback": "callback_waypoint_color_r",
+            "value": "waypoint_color_r",
+            "max": 1,
+            "min": 0,
+            "step": 0.01,
+            "default_value": 0
+        },
+        {
+            "type": "slider",
+            "id": "waypoint_color_g",
+            "title": "color_green",
+            "description": "",
+            "callback": "callback_waypoint_color_g",
+            "value": "waypoint_color_g",
+            "max": 1,
+            "min": 0,
+            "step": 0.01,
+            "default_value": 0.5
+        },
+        {
+            "type": "slider",
+            "id": "waypoint_color_b",
+            "title": "color_blue",
+            "description": "",
+            "callback": "callback_waypoint_color_b",
+            "value": "waypoint_color_b",
+            "max": 1,
+            "min": 0,
+            "step": 0.01,
+            "default_value": 1
+        },
+        {
+            "type": "toggle",
+            "id": "waypoint_deploy",
+            "title": "waypoint_deploy",
+            "description": "waypoint_deploy_desc",
+            "callback": "callback_show_deployable_waypoint",
+            "value": "show_deployable_waypoint",
+            "default_value": true
+        },
+        {
+            "type": "toggle",
+            "id": "waypoint_timer",
+            "title": "waypoint_timer",
+            "description": "waypoint_timer_desc",
+            "callback": "callback_show_timer_waypoint",
+            "value": "show_timer_waypoint",
+            "default_value": true
+        },
+        {
+            "type": "divider",
+            "size" : 16
+        },
+        {
+            "type": "multiple_choice",
+            "id": "custom_waypoint_offscreen_type",
+            "title": "custom_waypoint_offscreen_type",
+            "description": "custom_waypoint_offscreen_type_desc",
+            "callback": "callback_custom_waypoint_offscreen_type",
+            "items": [
+                "custom_waypoint_offscreen_type_circle",
+                "custom_waypoint_offscreen_type_ellipse",
+                "custom_waypoint_offscreen_type_border"
+            ],
+            "value": "offscreen_type",
+            "default_value": 3
+        },
+        {
+            "type": "slider",
+            "id": "custom_waypoint_offscreen_radius_scale",
+            "title": "custom_waypoint_offscreen_radius_scale",
+            "description": "custom_waypoint_offscreen_radius_scale_desc",
+            "callback": "callback_custom_waypoint_offscreen_radius_scale",
+            "value": "offscreen_radius_scale",
+            "max": 2,
+            "min": 1,
+            "step": 0.01,
+            "default_value": 1
+        },
+        {
+            "type": "slider",
+            "id": "custom_waypoint_transit_speed",
+            "title": "custom_waypoint_transit_speed",
+            "description": "custom_waypoint_transit_speed_desc",
+            "callback": "callback_custom_waypoint_transit_speed",
+            "value": "transit_speed",
+            "max": 1,
+            "min": 0,
+            "step": 0.01,
+            "default_value": 0.35
+        }
+    ]
 }

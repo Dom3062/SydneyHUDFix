@@ -1,4 +1,3 @@
-
 local function format_time_string(value)
     local frmt_string
 

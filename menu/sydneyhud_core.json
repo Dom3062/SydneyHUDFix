@@ -1,24 +1,24 @@
 {
-	"menu_id": "sydneyhud_core",
-	"parent_menu_id": "sydneyhud_options",
-	"title": "sydneyhud_core",
-	"description": "sydneyhud_core_desc",
-	"items": [
-		{
-			"type": "multiple_choice",
-			"id": "sydneyhud_language",
-			"title": "sydneyhud_language",
-			"description": "sydneyhud_language_desc",
-			"callback": "callback_sydneyhud_language",
-			"items": [
-				"sydneyhud_language_english",
-				"sydneyhud_language_japanese",
-				"sydneyhud_language_french",
-				"sydneyhud_language_russian",
-				"sydneyhud_language_portuguese"
-			],
-			"value": "language",
-			"default_value": 1
-		}
-	]
+    "menu_id": "sydneyhud_core",
+    "parent_menu_id": "sydneyhud_options",
+    "title": "sydneyhud_core",
+    "description": "sydneyhud_core_desc",
+    "items": [
+        {
+            "type": "multiple_choice",
+            "id": "sydneyhud_language",
+            "title": "sydneyhud_language",
+            "description": "sydneyhud_language_desc",
+            "callback": "callback_sydneyhud_language",
+            "items": [
+                "sydneyhud_language_english",
+                "sydneyhud_language_japanese",
+                "sydneyhud_language_french",
+                "sydneyhud_language_russian",
+                "sydneyhud_language_portuguese"
+            ],
+            "value": "language",
+            "default_value": 1
+        }
+    ]
 }
