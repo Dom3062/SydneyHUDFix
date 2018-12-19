@@ -523,6 +523,125 @@ if not SydneyHUD.setup then
         return peer and peer:id() or 0
     end
 
+    function SydneyHUD:CreatePanel()
+        if self._panel or not managers.menu_component then
+            return
+        end
+        self._panel = managers.menu_component._ws:panel():panel()
+    end
+
+    function SydneyHUD:DestroyPanel()
+        if not alive(self._panel) then
+            return
+        end
+        self._panel:clear()
+        self.color_box = nil
+        self.color_box_2 = nil
+        self.color_box_3 = nil
+        self.text_box = nil
+        self.text_box_2 = nil
+        self.text_box_3 = nil
+        self._panel:parent():remove(self._panel)
+        self._panel = nil
+    end
+
+    function SydneyHUD:CreateBitmaps()
+        if alive(self._panel) and not self.color_box then
+            self.color_box = self:CreateBitmap(Color.white, 0.10)
+            self.color_box_2 = self:CreateBitmap(Color.white, 0.20)
+            self.color_box_3 = self:CreateBitmap(Color.white, 0.30)
+        end
+    end
+
+    function SydneyHUD:CreateTexts()
+        if alive(self._panel) and not self.text_box then
+            self.text_box = self:CreateText(self:GetText("enable_laser_options_turret"), 0.12, 0.25)
+            self.text_box_2 = self:CreateText(self:GetText("enable_laser_options_turretr"), 0.22, 0.25)
+            self.text_box_3 = self:CreateText(self:GetText("enable_laser_options_turretm"), 0.32, 0.25)
+        end
+    end
+
+    function SydneyHUD:GetText(text)
+        return managers.localization:text(text) .. ":"
+    end
+
+    function SydneyHUD:MakeFineText(text)
+        local x, y, w, h = text:text_rect()
+    
+        text:set_size(w, h)
+        text:set_position(math.round(text:x()), math.round(text:y()))
+    end
+
+    function SydneyHUD:CreateText(text, x, y)
+        local txt = self._panel:text({
+            h = 0, -- This value changes during text resize
+            w = 0, -- This one also
+            valign = 'center',
+            halign = 'center',
+            font = tweak_data.menu.pd2_large_font,
+            font_size = tweak_data.menu.pd2_small_font_size,
+            text = text,
+            visible = false,
+            color = Color.white,
+            layer = 350, --tweak_data.gui.MENU_LAYER - 50,
+            blend_mode = 'add'
+        })
+        self:SetRight(y or 0.02, txt)
+        self:SetTop(x, txt)
+        self:MakeFineText(txt) -- Resizes text to fit the text in the panel
+        return txt
+    end
+
+    function SydneyHUD:CreateBitmap(color, x, y)
+        local bmp = self._panel:bitmap({
+            h = 48,
+            w = 48,
+            valign = 'center',
+            halign = 'center',
+            visible = false,
+            color = color,
+            layer = 350, --tweak_data.gui.MENU_LAYER - 50,
+            blend_mode = 'normal'
+        })
+        self:SetRight(y or 0.02, bmp)
+        self:SetTop(x, bmp)
+        return bmp
+    end
+
+    function SydneyHUD:SetTop(x, object)
+        object = object or self.color_box
+        if alive(self._panel) and object then
+            object:set_top(self._panel:h() * x)
+        end
+    end
+    
+    function SydneyHUD:SetRight(x, object)
+        object = object or self.color_box
+        if alive(self._panel) and object then
+            object:set_right(self._panel:right() - self._panel:w() * (0.35 + x))
+        end
+    end
+
+    function SydneyHUD:SetVisibility(visibility, object)
+        object = object or self.color_box
+        if object then
+            object:set_visible(visibility)
+        end
+    end
+
+    function SydneyHUD:SetBoxColor(color, extension, object)
+        object = object or self.color_box
+        object:set_color(self:GetColor(color, extension))
+    end
+
+    function SydneyHUD:GetColor(color, extension)
+        if not color then
+            return Color.white
+        end
+        extension = extension or ""
+        return Color(1, SydneyHUD._data[color .. "_r" .. extension], SydneyHUD._data[color .. "_g" .. extension], SydneyHUD._data[color .. "_b" .. extension]) -- Already converted from 255 format
+    end
+
     SydneyHUD:Load()
     SydneyHUD.setup = true
     log(SydneyHUD.info .. "SydneyHUD loaded.")

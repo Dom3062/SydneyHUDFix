@@ -4,6 +4,7 @@
     "title": "sydneyhud_options",
     "description": "sydneyhud_options_desc",
     "back_callback" : "SydneyHUDSave",
+    "focus_changed_callback" : "SydneyHUDChangedFocus",
     "items": [
         {
             "type" : "button",

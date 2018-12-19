@@ -3,6 +3,7 @@
     "parent_menu_id": "sydneyhud_hud_lists_options",
     "title": "sydneyhud_hud_lists_options_enemy_color",
     "description": "sydneyhud_hud_lists_options_enemy_color_desc",
+    "focus_changed_callback" : "SydneyHUDPanelFocus",
     "items": [
         {
             "type": "multiple_choice",

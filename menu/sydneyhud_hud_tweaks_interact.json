@@ -3,6 +3,7 @@
     "parent_menu_id": "sydneyhud_hud_tweaks",
     "title": "sydneyhud_hud_tweaks_interact",
     "description": "sydneyhud_hud_tweaks_interact_desc",
+    "focus_changed_callback" : "SydneyHUDPanelFocus",
     "items": [
         {
             "type": "toggle",

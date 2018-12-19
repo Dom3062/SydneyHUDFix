@@ -3,6 +3,7 @@
     "parent_menu_id": "sydneyhud_gadget_options",
     "title": "sydneyhud_gadget_options_turret",
     "description": "sydneyhud_gadget_options_turret_desc",
+    "focus_changed_callback" : "SydneyHUDPanelFocus",
     "items": [
         {
             "type": "toggle",

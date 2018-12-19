@@ -3,6 +3,7 @@
     "parent_menu_id": "sydneyhud_hud_tweaks",
     "title": "sydneyhud_hud_tweaks_waypoint",
     "description": "sydneyhud_hud_tweaks_waypoint_desc",
+    "focus_changed_callback" : "SydneyHUDPanelFocus",
     "items": [
         {
             "type": "multiple_choice",

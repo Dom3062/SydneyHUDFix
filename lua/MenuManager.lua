@@ -3,6 +3,31 @@ function MenuCallbackHandler:is_dlc_latest_locked(...)
     return SydneyHUD:GetOption("remove_ads") and false or is_dlc_latest_locked_original(self, ...)
 end
 
+local pos =
+{
+    ["sydneyhud_hud_tweaks_waypoint"] = 0.125,
+    ["sydneyhud_hud_tweaks_interact"] = 0.335,
+    ["sydneyhud_hud_lists_options_enemy_color"] = 0.125,
+    ["sydneyhud_hud_lists_options_civilian_color"] = 0.125,
+    ["sydneyhud_gadget_options_sniper"] = 0.175
+}
+
+local col =
+{
+    ["sydneyhud_hud_tweaks_waypoint"] = "waypoint_color",
+    ["sydneyhud_hud_tweaks_interact"] = "interaction_color",
+    ["sydneyhud_hud_lists_options_enemy_color"] = "enemy_color",
+    ["sydneyhud_hud_lists_options_civilian_color"] = "civilian_color",
+    ["sydneyhud_gadget_options_sniper"] = "laser_color",
+    ["sydneyhud_gadget_options_turret"] = "laser_color"
+}
+
+local col_ext =
+{
+    ["sydneyhud_gadget_options_sniper"] = "_snipers",
+    ["sydneyhud_gadget_options_turret"] = "_turret"
+}
+
 --[[
     Load our localization keys for our menu, and menu items.
 ]]
@@ -29,12 +54,39 @@ Hooks:Add("MenuManagerBuildCustomMenus", "MenuManagerBuildCustomMenus_sydneyhud"
 end)
 
 --[[
-    Setup our menu callbacks, load our saved data, and build the menu from our json file.
+    Setup our menu callbacks and build the menu from our json file.
 ]]
 Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_sydneyhud", function(menu_manager)
     --[[
         Setup our callbacks as defined in our item callback keys, and perform our logic on the data retrieved.
     ]]
+
+    MenuCallbackHandler.SydneyHUDChangedFocus = function(node, focus)
+        if focus then
+            SydneyHUD:CreatePanel()
+            SydneyHUD:CreateBitmaps()
+            SydneyHUD:CreateTexts()
+        end
+    end
+
+    MenuCallbackHandler.SydneyHUDPanelFocus = function(node, focus)
+        SydneyHUD:SetVisibility(focus)
+        if focus then
+            SydneyHUD:SetTop(pos[node:parameters()["menu_id"]] or 0.10)
+            SydneyHUD:SetBoxColor(col[node:parameters()["menu_id"]] or nil, col_ext[node:parameters()["menu_id"]] or nil) -- Nil colors are always resolved as White in SydneyHUD
+        end
+        if node:parameters()["menu_id"] == "sydneyhud_gadget_options_turret" then
+            SydneyHUD:SetVisibility(focus, SydneyHUD.color_box_2)
+            SydneyHUD:SetVisibility(focus, SydneyHUD.color_box_3)
+            SydneyHUD:SetVisibility(focus, SydneyHUD.text_box)
+            SydneyHUD:SetVisibility(focus, SydneyHUD.text_box_2)
+            SydneyHUD:SetVisibility(focus, SydneyHUD.text_box_3)
+            if focus then
+                SydneyHUD:SetBoxColor("laser_color", "_turretr", SydneyHUD.color_box_2)
+                SydneyHUD:SetBoxColor("laser_color", "_turretm", SydneyHUD.color_box_3)
+            end
+        end
+    end
 
     -- Screen skipping
     MenuCallbackHandler.callback_skip_black_screen = function(self, item)
@@ -152,21 +204,27 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_sydneyhud", function(m
 
     MenuCallbackHandler.callback_enemy_color_r = function(self, item)
         SydneyHUD._data.enemy_color_r = item:value()
+        SydneyHUD:SetBoxColor("enemy_color")
     end
     MenuCallbackHandler.callback_enemy_color_g = function(self, item)
         SydneyHUD._data.enemy_color_g = item:value()
+        SydneyHUD:SetBoxColor("enemy_color")
     end
     MenuCallbackHandler.callback_enemy_color_b = function(self, item)
         SydneyHUD._data.enemy_color_b = item:value()
+        SydneyHUD:SetBoxColor("enemy_color")
     end
     MenuCallbackHandler.callback_civilian_color_r = function(self, item)
         SydneyHUD._data.civilian_color_r = item:value()
+        SydneyHUD:SetBoxColor("civilian_color")
     end
     MenuCallbackHandler.callback_civilian_color_g = function(self, item)
         SydneyHUD._data.civilian_color_g = item:value()
+        SydneyHUD:SetBoxColor("civilian_color")
     end
     MenuCallbackHandler.callback_civilian_color_b = function(self, item)
         SydneyHUD._data.civilian_color_b = item:value()
+        SydneyHUD:SetBoxColor("civilian_color")
     end
 
     -- Kill counter
@@ -224,12 +282,15 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_sydneyhud", function(m
     end
     MenuCallbackHandler.callback_laser_color_r_snipers = function(self, item)
         SydneyHUD._data.laser_color_r_snipers = item:value()
+        SydneyHUD:SetBoxColor("laser_color", "_snipers")
     end
     MenuCallbackHandler.callback_laser_color_g_snipers = function(self, item)
         SydneyHUD._data.laser_color_g_snipers = item:value()
+        SydneyHUD:SetBoxColor("laser_color", "_snipers")
     end
     MenuCallbackHandler.callback_laser_color_b_snipers = function(self, item)
         SydneyHUD._data.laser_color_b_snipers = item:value()
+        SydneyHUD:SetBoxColor("laser_color", "_snipers")
     end
     MenuCallbackHandler.callback_laser_color_rainbow_snipers = function(self, item)
         SydneyHUD._data.laser_color_rainbow_snipers = item:value() == "on"
@@ -248,12 +309,15 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_sydneyhud", function(m
     end
     MenuCallbackHandler.callback_laser_color_r_turret = function(self, item)
         SydneyHUD._data.laser_color_r_turret = item:value()
+        SydneyHUD:SetBoxColor("laser_color", "_turret")
     end
     MenuCallbackHandler.callback_laser_color_g_turret = function(self, item)
         SydneyHUD._data.laser_color_g_turret = item:value()
+        SydneyHUD:SetBoxColor("laser_color", "_turret")
     end
     MenuCallbackHandler.callback_laser_color_b_turret = function(self, item)
         SydneyHUD._data.laser_color_b_turret = item:value()
+        SydneyHUD:SetBoxColor("laser_color", "_turret")
     end
     MenuCallbackHandler.callback_laser_color_rainbow_turret = function(self, item)
         SydneyHUD._data.laser_color_rainbow_turret = item:value() == "on"
@@ -272,12 +336,15 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_sydneyhud", function(m
     end
     MenuCallbackHandler.callback_laser_color_r_turretr = function(self, item)
         SydneyHUD._data.laser_color_r_turretr = item:value()
+        SydneyHUD:SetBoxColor("laser_color", "_turretr", SydneyHUD.color_box_2)
     end
     MenuCallbackHandler.callback_laser_color_g_turretr = function(self, item)
         SydneyHUD._data.laser_color_g_turretr = item:value()
+        SydneyHUD:SetBoxColor("laser_color", "_turretr", SydneyHUD.color_box_2)
     end
     MenuCallbackHandler.callback_laser_color_b_turretr = function(self, item)
         SydneyHUD._data.laser_color_b_turretr = item:value()
+        SydneyHUD:SetBoxColor("laser_color", "_turretr", SydneyHUD.color_box_2)
     end
     MenuCallbackHandler.callback_laser_color_rainbow_turretr = function(self, item)
         SydneyHUD._data.laser_color_rainbow_turretr = item:value() == "on"
@@ -296,12 +363,15 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_sydneyhud", function(m
     end
     MenuCallbackHandler.callback_laser_color_r_turretm = function(self, item)
         SydneyHUD._data.laser_color_r_turretm = item:value()
+        SydneyHUD:SetBoxColor("laser_color", "_turretm", SydneyHUD.color_box_3)
     end
     MenuCallbackHandler.callback_laser_color_g_turretm = function(self, item)
         SydneyHUD._data.laser_color_g_turretm = item:value()
+        SydneyHUD:SetBoxColor("laser_color", "_turretm", SydneyHUD.color_box_3)
     end
     MenuCallbackHandler.callback_laser_color_b_turretm = function(self, item)
         SydneyHUD._data.laser_color_b_turretm = item:value()
+        SydneyHUD:SetBoxColor("laser_color", "_turretm", SydneyHUD.color_box_3)
     end
     MenuCallbackHandler.callback_laser_color_rainbow_turretm = function(self, item)
         SydneyHUD._data.laser_color_rainbow_turretm = item:value() == "on"
@@ -448,12 +518,15 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_sydneyhud", function(m
 
     MenuCallbackHandler.callback_interaction_color_r = function(self, item)
         SydneyHUD._data.interaction_color_r = item:value()
+        SydneyHUD:SetBoxColor("interaction_color")
     end
     MenuCallbackHandler.callback_interaction_color_g = function(self, item)
         SydneyHUD._data.interaction_color_g = item:value()
+        SydneyHUD:SetBoxColor("interaction_color")
     end
     MenuCallbackHandler.callback_interaction_color_b = function(self, item)
         SydneyHUD._data.interaction_color_b = item:value()
+        SydneyHUD:SetBoxColor("interaction_color")
     end
 
     MenuCallbackHandler.callback_anti_bobble = function(self, item)
@@ -521,12 +594,15 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_sydneyhud", function(m
     -- EXPERIMENTAL
     MenuCallbackHandler.callback_waypoint_color_r = function(self, item)
         SydneyHUD._data.waypoint_color_r = item:value()
+        SydneyHUD:SetBoxColor("waypoint_color")
     end
     MenuCallbackHandler.callback_waypoint_color_g = function(self, item)
         SydneyHUD._data.waypoint_color_g = item:value()
+        SydneyHUD:SetBoxColor("waypoint_color")
     end
     MenuCallbackHandler.callback_waypoint_color_b = function(self, item)
         SydneyHUD._data.waypoint_color_b = item:value()
+        SydneyHUD:SetBoxColor("waypoint_color")
     end
     MenuCallbackHandler.callback_show_deployable_waypoint = function(self, item)
         SydneyHUD._data.show_deployable_waypoint = item:value() == "on"
@@ -586,6 +662,7 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_sydneyhud", function(m
     
     MenuCallbackHandler.SydneyHUDSave = function(this, item)
         SydneyHUD:Save()
+        SydneyHUD:DestroyPanel()
     end
 
     --[[
