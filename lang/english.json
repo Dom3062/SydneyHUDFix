@@ -1,4 +1,6 @@
 {
+    "_24h_format" : "Use 24-hour format",
+    "_24h_format_desc" : "Use 24-hour time format when someone wrote something in the chat\nOtherwise use 12-hour time format (Menu only)",
     "aggregate_enemies": "Aggregate enemies",
     "aggregate_enemies_desc": "Don't split enemies on types; use a single entry for all",
     "aggregate_hostages": "Aggregate hostages",
@@ -23,6 +25,9 @@
     "buy_all_assets_desc": "Buy all the assets that you are permitted to acquire",
     "center_assault_banner": "Center assault banner",
     "center_assault_banner_desc": "Place assault banner to center",
+    "chat_time_format_desc" : "Specifies how time should be written in the chat (Menu only)",
+    "chat_time_format_1" : "HH:MM:SS",
+    "chat_time_format_2" : "HH:MM",
     "civilian_color" : "Civilian Color",
     "civilian_color_desc" : "Changes Civilian Color (Max: 1.00)",
     "civilian_spot": "Civilian spot",

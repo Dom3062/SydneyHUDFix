@@ -14,6 +14,28 @@
             "default_value": true
         },
         {
+            "type": "toggle",
+            "id": "show_heist_time_24h_format",
+            "title": "_24h_format",
+            "description": "_24h_format_desc",
+            "callback" : "callback_24h_format",
+            "value": "_24h_format",
+            "default_value": true
+        },
+        {
+            "type": "multiple_choice",
+            "id": "chat_time_format",
+            "title": "sydneyhud_time_format",
+            "description" : "chat_time_format_desc",
+            "callback": "callback_chat_time_format",
+            "items": [
+                "chat_time_format_1",
+                "chat_time_format_2"
+            ],
+            "value": "chat_time_format",
+            "default_value": 1
+        },
+        {
             "type": "divider",
             "size": 16
         },

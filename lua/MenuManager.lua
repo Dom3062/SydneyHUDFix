@@ -548,6 +548,12 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_sydneyhud", function(m
     MenuCallbackHandler.callback_show_heist_time = function(self, item)
         SydneyHUD._data.show_heist_time = item:value() == "on"
     end
+    MenuCallbackHandler.callback_24h_format = function(self, item)
+        SydneyHUD._data._24h_format = item:value() == "on"
+    end
+    MenuCallbackHandler.callback_chat_time_format = function(self, item)
+        SydneyHUD._data.chat_time_format = item:value()
+    end
 
     MenuCallbackHandler.callback_assault_phase_chat_info = function(self, item)
         SydneyHUD._data.assault_phase_chat_info = item:value() == "on"

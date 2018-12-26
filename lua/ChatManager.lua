@@ -1,17 +1,19 @@
-local receive_message_by_peer_original = ChatManager.receive_message_by_peer
-local init_original = ChatGui.init
-local _layout_input_panel_original = ChatGui._layout_input_panel
-local key_press_original = ChatGui.key_press
-local close_original = ChatGui.close
+local GetTime = function()
+    return managers.hud and managers.hud._hud_heist_timer and managers.hud._hud_heist_timer._timer_text and managers.hud._hud_heist_timer._timer_text:text() or
+    (SydneyHUD:GetOption("_24h_format") and
+    (SydneyHUD:GetOption("chat_time_format") == 1 and os.date('%X') or os.date('%H:%M')) or
+    (SydneyHUD:GetOption("chat_time_format") == 1 and os.date('%I:%M:%S%p') or os.date('%I:%M%p')))
+end
 
 local _f_receive_message = ChatGui.receive_message
 function ChatGui:receive_message(name, message, color, icon)
     if SydneyHUD:GetOption("show_heist_time") then
-        name = SydneyHUD._heist_time .. " " .. name
+        name = GetTime() .. " " .. name
     end
     _f_receive_message(self, name, message, color, icon)
 end
 
+local receive_message_by_peer_original = ChatManager.receive_message_by_peer
 function ChatManager:receive_message_by_peer(channel_id, peer, message)
     receive_message_by_peer_original(self, channel_id, peer, message)
     if tonumber(channel_id) == 1 then
@@ -29,6 +31,7 @@ function ChatManager:is_spam(name, message)  -- WIP
     return false
 end
 
+local init_original = ChatGui.init
 function ChatGui:init(...)
     init_original(self, ...)
     self:_create_info_panel()
@@ -57,6 +60,7 @@ function ChatGui:_create_info_panel()
     })
 end
 
+local _layout_input_panel_original = ChatGui._layout_input_panel
 function ChatGui:_layout_input_panel()
     _layout_input_panel_original(self)
     self._input_panel:set_y(self._input_panel:parent():h() - self._input_panel:h() - 24)
@@ -113,6 +117,7 @@ function ChatGui:update_info_text()
     end)
 end
 
+local key_press_original = ChatGui.key_press
 function ChatGui:key_press(o, k)
     key_press_original(self, o, k)
     local t = TimerManager:game():time()
@@ -124,6 +129,7 @@ function ChatGui:key_press(o, k)
     end
 end
 
+local close_original = ChatGui.close
 function ChatGui:close(...)
     SydneyHUD:DelayedCallsRemove("SydneyHUD_chatinfo_update_info_text")
     close_original(self, ...)
