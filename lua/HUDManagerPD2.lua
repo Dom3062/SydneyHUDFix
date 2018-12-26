@@ -117,6 +117,16 @@ function HUDManager:hide_point_of_no_return_timer(...)
     self._hud_heist_timer._heist_timer_panel:set_visible(true)
 end
 
+local _f_create_custody_hud = HUDManager._create_custody_hud
+function HUDManager:_create_custody_hud(hud)
+    _f_create_custody_hud(self, hud)
+    if SydneyHUD:GetOption("center_assault_banner") then
+        local timer_msg = self._hud_player_custody._hud_panel:child("custody_panel"):child("timer_msg")
+        timer_msg:set_y(50)
+        self._hud_player_custody._hud.timer:set_y(math.round(timer_msg:bottom() - 6))
+    end
+end
+
 local feed_heist_time_original = HUDManager.feed_heist_time
 function HUDManager:feed_heist_time(t)
     if SydneyHUD:GetOption("enable_corpse_remover_plus") then
