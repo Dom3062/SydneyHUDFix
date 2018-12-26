@@ -160,7 +160,7 @@ local CharacterData = {
     ["tank_medic"] = "MEDIC DOZER",
     ["spooc"] = "CLOAKER",
     ["shield"] = "SHIELD",
-    ["phalanx_minion"] = "WINTERS UNIT",
+    ["phalanx_minion"] = "WINTER'S UNIT",
     ["phalanx_vip"] = "CAPTAIN WINTERS",
     ["taser"] = "TASER",
     ["civilian"] = "CIVILIAN",
@@ -195,12 +195,61 @@ local CharacterData = {
     ["bolivian_indoors"] = "SOSA SECURITY",
     ["drug_lord_boss"] = "SOSA BOSS",
     ["drug_lord_boss_stealth"] = "SOSA BOSS",
-    ["old_hoxton_mission"] = "HOXTON / LOCKE",
+    ["old_hoxton_mission"] = "", -- Fixed dynamically
     ["medic"] = "MEDIC",
     ["spa_vip"] = "CHARON",
     ["spa_vip_hurt"] = "CHARON",
     ["swat_turret"] = "SWAT TURRET"
 }
+
+local function FixNames()
+    local level_id, difficulty = Global.game_settings.level_id, Global.game_settings.difficulty
+    if SydneyHUD:IsOr(level_id, "hox_1", "hox_2") then
+        CharacterData["old_hoxton_mission"] = "HOXTON"
+    end
+    if SydneyHUD:IsOr(difficulty, "easy_wish", "overkill_290") then -- Mayhem or Death Wish
+        CharacterData["city_swat"] = "GENSEC SWAT UNIT"
+        CharacterData["fbi_heavy_swat"] = "GENSEC HEAVY SWAT"
+    end
+    if difficulty == "sm_wish" then -- Death Sentence
+        CharacterData["swat"] = "ZEAL SWAT UNIT"
+        CharacterData["heavy_swat"] = "ZEAL HEAVY SWAT"
+        CharacterData["tank"] = "ZEALDOZER"
+        CharacterData["spooc"] = "ZEAL CLOAKER"
+        CharacterData["shield"] = "ZEAL SHIELD"
+        CharacterData["taser"] = "ZEAL TASER"
+    end
+    if SydneyHUD:IsOr(level_id, "kosugi", "pbr", "dark", "des", "bph", "vis") then -- Shadow Raid, Beneath the Mountain, Murky Station, Henry's Rock, Hell's Island, The White House
+        CharacterData["fbi"] = "MURKYWATER LIGHT"
+        CharacterData["fbi_swat"] = "MURKYWATER LIGHT"
+        CharacterData["city_swat"] = "MURKYWATER"
+        CharacterData["fbi_heavy_swat"] = "MURKYWATER HEAVY"
+        CharacterData["medic"] = "MURKYWATER MEDIC"
+        CharacterData["taser"] = "MURKYWATER TASER"
+        CharacterData["tank"] = "MURKYWATER BULLDOZER"
+        CharacterData["spooc"] = "MURKYWATER CLOAKER"
+        CharacterData["shield"] = "MURKYWATER SHIELD"
+        CharacterData["swat"] = "MURKYWATER LIGHT" -- Death Sentence
+        CharacterData["heavy_swat"] = "MURKYWATER HEAVY" -- Death Sentence
+        if level_id == "pbr" then -- Beneath the Mountain
+            CharacterData["old_hoxton_mission"] = "LOCKE"
+        end
+    end
+    if level_id == "mad" then -- Boiling Point
+        CharacterData["fbi_swat"] = "RUSSIAN LIGHT"
+        CharacterData["city_swat"] = "RUSSIAN LIGHT"
+        CharacterData["fbi_heavy_swat"] = "RUSSIAN HEAVY"
+        CharacterData["tank"] = "RUSSIAN BULLDOZER"
+        CharacterData["sniper"] = "RUSSIAN SNIPER"
+        CharacterData["spooc"] = "RUSSIAN CLOAKER"
+        CharacterData["shield"] = "RUSSIAN SHIELD"
+        CharacterData["taser"] = "RUSSIAN TASER"
+        CharacterData["medic"] = "RUSSIAN MEDIC"
+        CharacterData["swat_turret"] = "RUSSIAN TURRET"
+    end
+end
+
+FixNames()
 
 Hooks:PostHook(HUDManager, "_player_hud_layout", "uHUDPostHUDManagerPlayerInfoHUDLayout", function(self)
     local unit_health_main = managers.hud:script(PlayerBase.PLAYER_INFO_HUD_PD2).panel:panel({
@@ -326,7 +375,9 @@ end
 
 
 function HUDManager:set_unit_health(current, total, tweak_table)
-    if not current or not total then return end
+    if not current or not total then
+        return
+    end
     local enemy = CharacterData[tweak_table] or tweak_table
     local _r = current / total
     local r = self._unit_health:width()
