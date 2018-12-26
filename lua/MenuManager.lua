@@ -60,7 +60,6 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_sydneyhud", function(m
     --[[
         Setup our callbacks as defined in our item callback keys, and perform our logic on the data retrieved.
     ]]
-
     MenuCallbackHandler.SydneyHUDChangedFocus = function(node, focus)
         if focus then
             SydneyHUD:CreatePanel()
@@ -85,6 +84,13 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_sydneyhud", function(m
                 SydneyHUD:SetBoxColor("laser_color", "_turretr", SydneyHUD.color_box_2)
                 SydneyHUD:SetBoxColor("laser_color", "_turretm", SydneyHUD.color_box_3)
             end
+        end
+    end
+
+    MenuCallbackHandler.SydneyHUD_HUDTweaks_ChangedFocus = function(node, focus)
+        if BAI then
+            node:item("sydneyhud_hud_tweaks_assault"):set_enabled(false)
+            node:item("sydneyhud_hud_tweaks_assault"):set_parameter("help_id", "sydneyhud_show_assault_states_disabled_desc")
         end
     end
 

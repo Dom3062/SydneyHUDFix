@@ -349,6 +349,7 @@
     "sydneyhud_save_preplanning_desc" : "Save your Preplanning",
     "sydneyhud_show_assault_states" : "Show assault states",
     "sydneyhud_show_assault_states_desc" : "Show assault state (control, anticipation, build, sustain and fade) in the assault box\nThis option will not work on endless assault and when captain is present",
+    "sydneyhud_show_assault_states_disabled_desc" : "The menu is disabled and options inside the menu cannot be changed while BAI is active\nChange these settings in the BAI mod option menu",
     "sydneyhud_time_format" : "Time Format",
     "sydneyhud_time_format_desc" : "Changes Time Format showed with 'Time Left' info",
     "sydneyhud_time_format_1" : "xx.xx (in s)",

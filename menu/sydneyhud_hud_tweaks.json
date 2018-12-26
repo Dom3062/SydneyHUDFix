@@ -3,6 +3,7 @@
     "parent_menu_id": "sydneyhud_options",
     "title": "sydneyhud_hud_tweaks",
     "description": "sydneyhud_hud_tweaks_desc",
+    "focus_changed_callback" : "SydneyHUD_HUDTweaks_ChangedFocus",
     "items": [
         {
             "type": "slider",
