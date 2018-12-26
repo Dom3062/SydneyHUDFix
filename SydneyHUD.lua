@@ -25,7 +25,7 @@ if not SydneyHUD.setup then
     --[[
         Alias for EZ to write log
 
-        Info: Infomation Log. Something successed.
+        Info: Information Log. Something succeeded.
         Warn: Warning Log. Something Errored, but can keep working.
         Error: Error Log. Something Errored. Can not keep working.
         Dev: Develop Log. Printing var, Breakpoint.
@@ -37,12 +37,6 @@ if not SydneyHUD.setup then
 
     -- var for script
     SydneyHUD._autorepair_map = {}
-    SydneyHUD._current_phase = ""
-    SydneyHUD._pre_phase = ""
-
-    SydneyHUD._current_wave = 0
-    SydneyHUD._pre_wave = 0
-
     SydneyHUD._last_removed_time = 0
 
     SydneyHUD._down_count = {}
@@ -96,7 +90,6 @@ if not SydneyHUD.setup then
     }
     SydneyHUD._hook_files = {
         ["core/lib/utils/coreapp"] = "Coreapp.lua",
-        ["core/lib/managers/menu/items/coremenuitemslider"] = "CoreItemSlider.lua",
         ["lib/managers/chatmanager"] = "ChatManager.lua",
         ["lib/managers/enemymanager"] = "EnemyManager.lua",
         ["lib/managers/group_ai_states/groupaistatebase"] = "GroupAIStateBase.lua",
