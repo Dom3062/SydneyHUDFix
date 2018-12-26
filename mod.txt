@@ -95,10 +95,6 @@
         },
         {
             "script_path": "SydneyHUD.lua",
-            "hook_id": "lib/managers/localizationmanager"
-        },
-        {
-            "script_path": "SydneyHUD.lua",
             "hook_id": "lib/managers/menu/blackmarketgui"
         },
         {

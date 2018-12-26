@@ -74,11 +74,8 @@
     "enemy_color" : "エネミーカラー",
     "enemy_color_desc" : "敵の色",
     "enhanced_assault_count": "Wave数の表示",
-    "enhanced_assault_count_desc": "Wave数を表示します。 (Assaultバナーの強化に依存します。)",
     "enhanced_assault_spawns": "残り湧き数の表示",
-    "enhanced_assault_spawns_desc": "残り湧き数を表示します。(Assaultバナーの強化に依存します。)",
     "enhanced_assault_time": "残り時間の表示",
-    "enhanced_assault_time_desc": "残り時間を表示します。 (Assaultバナーの強化に依存します。)",
     "equipment_interrupt": "インベントリキーでの中断",
     "equipment_interrupt_desc": "インタラクトキー([F]キー)の代わりにインベントリキー([G]キー)でインタラクトを中断させます。",
     "flashlight_angle": "フラッシュライトアングル",
@@ -299,9 +296,5 @@
     "tab_font_size_desc": "Tabメニューのフォントの大きさを変更します。",
     "truncate_name_tags": "Truncate name tags",
     "truncate_name_tags_desc": "Truncate clan tags off names and replace them with a small dot",
-    "waypoint_color" : "目的地カラー",
-    "waypoint_deploy": "Show Deployable Waypoint",
-    "waypoint_deploy_desc": "Shows waypoints for deployable",
-    "waypoint_timer": "Show Waypoint Timers",
-    "waypoint_timer_desc": "Shows waypoint for timers"
+    "waypoint_color" : "目的地カラー"
 }

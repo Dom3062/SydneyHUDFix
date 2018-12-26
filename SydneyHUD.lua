@@ -109,7 +109,6 @@ if not SydneyHUD.setup then
         ["lib/managers/hud/hudteammate"] = "HUDTeammate.lua",
         ["lib/managers/hudmanager"] = "HUDManager.lua",
         ["lib/managers/hudmanagerpd2"] = "HUDManagerPD2.lua",
-        ["lib/managers/localizationmanager"] = "LocalizationManager.lua",
         ["lib/managers/menu/blackmarketgui"] = "BlackMarketGUI.lua",
         ["lib/managers/menu/contractboxgui"] = "ContractBoxGui.lua",
         ["lib/managers/menu/lootdropscreengui"] = "LootDropScreenGui.lua",
@@ -640,6 +639,27 @@ if not SydneyHUD.setup then
         end
         extension = extension or ""
         return Color(1, SydneyHUD._data[color .. "_r" .. extension], SydneyHUD._data[color .. "_g" .. extension], SydneyHUD._data[color .. "_b" .. extension]) -- Already converted from 255 format
+    end
+
+    function SydneyHUD:IsOr(string, ...)
+        for i = 1, select("#", ...) do
+            if string == select(i, ...) then
+                return true
+            end
+        end
+        return false
+    end
+
+    function SydneyHUD:Hook(object, func, post_call)
+        Hooks:PostHook(object, func, "SydneyHUD_" .. func, post_call)
+    end
+    
+--[[     function SydneyHUD:Unhook(mod, id)
+        Hooks:RemovePostHook((mod and (mod .. "_") or "BAI_") .. id)
+    end ]]
+    
+    function SydneyHUD:DelayCall(name, t, func)
+        DelayedCalls:Add(name, t, func)
     end
 
     SydneyHUD:Load()

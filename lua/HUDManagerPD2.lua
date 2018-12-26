@@ -24,11 +24,8 @@ local set_mugshot_downed_original = HUDManager.set_mugshot_downed
 local set_mugshot_custody_original = HUDManager.set_mugshot_custody
 local set_mugshot_normal_original = HUDManager.set_mugshot_normal
 local teammate_progress_original = HUDManager.teammate_progress
-local feed_heist_time_original = HUDManager.feed_heist_time
 local show_casing_original = HUDManager.show_casing
 local hide_casing_original = HUDManager.hide_casing
-local sync_start_assault_original = HUDManager.sync_start_assault
-local sync_end_assault_original = HUDManager.sync_end_assault
 local show_point_of_no_return_timer_original = HUDManager.show_point_of_no_return_timer
 local hide_point_of_no_return_timer_original = HUDManager.hide_point_of_no_return_timer
 local set_player_condition_original = HUDManager.set_player_condition
@@ -110,16 +107,6 @@ function HUDManager:hide_casing(...)
     self._hud_heist_timer._heist_timer_panel:set_visible(true)
 end
 
-function HUDManager:sync_start_assault(...)
-    self._hud_heist_timer._heist_timer_panel:set_visible(not SydneyHUD:GetOption("center_assault_banner"))
-    sync_start_assault_original(self, ...)
-end
-
-function HUDManager:sync_end_assault(...)
-    sync_end_assault_original(self, ...)
-    self._hud_heist_timer._heist_timer_panel:set_visible(true)
-end
-
 function HUDManager:show_point_of_no_return_timer(...)
     self._hud_heist_timer._heist_timer_panel:set_visible(not SydneyHUD:GetOption("center_assault_banner"))
     show_point_of_no_return_timer_original(self, ...)
@@ -130,10 +117,10 @@ function HUDManager:hide_point_of_no_return_timer(...)
     self._hud_heist_timer._heist_timer_panel:set_visible(true)
 end
 
-function HUDManager:feed_heist_time(t, ...)
+local feed_heist_time_original = HUDManager.feed_heist_time
+function HUDManager:feed_heist_time(t)
     if SydneyHUD:GetOption("enable_corpse_remover_plus") then
         if t - SydneyHUD._last_removed_time >= SydneyHUD:GetOption("remove_interval") then
-
             if SydneyHUD:GetOption("remove_shield") then
                 if managers.enemy then
                     local enemy_data = managers.enemy._enemy_data
@@ -145,21 +132,16 @@ function HUDManager:feed_heist_time(t, ...)
                     end
                 end
             end
-
             if SydneyHUD:GetOption("remove_body") then
                 if managers.enemy and not managers.groupai:state():whisper_mode() then
                     managers.enemy:dispose_all_corpses()
                 end
             end
-
             SydneyHUD._last_removed_time = t
         end
     end
-
-    if self._hud_assault_corner then
-        self._hud_assault_corner:feed_heist_time(t)
-    end
-    feed_heist_time_original(self, t, ...)
+    feed_heist_time_original(self, t)
+    self._hud_assault_corner:feed_heist_time(t)
     self._teammate_panels[self.PLAYER_PANEL]:change_health(0) -- force refresh hps meter atleast every second.
 end
 

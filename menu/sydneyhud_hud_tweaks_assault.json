@@ -14,6 +14,19 @@
             "default_value": true
         },
         {
+            "type" : "toggle",
+            "id" : "show_assault_states",
+            "title" : "sydneyhud_show_assault_states",
+            "description" : "sydneyhud_show_assault_states_desc",
+            "callback" : "callback_show_assault_states",
+            "value" : "show_assault_states",
+            "default_value" : true
+        },
+        {
+            "type" : "divider",
+            "value" : 32
+        },
+        {
             "type": "toggle",
             "id": "enable_enhanced_assault_banner",
             "title": "enable_enhanced_assault_banner",
@@ -39,6 +52,23 @@
             "callback": "callback_enhanced_assault_time",
             "value": "enhanced_assault_time",
             "default_value": true
+        },
+        {
+            "type": "multiple_choice",
+            "id": "time_format",
+            "title": "sydneyhud_time_format",
+            "description" : "sydneyhud_time_format_desc",
+            "callback": "callback_time_format",
+            "items": [
+                "sydneyhud_time_format_1",
+                "sydneyhud_time_format_2",
+                "sydneyhud_time_format_3",
+                "sydneyhud_time_format_4",
+                "sydneyhud_time_format_5",
+                "sydneyhud_time_format_6"
+            ],
+            "value": "time_format",
+            "default_value": 1
         },
         {
             "type": "toggle",

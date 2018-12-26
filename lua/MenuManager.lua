@@ -494,7 +494,6 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_sydneyhud", function(m
     end
     MenuCallbackHandler.callback_show_underdog_aced = function(self, item)
         SydneyHUD._data.show_underdog_aced = item:value() == "on"
-        
     end
     MenuCallbackHandler.callback_anti_stealth_grenades = function(self, item)
         SydneyHUD._data.anti_stealth_grenades = item:value() == "on"
@@ -506,11 +505,17 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_sydneyhud", function(m
     MenuCallbackHandler.callback_enable_enhanced_assault_banner = function(self, item)
         SydneyHUD._data.enable_enhanced_assault_banner = item:value() == "on"
     end
+    MenuCallbackHandler.callback_show_assault_states = function(self, item)
+        SydneyHUD._data.show_assault_states = item:value() == "on"
+    end
     MenuCallbackHandler.callback_enhanced_assault_spawns = function(self, item)
         SydneyHUD._data.enhanced_assault_spawns = item:value() == "on"
     end
     MenuCallbackHandler.callback_enhanced_assault_time = function(self, item)
         SydneyHUD._data.enhanced_assault_time = item:value() == "on"
+    end
+    MenuCallbackHandler.callback_time_format = function(self, item)
+        SydneyHUD._data.time_format = item:value()
     end
     MenuCallbackHandler.callback_enhanced_assault_count = function(self, item)
         SydneyHUD._data.enhanced_assault_count = item:value() == "on"
