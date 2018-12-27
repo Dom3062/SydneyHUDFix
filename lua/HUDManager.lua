@@ -219,7 +219,7 @@ local function FixNames()
         CharacterData["shield"] = "ZEAL SHIELD"
         CharacterData["taser"] = "ZEAL TASER"
     end
-    if SydneyHUD:IsOr(level_id, "kosugi", "pbr", "dark", "des", "bph", "vis") then -- Shadow Raid, Beneath the Mountain, Murky Station, Henry's Rock, Hell's Island, The White House
+    if SydneyHUD:IsOr(level_id, "kosugi", "pbr", "dark", "des", "bph", "vit") then -- Shadow Raid, Beneath the Mountain, Murky Station, Henry's Rock, Hell's Island, The White House
         CharacterData["fbi"] = "MURKYWATER LIGHT"
         CharacterData["fbi_swat"] = "MURKYWATER LIGHT"
         CharacterData["city_swat"] = "MURKYWATER"
