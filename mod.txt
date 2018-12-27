@@ -1,9 +1,9 @@
 {
     "name": "SydneyHUD",
     "description": "All-In-One HUD mod",
-    "author": "SydneyMOD Project Team; Fixes by Dom",
+    "author": "SydneyMOD Project Team; Fixes and improvements by Dom",
     "contact": "http://steamcommunity.com/groups/SydneyMOD",
-    "version": "4.0.7",
+    "version": "4.0.8",
     "blt_version": 2,
     "color": "0.3 0 1",
     "image": "logo.png",

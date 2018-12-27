@@ -102,11 +102,7 @@ end
 function HUDAssaultCorner:SpamChat(phase)
     if Network:is_server() then
         if SydneyHUD:GetOption("assault_phase_chat_info") then
-            if SydneyHUD:GetOption("assault_phase_chat_info_feed") then
-                SydneyHUD:SendChatMessage("Assault", phase .. " Wave: " .. self._wave_number, true)
-            else
-                SydneyHUD:SendChatMessage("Assault", phase .. " Wave: " .. self._wave_number, false)
-            end
+            SydneyHUD:SendChatMessage("Assault", phase .. " Wave: " .. self._wave_number, SydneyHUD:GetOption("assault_phase_chat_info_feed"))
         end
     end
 end
@@ -203,6 +199,7 @@ function HUDAssaultCorner:_start_endless_assault(text_list)
     self:_start_assault(text_list)
     self:SetImage("padlock")
     self:_update_assault_hud_color(self._assault_endless_color)
+    self:SpamChat("Endless")
 end
 
 local _f_start_assault = HUDAssaultCorner._start_assault
@@ -337,6 +334,7 @@ function HUDAssaultCorner:UpdateAssaultState(state)
             if state and self.assault_state ~= state then
                 self.assault_state = state
                 if state == "build" then
+                    self:SpamChat("Build")
                     self:_update_assault_hud_color(self:GetStateColor(state))
                     return
                 end
@@ -362,6 +360,11 @@ function HUDAssaultCorner:UpdateAssaultState(state)
                         self:_set_text_list(self:_get_assault_state_strings_info(state))
                     else
                         self:_set_text_list(self:_get_assault_state_strings(state))
+                    end
+                    if state == "sustain" then
+                        self:SpamChat("Sustain")
+                    else
+                        self:SpamChat("Fade")
                     end
                 end
                 self:_update_assault_hud_color(self:GetStateColor(state))
@@ -394,6 +397,13 @@ function HUDAssaultCorner:UpdateAssaultStateOverride(state)
                         self:_set_text_list(self:_get_assault_state_strings(state))
                     end
                     self:_update_assault_hud_color(self:GetStateColor(state))
+                    if state == "build" then
+                        self:SpamChat("Build")
+                    elseif state == "sustain" then
+                        self:SpamChat("Sustain")
+                    else
+                        self:SpamChat("Fade")
+                    end
                     if self.is_host then
                         LuaNetworking:SendToPeers("BAI_AssaultStateOverride", state)
                     end
@@ -407,6 +417,7 @@ function HUDAssaultCorner:_set_hostages_offseted(is_offseted)
     if SydneyHUD:GetOption("center_assault_banner") then
         return
     end
+
 	local hostage_panel = self._hud_panel:child("hostages_panel")
 	self._remove_hostage_offset = nil
 
@@ -638,7 +649,7 @@ Hooks:Add("NetworkReceivedData", "NetworkReceivedData_BAI", function(sender, id,
         end
     end
     if id == "BAI_AdvancedAssaultInfo_TimeLeft" then -- Client
-        managers.hud:SetTimeLeft(data)
+        managers.hud._hud_assault_corner:SetTimeLeft(data)
     end
 end)
 
