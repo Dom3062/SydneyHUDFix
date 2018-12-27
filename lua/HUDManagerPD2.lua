@@ -123,7 +123,7 @@ function HUDManager:_create_custody_hud(hud)
     if SydneyHUD:GetOption("center_assault_banner") then
         local timer_msg = self._hud_player_custody._hud_panel:child("custody_panel"):child("timer_msg")
         timer_msg:set_y(50)
-        self._hud_player_custody._hud.timer:set_y(math.round(timer_msg:bottom() - 6))
+        self._hud_player_custody._hud_panel:child("custody_panel"):child("timer"):set_y(math.round(timer_msg:bottom() - 6))
     end
 end
 
