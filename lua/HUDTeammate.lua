@@ -586,8 +586,10 @@ function HUDTeammate:set_hud_mode(mode)
 end
 
 function HUDTeammate:set_detection_risk(risk)
-    self._detection_counter:set_text(string.format("%.0f", risk * 100))
-    self._detection_counter:set_color(Color(1, 0.99, 0.08, 0) * (risk / 0.75) + Color(1, 0, 0.71, 1) * (1 - risk / 0.75))
+    if self._detection_counter then
+        self._detection_counter:set_text(string.format("%.0f", risk * 100))
+        self._detection_counter:set_color(Color(1, 0.99, 0.08, 0) * (risk / 0.75) + Color(1, 0, 0.71, 1) * (1 - risk / 0.75))
+    end
 end
 
 function HUDTeammate:increment_kill_count(is_special, headshot)
