@@ -581,7 +581,7 @@ function HUDTeammate:set_health(data)
 end
 
 function HUDTeammate:set_hud_mode(mode)
-    self:set_revive_visibility(not (mode == "stealth"))
+    self:set_revive_visibility(mode ~= "stealth")
     self:set_detection_visibility(mode == "stealth")
 end
 
