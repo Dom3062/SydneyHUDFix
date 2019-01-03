@@ -41,14 +41,12 @@ function HUDManager:add_waypoint(id, data)
         rotation = 360
     })
     local distance
-    local r = SydneyHUD:GetOption("waypoint_color_r")
-    local g = SydneyHUD:GetOption("waypoint_color_g")
-    local b = SydneyHUD:GetOption("waypoint_color_b")
+    local waypoint_color = SydneyHUD:GetColor("waypoint_color")
     if data.distance then
         distance = waypoint_panel:text({
             name = "distance" .. id,
             text = "16.5",
-            color = data.color or Color(r, g, b), --Color(1, 1, 0.65882355, 0),
+            color = data.color or waypoint_color, --Color(1, 1, 0.65882355, 0),
             font = tweak_data.hud.medium_font_noshadow,
             font_size = tweak_data.hud.default_font_size,
             align = "center",
@@ -199,7 +197,10 @@ local CharacterData = {
     ["medic"] = "MEDIC",
     ["spa_vip"] = "CHARON",
     ["spa_vip_hurt"] = "CHARON",
-    ["swat_turret"] = "SWAT TURRET"
+    ["swat_turret"] = "SWAT TURRET",
+    ["cop_female"] = "FEMALE POLICE OFFICER",
+    ["heavy_swat_sniper"] = "ZEAL SNIPER",
+    ["mute_security_undominatable"] = "SOLOMON GARRETT"
 }
 
 local function FixNames()
