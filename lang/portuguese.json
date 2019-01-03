@@ -123,8 +123,6 @@
     "loot_screen_skip_desc": "Pula a tela de loot depois de X segundos",
     "move_lpi_lobby_box": "Informações do jogador no centro do lobby",
     "move_lpi_lobby_box_desc": "Move a Caixa de informações do jogador para o centro da tela",
-    "new_icon": "Novo tipo de ícone",
-    "new_icon_desc": "Usa os novos ícones do SydneyHUD, não funciona por enquanto",
     "push_to_interact": "Apertar para interagir",
     "push_to_interact_desc": "Não é necessário segurar a tecla de interação [F]",
     "push_to_interact_delay": "Atraso do aperte pra interagir",

@@ -123,8 +123,6 @@
     "loot_screen_skip_desc": "指定された秒数後に戦利品画面のスキップを行います。",
     "move_lpi_lobby_box": "Lobby Player Info欄の配置",
     "move_lpi_lobby_box_desc": "Lobby Player Info欄を画面の上部に配置します。",
-    "new_icon": "新しいアイコンタイプ",
-    "new_icon_desc": "SydneyHUDのために作られた新しいアイコンを使用します。",
     "push_to_interact": "Push to interact",
     "push_to_interact_desc": "インタラクトキー([F]キー)を長押ししなくてもインタラクトできるようにします。",
     "push_to_interact_delay": "Push to interact遅延",

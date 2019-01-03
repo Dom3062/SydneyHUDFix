@@ -1,0 +1,155 @@
+{
+    "menu_id": "sydneyhud_hudlist_options_right",
+    "parent_menu_id": "sydneyhud_hudlist_options",
+    "title": "sydneyhud_hudlist_options_right",
+    "description": "sydneyhud_hudlist_options_right_desc",
+    "items": [
+        {
+            "type": "slider",
+            "id": "right_list_y",
+            "title": "sydneyhud_hudlist_y",
+            "description": "sydneyhud_hudlist_right_list_y_desc",
+            "callback": "callback_right_list_y",
+            "value": "hudlist_right_list_y",
+            "max": 1000,
+            "min": 0,
+            "step": 1,
+            "round": true,
+            "default_value": 0
+        },
+        {
+            "type": "slider",
+            "id": "right_list_scale",
+            "title": "sydneyhud_hudlist_scale",
+            "description": "sydneyhud_hudlist_right_list_scale_desc",
+            "callback": "callback_right_list_scale",
+            "value": "hudlist_right_list_scale",
+            "max": 2,
+            "min": 0.5,
+            "step": 0.05,
+            "default_value": 1
+        },
+        {
+            "type": "divider",
+            "size": 12
+        },
+        {
+            "type": "multiple_choice",
+            "id": "show_loot",
+            "title": "sydneyhud_hudlist_show_loot",
+            "description": "sydneyhud_hudlist_show_loot_desc",
+            "callback": "callback_show_loot",
+            "items": [
+                "sydneyhud_hudlist_off",
+                "sydneyhud_hudlist_all",
+                "sydneyhud_hudlist_aggregate"
+            ],
+            "value": "hudlist_show_body_bags",
+            "default_value": 1
+        },
+        {
+            "type": "toggle",
+            "id": "separate_bagged_loot",
+            "title": "sydneyhud_hudlist_separate_bagged_loot",
+            "description": "sydneyhud_hudlist_separate_bagged_loot_desc",
+            "callback": "callback_separate_bagged_loot",
+            "value": "hudlist_separate_bagged_loot",
+            "default_value": true
+        },
+        {
+            "type": "multiple_choice",
+            "id": "show_enemies",
+            "title": "sydneyhud_hudlist_show_enemies",
+            "description": "sydneyhud_hudlist_show_enemies_desc",
+            "callback": "callback_show_enemies",
+            "items": [
+                "sydneyhud_hudlist_off",
+                "sydneyhud_hudlist_all",
+                "sydneyhud_hudlist_aggregate"
+            ],
+            "value": "hudlist_show_enemies",
+            "default_value": 1
+        },
+        {
+            "type": "toggle",
+            "id": "show_hostages",
+            "title": "sydneyhud_hudlist_show_hostages",
+            "description": "sydneyhud_hudlist_show_hostages_desc",
+            "callback": "callback_show_hostages",
+            "items": [
+                "sydneyhud_hudlist_off",
+                "sydneyhud_hudlist_all",
+                "sydneyhud_hudlist_aggregate"
+            ],
+            "value": "hudlist_show_hostages",
+            "default_value": 1
+        },
+        {
+            "type": "toggle",
+            "id": "show_civilians",
+            "title": "sydneyhud_hudlist_show_civilians",
+            "description": "sydneyhud_hudlist_show_civilians_desc",
+            "callback": "callback_show_civilians",
+            "value": "hudlist_show_civilians",
+            "default_value": true
+        },
+        {
+            "type": "toggle",
+            "id": "show_turrets",
+            "title": "sydneyhud_hudlist_show_turrets",
+            "description": "sydneyhud_hudlist_show_turrets_desc",
+            "callback": "callback_show_turrets",
+            "value": "hudlist_show_turrets",
+            "default_value": true
+        },
+        {
+            "type": "toggle",
+            "id": "show_minion_count",
+            "title": "sydneyhud_hudlist_show_minion_count",
+            "description": "sydneyhud_hudlist_show_minion_count_desc",
+            "callback": "callback_show_minion_count",
+            "value": "hudlist_show_minion_count",
+            "default_value": true
+        },
+        {
+            "type": "toggle",
+            "id": "show_pager_count",
+            "title": "sydneyhud_hudlist_show_pager_count",
+            "description": "sydneyhud_hudlist_show_pager_count_desc",
+            "callback": "callback_show_pager_count",
+            "value": "hudlist_show_pager_count",
+            "default_value": true
+        },
+        {
+            "type": "toggle",
+            "id": "show_camera_count",
+            "title": "sydneyhud_hudlist_show_camera_count",
+            "description": "sydneyhud_hudlist_show_camera_count_desc",
+            "callback": "callback_show_camera_count",
+            "value": "hudlist_show_camera_count",
+            "default_value": true
+        },
+        {
+            "type": "toggle",
+            "id": "show_body_count",
+            "title": "sydneyhud_hudlist_show_body_count",
+            "description": "sydneyhud_hudlist_show_body_count_desc",
+            "callback": "callback_show_body_count",
+            "value": "hudlist_show_body_count",
+            "default_value": true
+        },
+        {
+            "type": "toggle",
+            "id": "show_special_pickups",
+            "title": "sydneyhud_hudlist_show_special_pickups",
+            "description": "sydneyhud_hudlist_show_special_pickups_desc",
+            "callback": "callback_show_special_pickups",
+            "value": "hudlist_show_special_pickups",
+            "default_value": true
+        },
+        {
+            "type": "divider",
+            "size": 12
+        }
+    ]
+}

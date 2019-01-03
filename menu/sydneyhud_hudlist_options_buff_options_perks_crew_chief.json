@@ -1,0 +1,25 @@
+{
+    "menu_id": "sydneyhud_hudlist_options_buff_options_perks_crew_chief",
+    "parent_menu_id": "sydneyhud_hudlist_options_buff_options_perks",
+    "title": "sydneyhud_hudlist_options_buff_options_perks_crew_chief",
+    "items": [
+        {
+            "type": "toggle",
+            "id": "not_ignore_buff_crew_chief_level",
+            "title": "sydneyhud_hudlist_not_ignore_buff_crew_chief_level",
+            "description": "sydneyhud_hudlist_not_ignore_buff_crew_chief_level_desc",
+            "callback": "callback_not_ignore_buff_crew_chief_level",
+            "value": "hudlist_not_ignore_buff_crew_chief_level",
+            "default_value": true
+        },
+        {
+            "type": "toggle",
+            "id": "not_ignore_buff_hostage_situation",
+            "title": "sydneyhud_hudlist_not_ignore_buff_hostage_situation",
+            "description": "sydneyhud_hudlist_not_ignore_buff_hostage_situation_desc",
+            "callback": "callback_not_ignore_buff_hostage_situation",
+            "value": "hudlist_not_ignore_buff_hostage_situation",
+            "default_value": true
+        }
+    ]
+}

@@ -14,6 +14,10 @@ if not Steam then
     return
 end
 
+if not BLTSuperMod then -- SuperBLT Only
+    return
+end
+
 --[[
     We setup the global table for our mod, along with some path variables, and a data table.
     We cache the ModPath directory, so that when our hooks are called, we aren't using the ModPath from a
@@ -67,11 +71,39 @@ if not SydneyHUD.setup then
         "sydneyhud_gadget_options_sniper",
         "sydneyhud_gadget_options_turret",
 
-        "sydneyhud_hud_lists_options",
-        "sydneyhud_hud_lists_options_civilian_color",
-        "sydneyhud_hud_lists_options_enemy_color",
-        "sydneyhud_hud_lists_options_left",
-        "sydneyhud_hud_lists_options_right",
+        "sydneyhud_hudlist_options",
+        "sydneyhud_hudlist_options_left",
+        "sydneyhud_hudlist_options_right",
+        "sydneyhud_hudlist_options_right_not_ignore",
+        "sydneyhud_hudlist_options_buff",
+        "sydneyhud_hudlist_options_buff_options",
+        "sydneyhud_hudlist_options_buff_options_buff",
+        "sydneyhud_hudlist_options_buff_options_skills",
+        "sydneyhud_hudlist_options_buff_options_skills_mastermind",
+        "sydneyhud_hudlist_options_buff_options_skills_enforcer",
+        "sydneyhud_hudlist_options_buff_options_skills_technician",
+        "sydneyhud_hudlist_options_buff_options_skills_ghost",
+        "sydneyhud_hudlist_options_buff_options_skills_fugitive",
+        "sydneyhud_hudlist_options_buff_options_composite",
+        "sydneyhud_hudlist_options_buff_options_perks",
+        "sydneyhud_hudlist_options_buff_options_perks_crew_chief",
+        "sydneyhud_hudlist_options_buff_options_perks_muscle",
+        "sydneyhud_hudlist_options_buff_options_perks_armorer",
+        "sydneyhud_hudlist_options_buff_options_perks_hitman",
+        "sydneyhud_hudlist_options_buff_options_perks_infiltrator",
+        "sydneyhud_hudlist_options_buff_options_perks_sociopath",
+        "sydneyhud_hudlist_options_buff_options_perks_gambler",
+        "sydneyhud_hudlist_options_buff_options_perks_grinder",
+        "sydneyhud_hudlist_options_buff_options_perks_yakuza",
+        "sydneyhud_hudlist_options_buff_options_perks_maniac",
+        "sydneyhud_hudlist_options_buff_options_perks_anarchist",
+        "sydneyhud_hudlist_options_buff_options_perks_biker",
+        "sydneyhud_hudlist_options_buff_options_perks_kingpin",
+        "sydneyhud_hudlist_options_buff_options_perks_sicario",
+        "sydneyhud_hudlist_options_buff_options_perks_stoic",
+        "sydneyhud_hudlist_options_buff_options_perks_hacker",
+        "sydneyhud_hudlist_options_buff_options_boosts",
+        "sydneyhud_hudlist_options_buff_player_actions",
 
         "sydneyhud_chat_info",
         "sydneyhud_experimental",
@@ -89,74 +121,77 @@ if not SydneyHUD.setup then
         "sydneyhud_hud_tweaks_waypoint"
     }
     SydneyHUD._hook_files = {
-        ["core/lib/utils/coreapp"] = "Coreapp.lua",
-        ["lib/managers/chatmanager"] = "ChatManager.lua",
-        ["lib/managers/enemymanager"] = "EnemyManager.lua",
-        ["lib/managers/group_ai_states/groupaistatebase"] = "GroupAIStateBase.lua",
-        ["lib/managers/hud/hudassaultcorner"] = "HUDAssaultCorner.lua",
-        ["lib/managers/hud/hudinteraction"] = "HUDInteraction.lua",
-        ["lib/managers/hud/hudpresenter"] = "HUDPresenter.lua",
-        ["lib/managers/hud/hudstatsscreen"] = "HUDStatsScreen.lua",
-        ["lib/managers/hud/hudsuspicion"] = "HUDSuspicion.lua",
-        ["lib/managers/hud/hudteammate"] = "HUDTeammate.lua",
-        ["lib/managers/hudmanager"] = "HUDManager.lua",
-        ["lib/managers/hudmanagerpd2"] = "HUDManagerPD2.lua",
-        ["lib/managers/menu/blackmarketgui"] = "BlackMarketGUI.lua",
-        ["lib/managers/menu/contractboxgui"] = "ContractBoxGui.lua",
-        ["lib/managers/menu/lootdropscreengui"] = "LootDropScreenGui.lua",
-        ["lib/managers/menu/menubackdropgui"] = "MenuBackDropGUI.lua",
-        ["lib/managers/menu/menucomponentmanager"] = "MenuComponentManager.lua",
-        ["lib/managers/menu/menunodegui"] = "MenuNodeGui.lua",
-        ["lib/managers/menu/menuscenemanager"] = "MenuSceneManager.lua",
-        ["lib/managers/menu/missionbriefinggui"] = "MissionBriefingGui.lua",
-        ["lib/managers/menu/stageendscreengui"] = "StageEndScreenGui.lua",
-        ["lib/managers/menumanager"] = "MenuManager.lua",
-        ["lib/managers/missionassetsmanager"] = "MissionAssetsManager.lua",
-        ["lib/managers/objectinteractionmanager"] = "ObjectInteractionManager.lua",
-        ["lib/managers/playermanager"] = "PlayerManager.lua",
-        ["lib/managers/trademanager"] = "TradeManager.lua",
-        ["lib/network/base/handlers/connectionnetworkhandler"] = "ConnectionNetworkHandler.lua",
-        ["lib/network/base/networkpeer"] = "NetworkPeer.lua",
-        ["lib/network/handlers/unitnetworkhandler"] = "UnitNetworkHandler.lua",
-        ["lib/player_actions/skills/playeractionammoefficiency"] = "PlayerActionAmmoefficiency.lua",
-        ["lib/player_actions/skills/playeractionbloodthirstbase"] = "PlayerActionBloodthirstBase.lua",
-        ["lib/player_actions/skills/playeractiondireneed"] = "PlayerActionDireneed.lua",
-        ["lib/player_actions/skills/playeractionexperthandling"] = "PlayerActionExperthandling.lua",
-        ["lib/player_actions/skills/playeractionshockandawe"] = "PlayerActionShockandawe.lua",
-        ["lib/player_actions/skills/playeractiontriggerhappy"] = "PlayerActionTriggerhappy.lua",
-        ["lib/player_actions/skills/playeractionunseenstrike"] = "PlayerActionUnseenstrike.lua",
-        ["lib/setups/setup"] = "Setup.lua",
-        ["lib/states/ingamewaitingforplayers"] = "IngameWaitingForPlayersState.lua",
-        ["lib/tweak_data/charactertweakdata"] = "CharacterTweakData.lua",
-        ["lib/tweak_data/playertweakdata"] = "PlayerTweakData.lua",
-        ["lib/units/beings/player/huskplayermovement"] = "HuskPlayerMovement.lua",
-        ["lib/units/beings/player/playerdamage"] = "PlayerDamage.lua",
-        ["lib/units/beings/player/playermovement"] = "PlayerMovement.lua",
-        ["lib/units/beings/player/states/playerbleedout"] = "PlayerBleedOut.lua",
-        ["lib/units/beings/player/states/playercarry"] = "PlayerCarry.lua",
-        ["lib/units/beings/player/states/playercivilian"] = "PlayerCivilian.lua",
-        ["lib/units/beings/player/states/playerdriving"] = "PlayerDriving.lua",
-        ["lib/units/beings/player/states/playermaskoff"] = "PlayerMaskOff.lua",
-        ["lib/units/beings/player/states/playerstandard"] = "PlayerStandard.lua",
-        ["lib/units/enemies/cop/copdamage"] = "CopDamage.lua",
-        ["lib/units/equipment/ammo_bag/ammobagbase"] = "AmmoBagBase.lua",
-        ["lib/units/equipment/bodybags_bag/bodybagsbagbase"] = "BodyBagBase.lua",
-        ["lib/units/equipment/doctor_bag/doctorbagbase"] = "DoctorBagBase.lua",
-        ["lib/units/equipment/ecm_jammer/ecmjammerbase"] = "ECMJammerBase.lua",
-        ["lib/units/equipment/grenade_crate/grenadecratebase"] = "GrenadeCrateBase.lua",
-        ["lib/units/equipment/sentry_gun/sentrygunbase"] = "SentryGunBase.lua",
-        ["lib/units/equipment/sentry_gun/sentrygundamage"] = "SentryGunDamage.lua",
-        ["lib/units/interactions/interactionext"] = "InteractionExt.lua",
-        ["lib/units/props/digitalgui"] = "DigitalGui.lua",
-        ["lib/units/props/drill"] = "Drill.lua",
-        ["lib/units/props/securitycamera"] = "SecurityCamera.lua",
-        ["lib/units/props/securitylockgui"] = "SecurityLockGui.lua",
-        ["lib/units/props/timergui"] = "TimerGui.lua",
-        ["lib/units/weapons/newraycastweaponbase"] = "NewRayCastWeaponBase.lua",
-        ["lib/units/weapons/sentrygunweapon"] = "SentryGunWeapon.lua",
-        ["lib/units/weapons/weaponflashlight"] = "WeaponFlashlight.lua",
-        ["lib/units/weapons/weaponlaser"] = "WeaponLaser.lua",
-        ["lib/utils/temporarypropertymanager"] = "TemporaryPropertyManager.lua"
+        ["lib/entry"] = "lib/Entry.lua",
+        ["lib/managers/chatmanager"] = "lib/managers/ChatManager.lua",
+        ["lib/managers/enemymanager"] = "lib/managers/EnemyManager.lua",
+        ["lib/managers/group_ai_states/groupaistatebase"] = "lib/managers/group_ai_states/GroupAIStateBase.lua",
+        ["lib/managers/hud/hudassaultcorner"] = "lib/managers/hud/HUDAssaultCorner.lua",
+        ["lib/managers/hud/hudinteraction"] = "lib/managers/hud/HUDInteraction.lua",
+        ["lib/managers/hud/hudstatsscreen"] = "lib/managers/hud/HUDStatsScreen.lua",
+        ["lib/managers/hud/hudsuspicion"] = "lib/managers/hud/HUDSuspicion.lua",
+        ["lib/managers/hud/hudteammate"] = "lib/managers/hud/HUDTeammate.lua",
+        ["lib/managers/hudmanager"] = "lib/managers/HUDManager.lua",
+        ["lib/managers/hudmanagerpd2"] = "lib/managers/HUDManagerPD2.lua",
+        ["lib/managers/menu/blackmarketgui"] = "lib/managers/menu/BlackMarketGUI.lua",
+        ["lib/managers/menu/contractboxgui"] = "lib/managers/menu/ContractBoxGui.lua",
+        ["lib/managers/menu/lootdropscreengui"] = "lib/managers/menu/LootDropScreenGui.lua",
+        ["lib/managers/menu/menubackdropgui"] = "lib/managers/menu/MenuBackDropGUI.lua",
+        ["lib/managers/menu/menucomponentmanager"] = "lib/managers/menu/MenuComponentManager.lua",
+        ["lib/managers/menu/menunodegui"] = "lib/managers/menu/MenuNodeGui.lua",
+        ["lib/managers/menu/menuscenemanager"] = "lib/managers/menu/MenuSceneManager.lua",
+        ["lib/managers/menu/missionbriefinggui"] = "lib/managers/menu/MissionBriefingGui.lua",
+        ["lib/managers/menu/stageendscreengui"] = "lib/managers/menu/StageEndScreenGui.lua",
+        ["lib/managers/menumanager"] = "lib/managers/MenuManager.lua",
+        ["lib/managers/missionassetsmanager"] = "lib/managers/MissionAssetsManager.lua",
+        ["lib/managers/objectinteractionmanager"] = "lib/managers/ObjectInteractionManager.lua",
+        ["lib/managers/playermanager"] = "lib/managers/PlayerManager.lua",
+        ["lib/managers/trademanager"] = "lib/managers/TradeManager.lua",
+        ["lib/modifiers/boosts/gagemodifierlifesteal"] = "lib/modifiers/boosts/GageModifierLifeSteal.lua",
+        ["lib/modifiers/boosts/gagemodifiermeleeinvincibility"] = "lib/modifiers/boosts/GageMeleeModifierInvincibility.lua",
+        ["lib/network/base/handlers/connectionnetworkhandler"] = "lib/network/base/handlers/ConnectionNetworkHandler.lua",
+        ["lib/network/base/networkpeer"] = "lib/network/base/NetworkPeer.lua",
+        ["lib/network/handlers/unitnetworkhandler"] = "lib/network/handlers/UnitNetworkHandler.lua",
+        ["lib/player_actions/skills/playeractionammoefficiency"] = "lib/player_actions/skills/PlayerActionAmmoEfficiency.lua",
+        ["lib/player_actions/skills/playeractionbloodthirstbase"] = "lib/player_actions/skills/PlayerActionBloodthirstBase.lua",
+        ["lib/player_actions/skills/playeractiondireneed"] = "lib/player_actions/skills/PlayerActionDireNeed.lua",
+        ["lib/player_actions/skills/playeractionexperthandling"] = "lib/player_actions/skills/PlayerActionExpertHandling.lua",
+        ["lib/player_actions/skills/playeractionshockandawe"] = "lib/player_actions/skills/PlayerActionShockAndAwe.lua",
+        ["lib/player_actions/skills/playeractiontriggerhappy"] = "lib/player_actions/skills/PlayerActionTriggerHappy.lua",
+        ["lib/player_actions/skills/playeractionunseenstrike"] = "lib/player_actions/skills/PlayerActionUnseenStrike.lua",
+        ["lib/setups/setup"] = "lib/setups/Setup.lua",
+        ["lib/states/ingamewaitingforplayers"] = "lib/states/IngameWaitingForPlayersState.lua",
+        ["lib/tweak_data/charactertweakdata"] = "lib/tweak_data/CharacterTweakData.lua",
+        ["lib/tweak_data/playertweakdata"] = "lib/tweak_data/PlayerTweakData.lua",
+        ["lib/units/beings/player/huskplayermovement"] = "lib/units/beings/player/HuskPlayerMovement.lua",
+        ["lib/units/beings/player/playerdamage"] = "lib/units/beings/player/PlayerDamage.lua",
+        ["lib/units/beings/player/playerinventory"] = "lib/units/beings/player/PlayerInventory.lua",
+        ["lib/units/beings/player/playermovement"] = "lib/units/beings/player/PlayerMovement.lua",
+        ["lib/units/beings/player/states/playerbleedout"] = "lib/units/beings/player/states/PlayerBleedOut.lua",
+        ["lib/units/beings/player/states/playercarry"] = "lib/units/beings/player/states/PlayerCarry.lua",
+        ["lib/units/beings/player/states/playercivilian"] = "lib/units/beings/player/states/PlayerCivilian.lua",
+        ["lib/units/beings/player/states/playerdriving"] = "lib/units/beings/player/states/PlayerDriving.lua",
+        ["lib/units/beings/player/states/playermaskoff"] = "lib/units/beings/player/states/PlayerMaskOff.lua",
+        ["lib/units/beings/player/states/playerstandard"] = "lib/units/beings/player/states/PlayerStandard.lua",
+        ["lib/units/enemies/cop/copdamage"] = "lib/units/enemies/cop/CopDamage.lua",
+        ["lib/units/equipment/ammo_bag/ammobagbase"] = "lib/units/equipment/ammo_bag/AmmoBagBase.lua",
+        ["lib/units/equipment/bodybags_bag/bodybagsbagbase"] = "lib/units/equipment/bodybags_bag/BodyBagBase.lua",
+        ["lib/units/equipment/doctor_bag/doctorbagbase"] = "lib/units/equipment/doctor_bag/DoctorBagBase.lua",
+        ["lib/units/equipment/ecm_jammer/ecmjammerbase"] = "lib/units/equipment/ecm_jammer/ECMJammerBase.lua",
+        ["lib/units/equipment/grenade_crate/grenadecratebase"] = "lib/units/equipment/grenade_crate/GrenadeCrateBase.lua",
+        ["lib/units/equipment/sentry_gun/sentrygunbase"] = "lib/units/equipment/sentry_gun/SentryGunBase.lua",
+        ["lib/units/equipment/sentry_gun/sentrygundamage"] = "lib/units/equipment/sentry_gun/SentryGunDamage.lua",
+        ["lib/units/interactions/interactionext"] = "lib/units/interactions/InteractionExt.lua",
+        ["lib/units/props/digitalgui"] = "lib/units/props/DigitalGui.lua",
+        ["lib/units/props/drill"] = "lib/units/props/Drill.lua",
+        ["lib/units/props/securitycamera"] = "lib/units/props/SecurityCamera.lua",
+        ["lib/units/props/securitylockgui"] = "lib/units/props/SecurityLockGui.lua",
+        ["lib/units/props/timergui"] = "lib/units/props/TimerGui.lua",
+        ["lib/units/weapons/newraycastweaponbase"] = "lib/units/weapons/NewRayCastWeaponBase.lua",
+        ["lib/units/weapons/sentrygunweapon"] = "lib/units/weapons/SentryGunWeapon.lua",
+        ["lib/units/weapons/weaponflashlight"] = "lib/units/weapons/WeaponFlashlight.lua",
+        ["lib/units/weapons/weaponlaser"] = "lib/units/weapons/WeaponLaser.lua",
+        ["lib/utils/propertymanager"] = "lib/utils/PropertyManager.lua",
+        ["lib/utils/temporarypropertymanager"] = "lib/utils/TemporaryPropertyManager.lua"
     }
     SydneyHUD._poco_conflicting_defaults = {
         buff = {
@@ -180,71 +215,6 @@ if not SydneyHUD.setup then
             uppercaseNames = true
         }
     }
-
-    local upcoming = {}
-    local incoming = {}
-    local removals = {}
-
-    function SydneyHUD:DelayedCallsUpdate(time, deltaTime)
-        local immutable = self._calls
-        for k, v in pairs(immutable) do
-            v.currentTime = v.currentTime + deltaTime
-            if v.currentTime >= v.timeToWait then
-                if v.functionCall then
-                    local status = pcall(v.functionCall)
-                    if not status then
-                        log(SydneyHUD.warn .. "Execution of callback has failed: " .. tostring(k))
-                    end
-                end
-            else
-                upcoming[k] = v
-            end
-        end
-
-        for k, v in pairs(self._calls) do
-            upcoming[k] = v
-        end
-        for k, v in pairs(removals) do
-            if upcoming[k] ~= nil then
-                upcoming[k] = nil
-            end
-        end
-
-        for key, __ in pairs(immutable) do
-            immutable[key] = nil
-        end
-        for key, __ in pairs(self._calls) do
-            self._calls[key] = nil
-        end
-        for key, __ in pairs(removals) do
-            removals[key] = nil
-        end
-
-        self._calls, upcoming, incoming = upcoming, self._calls, immutable
-    end
-
-    function SydneyHUD:DelayedCallsAdd(id, time, func)
-        local data = self._calls[id]
-        if data == nil then
-            self._calls[id] = {
-                functionCall = func,
-                timeToWait = time,
-                currentTime = 0
-            }
-        else
-            data.functionCall = func
-            data.timeToWait = time
-            data.currentTime = 0
-        end
-    end
-
-    function SydneyHUD:DelayedCallsRemove(id)
-        if self._calls[id] == nil then
-            removals[id] = true
-        else
-            self._calls[id] = nil
-        end
-    end
 
     --[[
         A simple save function that json encodes our _data table and saves it to a file.
@@ -276,6 +246,22 @@ if not SydneyHUD.setup then
 
     function SydneyHUD:GetOption(id)
         return self._data[id]
+    end
+
+    function SydneyHUD:GetModOption(mod_name, id)
+        return self:GetOption(mod_name .. "_" .. id)
+    end
+
+    function SydneyHUD:GetHUDListItemOption(item_name)
+        return not self:GetOption("hudlist_not_ignore_item_" .. item_name)
+    end
+
+    function SydneyHUD:GetHUDListBuffOption(buff_name)
+        return not self:GetOption("hudlist_not_ignore_buff_" .. buff_name)
+    end
+
+    function SydneyHUD:GetHUDListPlayerActionOption(action_name)
+        return not self:GetOption("hudlist_not_ignore_player_action_" .. action_name)
     end
 
     function SydneyHUD:LoadDefaults()
@@ -334,7 +320,7 @@ if not SydneyHUD.setup then
             if io.file_is_readable(fileName) then
                 dofile(fileName)
             else
-                log(SydneyHUD.error .. "Could not open file '" .. fileName .. "'!")
+                log(SydneyHUD.error .. "Can't open file '" .. fileName .. "'!")
             end
         end)
         if not success then
@@ -650,8 +636,12 @@ if not SydneyHUD.setup then
         Hooks:RemovePostHook((mod and (mod .. "_") or "BAI_") .. id)
     end ]]
     
-    function SydneyHUD:DelayCall(name, t, func)
-        DelayedCalls:Add(name, t, func)
+    function SydneyHUD:AddDelayedCall(id, t, func)
+        DelayedCalls:Add(id, t, func)
+    end
+
+    function SydneyHUD:RemoveDelayedCall(id)
+        DelayedCalls:Remove(id)
     end
 
     SydneyHUD:Load()

@@ -1,0 +1,51 @@
+{
+    "menu_id": "sydneyhud_hudlist_options_buff",
+    "parent_menu_id": "sydneyhud_hudlist_options",
+    "title": "sydneyhud_hudlist_options_buff",
+    "description": "sydneyhud_hudlist_options_buff_desc",
+    "items": [
+        {
+            "type": "slider",
+            "id": "buff_list_y",
+            "title": "sydneyhud_hudlist_y",
+            "description": "sydneyhud_hudlist_buff_list_y_desc",
+            "callback": "callback_buff_list_y",
+            "value": "hudlist_buff_list_y",
+            "max": 1000,
+            "min": 0,
+            "step": 1,
+            "round": true,
+            "default_value": 80
+        },
+        {
+            "type": "slider",
+            "id": "buff_list_scale",
+            "title": "sydneyhud_hudlist_scale",
+            "description": "sydneyhud_hudlist_buff_list_scale_desc",
+            "callback": "callback_buff_list_scale",
+            "value": "hudlist_buff_list_scale",
+            "max": 2,
+            "min": 0.5,
+            "step": 0.05,
+            "default_value": 1
+        },
+        {
+            "type": "toggle",
+            "id": "show_buffs",
+            "title": "sydneyhud_hudlist_show_buffs",
+            "description": "sydneyhud_hudlist_show_buffs_desc",
+            "callback": "callback_show_buffs",
+            "value": "hudlist_show_buffs",
+            "default_value": true
+        },
+        {
+            "type": "toggle",
+            "id": "show_player_action",
+            "title": "sydneyhud_hudlist_show_player_actions",
+            "description": "sydneyhud_hudlist_show_player_actions_desc",
+            "callback": "callback_show_player_actions",
+            "value": "hudlist_show_player_actions",
+            "default_value": true
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "menu_id": "sydneyhud_hudlist_options",
+    "parent_menu_id": "sydneyhud_options",
+    "title": "sydneyhud_hudlist_options",
+    "description": "sydneyhud_hudlist_options_desc",
+    "items": [
+    ]
+}

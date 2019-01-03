@@ -3,7 +3,7 @@
     "description": "All-In-One HUD mod",
     "author": "SydneyMOD Project Team; Fixes and improvements by Dom",
     "contact": "http://steamcommunity.com/groups/SydneyMOD",
-    "version": "4.0.9",
+    "version": "4.1.0",
     "blt_version": 2,
     "color": "0.3 0 1",
     "image": "logo.png",
@@ -24,33 +24,33 @@
     ],
     "pre_hooks": [
         {
-            "script_path": "SydneyHUD.lua",
-            "hook_id": "core/lib/utils/coreapp"
+            "script_path": "lua/lib/Entry.lua",
+            "hook_id": "lib/entry"
         },
         {
-            "script_path": "lua/Setup.lua",
+            "script_path": "lua/lib/setups/Setup.lua",
             "hook_id": "lib/setups/setup"
         },
         {
-            "script_path": "lua/GameSetup.lua",
+            "script_path": "lua/lib/setups/GameSetup.lua",
             "hook_id": "lib/setups/gamesetup"
         }
     ],
     "hooks": [
         {
-            "script_path": "lua/Setup.lua",
+            "script_path": "lua/lib/setups/Setup.lua",
             "hook_id": "lib/setups/setup"
         },
         {
-            "script_path": "lua/GameSetup.lua",
+            "script_path": "lua/lib/setups/GameSetup.lua",
             "hook_id": "lib/setups/gamesetup"
         },
         {
-            "script_path": "lua/DeployableWaypoint.lua",
+            "script_path": "lua/lib/setups/DeployableWaypoint.lua",
             "hook_id": "lib/setups/gamesetup"
         },
         {
-            "script_path": "lua/TimerWaypoint.lua",
+            "script_path": "lua/lib/setups/TimerWaypoint.lua",
             "hook_id": "lib/setups/gamesetup"
         },
         {
@@ -150,12 +150,20 @@
             "hook_id": "lib/managers/trademanager"
         },
         {
-            "script_path": "SydneyHUD.lua",
-            "hook_id": "lib/network/base/handlers/connectionnetworkhandler"
+            "hook_id" : "lib/modifiers/boosts/gagemodifierlifesteal",
+            "script_path" : "SydneyHUD.lua"
+        },
+        {
+            "hook_id" : "lib/modifiers/boosts/gagemodifiermeleeinvincibility",
+            "script_path" : "SydneyHUD.lua"
         },
         {
             "script_path": "SydneyHUD.lua",
             "hook_id": "lib/network/base/networkpeer"
+        },
+        {
+            "script_path": "SydneyHUD.lua",
+            "hook_id": "lib/network/base/handlers/connectionnetworkhandler"
         },
         {
             "script_path": "SydneyHUD.lua",
@@ -208,6 +216,10 @@
         {
             "script_path": "SydneyHUD.lua",
             "hook_id": "lib/units/beings/player/playerdamage"
+        },
+        {
+            "hook_id": "lib/units/beings/player/playerinventory",
+            "script_path": "SydneyHUD.lua"
         },
         {
             "script_path": "SydneyHUD.lua",
@@ -308,6 +320,10 @@
         {
             "script_path": "SydneyHUD.lua",
             "hook_id": "lib/units/weapons/weaponlaser"
+        },
+        {
+            "hook_id" : "lib/utils/propertymanager",
+            "script_path": "SydneyHUD.lua"
         },
         {
             "script_path": "SydneyHUD.lua",

@@ -1,0 +1,33 @@
+{
+    "menu_id": "sydneyhud_hudlist_options_buff_options_perks_infiltrator",
+    "parent_menu_id": "sydneyhud_hudlist_options_buff_options_perks",
+    "title": "sydneyhud_hudlist_options_buff_options_perks_infiltrator",
+    "items": [
+        {
+            "type": "toggle",
+            "id": "not_ignore_buff_life_drain_cooldown",
+            "title": "sydneyhud_hudlist_not_ignore_buff_life_drain_cooldown",
+            "callback": "callback_not_ignore_buff_life_drain_cooldown",
+            "value": "hudlist_not_ignore_buff_life_drain_cooldown",
+            "default_value": true
+        },
+        {
+            "type": "toggle",
+            "id": "not_ignore_buff_overdog_damage_reduction",
+            "title": "sydneyhud_hudlist_not_ignore_buff_overdog_damage_reduction",
+            "description": "sydneyhud_hudlist_not_ignore_buff_overdog_damage_reduction_desc",
+            "callback": "callback_not_ignore_buff_overdog_damage_reduction",
+            "value": "hudlist_not_ignore_buff_overdog_damage_reduction",
+            "default_value": false
+        },
+        {
+            "type": "toggle",
+            "id": "not_ignore_buff_overdog_melee_damage",
+            "title": "sydneyhud_hudlist_not_ignore_buff_overdog_melee_damage",
+            "description": "sydneyhud_hudlist_not_ignore_buff_overdog_melee_damage_desc",
+            "callback": "callback_not_ignore_buff_overdog_melee_damage",
+            "value": "hudlist_not_ignore_buff_overdog_melee_damage",
+            "default_value": false
+        }
+    ]
+}

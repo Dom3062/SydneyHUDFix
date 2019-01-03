@@ -1,0 +1,59 @@
+{
+    "menu_id": "sydneyhud_hudlist_options_buff_options_skills_enforcer",
+    "parent_menu_id": "sydneyhud_hudlist_options_buff_options_skills",
+    "title": "sydneyhud_hudlist_options_buff_options_skills_enforcer",
+    "items": [
+        {
+            "type": "toggle",
+            "id": "not_ignore_buff_bullet_storm",
+            "title": "sydneyhud_hudlist_not_ignore_buff_bullet_storm",
+            "callback": "callback_not_ignore_buff_bullet_storm",
+            "value": "hudlist_not_ignore_buff_bullet_storm",
+            "default_value": true
+        },
+        {
+            "type": "toggle",
+            "id": "not_ignore_buff_bullseye_cooldown",
+            "title": "sydneyhud_hudlist_not_ignore_buff_bullseye_cooldown",
+            "callback": "callback_not_ignore_buff_bullseye_cooldown",
+            "value": "hudlist_not_ignore_buff_bullseye_cooldown",
+            "default_value": true
+        },
+        {
+            "type": "toggle",
+            "id": "not_ignore_buff_die_hard",
+            "title": "sydneyhud_hudlist_not_ignore_buff_die_hard",
+            "description": "sydneyhud_hudlist_not_ignore_buff_die_hard_desc",
+            "callback": "callback_not_ignore_buff_die_hard",
+            "value": "hudlist_not_ignore_buff_die_hard",
+            "default_value": false
+        },
+        {
+            "type": "toggle",
+            "id": "not_ignore_buff_overkill",
+            "title": "sydneyhud_hudlist_not_ignore_buff_overkill",
+            "description": "sydneyhud_hudlist_not_ignore_buff_overkill_desc",
+            "callback": "callback_not_ignore_buff_overkill",
+            "value": "hudlist_not_ignore_buff_overkill",
+            "default_value": false
+        },
+        {
+            "type": "toggle",
+            "id": "not_ignore_buff_shock_and_awe",
+            "title": "sydneyhud_hudlist_not_ignore_buff_shock_and_awe",
+            "description": "sydneyhud_hudlist_not_ignore_buff_shock_and_awe_desc",
+            "callback": "callback_not_ignore_buff_shock_and_awe",
+            "value": "hudlist_not_ignore_buff_shock_and_awe",
+            "default_value": true
+        },
+        {
+            "type": "toggle",
+            "id": "not_ignore_buff_underdog",
+            "title": "sydneyhud_hudlist_not_ignore_buff_underdog",
+            "description": "sydneyhud_hudlist_not_ignore_buff_underdog_desc",
+            "callback": "callback_not_ignore_buff_underdog",
+            "value": "hudlist_not_ignore_buff_underdog",
+            "default_value": false
+        }
+    ]
+}

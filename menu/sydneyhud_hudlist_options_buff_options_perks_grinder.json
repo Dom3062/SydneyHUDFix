@@ -1,0 +1,24 @@
+{
+    "menu_id": "sydneyhud_hudlist_options_buff_options_perks_grinder",
+    "parent_menu_id": "sydneyhud_hudlist_options_buff_options_perks",
+    "title": "sydneyhud_hudlist_options_buff_options_perks_grinder",
+    "items": [
+        {
+            "type": "toggle",
+            "id": "not_ignore_buff_histamine",
+            "title": "sydneyhud_hudlist_not_ignore_buff_histamine",
+            "callback": "callback_not_ignore_buff_histamine",
+            "value": "hudlist_not_ignore_buff_histamine",
+            "default_value": true
+        },
+        {
+            "type": "toggle",
+            "id": "not_ignore_buff_histamine_cooldown",
+            "title": "sydneyhud_hudlist_not_ignore_buff_histamine_cooldown",
+            "description": "sydneyhud_hudlist_not_ignore_buff_histamine_cooldown_desc",
+            "callback": "callback_not_ignore_buff_histamine_cooldown",
+            "value": "hudlist_not_ignore_buff_histamine_cooldown",
+            "default_value": false
+        }
+    ]
+}

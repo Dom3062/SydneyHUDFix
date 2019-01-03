@@ -1,0 +1,24 @@
+{
+    "menu_id": "sydneyhud_hudlist_options_buff_options_boosts",
+    "parent_menu_id": "sydneyhud_hudlist_options_buff_options_buff",
+    "title": "sydneyhud_hudlist_options_buff_options_boosts",
+    "description": "sydneyhud_hudlist_options_buff_options_boosts_desc",
+    "items": [
+        {
+            "type": "toggle",
+            "id": "not_ignore_buff_some_invulnerability_cooldown",
+            "title": "sydneyhud_hudlist_not_ignore_buff_some_invulnerability_cooldown",
+            "callback": "callback_not_ignore_buff_some_invulnerability_cooldown",
+            "value": "hudlist_not_ignore_buff_some_invulnerability_cooldown",
+            "default_value": true
+        },
+        {
+            "type": "toggle",
+            "id": "not_ignore_buff_self_healer_cooldown",
+            "title": "sydneyhud_hudlist_not_ignore_buff_self_healer_cooldown",
+            "callback": "callback_not_ignore_buff_self_healer_cooldown",
+            "value": "hudlist_not_ignore_buff_self_healer_cooldown",
+            "default_value": true
+        }
+    ]
+}

@@ -1,0 +1,42 @@
+{
+    "menu_id": "sydneyhud_hudlist_options_buff_options_perks_sicario",
+    "parent_menu_id": "sydneyhud_hudlist_options_buff_options_perks",
+    "title": "sydneyhud_hudlist_options_buff_options_perks_sicario",
+    "items": [
+        {
+            "type": "toggle",
+            "id": "not_ignore_buff_smoke_grenade",
+            "title": "sydneyhud_hudlist_not_ignore_buff_smoke_grenade",
+            "description": "sydneyhud_hudlist_not_ignore_buff_smoke_grenade_desc",
+            "callback": "callback_not_ignore_buff_smoke_grenade",
+            "value": "hudlist_not_ignore_buff_smoke_grenade",
+            "default_value": false
+        },
+        {
+            "type": "toggle",
+            "id": "not_ignore_buff_smoke_screen",
+            "title": "sydneyhud_hudlist_not_ignore_buff_smoke_screen",
+            "description": "sydneyhud_hudlist_not_ignore_buff_smoke_screen_desc",
+            "callback": "callback_not_ignore_buff_smoke_screen",
+            "value": "hudlist_not_ignore_buff_smoke_screen",
+            "default_value": true
+        },
+        {
+            "type": "toggle",
+            "id": "not_ignore_buff_twitch",
+            "title": "sydneyhud_hudlist_not_ignore_buff_twitch",
+            "callback": "callback_not_ignore_buff_twitch",
+            "value": "hudlist_not_ignore_buff_twitch",
+            "default_value": false
+        },
+        {
+            "type": "toggle",
+            "id": "not_ignore_buff_twitch_cooldown",
+            "title": "sydneyhud_hudlist_not_ignore_buff_twitch_cooldown",
+            "description": "sydneyhud_hudlist_not_ignore_buff_twitch_cooldown_desc",
+            "callback": "callback_not_ignore_buff_twitch_cooldown",
+            "value": "hudlist_not_ignore_buff_twitch_cooldown",
+            "default_value": true
+        }
+    ]
+}

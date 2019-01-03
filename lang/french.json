@@ -145,8 +145,6 @@
     "loot_screen_skip_desc": "Passe l'écran de loot après X secondes",
     "move_lpi_lobby_box": "Centre la boîte d'information du lobby",
     "move_lpi_lobby_box_desc": "Déplace la boîte d'information du lobby dans le centre supérieur de l'écran",
-    "new_icon": "Nouvelles icônes",
-    "new_icon_desc": "Utilise les nouvelles icônes crées pour SydneyHUD",
     "push_to_interact": "Appuyer pour interagir",
     "push_to_interact_desc": "Plus besoin de maintenir la touche d'interaction [F]",
     "push_to_interact_delay": "Délai d'Appuyer pour interagir",
