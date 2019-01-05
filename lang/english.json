@@ -260,6 +260,8 @@
     "show_text_borders_desc": "Show black borders around the interaction/suspicion texts",
     "show_timers": "Show timers",
     "show_timers_desc": "Enables or disables timers",
+    "show_trade_delay" : "Show Trade Delay",
+    "show_trade_delay_desc" : "Shows Trade Delay in the message when you killed a civilian",
     "show_turrets": "Show Turrets",
     "show_turrets_desc": "Show active SWAT turrets",
     "show_underdog_aced": "Show Underdog Aced Indicator",

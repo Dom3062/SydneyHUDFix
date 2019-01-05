@@ -138,6 +138,10 @@
             "hook_id": "lib/managers/missionassetsmanager"
         },
         {
+            "hook_id": "lib/managers/moneymanager",
+            "script_path": "SydneyHUD.lua"
+        },
+        {
             "script_path": "SydneyHUD.lua",
             "hook_id": "lib/managers/objectinteractionmanager"
         },

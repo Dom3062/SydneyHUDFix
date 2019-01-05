@@ -251,6 +251,7 @@
     "show_suspicion_text": true,
     "show_text_borders": true,
     "show_timer_waypoint": true,
+    "show_trade_delay" : true,
     "show_underdog_aced": true,
     "skip_black_screen": true,
     "skip_card_picking": true,

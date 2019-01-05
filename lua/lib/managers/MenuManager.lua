@@ -123,6 +123,10 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_sydneyhud", function(m
         SydneyHUD._data.improved_ammo_count = item:value() == "on"
     end
 
+    MenuCallbackHandler.callback_show_trade_delay = function(self, item)
+        SydneyHUD._data.show_trade_delay = item:value() == "on"
+    end
+
     -- HUDList
     -- Left Panel
     MenuCallbackHandler.callback_left_list_y = function(self, item)

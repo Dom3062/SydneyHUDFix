@@ -75,6 +75,15 @@
             "callback": "callback_show_damage_popup",
             "value": "show_damage_popup",
             "default_value": true
+        },
+        {
+            "type": "toggle",
+            "id": "show_trade_delay",
+            "title": "show_trade_delay",
+            "description": "show_trade_delay_desc",
+            "callback": "callback_show_trade_delay",
+            "value": "show_trade_delay",
+            "default_value": true
         }
     ]
 }

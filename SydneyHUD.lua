@@ -143,6 +143,7 @@ if not SydneyHUD.setup then
         ["lib/managers/menu/stageendscreengui"] = "lib/managers/menu/StageEndScreenGui.lua",
         ["lib/managers/menumanager"] = "lib/managers/MenuManager.lua",
         ["lib/managers/missionassetsmanager"] = "lib/managers/MissionAssetsManager.lua",
+        ["lib/managers/moneymanager"] = "lib/managers/MoneyManager.lua",
         ["lib/managers/objectinteractionmanager"] = "lib/managers/ObjectInteractionManager.lua",
         ["lib/managers/playermanager"] = "lib/managers/PlayerManager.lua",
         ["lib/managers/trademanager"] = "lib/managers/TradeManager.lua",
