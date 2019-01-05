@@ -584,6 +584,10 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_sydneyhud", function(m
         SydneyHUD._data.hudlist_not_ignore_buff_self_healer_cooldown = item:value() == "on"
     end
 
+    MenuCallbackHandler.callback_not_ignore_buff_ai_inspire_cooldown = function(self, item)
+        SydneyHUD._data.hudlist_not_ignore_buff_ai_inspire_cooldown = item:value() == "on"
+    end
+
     -- Down Panel (Player Action Option)
     MenuCallbackHandler.callback_not_ignore_player_action_anarchist_armor_regeneration = function(self, item)
         SydneyHUD._data.hudlist_not_ignore_player_action_anarchist_armor_regeneration = item:value() == "on"

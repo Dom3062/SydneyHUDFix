@@ -19,6 +19,18 @@
             "callback": "callback_not_ignore_buff_self_healer_cooldown",
             "value": "hudlist_not_ignore_buff_self_healer_cooldown",
             "default_value": true
+        },
+        {
+            "type" : "divider",
+            "size" : 32
+        },
+        {
+            "type": "toggle",
+            "id": "not_ignore_buff_ai_inspire_cooldown",
+            "title": "sydneyhud_hudlist_not_ignore_buff_ai_inspire_cooldown",
+            "callback": "callback_not_ignore_buff_ai_inspire_cooldown",
+            "value": "hudlist_not_ignore_buff_ai_inspire_cooldown",
+            "default_value": true
         }
     ]
 }

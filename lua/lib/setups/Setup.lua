@@ -1169,7 +1169,7 @@ if RequiredScript == "lib/setups/setup" and not Setup then
 				loose_ammo_give_team =							{ "ammo_give_out_debuff" },
 				revive_damage_reduction =						{ "combat_medic_success" },
 				unseen_strike =									{ "unseen_strike", "unseen_strike" },
-				pocket_ecm_kill_dodge =							{ "pocket_ecm_kill_dodge" },
+                pocket_ecm_kill_dodge =							{ "pocket_ecm_kill_dodge" },
 			},
 			property = {
 				bloodthirst_reload_speed =						{ "bloodthirst_aced" },
@@ -1182,7 +1182,8 @@ if RequiredScript == "lib/setups/setup" and not Setup then
 				bipod_deploy_multiplier =						false,
 			},
 			cooldown = {
-				long_dis_revive =									{ "inspire_revive_debuff" },
+                long_dis_revive =									{ "inspire_revive_debuff" },
+                crew_inspire = { "ai_inspire_cooldown" }
 			},
 			team = {
 				damage_dampener = {
@@ -1272,7 +1273,7 @@ if RequiredScript == "lib/setups/setup" and not Setup then
 	function GameInfoManager:_buff_event(event, id, data)
 		if event == "activate" then
 			if self._buffs[id] then return end
-			self._buffs[id] = {}
+            self._buffs[id] = {}
 		elseif self._buffs[id] then
 			if event == "set_duration" then
 				local t = data.t or Application:time()
@@ -1281,15 +1282,15 @@ if RequiredScript == "lib/setups/setup" and not Setup then
 				if self._buffs[id].t == t and 
 					self._buffs[id].expire_t == expire_t and 
 					self._buffs[id].no_expire == data.no_expire then 
-						return
+                        return
 				end
 				
 				self._buffs[id].t = t
 				self._buffs[id].expire_t = expire_t
-				self._buffs[id].no_expire = data.no_expire
+                self._buffs[id].no_expire = data.no_expire
 				
 				if not self._buffs[id].no_expire then
-					self:add_scheduled_callback(id .. "_expire", expire_t - Application:time(), callback(self, self, "_buff_event"), "deactivate", id)
+                    self:add_scheduled_callback(id .. "_expire", expire_t - Application:time(), callback(self, self, "_buff_event"), "deactivate", id)
 				end
 			elseif event == "set_value" then
 				if self._buffs[id].value == data.value then return end

@@ -159,6 +159,7 @@
     "hudlist_not_ignore_buff_kluge" : true,
     "hudlist_not_ignore_buff_some_invulnerability_cooldown" : true,
     "hudlist_not_ignore_buff_self_healer_cooldown" : true,
+    "hudlist_not_ignore_buff_ai_inspire_cooldown" : true,
     "hudlist_not_ignore_player_action_anarchist_armor_regeneration": true,
     "hudlist_not_ignore_player_action_standard_armor_regeneration": true,
     "hudlist_not_ignore_player_action_melee_charge": true,

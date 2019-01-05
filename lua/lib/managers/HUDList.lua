@@ -150,7 +150,10 @@ HUDListManager.ListOptions = HUDListManager.ListOptions or {
 			damage_increase = SydneyHUD:GetHUDListBuffOption("damage_bonus"),
 			damage_reduction = SydneyHUD:GetHUDListBuffOption("received_damage_reduction"),
 			melee_damage_increase = SydneyHUD:GetHUDListBuffOption("melee_damage_increase"),
-			passive_health_regen = SydneyHUD:GetHUDListBuffOption("health_regeneration"),
+            passive_health_regen = SydneyHUD:GetHUDListBuffOption("health_regeneration"),
+            
+            --Custom buffs
+            crew_inspire = SydneyHUD:GetHUDListBuffOption("ai_inspire_cooldown")
 		},
 	show_player_actions = SydneyHUD:GetModOption("hudlist", "show_player_actions"),	--Show active player actions (armor regen, interactions, weapon charge, reload etc.)
 		ignore_player_actions = {	--Exclude specific effects from showing
@@ -421,7 +424,10 @@ HUDListManager.BUFFS = {
 	uppers_debuff =							{ "uppers", "uppers_debuff", is_debuff = true },
 	virtue_debuff =							{ "virtue_debuff", is_debuff = true },
 	yakuza_recovery =							{ "yakuza" },
-	yakuza_speed =								{ "yakuza" },
+    yakuza_speed =								{ "yakuza" },
+    
+    --Custom buffs
+    crew_inspire = { "crew_inspire", is_debuff = true }
 }
 
 HUDListManager.FORCE_AGGREGATE_EQUIPMENT = {
@@ -4350,6 +4356,14 @@ HUDList.BuffItemBase.MAP = {
         show_value = buff_value_standard,
         title = "Regen",
         menu_data = { grouping = { "composite" } },
+    },
+
+    --Custom buffs
+    crew_inspire = {
+        skills_new = tweak_data.skilltree.skills.inspire.icon_xy,
+        class = "AITimedBuffItem",
+        priority = 10,
+        title = "AI"
     }
 }
 
@@ -5164,4 +5178,34 @@ function HUDList.ArmorRegenActionItem:_check_max_expire_t()
             self._t = self._forced_t
         end
     end
+end
+
+--Custom buffs
+HUDList.AITimedBuffItem = HUDList.AITimedBuffItem or class(HUDList.BuffItemBase)
+function HUDList.AITimedBuffItem:init(id, ppanel, members, item_data)
+    self._timed = true
+    HUDList.AITimedBuffItem.super.init(self, id, ppanel, members, item_data)
+
+    if item_data.title then
+        local icon_size = self._panel:w() - HUDList.BuffItemBase.PROGRESS_BAR_WIDTH * 3 - 5
+        local h = (self._panel:h() - icon_size) / 2
+        
+        self._title_text = self._panel:text({
+            text = item_data.title,
+            align = "center",
+            vertical = "top",
+            w = self._panel:w(),
+            h = h,
+            font = tweak_data.hud_corner.assault_font,
+            font_size = 0.7 * h,
+        })
+    end
+    
+    table.insert(self._listener_clbks, {
+        name = string.format("HUDList_buff_listener_%s", id),
+        source = "buff",
+        event = { "set_duration" },
+        clbk = callback(self, self, "_set_duration_clbk"),
+        keys = members,
+    })
 end

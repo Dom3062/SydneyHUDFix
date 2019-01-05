@@ -296,6 +296,16 @@ function PlayerManager:update_hostage_skills()
     end
 end
 
+local _f_start_custom_cooldown = PlayerManager.start_custom_cooldown
+function PlayerManager:start_custom_cooldown(category, upgrade, cooldown)
+    _f_start_custom_cooldown(self, category, upgrade, cooldown)
+    if category == "team" and upgrade == "crew_inspire" then
+        managers.gameinfo:event("buff", "activate", upgrade)
+        managers.gameinfo:event("buff", "set_duration", upgrade, {duration = cooldown})
+        LuaNetworking:SendToPeers("AI_Inspire_Event", cooldown)
+    end
+end
+
 if SydneyHUD:GetOption("inspire_ace_chat_info") then
     local has_enabled_cooldown_upgrade_original = PlayerManager.has_enabled_cooldown_upgrade
     function PlayerManager:has_enabled_cooldown_upgrade(category, upgrade)
@@ -311,3 +321,10 @@ if SydneyHUD:GetOption("inspire_ace_chat_info") then
         return has_enabled_cooldown_upgrade_original(self, category, upgrade)
     end
 end
+
+Hooks:Add("NetworkReceivedData", "NetworkReceivedData_SydneyHUD_PlayerManager", function(sender, id, data)
+    if id == "AI_Inspire_Event" then
+        managers.gameinfo:event("buff", "activate", "crew_inspire")
+        managers.gameinfo:event("buff", "set_duration", "crew_inspire", {duration = data})
+    end
+end)
