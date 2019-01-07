@@ -108,6 +108,8 @@
     "hud_spawns_left" : "Spawns restants: ",
     "hud_min" : "min",
     "hud_s" : "s",
+    "hud_hold" : "Maintenir",
+    "hud_press" : "Appuyer sur",
     "hold_to_pick": "Maintiens pour prendre",
     "hold_to_pick_delay": "Délai pour 'Maintiens pour prendre'",
     "hold_to_pick_delay_desc": "Délai de temps avant l'activation de 'Maintiens pour prendre'. Mettez le à 0 pour prendre l'argent le plus rapidement possible",

@@ -246,8 +246,8 @@ function HUDManager:reset_kill_count(teammate_panel_id)
     self._teammate_panels[teammate_panel_id]:reset_kill_count()
 end
 
-function HUDManager:press_substitute(text, new)
-    return text:gsub("Hold", new)
+function HUDManager:press_substitute(text)
+    return text:gsub(utf8.to_upper(managers.localization:text("hud_hold")), utf8.to_upper(managers.localization:text("hud_press")))
 end
 
 function HUDManager.show_interact(self, data)
@@ -255,8 +255,8 @@ function HUDManager.show_interact(self, data)
         return
     end
 
-    if SydneyHUD:GetOption("push_to_interact") and 0 >= SydneyHUD:GetOption("push_to_interact_delay") then
-        data.text = HUDManager:press_substitute(data.text, "Press")
+    if SydneyHUD:GetOption("push_to_interact") and SydneyHUD:GetOption("push_to_interact_delay") >= 0 then
+        data.text = HUDManager:press_substitute(data.text)
     end
 
     self._interact_visible = true

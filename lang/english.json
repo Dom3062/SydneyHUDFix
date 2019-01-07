@@ -120,6 +120,8 @@
     "hud_wave": "Wave: ",
     "hud_min" : "min",
     "hud_s" : "s",
+    "hud_hold" : "Hold",
+    "hud_press" : "Press",
     "hold_to_pick": "Hold to pick",
     "hold_to_pick_delay": "Hold to pick delay",
     "hold_to_pick_delay_desc": "Delay the time between the hold to pick. Set 0 to pick as fast as you can.",
