@@ -293,9 +293,9 @@
     "sydneyhud_hps_meter": "Счетчик регенерации здоровья в секунду (ЗВС)",
     "sydneyhud_hps_meter_desc": "Настроить счетчик регенерации в секунду (ЗВС).",
 
-    "sydneyhud_hudlist_off" : "Выключить всё",
-    "sydneyhud_hudlist_all" : "Включить всё",
-    "sydneyhud_hudlist_aggregate" : "Свои настройки",
+    "sydneyhud_hudlist_off" : "Выключить все",
+    "sydneyhud_hudlist_all" : "Включить все",
+    "sydneyhud_hudlist_aggregate" : "Объединить",
     "sydneyhud_hudlist_player_only" : "Только для игрока",
     "sydneyhud_hudlist_y" : "Значение позиции",
     "sydneyhud_hudlist_scale" : "Значение Размера",
