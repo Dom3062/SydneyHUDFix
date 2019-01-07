@@ -1,7 +1,6 @@
 --TODO: See if camera counter can be fixed
 
 printf = printf or function(...) end
-
 if RequiredScript == "lib/setups/setup" and Setup then
 
     local init_managers_original = Setup.init_managers
@@ -18,9 +17,8 @@ if RequiredScript == "lib/setups/setup" and Setup then
         return update_original(self, t, dt, ...)
     end
 
-end
+else
 
-if RequiredScript == "lib/setups/setup" and not Setup then
     GameInfoManager = GameInfoManager or class()
     local plugin = 
     {
