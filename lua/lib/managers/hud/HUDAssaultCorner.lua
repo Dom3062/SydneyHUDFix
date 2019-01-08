@@ -5,7 +5,7 @@ function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
         self._assault_endless_color = Color.red
         self._state_control_color = Color.white
         self._state_anticipation_color = Color(255, 186, 204, 28) / 255
-        self._state_build_color = self._assault_color
+        self._state_build_color = Color(255, 255, 255, 0) / 255
         self._state_sustain_color = Color(255, 237, 127, 127) / 255
         self._state_fade_color = self._state_anticipation_color
         self.heists_with_fake_endless_assaults = { "framing_frame_1", "gallery", "watchdogs_2", "bph" } -- Framing Frame Day 1, Art Gallery, Watch Dogs Day 2, Hell's Island
@@ -13,7 +13,7 @@ function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
         self.endless_client = false
         self.is_host = Network:is_server()
         self.is_client = not self.is_host
-        self.is_skirmish = managers.skirmish and managers.skirmish:is_skirmish() or false 
+        self.is_skirmish = managers.skirmish and managers.skirmish:is_skirmish() or false
         self.is_crimespree = managers.crime_spree and managers.crime_spree:is_active() or false
         self.multiplayer_game = false
         if self.is_client then -- Safe House Nightmare, The Biker Heist Day 2, Cursed Kill Room, Escape: Garage, Escape: Cafe, Escape: Cafe (Day)
