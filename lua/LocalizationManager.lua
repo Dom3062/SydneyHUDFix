@@ -98,7 +98,7 @@ function LocalizationManager:hud_assault_enhanced()
                 atime = atime + add
             end
             if skirmish then
-                atime = 140 - (groupaistate._task_data.assault.phase_end_t - groupaistate._t) -- 140 is precalculated from SkirmishTweakData.lua
+                atime = 140 - (assault_data.phase_end_t - groupaistate._t) -- 140 is precalculated from SkirmishTweakData.lua
             end
         elseif assault_data.phase == "sustain" then
             atime = atime + tweak.fade_duration
