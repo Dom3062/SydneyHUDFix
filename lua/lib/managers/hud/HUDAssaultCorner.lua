@@ -34,7 +34,8 @@ function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
         end
         self.assault_state = "nil"
         self.show_popup = true
-        dofile(SydneyHUD._lua_path .. "LocalizationManager.lua")
+        dofile(SydneyHUD._lua_path .. "lib/managers/LocalizationManager.lua")
+        dofile(SydneyHUD._lua_path .. "lib/managers/hud/HUDAssaultCorner_AssaultStates.lua")
         if self.is_client then
             managers.localization:SetClient()
         end
@@ -668,35 +669,5 @@ end)
 Hooks:Add("NetworkManagerOnPeerAdded", "NetworkManagerOnPeerAdded_BAI", function(peer, peer_id)
     if Network:is_client() then
         managers.hud._hud_assault_corner.number_of_peers = managers.hud._hud_assault_corner.number_of_peers + 1
-    end
-end)
-
---
--- Assault States
---
-SydneyHUD:Hook(HUDManager, "sync_start_anticipation_music", function(self)
-    self._hud_assault_corner:UpdateAssaultState("anticipation")
-end)
-
-SydneyHUD:AddDelayedCall("AssaultStatesHookDelay", 1, function()
-    if Global.game_settings.level_id == "Enemy_Spawner" then
-        return
-    end
-    
-    SydneyHUD:Hook(GroupAIStateBesiege, "_upd_assault_task", function(self)
-        if self._task_data.assault.phase ~= "anticipation" then
-            managers.hud._hud_assault_corner:UpdateAssaultState(self._task_data.assault.phase)
-        end
-    end)
-    
-    if Network:is_server() then
-        function GroupAIStateBase:GetAssaultState()
-            return self._task_data.assault.phase
-        end
-    
-        SydneyHUD:Hook(GroupAIStateBase, "on_enemy_weapons_hot", function(self)
-            managers.hud._hud_assault_corner:UpdateAssaultState("control")
-            LuaNetworking:SendToPeers("BAI_AssaultState", "control")
-        end)
     end
 end)
