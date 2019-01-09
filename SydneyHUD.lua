@@ -14,10 +14,6 @@ if not Steam then
     return
 end
 
-if not BLTSuperMod then -- SuperBLT Only
-    return
-end
-
 --[[
     We setup the global table for our mod, along with some path variables, and a data table.
     We cache the ModPath directory, so that when our hooks are called, we aren't using the ModPath from a
@@ -636,14 +632,6 @@ if not SydneyHUD.setup then
 --[[     function SydneyHUD:Unhook(mod, id)
         Hooks:RemovePostHook((mod and (mod .. "_") or "BAI_") .. id)
     end ]]
-    
-    function SydneyHUD:AddDelayedCall(id, t, func)
-        DelayedCalls:Add(id, t, func)
-    end
-
-    function SydneyHUD:RemoveDelayedCall(id)
-        DelayedCalls:Remove(id)
-    end
 
     SydneyHUD:Load()
     SydneyHUD.setup = true
