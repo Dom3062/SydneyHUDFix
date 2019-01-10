@@ -119,6 +119,15 @@ if BAI then -- Halt execution here, because the first four functions have nothin
     return
 end
 
+local old_sync_set_assault_mode = HUDAssaultCorner.sync_set_assault_mode
+function HUDAssaultCorner:sync_set_assault_mode(mode)
+    old_sync_set_assault_mode(self, mode)
+    self._assault_vip = mode == "phalanx"
+    if SydneyHUD:GetOption("show_assault_states") and mode ~= "phalanx" and self.is_host then
+        self:UpdateAssaultState("fade") -- When Captain is defeated, Assault state is automatically set to Fade state
+    end
+end
+
 function HUDAssaultCorner:_show_hostages(...)
     return
 end
@@ -633,7 +642,7 @@ Hooks:Add("NetworkReceivedData", "NetworkReceivedData_BAI", function(sender, id,
         if data == "NormalAssaultOverride" then -- Client
             managers.hud._hud_assault_corner:SetNormalAssaultOverride()
         end
-        if data == "SendAssaultStates" then -- Host; do nothing
+        if data == "SendAssaultStates" then -- Host; does nothing
         end
         if data == "RequestCurrentAssaultState" then -- Host
             LuaNetworking:SendToPeer(sender, "BAI_AssaultStateOverride", managers.groupai:state():GetAssaultState())
