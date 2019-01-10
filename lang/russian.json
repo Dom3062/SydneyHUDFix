@@ -50,7 +50,7 @@
     "custom_waypoint_transit_speed_desc" : "Время перехода метки со стандартной позиции на кастомную.(если не используется тип 'обводка').",
     "chat_is_typing" : "печатает...",
     "chat_are_typing" : "печатают...",
-    "chat_and" : "и"
+    "chat_and" : "и",
     "down_warning_chat_info": "Показывать оповещения о падениях",
     "down_warning_chat_info_desc": "Показывает падения ваших поддельников в чате.",
     "down_warning_chat_info_feed": "Показывать падения в чате.",
@@ -241,8 +241,6 @@
     "sydneyhud_core_desc": "Настроить SydneyHUD",
     "sydneyhud_corpse_remover_plus": "Настройка удаления тел",
     "sydneyhud_corpse_remover_plus_desc": "Детальные настройки удаления тел",
-    "enable_enhanced_assault_banner": "Enhanced Assault Banner",
-    "enable_enhanced_assault_banner_desc": "Shows detailed information about the current assault progress",
     "sydneyhud_experimental": "Экспериментальные возможности",
     "sydneyhud_experimental_desc": "Экспериментальные возможности НЕСТАБИЛЬНЫ. Используйте на свой риск!",
     "sydneyhud_gadget_options": "Настройки гаджетов",
