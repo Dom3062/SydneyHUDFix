@@ -36,7 +36,6 @@ if not SydneyHUD.setup then
     SydneyHUD.dev = "[SydneyHUD Dev] "
 
     -- var for script
-    SydneyHUD._autorepair_map = {}
     SydneyHUD._last_removed_time = 0
 
     SydneyHUD._down_count = {}
@@ -52,8 +51,6 @@ if not SydneyHUD.setup then
 
     -- var for util
     SydneyHUD.assets_path = "./assets/mod_overrides/"
-    SydneyHUD._calls = SydneyHUD._calls or {}
-    SydneyHUD._chat = {}
     SydneyHUD._path = ModPath
     SydneyHUD._lua_path = ModPath .. "lua/"
     SydneyHUD._data_path = SavePath .. "SydneyHUD.json"
@@ -179,7 +176,6 @@ if not SydneyHUD.setup then
         ["lib/units/equipment/sentry_gun/sentrygundamage"] = "lib/units/equipment/sentry_gun/SentryGunDamage.lua",
         ["lib/units/interactions/interactionext"] = "lib/units/interactions/InteractionExt.lua",
         ["lib/units/props/digitalgui"] = "lib/units/props/DigitalGui.lua",
-        ["lib/units/props/drill"] = "lib/units/props/Drill.lua",
         ["lib/units/props/securitycamera"] = "lib/units/props/SecurityCamera.lua",
         ["lib/units/props/securitylockgui"] = "lib/units/props/SecurityLockGui.lua",
         ["lib/units/props/timergui"] = "lib/units/props/TimerGui.lua",
@@ -381,30 +377,6 @@ if not SydneyHUD.setup then
                 local peer = managers.network:session():peer(i)
                 if peer then
                     peer:send("send_chat_message", ChatManager.GAME, name .. ": " .. message)
-                end
-            end
-        end
-    end
-
-    function SydneyHUD:SaveChatMessage(name, message) -- WIP
-        table.insert(self._chat, tostring(name .. ": " .. message))
-    end
-
-    function SydneyHUD:RemoveChatMessage(type, message) -- WIP
-        if not type then
-            type = "current"
-        end
-
-        if type == "all" then
-            for _, _ in ipairs(self._chat) do
-                table.remove(self._chat)
-            end
-        elseif type == "current" then
-            table.remove(self._chat)
-        elseif type == "select" then
-            for num, mes in ipairs(self._chat) do
-                if mes == message then
-                    table.remove(self._chat, num)
                 end
             end
         end

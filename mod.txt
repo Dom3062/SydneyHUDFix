@@ -295,10 +295,6 @@
         },
         {
             "script_path": "SydneyHUD.lua",
-            "hook_id": "lib/units/props/drill"
-        },
-        {
-            "script_path": "SydneyHUD.lua",
             "hook_id": "lib/units/props/securitycamera"
         },
         {
