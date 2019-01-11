@@ -7,8 +7,8 @@ local pos =
 {
     ["sydneyhud_hud_tweaks_waypoint"] = 0.125,
     ["sydneyhud_hud_tweaks_interact"] = 0.335,
-    ["sydneyhud_hud_lists_options_enemy_color"] = 0.125,
-    ["sydneyhud_hud_lists_options_civilian_color"] = 0.125,
+    ["sydneyhud_hudlist_options_enemy_color"] = 0.125,
+    ["sydneyhud_hudlist_options_civilian_color"] = 0.125,
     ["sydneyhud_gadget_options_sniper"] = 0.175
 }
 
@@ -16,8 +16,8 @@ local col =
 {
     ["sydneyhud_hud_tweaks_waypoint"] = "waypoint_color",
     ["sydneyhud_hud_tweaks_interact"] = "interaction_color",
-    ["sydneyhud_hud_lists_options_enemy_color"] = "enemy_color",
-    ["sydneyhud_hud_lists_options_civilian_color"] = "civilian_color",
+    ["sydneyhud_hudlist_options_enemy_color"] = "enemy_color",
+    ["sydneyhud_hudlist_options_civilian_color"] = "civilian_color",
     ["sydneyhud_gadget_options_sniper"] = "laser_color",
     ["sydneyhud_gadget_options_turret"] = "laser_color"
 }

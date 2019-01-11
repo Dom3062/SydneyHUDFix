@@ -3565,33 +3565,40 @@ function HUDList.BodyCountItem:set_count(...)
     end
 end
 
+local enemy_color = SydneyHUD:GetColor("enemy_color")
+local guard_color = enemy_color
+local special_color = enemy_color
+local turret_color = enemy_color
+local thug_color = enemy_color
+local civilian_color = SydneyHUD:GetColor("civilian_color")
+local hostage_color = civilian_color
 
 HUDList.UnitCountItem = HUDList.UnitCountItem or class(HUDList.CounterItem)
 HUDList.UnitCountItem.MAP = {
     --TODO: Security and cop are both able to be dominate/jokered. Specials could cause issues if made compatible. Straight subtraction won't work. Should be fine for aggregated enemy counter
-    enemies =	{ priority = 0,	class = "DominatableCountItem",	icon = { skills = {0, 5} } },	--Aggregated enemies
-    hostages =	{ priority = 6,	class = "UnitCountItem",			icon = { skills = {4, 7} } },	--Aggregated hostages
+    enemies =	{ priority = 0,	class = "DominatableCountItem",	icon = { skills = {0, 5}, color = enemy_color } },	--Aggregated enemies
+    hostages =	{ priority = 6,	class = "UnitCountItem",			icon = { skills = {4, 7}, color = hostage_color } },	--Aggregated hostages
     
-    cop =			{ priority = 2,	class = "DominatableCountItem",	icon = { skills = {0, 5} } },
-    security =	{ priority = 3,	class = "DominatableCountItem",	icon = { perks = {1, 4} } },
-    thug =		{ priority = 3,	class = "UnitCountItem",			icon = { skills = {4, 12} } },
-    thug_boss =	{ priority = 3,	class = "UnitCountItem",			icon = { skills = {1, 1} } },
-    tank =		{ priority = 1,	class = "UnitCountItem",			icon = { skills = {3, 1} } },
-    tank_med =	{ priority = 1,	class = "UnitCountItem",			icon = { hud_icons = "crime_spree_dozer_medic" } },
-    tank_min =	{ priority = 1,	class = "UnitCountItem",			icon = { hud_icons = "crime_spree_dozer_minigun" } },
-    spooc =		{ priority = 1,	class = "UnitCountItem",			icon = { skills = {1, 3} } },
-    taser =		{ priority = 1,	class = "UnitCountItem",			icon = { skills = {3, 5} } },
-    shield =		{ priority = 1,	class = "ShieldCountItem",			icon = { texture = "guis/textures/pd2/hud_buff_shield" } },
-    sniper =		{ priority = 1,	class = "UnitCountItem",			icon = { skills = {6, 5} } },
-    medic =		{ priority = 1,	class = "UnitCountItem",			icon = { skills = {5, 7} } },
-    phalanx =	{ priority = 0,	class = "UnitCountItem",			icon = { texture = "guis/textures/pd2/hud_buff_shield" } },
+    cop =		{ priority = 2,	class = "DominatableCountItem",	icon = { skills = {0, 5}, color = enemy_color } },
+    security =	{ priority = 3,	class = "DominatableCountItem",	icon = { perks = {1, 4}, color = guard_color } },
+    thug =		{ priority = 3,	class = "UnitCountItem",			icon = { skills = {4, 12}, color = thug_color } },
+    thug_boss =	{ priority = 3,	class = "UnitCountItem",			icon = { skills = {1, 1}, color = thug_color } },
+    tank =		{ priority = 1,	class = "UnitCountItem",			icon = { skills = {3, 1}, color = special_color } },
+    tank_med =	{ priority = 1,	class = "UnitCountItem",			icon = { hud_icons = "crime_spree_dozer_medic", color = special_color } },
+    tank_min =	{ priority = 1,	class = "UnitCountItem",			icon = { hud_icons = "crime_spree_dozer_minigun", color = special_color } },
+    spooc =		{ priority = 1,	class = "UnitCountItem",			icon = { skills = {1, 3}, color = special_color } },
+    taser =		{ priority = 1,	class = "UnitCountItem",			icon = { skills = {3, 5}, color = special_color } },
+    shield =	{ priority = 1,	class = "ShieldCountItem",			icon = { texture = "guis/textures/pd2/hud_buff_shield", color = special_color } },
+    sniper =	{ priority = 1,	class = "UnitCountItem",			icon = { skills = {6, 5}, color = special_color } },
+    medic =		{ priority = 1,	class = "UnitCountItem",			icon = { skills = {5, 7}, color = special_color } },
+    phalanx =	{ priority = 0,	class = "UnitCountItem",			icon = { texture = "guis/textures/pd2/hud_buff_shield", color = special_color } },
     
-    turret =			{ priority = 3,	class = "UnitCountItem",		icon = { skills = {7, 5} } },
-    unique =			{ priority = 4,	class = "UnitCountItem",		icon = { skills = {3, 8} } },
-    civ =				{ priority = 4,	class = "CivilianCountItem",	icon = { skills = {6, 7} } },
-    cop_hostage =	{ priority = 5,	class = "UnitCountItem",		icon = { skills = {2, 8} } },
-    civ_hostage =	{ priority = 6,	class = "UnitCountItem",		icon = { skills = {4, 7} } },
-    minion =			{ priority = 7,	class = "UnitCountItem",		icon = { skills = {6, 8} } },
+    turret =		{ priority = 3,	class = "UnitCountItem",		icon = { skills = {7, 5}, color = turret_color } },
+    unique =		{ priority = 4,	class = "UnitCountItem",		icon = { skills = {3, 8}, color = civilian_color } },
+    civ =			{ priority = 4,	class = "CivilianCountItem",	icon = { skills = {6, 7}, color = civilian_color } },
+    cop_hostage =	{ priority = 5,	class = "UnitCountItem",		icon = { skills = {2, 8}, color = hostage_color } },
+    civ_hostage =	{ priority = 6,	class = "UnitCountItem",		icon = { skills = {4, 7}, color = hostage_color } },
+    minion =		{ priority = 7,	class = "UnitCountItem",		icon = { skills = {6, 8}, color = hostage_color } }
 }
 function HUDList.UnitCountItem:init(id, ppanel, members)
     local data = HUDList.UnitCountItem.MAP[id]

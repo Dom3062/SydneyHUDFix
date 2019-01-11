@@ -6,19 +6,6 @@
     "items": [
         {
             "type": "slider",
-            "id": "right_list_y",
-            "title": "sydneyhud_hudlist_y",
-            "description": "sydneyhud_hudlist_right_list_y_desc",
-            "callback": "callback_right_list_y",
-            "value": "hudlist_right_list_y",
-            "max": 1000,
-            "min": 0,
-            "step": 1,
-            "round": true,
-            "default_value": 0
-        },
-        {
-            "type": "slider",
             "id": "right_list_scale",
             "title": "sydneyhud_hudlist_scale",
             "description": "sydneyhud_hudlist_right_list_scale_desc",

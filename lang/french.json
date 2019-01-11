@@ -236,16 +236,10 @@
     "sydneyhud_hps_meter": "Compteur SPS",
     "sydneyhud_hps_meter_desc": "Options du compteur de soins par seconde",
 
-    "sydneyhud_hudlist_options": "Liste HUD",
     "sydneyhud_hudlist_options_civilian_color": "Couleur des civils",
     "sydneyhud_hudlist_options_civilian_color_desc": "Configure la couleur des civils",
-    "sydneyhud_hudlist_options_desc": "Configure les listes pour les minuteurs, perceuses, CMEs, bipeurs, sacs, otages, ennemis, buff, etc",
     "sydneyhud_hudlist_options_enemy_color": "Couleur de l'ennemi",
     "sydneyhud_hudlist_options_enemy_color_desc": "Configure la couleur de l'ennemi",
-    "sydneyhud_hudlist_options_left": "Liste Gauche",
-    "sydneyhud_hudlist_options_left_desc": "Configure le contenu de la liste Gauche",
-    "sydneyhud_hudlist_options_right": "Liste Droite",
-    "sydneyhud_hudlist_options_right_desc": "Configure le contenu de la liste Droite",
     
     "sydneyhud_hud_tweaks": "Amélioration de l'HUD",
     "sydneyhud_hud_tweaks_assault": "Bannière d'Assaut",

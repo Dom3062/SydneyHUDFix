@@ -97,6 +97,8 @@ if not SydneyHUD.setup then
         "sydneyhud_hudlist_options_buff_options_perks_hacker",
         "sydneyhud_hudlist_options_buff_options_boosts",
         "sydneyhud_hudlist_options_buff_player_actions",
+        "sydneyhud_hudlist_options_civilian_color",
+        "sydneyhud_hudlist_options_enemy_color",
 
         "sydneyhud_chat_info",
         "sydneyhud_experimental",
