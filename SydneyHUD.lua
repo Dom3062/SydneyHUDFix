@@ -452,7 +452,7 @@ if not SydneyHUD.setup then
 
     function SydneyHUD:Peer_id_To_Peer(peer_id)
         local session = managers.network:session()
-        return session and session:peer(peer_id)
+        return session and session:peer(peer_id) or nil
     end
 
     function SydneyHUD:Peer(input)

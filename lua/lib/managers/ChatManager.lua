@@ -5,10 +5,15 @@ local GetTime = function()
     (SydneyHUD:GetOption("chat_time_format") == 1 and os.date('%I:%M:%S%p') or os.date('%I:%M%p')))
 end
 
+local text
+local visible -- Hack, don't try to fix it
 local _f_receive_message = ChatGui.receive_message
 function ChatGui:receive_message(name, message, color, icon)
     if SydneyHUD:GetOption("show_heist_time") then
         name = GetTime() .. " " .. name
+    end
+    if alive(self._panel) then
+        self:UpdateInfoText(text, visible)
     end
     _f_receive_message(self, name, message, color, icon)
 end
@@ -18,10 +23,10 @@ local typing = {
     [2] = "",
     [3] = "",
     [4] = ""
-} 
+}
 local init_original = ChatGui.init
-function ChatGui:init(...)
-    init_original(self, ...)
+function ChatGui:init(ws)
+    init_original(self, ws)
     self:_create_info_panel()
     self:_layout_info_panel()
 end
@@ -69,7 +74,7 @@ function ChatGui:_on_focus()
 	if not self._focus then
 		return
     end
-    LuaNetworking:SendToPeers("typing", "")
+    LuaNetworking:SendToPeers("ChatInfo", "typing")
 end
 
 local _f_loose_focus = ChatGui._loose_focus
@@ -78,10 +83,10 @@ function ChatGui:_loose_focus()
     if self._focus then
         return
     end
-    LuaNetworking:SendToPeers("typing_ended", "")
+    LuaNetworking:SendToPeers("ChatInfo", "typing_ended")
 end
 
-function ChatGui:AnimateInfoText(visible)
+function ChatGui:AnimateInfoText(text, visible) -- Don't call it during "NetworkReceivedDataChatInfo" hook, otherwise be prepared for a nice suprise
     if self._panel:child("info_text"):visible() ~= visible then
         --[[local function func(o)
             over(0.6, function(p)
@@ -93,10 +98,10 @@ function ChatGui:AnimateInfoText(visible)
 end
 
 function ChatGui:UpdateInfoText(action, peer, peer_name)
-    typing[peer] = action == "add" and peer_name or ""
+    typing[peer] = action == "add" and peer_name or "Someone"
     local amount = self:GetAmountOfPeopleWriting()
+    text = ""
     if amount > 0 then
-        local text = ""
         local loaded = 0
         for _, v in pairs(typing) do
             if v ~= "" then
@@ -112,9 +117,8 @@ function ChatGui:UpdateInfoText(action, peer, peer_name)
             end
         end
         text = text .. " " .. managers.localization:text("chat_" .. (amount > 1 and "are" or "is") .. "_typing")
-        self._panel:child("info_text"):set_text(text)
     end
-    self:AnimateInfoText(self:IsAnybodyTyping())
+    visible = self:IsAnybodyTyping()
 end
 
 function ChatGui:IsAnybodyTyping()
@@ -136,12 +140,12 @@ function ChatGui:GetAmountOfPeopleWriting()
     return amount
 end
 
-Hooks:Add("NetworkReceivedData", "NetworkReceivedDataTypingInfo", function(sender, id, data)
-    local peer = LuaNetworking:GetPeers()[sender]
-    local peer_name = peer and SydneyHUD:Peer(peer)._name or "Someone"
-    if id == "typing" and peer then
-        ChatGui:UpdateInfoText("add", peer, peer_name)
-    elseif id == "typing_ended" and peer then
-        ChatGui:UpdateInfoText("remove", peer) -- When removing player from the table, I don't need to know his name, because it is not used
+Hooks:Add("NetworkReceivedData", "NetworkReceivedDataChatInfo", function(sender, id, data)
+    if id == "ChatInfo" then
+        if id == "typing" then
+            ChatGui:UpdateInfoText("add", sender, SydneyHUD:Peer(sender)._name or "Someone")
+        else
+            ChatGui:UpdateInfoText("remove", sender) -- When removing player from the table, I don't need to know his name, because it is not used
+        end
     end
 end)
