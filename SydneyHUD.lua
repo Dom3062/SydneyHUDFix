@@ -354,9 +354,6 @@ if not SydneyHUD.setup then
             message = name
             name = ""
         end
-        if not isfeed then
-            isfeed = false
-        end
         isfeed = isfeed or false
         --[[
         if not tostring(color):find('Color') then
@@ -405,22 +402,14 @@ if not SydneyHUD.setup then
     function SydneyHUD:Down(peer_id, local_peer)
         local peer = managers.network:session():peer(peer_id)
         if peer then
-            local warn_down = 3
-
-            if Global.game_settings.one_down then
-                warn_down = 1
-            end
+            local warn_down = Global.game_settings.one_down and 1 or 3
 
             if local_peer then
                 local nine_lives = managers.player:upgrade_value('player', 'additional_lives', 0) or 0
                 warn_down = warn_down + nine_lives
             end
 
-            if not SydneyHUD._down_count[peer_id] then
-                SydneyHUD._down_count[peer_id] = 1
-            else
-                SydneyHUD._down_count[peer_id] = SydneyHUD._down_count[peer_id] + 1
-            end
+            SydneyHUD._down_count[peer_id] = (SydneyHUD._down_count[peer_id] or 0) + 1
 
             if SydneyHUD._down_count[peer_id] == warn_down and SydneyHUD:GetOption("critical_down_warning_chat_info") then
                 local message = peer:name() .. " was downed " .. tostring(SydneyHUD._down_count[peer_id]) .. " times"
