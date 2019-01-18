@@ -1,6 +1,7 @@
 local init_original = HUDAssaultCorner.init
 function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
     init_original(self, hud, full_hud, tweak_hud)
+    self.center_assault_banner = SydneyHUD:GetOption("center_assault_banner")
     if not BAI then -- Initialize these variables when BAI is not installed or not running
         self._assault_endless_color = Color.red
         self._state_control_color = Color.white
@@ -110,7 +111,7 @@ function HUDAssaultCorner:SpamChat(phase)
 end
 
 function HUDAssaultCorner:HUDTimer(visibility)
-    if SydneyHUD:GetOption("center_assault_banner") then
+    if self.center_assault_banner then
         managers.hud._hud_heist_timer._heist_timer_panel:set_visible(visibility)
     end
 end
