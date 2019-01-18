@@ -26,10 +26,6 @@ function LocalizationManager:SetClient()
     self.is_client = true
 end
 
-function LocalizationManager:SetSynchronization(setter)
-    self.synchronize_time = setter
-end
-
 function LocalizationManager:hud_assault_enhanced()
     if self.is_client then
         local time
@@ -105,11 +101,6 @@ function LocalizationManager:hud_assault_enhanced()
             if add then
                 atime = atime + add
             end
-        end
-
-        if self.synchronize_time then
-            LuaNetworking:SendToPeers("BAI_AdvancedAssaultInfo_TimeLeft", time_left)
-            self.synchronize_time = false
         end
 
         if atime < 0 then

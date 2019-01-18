@@ -16,6 +16,7 @@ function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
         self.is_skirmish = managers.skirmish and managers.skirmish:is_skirmish() or false
         self.is_crimespree = managers.crime_spree and managers.crime_spree:is_active() or false
         self.multiplayer_game = false
+        self.send_time_left = true
         if self.is_client then -- Safe House Nightmare, The Biker Heist Day 2, Cursed Kill Room, Escape: Garage, Escape: Cafe, Escape: Cafe (Day)
             self.heists_with_endless_assaults = { "haunted", "chew", "hvh", "escape_garage", "escape_cafe", "escape_cafe_day" }
             self.endless_client = table.contains(self.heists_with_endless_assaults, Global.game_settings.level_id)
@@ -154,7 +155,44 @@ function HUDAssaultCorner:SetTimeLeft(time)
     self.client_time_left = TimerManager:game():time() + time
 end
 
+function HUDAssaultCorner:GetAssaultTime(sender)
+    if self.is_host and self._assault and not self._assault_endless and not self._assault_vip then
+        local tweak = tweak_data.group_ai.besiege.assault
+        local gai_state = managers.groupai:state()
+        local assault_data = gai_state and gai_state._task_data.assault
+        local get_value = gai_state._get_difficulty_dependent_value or function() return 0 end
+        local get_mult = gai_state._get_balancing_multiplier or function() return 0 end
+        
+        local time_left = assault_data.phase_end_t - gai_state._t
+        local add
+        if self.is_crimespree then
+            local sustain_duration = math.lerp(get_value(gai_state, tweak.sustain_duration_min), get_value(gai_state, tweak.sustain_duration_max), 0.5) * get_mult(gai_state, tweak.sustain_duration_balance_mul)
+            add = managers.modifiers:modify_value("GroupAIStateBesiege:SustainEndTime", sustain_duration) - sustain_duration
+        end
+        if assault_data.phase == "build" then
+            local sustain_duration = math.lerp(get_value(gai_state, tweak.sustain_duration_min), get_value(gai_state, tweak.sustain_duration_max), 0.5) * get_mult(gai_state, tweak.sustain_duration_balance_mul)
+            time_left = time_left + sustain_duration + tweak.fade_duration
+            if add then
+                time_left = time_left + add
+            end
+            if self.is_skirmish then
+                time_left = 140 - (assault_data.phase_end_t - gai_state._t) -- 140 is precalculated from SkirmishTweakData.lua
+            end
+        elseif assault_data.phase == "sustain" then
+            time_left = time_left + tweak.fade_duration
+            if add then
+                time_left = time_left + add
+            end
+        end
+        LuaNetworking:SendToPeer(sender, "BAI_AdvancedAssaultInfo_TimeLeft", time_left)
+    end
+end
+
 function HUDAssaultCorner:GetTimeLeft()
+    if self.send_time_left and self.client_time_left - TimerManager:game():time() > 40 then
+        self.send_time_left = false
+        LuaNetworking:SendToPeer(1, "BAI_Message", "RequestCurrentAssaultTimeLeft")
+    end
 	return self.client_time_left - TimerManager:game():time()
 end
 
@@ -258,9 +296,6 @@ function HUDAssaultCorner:_get_assault_strings_info()
     elseif self.is_client and not SydneyHUD:GetOption("enhanced_assault_time") and not SydneyHUD:GetOption("enhanced_assault_count") then
         return self:_get_assault_state_strings()
     end
-    if self.is_host and self.multiplayer_game and not self.is_skirmish then
-        managers.localization:SetSynchronization(true)
-    end
     if managers.job:current_difficulty_stars() > 0 then
         local ids_risk = Idstring("risk")
         return {
@@ -346,6 +381,9 @@ function HUDAssaultCorner:UpdateAssaultState(state)
                 if state == "build" then
                     self:SpamChat("Build")
                     self:_update_assault_hud_color(self:GetStateColor(state))
+                    if self.is_client then
+                        LuaNetworking:SendToPeer(1, "BAI_Message", "RequestCurrentAssaultTimeLeft")
+                    end
                     return
                 end
                 if state == "anticipation" and self.is_client and not self.multiplayer_game then
@@ -368,6 +406,9 @@ function HUDAssaultCorner:UpdateAssaultState(state)
                 else
                     if SydneyHUD:GetOption("enable_enhanced_assault_banner") then
                         self:_set_text_list(self:_get_assault_state_strings_info(state))
+                        if self.is_client then
+                            LuaNetworking:SendToPeer(1, "BAI_Message", "RequestCurrentAssaultTimeLeft")
+                        end
                     else
                         self:_set_text_list(self:_get_assault_state_strings(state))
                     end
@@ -403,6 +444,9 @@ function HUDAssaultCorner:UpdateAssaultStateOverride(state)
                     self.assault_state = state
                     if SydneyHUD:GetOption("enable_enhanced_assault_banner") then
                         self:_set_text_list(self:_get_assault_state_strings_info(state))
+                        if self.is_client then
+                            LuaNetworking:SendToPeer(1, "BAI_Message", "RequestCurrentAssaultTimeLeft")
+                        end
                     else
                         self:_set_text_list(self:_get_assault_state_strings(state))
                     end
@@ -524,9 +568,6 @@ function HUDAssaultCorner:_get_assault_state_strings_info()
     elseif self.is_client and not SydneyHUD:GetOption("enhanced_assault_time") and not SydneyHUD:GetOption("enhanced_assault_count") then
         return self:_get_assault_state_strings()
     end
-    if self.is_host and self.multiplayer_game and not self.is_skirmish then
-        managers.localization:SetSynchronization(true)
-    end
     if managers.job:current_difficulty_stars() > 0 then
         local ids_risk = Idstring("risk")
         return {
@@ -587,6 +628,7 @@ function HUDAssaultCorner:_end_assault()
     end
     self.endless_client = false
     self._assault_endless = false
+    self.send_time_left = true
     self:SetImage("assault")
 end
 
@@ -646,6 +688,9 @@ Hooks:Add("NetworkReceivedData", "NetworkReceivedData_BAI", function(sender, id,
         end
         if data == "RequestCurrentAssaultState" then -- Host
             LuaNetworking:SendToPeer(sender, "BAI_AssaultStateOverride", managers.groupai:state():GetAssaultState())
+        end
+        if data == "RequestCurrentAssaultTimeLeft" then -- Host
+            managers.hud:GetAssaultTime(sender)
         end
     end
     if id == "BAI_AssaultState" then -- Client
