@@ -2,6 +2,7 @@ local init_original = HUDAssaultCorner.init
 function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
     init_original(self, hud, full_hud, tweak_hud)
     self.center_assault_banner = SydneyHUD:GetOption("center_assault_banner")
+    self.hudlist_enemy = SydneyHUD:GetModOption("hudlist", "show_enemies")
     if not BAI then -- Initialize these variables when BAI is not installed or not running
         self._assault_endless_color = Color.red
         self._state_control_color = Color.white
@@ -472,7 +473,7 @@ function HUDAssaultCorner:UpdateAssaultStateOverride(state)
 end
 
 function HUDAssaultCorner:_set_hostages_offseted(is_offseted)
-    if SydneyHUD:GetOption("center_assault_banner") then
+    if SydneyHUD:GetOption("center_assault_banner") and self.hudlist_enemy ~= 1 then -- 1 = All enemies
         return
     end
 
