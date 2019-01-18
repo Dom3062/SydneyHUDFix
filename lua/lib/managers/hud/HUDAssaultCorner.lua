@@ -358,6 +358,9 @@ if Global.game_settings.level_id == "pbr" then
             self:_update_assault_hud_color(self._assault_color)
             if SydneyHUD:GetOption("enable_enhanced_assault_banner") then
                 self:_set_text_list(self:_get_assault_strings_info())
+                if self.is_client then
+                    LuaNetworking:SendToPeer(1, "BAI_Message", "RequestCurrentAssaultTimeLeft")
+                end
             else
                 self:_set_text_list(self:_get_assault_strings())
             end
@@ -690,7 +693,7 @@ Hooks:Add("NetworkReceivedData", "NetworkReceivedData_BAI", function(sender, id,
             LuaNetworking:SendToPeer(sender, "BAI_AssaultStateOverride", managers.groupai:state():GetAssaultState())
         end
         if data == "RequestCurrentAssaultTimeLeft" then -- Host
-            managers.hud:GetAssaultTime(sender)
+            managers.hud._hud_assault_corner:GetAssaultTime(sender)
         end
     end
     if id == "BAI_AssaultState" then -- Client
