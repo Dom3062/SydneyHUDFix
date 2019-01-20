@@ -13,7 +13,7 @@ function ChatGui:receive_message(name, message, color, icon)
         name = GetTime() .. " " .. name
     end
     if alive(self._panel) then
-        self:UpdateInfoText(text, visible)
+        self:AnimateInfoText(text, visible)
     end
     _f_receive_message(self, name, message, color, icon)
 end
