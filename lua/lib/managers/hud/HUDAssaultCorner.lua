@@ -79,6 +79,65 @@ function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
         self._casing_timer._timer_text:set_align("left")
         self._casing_timer._timer_text:set_vertical("center")
         self._casing_timer._timer_text:set_color(Color.white:with_alpha(0.9))
+        if managers.skirmish and managers.skirmish:is_skirmish() and SydneyHUD:GetModOption("hudlist", "show_enemies") == 1 and SydneyHUD:GetOption("center_assault_banner") then
+            if self._hud_panel:child("wave_panel") then
+                self._hud_panel:remove(self._hud_panel:child("wave_panel"))
+            end
+            local wave_w = 38
+            local wave_h = 38
+            local wave_panel = self._hud_panel:panel({
+                name = "wave_panel",
+                w = 145,
+                h = 38
+            })
+    
+            wave_panel:set_top(0)
+            wave_panel:set_right(self._hud_panel:child("hostages_panel"):left() + 75)
+    
+            local waves_icon = wave_panel:bitmap({
+                texture = "guis/textures/pd2/specialization/icons_atlas",
+                name = "waves_icon",
+                layer = 1,
+                valign = "top",
+                y = 0,
+                x = 0,
+                texture_rect = {
+                    192,
+                    64,
+                    64,
+                    64
+                },
+                w = wave_w,
+                h = wave_h
+            })
+            self._wave_bg_box = HUDBGBox_create(wave_panel, {
+                w = 100,
+                x = 0,
+                y = 0,
+                h = wave_h
+            }, {blend_mode = "add"})
+    
+            waves_icon:set_right(wave_panel:w())
+            waves_icon:set_center_y(self._wave_bg_box:h() * 0.5)
+            self._wave_bg_box:set_right(waves_icon:left())
+    
+            local num_waves = self._wave_bg_box:text({
+                vertical = "center",
+                name = "num_waves",
+                layer = 1,
+                align = "center",
+                y = 0,
+                halign = "right",
+                x = 0,
+                valign = "center",
+                text = self:get_completed_waves_string(),
+                w = self._wave_bg_box:w(),
+                h = self._wave_bg_box:h(),
+                color = Color.white,
+                font = tweak_data.hud_corner.assault_font,
+                font_size = tweak_data.hud_corner.numhostages_size
+            })
+        end
     end
 end
 
@@ -212,9 +271,13 @@ function HUDAssaultCorner:start_assault_callback()
                     self:_update_assault_hud_color(self:GetStateColor("build"))
                 else
                     self:_start_assault(self:_get_assault_strings_info())
+                    LuaNetworking:SendToPeer(1, "BAI_Message", "RequestCurrentAssaultTimeLeft")
                 end
             else
                 self:_start_assault(self:_get_assault_strings_info())
+                if self.is_client then
+                    LuaNetworking:SendToPeer(1, "BAI_Message", "RequestCurrentAssaultTimeLeft")
+                end
             end    
         else
             if SydneyHUD:GetOption("show_assault_states") then
@@ -493,7 +556,7 @@ end
 
 function HUDAssaultCorner:_offset_hostages(is_offseted, hostage_panel) -- Just offseting panels, nothing more!
 	local TOTAL_T = 0.18
-	local OFFSET = self._bg_box:h() + 8
+	local OFFSET = self._bg_box:h() + ((self.is_skirmish and self.center_assault_banner) and 16 or 8)
 	local from_y = is_offseted and 0 or OFFSET
 	local target_y = is_offseted and OFFSET or 0
 	local t = (1 - math.abs(hostage_panel:y() - target_y) / OFFSET) * TOTAL_T
