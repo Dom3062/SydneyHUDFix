@@ -5,7 +5,7 @@
     "items": [
         {
             "type": "toggle",
-            "id": "not_ignore_buff_histamine",
+            "id": "hudlist_not_ignore_buff_histamine",
             "title": "sydneyhud_hudlist_not_ignore_buff_histamine",
             "callback": "callback_not_ignore_buff_histamine",
             "value": "hudlist_not_ignore_buff_histamine",
@@ -13,7 +13,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_histamine_cooldown",
+            "id": "hudlist_not_ignore_buff_histamine_cooldown",
             "title": "sydneyhud_hudlist_not_ignore_buff_histamine_cooldown",
             "description": "sydneyhud_hudlist_not_ignore_buff_histamine_cooldown_desc",
             "callback": "callback_not_ignore_buff_histamine_cooldown",

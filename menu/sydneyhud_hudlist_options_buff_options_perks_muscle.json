@@ -5,7 +5,7 @@
     "items": [
         {
             "type": "toggle",
-            "id": "not_ignore_buff_800_pound_gorilla",
+            "id": "hudlist_not_ignore_buff_800_pound_gorilla",
             "title": "sydneyhud_hudlist_not_ignore_buff_800_pound_gorilla",
             "description": "sydneyhud_hudlist_not_ignore_buff_800_pound_gorilla_desc",
             "callback": "callback_not_ignore_buff_800_pound_gorilla",

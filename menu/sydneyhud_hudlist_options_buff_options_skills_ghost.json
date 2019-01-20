@@ -5,7 +5,7 @@
     "items": [
         {
             "type": "toggle",
-            "id": "not_ignore_buff_dire_need",
+            "id": "hudlist_not_ignore_buff_dire_need",
             "title": "sydneyhud_hudlist_not_ignore_buff_dire_need",
             "callback": "callback_not_ignore_buff_dire_need",
             "value": "hudlist_not_ignore_buff_dire_need",
@@ -13,7 +13,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_second_wind",
+            "id": "hudlist_not_ignore_buff_second_wind",
             "title": "sydneyhud_hudlist_not_ignore_buff_second_wind",
             "callback": "callback_not_ignore_buff_second_wind",
             "value": "hudlist_not_ignore_buff_second_wind",
@@ -21,7 +21,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_sixth_sense",
+            "id": "hudlist_not_ignore_buff_sixth_sense",
             "title": "sydneyhud_hudlist_not_ignore_buff_sixth_sense",
             "callback": "callback_not_ignore_buff_sixth_sense",
             "value": "hudlist_not_ignore_buff_sixth_sense",
@@ -29,7 +29,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_unseen_strike",
+            "id": "hudlist_not_ignore_buff_unseen_strike",
             "title": "sydneyhud_hudlist_not_ignore_buff_unseen_strike",
             "callback": "callback_not_ignore_buff_unseen_strike",
             "value": "hudlist_not_ignore_buff_unseen_strike",
@@ -37,7 +37,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_unseen_strike_cooldown",
+            "id": "hudlist_not_ignore_buff_unseen_strike_cooldown",
             "title": "sydneyhud_hudlist_not_ignore_buff_unseen_strike_cooldown",
             "description": "sydneyhud_hudlist_not_ignore_buff_unseen_strike_cooldown_desc",
             "callback": "callback_not_ignore_buff_unseen_strike_cooldown",

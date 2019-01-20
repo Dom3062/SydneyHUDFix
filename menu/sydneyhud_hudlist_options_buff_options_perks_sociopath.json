@@ -5,7 +5,7 @@
     "items": [
         {
             "type": "toggle",
-            "id": "not_ignore_buff_sociopath_cooldown",
+            "id": "hudlist_not_ignore_buff_sociopath_cooldown",
             "title": "sydneyhud_hudlist_not_ignore_buff_sociopath_cooldown",
             "description": "sydneyhud_hudlist_not_ignore_buff_sociopath_cooldown_desc",
             "callback": "callback_not_ignore_buff_sociopath_cooldown",

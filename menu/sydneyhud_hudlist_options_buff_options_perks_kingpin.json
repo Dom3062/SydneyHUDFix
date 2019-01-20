@@ -5,7 +5,7 @@
     "items": [
         {
             "type": "toggle",
-            "id": "not_ignore_buff_injector",
+            "id": "hudlist_not_ignore_buff_injector",
             "title": "sydneyhud_hudlist_not_ignore_buff_injector",
             "callback": "callback_not_ignore_buff_injector",
             "value": "hudlist_not_ignore_buff_injector",
@@ -13,7 +13,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_injector_cooldown",
+            "id": "hudlist_not_ignore_buff_injector_cooldown",
             "title": "sydneyhud_hudlist_not_ignore_buff_injector_cooldown",
             "description": "sydneyhud_hudlist_not_ignore_buff_injector_cooldown_desc",
             "callback": "callback_not_ignore_buff_injector_cooldown",

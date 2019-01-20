@@ -5,7 +5,7 @@
     "items": [
         {
             "type": "toggle",
-            "id": "not_ignore_buff_yakuza",
+            "id": "hudlist_not_ignore_buff_yakuza",
             "title": "sydneyhud_hudlist_not_ignore_buff_yakuza",
             "callback": "callback_not_ignore_buff_yakuza",
             "value": "hudlist_not_ignore_buff_yakuza",

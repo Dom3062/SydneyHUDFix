@@ -5,7 +5,7 @@
     "items": [
         {
             "type": "toggle",
-            "id": "not_ignore_buff_lock_n_load",
+            "id": "hudlist_not_ignore_buff_lock_n_load",
             "title": "sydneyhud_hudlist_not_ignore_buff_lock_n_load",
             "callback": "callback_not_ignore_buff_lock_n_load",
             "value": "hudlist_not_ignore_buff_lock_n_load",

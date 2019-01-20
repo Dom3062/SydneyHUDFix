@@ -5,7 +5,7 @@
     "items": [
         {
             "type": "toggle",
-            "id": "not_ignore_buff_liquid_armor",
+            "id": "hudlist_not_ignore_buff_liquid_armor",
             "title": "sydneyhud_hudlist_not_ignore_buff_liquid_armor",
             "description": "sydneyhud_hudlist_not_ignore_buff_liquid_armor_desc",
             "callback": "callback_not_ignore_buff_liquid_armor",

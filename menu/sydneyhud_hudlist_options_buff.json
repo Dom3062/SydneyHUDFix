@@ -6,7 +6,7 @@
     "items": [
         {
             "type": "slider",
-            "id": "buff_list_y",
+            "id": "hudlist_buff_list_y",
             "title": "sydneyhud_hudlist_y",
             "description": "sydneyhud_hudlist_buff_list_y_desc",
             "callback": "callback_buff_list_y",
@@ -19,7 +19,7 @@
         },
         {
             "type": "slider",
-            "id": "buff_list_scale",
+            "id": "hudlist_buff_list_scale",
             "title": "sydneyhud_hudlist_scale",
             "description": "sydneyhud_hudlist_buff_list_scale_desc",
             "callback": "callback_buff_list_scale",
@@ -31,7 +31,7 @@
         },
         {
             "type": "toggle",
-            "id": "show_buffs",
+            "id": "hudlist_show_buffs",
             "title": "sydneyhud_hudlist_show_buffs",
             "description": "sydneyhud_hudlist_show_buffs_desc",
             "callback": "callback_show_buffs",
@@ -40,7 +40,7 @@
         },
         {
             "type": "toggle",
-            "id": "show_player_action",
+            "id": "hudlist_show_player_action",
             "title": "sydneyhud_hudlist_show_player_actions",
             "description": "sydneyhud_hudlist_show_player_actions_desc",
             "callback": "callback_show_player_actions",

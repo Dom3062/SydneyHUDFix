@@ -5,7 +5,7 @@
     "items": [
         {
             "type": "toggle",
-            "id": "not_ignore_buff_ammo_give_out_cooldown",
+            "id": "hudlist_not_ignore_buff_ammo_give_out_cooldown",
             "title": "sydneyhud_hudlist_not_ignore_buff_ammo_give_out_cooldown",
             "callback": "callback_not_ignore_buff_ammo_give_out_cooldown",
             "value": "hudlist_not_ignore_buff_ammo_give_out_cooldown",
@@ -13,7 +13,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_medical_supplies_cooldown",
+            "id": "hudlist_not_ignore_buff_medical_supplies_cooldown",
             "title": "sydneyhud_hudlist_not_ignore_buff_medical_supplies_cooldown",
             "callback": "callback_not_ignore_buff_medical_supplies_cooldown",
             "value": "hudlist_not_ignore_buff_medical_supplies_cooldown",

@@ -7,7 +7,7 @@
     "items": [
         {
             "type": "multiple_choice",
-            "id": "civilian_color",
+            "id": "hudlist_civilian_color",
             "description": "civilian_color_desc",
             "title": "",
             "items": [
@@ -17,7 +17,7 @@
         },
         {
             "type": "slider",
-            "id": "civilian_color_r",
+            "id": "hudlist_civilian_color_r",
             "title": "color_red",
             "description": "",
             "callback": "callback_civilian_color_r",
@@ -29,7 +29,7 @@
         },
         {
             "type": "slider",
-            "id": "civilian_color_g",
+            "id": "hudlist_civilian_color_g",
             "title": "color_green",
             "description": "",
             "callback": "callback_civilian_color_g",
@@ -41,7 +41,7 @@
         },
         {
             "type": "slider",
-            "id": "color_blue",
+            "id": "hudlist_color_blue",
             "title": "color_blue",
             "description": "",
             "callback": "callback_civilian_color_b",

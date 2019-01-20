@@ -5,7 +5,7 @@
     "items": [
         {
             "type": "toggle",
-            "id": "not_ignore_buff_pocket_jammer_cooldown",
+            "id": "hudlist_not_ignore_buff_pocket_jammer_cooldown",
             "title": "sydneyhud_hudlist_not_ignore_buff_pocket_jammer_cooldown",
             "callback": "callback_not_ignore_buff_pocket_jammer_cooldown",
             "value": "hudlist_not_ignore_buff_pocket_jammer_cooldown",
@@ -13,7 +13,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_kluge",
+            "id": "hudlist_not_ignore_buff_kluge",
             "title": "sydneyhud_hudlist_not_ignore_buff_kluge",
             "callback": "callback_not_ignore_buff_kluge",
             "value": "hudlist_not_ignore_buff_kluge",

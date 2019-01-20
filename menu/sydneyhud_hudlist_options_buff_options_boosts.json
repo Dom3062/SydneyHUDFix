@@ -6,7 +6,7 @@
     "items": [
         {
             "type": "toggle",
-            "id": "not_ignore_buff_some_invulnerability_cooldown",
+            "id": "hudlist_not_ignore_buff_some_invulnerability_cooldown",
             "title": "sydneyhud_hudlist_not_ignore_buff_some_invulnerability_cooldown",
             "callback": "callback_not_ignore_buff_some_invulnerability_cooldown",
             "value": "hudlist_not_ignore_buff_some_invulnerability_cooldown",
@@ -14,7 +14,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_self_healer_cooldown",
+            "id": "hudlist_not_ignore_buff_self_healer_cooldown",
             "title": "sydneyhud_hudlist_not_ignore_buff_self_healer_cooldown",
             "callback": "callback_not_ignore_buff_self_healer_cooldown",
             "value": "hudlist_not_ignore_buff_self_healer_cooldown",
@@ -26,7 +26,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_ai_inspire_cooldown",
+            "id": "hudlist_not_ignore_buff_ai_inspire_cooldown",
             "title": "sydneyhud_hudlist_not_ignore_buff_ai_inspire_cooldown",
             "callback": "callback_not_ignore_buff_ai_inspire_cooldown",
             "value": "hudlist_not_ignore_buff_ai_inspire_cooldown",

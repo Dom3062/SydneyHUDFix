@@ -5,7 +5,7 @@
     "items": [
         {
             "type": "toggle",
-            "id": "not_ignore_buff_excitement",
+            "id": "hudlist_not_ignore_buff_excitement",
             "title": "sydneyhud_hudlist_not_ignore_buff_excitement",
             "callback": "callback_not_ignore_buff_excitement",
             "value": "hudlist_not_ignore_buff_excitement",

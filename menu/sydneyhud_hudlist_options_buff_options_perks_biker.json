@@ -5,7 +5,7 @@
     "items": [
         {
             "type": "toggle",
-            "id": "not_ignore_buff_prospect",
+            "id": "hudlist_not_ignore_buff_prospect",
             "title": "sydneyhud_hudlist_not_ignore_buff_prospect",
             "callback": "callback_not_ignore_buff_prospect",
             "value": "hudlist_not_ignore_buff_prospect",

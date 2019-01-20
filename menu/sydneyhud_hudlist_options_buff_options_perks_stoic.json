@@ -5,7 +5,7 @@
     "items": [
         {
             "type": "toggle",
-            "id": "not_ignore_buff_calm",
+            "id": "hudlist_not_ignore_buff_calm",
             "title": "sydneyhud_hudlist_not_ignore_buff_calm",
             "callback": "callback_not_ignore_buff_calm",
             "value": "hudlist_not_ignore_buff_calm",
@@ -13,7 +13,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_stoic_flask",
+            "id": "hudlist_not_ignore_buff_stoic_flask",
             "title": "sydneyhud_hudlist_not_ignore_buff_stoic_flask",
             "callback": "callback_not_ignore_buff_stoic_flask",
             "value": "hudlist_not_ignore_buff_stoic_flask",
@@ -21,7 +21,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_virtue_cooldown",
+            "id": "hudlist_not_ignore_buff_virtue_cooldown",
             "title": "sydneyhud_hudlist_not_ignore_buff_virtue_cooldown",
             "description": "sydneyhud_hudlist_not_ignore_buff_virtue_cooldown_desc",
             "callback": "callback_not_ignore_buff_virtue_cooldown",

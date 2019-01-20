@@ -5,7 +5,7 @@
     "items": [
         {
             "type": "toggle",
-            "id": "not_ignore_buff_crew_chief_level",
+            "id": "hudlist_not_ignore_buff_crew_chief_level",
             "title": "sydneyhud_hudlist_not_ignore_buff_crew_chief_level",
             "description": "sydneyhud_hudlist_not_ignore_buff_crew_chief_level_desc",
             "callback": "callback_not_ignore_buff_crew_chief_level",
@@ -14,7 +14,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_hostage_situation",
+            "id": "hudlist_not_ignore_buff_hostage_situation",
             "title": "sydneyhud_hudlist_not_ignore_buff_hostage_situation",
             "description": "sydneyhud_hudlist_not_ignore_buff_hostage_situation_desc",
             "callback": "callback_not_ignore_buff_hostage_situation",

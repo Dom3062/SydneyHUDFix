@@ -6,7 +6,7 @@
     "items": [
         {
             "type": "toggle",
-            "id": "not_ignore_item_crowbar",
+            "id": "hudlist_not_ignore_item_crowbar",
             "title": "sydneyhud_hudlist_not_ignore_item_crowbar",
             "callback": "callback_not_ignore_item_crowbar",
             "value": "hudlist_not_ignore_item_crowbar",
@@ -14,7 +14,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_item_keycard",
+            "id": "hudlist_not_ignore_item_keycard",
             "title": "sydneyhud_hudlist_not_ignore_item_keycard",
             "callback": "callback_not_ignore_item_keycard",
             "value": "hudlist_not_ignore_item_keycard",
@@ -22,7 +22,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_item_courier",
+            "id": "hudlist_not_ignore_item_courier",
             "title": "sydneyhud_hudlist_not_ignore_item_courier",
             "callback": "callback_not_ignore_item_courier",
             "value": "hudlist_not_ignore_item_courier",
@@ -30,7 +30,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_item_planks",
+            "id": "hudlist_not_ignore_item_planks",
             "title": "sydneyhud_hudlist_not_ignore_item_planks",
             "callback": "callback_not_ignore_item_planks",
             "value": "hudlist_not_ignore_item_planks",
@@ -38,7 +38,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_item_meth_ingredients",
+            "id": "hudlist_not_ignore_item_meth_ingredients",
             "title": "sydneyhud_hudlist_not_ignore_item_meth_ingredients",
             "callback": "callback_not_ignore_item_meth_ingredients",
             "value": "hudlist_not_ignore_item_meth_ingredients",
@@ -46,7 +46,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_item_secret_item",
+            "id": "hudlist_not_ignore_item_secret_item",
             "title": "sydneyhud_hudlist_not_ignore_item_secret_item",
             "description": "sydneyhud_hudlist_not_ignore_item_secret_item_desc",
             "callback": "callback_not_ignore_item_secret_item",

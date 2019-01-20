@@ -5,7 +5,7 @@
     "items": [
         {
             "type": "toggle",
-            "id": "not_ignore_buff_life_drain_cooldown",
+            "id": "hudlist_not_ignore_buff_life_drain_cooldown",
             "title": "sydneyhud_hudlist_not_ignore_buff_life_drain_cooldown",
             "callback": "callback_not_ignore_buff_life_drain_cooldown",
             "value": "hudlist_not_ignore_buff_life_drain_cooldown",
@@ -13,7 +13,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_overdog_damage_reduction",
+            "id": "hudlist_not_ignore_buff_overdog_damage_reduction",
             "title": "sydneyhud_hudlist_not_ignore_buff_overdog_damage_reduction",
             "description": "sydneyhud_hudlist_not_ignore_buff_overdog_damage_reduction_desc",
             "callback": "callback_not_ignore_buff_overdog_damage_reduction",
@@ -22,7 +22,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_overdog_melee_damage",
+            "id": "hudlist_not_ignore_buff_overdog_melee_damage",
             "title": "sydneyhud_hudlist_not_ignore_buff_overdog_melee_damage",
             "description": "sydneyhud_hudlist_not_ignore_buff_overdog_melee_damage_desc",
             "callback": "callback_not_ignore_buff_overdog_melee_damage",

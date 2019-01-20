@@ -7,7 +7,7 @@
     "items": [
         {
             "type": "multiple_choice",
-            "id": "enemy_color",
+            "id": "hudlist_enemy_color",
             "description": "enemy_color_desc",
             "title": "",
             "items": [
@@ -17,7 +17,7 @@
         },
         {
             "type": "slider",
-            "id": "enemy_color_r",
+            "id": "hudlist_enemy_color_r",
             "title": "color_red",
             "description": "",
             "callback": "callback_enemy_color_r",
@@ -29,7 +29,7 @@
         },
         {
             "type": "slider",
-            "id": "enemy_color_g",
+            "id": "hudlist_enemy_color_g",
             "title": "color_green",
             "description": "",
             "callback": "callback_enemy_color_g",
@@ -41,7 +41,7 @@
         },
         {
             "type": "slider",
-            "id": "enemy_color_b",
+            "id": "hudlist_enemy_color_b",
             "title": "color_blue",
             "description": "",
             "callback": "callback_enemy_color_b",

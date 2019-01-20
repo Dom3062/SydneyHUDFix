@@ -5,7 +5,7 @@
     "items": [
         {
             "type": "toggle",
-            "id": "not_ignore_buff_smoke_grenade",
+            "id": "hudlist_not_ignore_buff_smoke_grenade",
             "title": "sydneyhud_hudlist_not_ignore_buff_smoke_grenade",
             "description": "sydneyhud_hudlist_not_ignore_buff_smoke_grenade_desc",
             "callback": "callback_not_ignore_buff_smoke_grenade",
@@ -14,7 +14,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_smoke_screen",
+            "id": "hudlist_not_ignore_buff_smoke_screen",
             "title": "sydneyhud_hudlist_not_ignore_buff_smoke_screen",
             "description": "sydneyhud_hudlist_not_ignore_buff_smoke_screen_desc",
             "callback": "callback_not_ignore_buff_smoke_screen",
@@ -23,7 +23,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_twitch",
+            "id": "hudlist_not_ignore_buff_twitch",
             "title": "sydneyhud_hudlist_not_ignore_buff_twitch",
             "callback": "callback_not_ignore_buff_twitch",
             "value": "hudlist_not_ignore_buff_twitch",
@@ -31,7 +31,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_twitch_cooldown",
+            "id": "hudlist_not_ignore_buff_twitch_cooldown",
             "title": "sydneyhud_hudlist_not_ignore_buff_twitch_cooldown",
             "description": "sydneyhud_hudlist_not_ignore_buff_twitch_cooldown_desc",
             "callback": "callback_not_ignore_buff_twitch_cooldown",

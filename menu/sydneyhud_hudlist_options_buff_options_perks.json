@@ -5,7 +5,7 @@
     "items": [
         {
             "type": "toggle",
-            "id": "not_ignore_buff_armor_break_invulnerability",
+            "id": "hudlist_not_ignore_buff_armor_break_invulnerability",
             "title": "sydneyhud_hudlist_not_ignore_buff_armor_break_invulnerability",
             "description": "sydneyhud_hudlist_not_ignore_buff_armor_break_invulnerability_desc",
             "callback": "callback_not_ignore_buff_armor_break_invulnerability",
@@ -14,7 +14,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_armor_break_invulnerability_cooldown",
+            "id": "hudlist_not_ignore_buff_armor_break_invulnerability_cooldown",
             "title": "sydneyhud_hudlist_not_ignore_buff_armor_break_invulnerability_cooldown",
             "description": "sydneyhud_hudlist_not_ignore_buff_armor_break_invulnerability_cooldown_desc",
             "callback": "callback_not_ignore_buff_armor_break_invulnerability_cooldown",
@@ -23,7 +23,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_close_contact_no_talk",
+            "id": "hudlist_not_ignore_buff_close_contact_no_talk",
             "title": "sydneyhud_hudlist_not_ignore_buff_close_contact_no_talk",
             "description": "sydneyhud_hudlist_not_ignore_buff_close_contact_no_talk_desc",
             "callback": "callback_not_ignore_buff_close_contact_no_talk",

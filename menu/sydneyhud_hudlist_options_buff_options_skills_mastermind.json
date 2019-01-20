@@ -5,7 +5,7 @@
     "items": [
         {
             "type": "toggle",
-            "id": "not_ignore_buff_aggressive_reload",
+            "id": "hudlist_not_ignore_buff_aggressive_reload",
             "title": "sydneyhud_hudlist_not_ignore_buff_aggressive_reload",
             "callback": "callback_not_ignore_buff_aggressive_reload",
             "value": "hudlist_not_ignore_buff_aggressive_reload",
@@ -13,7 +13,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_ammo_efficiency",
+            "id": "hudlist_not_ignore_buff_ammo_efficiency",
             "title": "sydneyhud_hudlist_not_ignore_buff_ammo_efficiency",
             "callback": "callback_not_ignore_buff_ammo_efficiency",
             "value": "hudlist_not_ignore_buff_ammo_efficiency",
@@ -21,7 +21,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_combat_medic",
+            "id": "hudlist_not_ignore_buff_combat_medic",
             "title": "sydneyhud_hudlist_not_ignore_buff_combat_medic",
             "description": "sydneyhud_hudlist_not_ignore_buff_combat_medic_desc",
             "callback": "callback_not_ignore_buff_combat_medic",
@@ -30,7 +30,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_forced_friendship",
+            "id": "hudlist_not_ignore_buff_forced_friendship",
             "title": "sydneyhud_hudlist_not_ignore_buff_forced_friendship",
             "description": "sydneyhud_hudlist_not_ignore_buff_forced_friendship_desc",
             "callback": "callback_not_ignore_buff_forced_friendship",
@@ -39,7 +39,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_hostage_taker",
+            "id": "hudlist_not_ignore_buff_hostage_taker",
             "title": "sydneyhud_hudlist_not_ignore_buff_hostage_taker",
             "description":"sydneyhud_hudlist_not_ignore_buff_hostage_taker_desc",
             "callback": "callback_not_ignore_buff_hostage_taker",
@@ -48,7 +48,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_inspire",
+            "id": "hudlist_not_ignore_buff_inspire",
             "title": "sydneyhud_hudlist_not_ignore_buff_inspire",
             "callback": "callback_not_ignore_buff_inspire",
             "value": "hudlist_not_ignore_buff_inspire",
@@ -56,7 +56,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_inspire_boost_cooldown",
+            "id": "hudlist_not_ignore_buff_inspire_boost_cooldown",
             "title": "sydneyhud_hudlist_not_ignore_buff_inspire_boost_cooldown",
             "callback": "callback_not_ignore_buff_inspire_boost_cooldown",
             "value": "hudlist_not_ignore_buff_inspire_boost_cooldown",
@@ -64,7 +64,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_inspire_revive_cooldown",
+            "id": "hudlist_not_ignore_buff_inspire_revive_cooldown",
             "title": "sydneyhud_hudlist_not_ignore_buff_inspire_revive_cooldown",
             "callback": "callback_not_ignore_buff_inspire_revive_cooldown",
             "value": "hudlist_not_ignore_buff_inspire_revive_cooldown",
@@ -72,7 +72,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_painkillers",
+            "id": "hudlist_not_ignore_buff_painkillers",
             "title": "sydneyhud_hudlist_not_ignore_buff_painkillers",
             "description": "sydneyhud_hudlist_not_ignore_buff_painkillers_desc",
             "callback": "callback_not_ignore_buff_painkillers",
@@ -81,7 +81,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_partner_in_crime",
+            "id": "hudlist_not_ignore_buff_partner_in_crime",
             "title": "sydneyhud_hudlist_not_ignore_buff_partner_in_crime",
             "callback": "callback_not_ignore_buff_partner_in_crime",
             "value": "hudlist_not_ignore_buff_partner_in_crime",
@@ -89,7 +89,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_quick_fix",
+            "id": "hudlist_not_ignore_buff_quick_fix",
             "title": "sydneyhud_hudlist_not_ignore_buff_quick_fix",
             "description": "sydneyhud_hudlist_not_ignore_buff_quick_fix_desc",
             "callback": "callback_not_ignore_buff_quick_fix",
@@ -98,7 +98,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_uppers",
+            "id": "hudlist_not_ignore_buff_uppers",
             "title": "sydneyhud_hudlist_not_ignore_buff_uppers",
             "callback": "callback_not_ignore_buff_uppers",
             "value": "hudlist_not_ignore_buff_uppers",
@@ -106,7 +106,7 @@
         },
         {
             "type": "toggle",
-            "id": "not_ignore_buff_uppers_cooldown",
+            "id": "hudlist_not_ignore_buff_uppers_cooldown",
             "title": "sydneyhud_hudlist_not_ignore_buff_uppers_cooldown",
             "callback": "callback_not_ignore_buff_uppers_cooldown",
             "value": "hudlist_not_ignore_buff_uppers_cooldown",
