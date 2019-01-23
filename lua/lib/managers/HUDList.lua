@@ -39,7 +39,7 @@ HUDListManager.ListOptions = HUDListManager.ListOptions or {
 	--General settings
 	right_list_y = SydneyHUD:GetOption("center_assault_banner") and 0 or 50,	--Margin from top for the right list
 	right_list_scale = SydneyHUD:GetModOption("hudlist", "right_list_scale"),	--Size scale of right list
-	left_list_y = SydneyHUD:GetModOption("hudlist", "left_list_y"),	--Margin from top for the left list
+	left_list_y = 40,	--Margin from top for the left list
 	left_list_scale = SydneyHUD:GetModOption("hudlist", "left_list_scale"),	--Size scale of left list
 	buff_list_y = SydneyHUD:GetModOption("hudlist", "buff_list_y"),	--Margin from bottom for the buff list
 	buff_list_scale = SydneyHUD:GetModOption("hudlist", "buff_list_scale"),	--Size scale of buff list
@@ -488,6 +488,16 @@ HUDListManager.EQUIPMENT_TABLE = {
 local function debug_print(...)
 	local msg = "[HUDList]: " .. string.format(...)
 	log(msg)
+end
+
+function HUDListManager:change_setting(setting, value)
+    local clbk = "_set_" .. setting
+    if HUDListManager[clbk] and HUDListManager.ListOptions[setting] ~= value then
+        HUDListManager.ListOptions[setting] = value
+        self[clbk](self, value)
+        return true
+    end
+    return false
 end
 
 function HUDListManager:lists()

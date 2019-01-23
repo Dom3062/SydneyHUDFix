@@ -47,7 +47,6 @@
     "hold_to_pick_delay": 0.1,
     "hps_refresh_rate": 1,
 
-    "hudlist_left_list_y": 40,
     "hudlist_left_list_scale" : 1,
     "hudlist_show_timers": true,
     "hudlist_show_ammo_bags": 2,
@@ -60,7 +59,6 @@
     "hudlist_show_minions": 2,
     "hudlist_show_pagers": true,
     "hudlist_show_tape_loop": true,
-    "hudlist_right_list_y": 80,
     "hudlist_right_list_scale": 1,
     "hudlist_show_loot" : 1,
     "hudlist_separate_bagged_loot": true,

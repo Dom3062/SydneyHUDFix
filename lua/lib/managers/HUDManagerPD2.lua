@@ -336,3 +336,9 @@ function HUDManager:set_teammate_custom_radial(i, data)
     end
     return custom_radial_original(self, i, data)
 end
+
+local _f_activate_objective = HUDManager.activate_objective
+function HUDManager:activate_objective(data)
+    _f_activate_objective(self, data)
+    managers.hudlist:change_setting("left_list_y", data.amount and 62 or 40)
+end

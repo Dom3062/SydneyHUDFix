@@ -129,10 +129,6 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_sydneyhud", function(m
 
     -- HUDList
     -- Left Panel
-    MenuCallbackHandler.callback_left_list_y = function(self, item)
-        SydneyHUD._data.hudlist_left_list_y = math.floor(item:value())
-    end
-
     MenuCallbackHandler.callback_left_list_scale = function(self, item)
         SydneyHUD._data.hudlist_left_list_scale = math.floor(item:value())
     end
@@ -182,10 +178,6 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_sydneyhud", function(m
     end
 
     -- Right Panel
-    MenuCallbackHandler.callback_right_list_y = function(self, item)
-        SydneyHUD._data.hudlist_right_list_y = math.floor(item:value())
-    end
-
     MenuCallbackHandler.callback_right_list_scale = function(self, item)
         SydneyHUD._data.hudlist_right_list_scale = math.floor(item:value())
     end
