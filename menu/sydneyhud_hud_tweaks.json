@@ -84,6 +84,15 @@
             "callback": "callback_show_trade_delay",
             "value": "show_trade_delay",
             "default_value": true
+        },
+        {
+            "type": "toggle",
+            "id": "show",
+            "title": "show_grenades_in_preplanning",
+            "description": "show_grenades_in_preplanning_desc",
+            "callback": "callback_show_grenades_in_preplanning",
+            "value": "show_grenades_in_preplanning",
+            "default_value": true
         }
     ]
 }

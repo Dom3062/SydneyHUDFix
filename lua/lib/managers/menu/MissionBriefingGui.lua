@@ -140,6 +140,10 @@ function AssetsItem:can_afford_all_assets()
     return (managers.assets:get_total_assets_costs() <= managers.money:total())
 end
 
+if not SydneyHUD:GetOption("show_grenades_in_preplanning") then
+    return
+end
+
 -- TODO: This does nothing useful for now. I *may* re-implement the pre-U143 melee icons (i.e. mini primary + secondary weapon
 -- icons) at a later point if I have time (or if I'm actually bored enough to do this)
 local preU143melee = false

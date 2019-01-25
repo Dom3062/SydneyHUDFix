@@ -189,6 +189,8 @@
     "show_downs_left_desc" : "Shows your remaining downs",
     "show_enemy_health": "Enemy health bar",
     "show_enemy_health_desc": "Show enemy health bar",
+    "show_grenades_in_preplanning" : "Show Grenades In Preplanning",
+    "show_grenades_in_preplanning_desc" : "Show in preplanning what grenades are you and your crew have selected\n(Not reliable when you join to the preplanning)",
     "show_headshot_kills": "Show headshot kills",
     "show_headshot_kills_desc": "Kill counter shows the headshot kills",
     "show_heist_time": "Show heist time",
