@@ -88,7 +88,7 @@
     "enhanced_assault_spawns": "Show spawns left",
     "enhanced_assault_spawns_desc": "Shows 'Spawns Left' in the Assault Box (Host only) (depends on enhanced assault banner)",
     "enhanced_assault_time": "Show time left",
-    "enhanced_assault_time_desc": "Shows 'Time Left' in the Assault Box. This option is not accurate on client when host does not have this option enabled (depends on enhanced assault banner).",
+    "enhanced_assault_time_desc": "Shows 'Time Left' in the Assault Box.\nThis option is not accurate on client when host does not have BAI/SydneyHUD running (depends on enhanced assault banner).",
     "equipment_interrupt": "Inventory key interrupt",
     "equipment_interrupt_desc": "Interrupt interaction by inventory key [G], instead of interaction key [F]",
     "flashlight_angle": "Flashlight angle",

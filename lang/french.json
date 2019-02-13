@@ -75,7 +75,7 @@
     "enhanced_assault_spawns": "Montre les 'Spawns restants'",
     "enhanced_assault_spawns_desc": "Montre les 'Spawns restants' dans la boite d'assaut (Hôte uniquement) (dépend de la bannière d'assaut améliorée)",
     "enhanced_assault_time": "Montre 'Temps Restant'",
-    "enhanced_assault_time_desc": "Montre le 'Temps Restant' dans la boite d'assaut\nCette option n'est pas précise en tant que client lorsque l'hôte n'a pas cette option activée (dépend de la bannière d'assaut améliorée).",
+    "enhanced_assault_time_desc": "Montre le 'Temps Restant' dans la boite d'assaut\nCette option n'est pas précise en tant que client lorsque l'hôte n'a pas BAI/SydneyHUD activé (dépend de la bannière d'assaut améliorée).",
     "equipment_interrupt": "Interruption de l'interaction",
     "equipment_interrupt_desc": "Interrompt l'interaction en appuyant sur la touche d'inventaire [G], au lieu de la touche d'interaction [F]",
     "flashlight_angle": "Angle de la lampe",
