@@ -1,7 +1,7 @@
 {
     "menu_id": "sydneyhud_hudlist_options_buff_options_perks_infiltrator",
     "parent_menu_id": "sydneyhud_hudlist_options_buff_options_perks",
-    "title": "sydneyhud_hudlist_options_buff_options_perks_infiltrator",
+    "title": "menu_st_spec_8",
     "items": [
         {
             "type": "toggle",

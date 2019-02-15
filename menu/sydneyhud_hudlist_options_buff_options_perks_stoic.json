@@ -1,12 +1,12 @@
 {
     "menu_id": "sydneyhud_hudlist_options_buff_options_perks_stoic",
     "parent_menu_id": "sydneyhud_hudlist_options_buff_options_perks",
-    "title": "sydneyhud_hudlist_options_buff_options_perks_stoic",
+    "title": "menu_st_spec_19",
     "items": [
         {
             "type": "toggle",
             "id": "hudlist_not_ignore_buff_calm",
-            "title": "sydneyhud_hudlist_not_ignore_buff_calm",
+            "title": "menu_deck19_5",
             "callback": "callback_not_ignore_buff_calm",
             "value": "hudlist_not_ignore_buff_calm",
             "default_value": true
@@ -14,7 +14,7 @@
         {
             "type": "toggle",
             "id": "hudlist_not_ignore_buff_stoic_flask",
-            "title": "sydneyhud_hudlist_not_ignore_buff_stoic_flask",
+            "title": "bm_grenade_damage_control",
             "callback": "callback_not_ignore_buff_stoic_flask",
             "value": "hudlist_not_ignore_buff_stoic_flask",
             "default_value": true

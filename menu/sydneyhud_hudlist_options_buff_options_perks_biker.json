@@ -1,12 +1,12 @@
 {
     "menu_id": "sydneyhud_hudlist_options_buff_options_perks_biker",
     "parent_menu_id": "sydneyhud_hudlist_options_buff_options_perks",
-    "title": "sydneyhud_hudlist_options_buff_options_perks_biker",
+    "title": "menu_st_spec_16",
     "items": [
         {
             "type": "toggle",
             "id": "hudlist_not_ignore_buff_prospect",
-            "title": "sydneyhud_hudlist_not_ignore_buff_prospect",
+            "title": "menu_deck16_1",
             "callback": "callback_not_ignore_buff_prospect",
             "value": "hudlist_not_ignore_buff_prospect",
             "default_value": true

@@ -1,12 +1,12 @@
 {
     "menu_id": "sydneyhud_hudlist_options_buff_options_skills_ghost",
     "parent_menu_id": "sydneyhud_hudlist_options_buff_options_skills",
-    "title": "sydneyhud_hudlist_options_buff_options_skills_ghost",
+    "title": "st_menu_ghost",
     "items": [
         {
             "type": "toggle",
             "id": "hudlist_not_ignore_buff_dire_need",
-            "title": "sydneyhud_hudlist_not_ignore_buff_dire_need",
+            "title": "menu_dire_need_beta",
             "callback": "callback_not_ignore_buff_dire_need",
             "value": "hudlist_not_ignore_buff_dire_need",
             "default_value": true
@@ -14,7 +14,7 @@
         {
             "type": "toggle",
             "id": "hudlist_not_ignore_buff_second_wind",
-            "title": "sydneyhud_hudlist_not_ignore_buff_second_wind",
+            "title": "menu_scavenger_beta",
             "callback": "callback_not_ignore_buff_second_wind",
             "value": "hudlist_not_ignore_buff_second_wind",
             "default_value": true
@@ -22,7 +22,7 @@
         {
             "type": "toggle",
             "id": "hudlist_not_ignore_buff_sixth_sense",
-            "title": "sydneyhud_hudlist_not_ignore_buff_sixth_sense",
+            "title": "menu_chameleon_beta",
             "callback": "callback_not_ignore_buff_sixth_sense",
             "value": "hudlist_not_ignore_buff_sixth_sense",
             "default_value": true
@@ -30,7 +30,7 @@
         {
             "type": "toggle",
             "id": "hudlist_not_ignore_buff_unseen_strike",
-            "title": "sydneyhud_hudlist_not_ignore_buff_unseen_strike",
+            "title": "menu_unseen_strike_beta",
             "callback": "callback_not_ignore_buff_unseen_strike",
             "value": "hudlist_not_ignore_buff_unseen_strike",
             "default_value": true

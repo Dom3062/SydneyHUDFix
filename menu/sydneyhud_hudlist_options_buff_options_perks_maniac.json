@@ -1,12 +1,12 @@
 {
     "menu_id": "sydneyhud_hudlist_options_buff_options_perks_maniac",
     "parent_menu_id": "sydneyhud_hudlist_options_buff_options_perks",
-    "title": "sydneyhud_hudlist_options_buff_options_perks_maniac",
+    "title": "menu_st_spec_14",
     "items": [
         {
             "type": "toggle",
             "id": "hudlist_not_ignore_buff_excitement",
-            "title": "sydneyhud_hudlist_not_ignore_buff_excitement",
+            "title": "menu_deck14_1",
             "callback": "callback_not_ignore_buff_excitement",
             "value": "hudlist_not_ignore_buff_excitement",
             "default_value": true

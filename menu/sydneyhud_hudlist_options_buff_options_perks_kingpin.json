@@ -1,12 +1,12 @@
 {
     "menu_id": "sydneyhud_hudlist_options_buff_options_perks_kingpin",
     "parent_menu_id": "sydneyhud_hudlist_options_buff_options_perks",
-    "title": "sydneyhud_hudlist_options_buff_options_perks_kingpin",
+    "title": "menu_st_spec_17",
     "items": [
         {
             "type": "toggle",
             "id": "hudlist_not_ignore_buff_injector",
-            "title": "sydneyhud_hudlist_not_ignore_buff_injector",
+            "title": "bm_ability_chico_injector",
             "callback": "callback_not_ignore_buff_injector",
             "value": "hudlist_not_ignore_buff_injector",
             "default_value": true

@@ -1,7 +1,7 @@
 {
     "menu_id": "sydneyhud_hudlist_options_buff_options_perks_gambler",
     "parent_menu_id": "sydneyhud_hudlist_options_buff_options_perks",
-    "title": "sydneyhud_hudlist_options_buff_options_perks_gambler",
+    "title": "menu_st_spec_10",
     "items": [
         {
             "type": "toggle",

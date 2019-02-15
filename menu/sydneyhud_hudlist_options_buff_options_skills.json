@@ -1,7 +1,6 @@
 {
     "menu_id": "sydneyhud_hudlist_options_buff_options_skills",
     "parent_menu_id": "sydneyhud_hudlist_options_buff_options_buff",
-    "title": "sydneyhud_hudlist_options_buff_options_skills",
-    "items": [
-    ]
+    "title": "menu_st_skilltree",
+    "items": []
 }

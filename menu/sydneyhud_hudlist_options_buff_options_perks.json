@@ -1,7 +1,7 @@
 {
     "menu_id": "sydneyhud_hudlist_options_buff_options_perks",
     "parent_menu_id": "sydneyhud_hudlist_options_buff_options_buff",
-    "title": "sydneyhud_hudlist_options_buff_options_perks",
+    "title": "menu_specialization",
     "items": [
         {
             "type": "toggle",

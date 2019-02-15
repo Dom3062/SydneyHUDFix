@@ -1,12 +1,12 @@
 {
     "menu_id": "sydneyhud_hudlist_options_buff_options_skills_mastermind",
     "parent_menu_id": "sydneyhud_hudlist_options_buff_options_skills",
-    "title": "sydneyhud_hudlist_options_buff_options_skills_mastermind",
+    "title": "st_menu_mastermind",
     "items": [
         {
             "type": "toggle",
             "id": "hudlist_not_ignore_buff_aggressive_reload",
-            "title": "sydneyhud_hudlist_not_ignore_buff_aggressive_reload",
+            "title": "menu_speedy_reload_beta",
             "callback": "callback_not_ignore_buff_aggressive_reload",
             "value": "hudlist_not_ignore_buff_aggressive_reload",
             "default_value": true
@@ -14,7 +14,7 @@
         {
             "type": "toggle",
             "id": "hudlist_not_ignore_buff_ammo_efficiency",
-            "title": "sydneyhud_hudlist_not_ignore_buff_ammo_efficiency",
+            "title": "menu_single_shot_ammo_return_beta",
             "callback": "callback_not_ignore_buff_ammo_efficiency",
             "value": "hudlist_not_ignore_buff_ammo_efficiency",
             "default_value": true
@@ -22,7 +22,7 @@
         {
             "type": "toggle",
             "id": "hudlist_not_ignore_buff_combat_medic",
-            "title": "sydneyhud_hudlist_not_ignore_buff_combat_medic",
+            "title": "menu_combat_medic_beta",
             "description": "sydneyhud_hudlist_not_ignore_buff_combat_medic_desc",
             "callback": "callback_not_ignore_buff_combat_medic",
             "value": "hudlist_not_ignore_buff_combat_medic",
@@ -31,7 +31,7 @@
         {
             "type": "toggle",
             "id": "hudlist_not_ignore_buff_forced_friendship",
-            "title": "sydneyhud_hudlist_not_ignore_buff_forced_friendship",
+            "title": "menu_triathlete_beta",
             "description": "sydneyhud_hudlist_not_ignore_buff_forced_friendship_desc",
             "callback": "callback_not_ignore_buff_forced_friendship",
             "value": "hudlist_not_ignore_buff_forced_friendship",
@@ -40,7 +40,7 @@
         {
             "type": "toggle",
             "id": "hudlist_not_ignore_buff_hostage_taker",
-            "title": "sydneyhud_hudlist_not_ignore_buff_hostage_taker",
+            "title": "menu_black_marketeer_beta",
             "description":"sydneyhud_hudlist_not_ignore_buff_hostage_taker_desc",
             "callback": "callback_not_ignore_buff_hostage_taker",
             "value": "hudlist_not_ignore_buff_hostage_taker",
@@ -49,7 +49,7 @@
         {
             "type": "toggle",
             "id": "hudlist_not_ignore_buff_inspire",
-            "title": "sydneyhud_hudlist_not_ignore_buff_inspire",
+            "title": "menu_inspire_beta",
             "callback": "callback_not_ignore_buff_inspire",
             "value": "hudlist_not_ignore_buff_inspire",
             "default_value": true
@@ -73,7 +73,7 @@
         {
             "type": "toggle",
             "id": "hudlist_not_ignore_buff_painkillers",
-            "title": "sydneyhud_hudlist_not_ignore_buff_painkillers",
+            "title": "menu_fast_learner_beta",
             "description": "sydneyhud_hudlist_not_ignore_buff_painkillers_desc",
             "callback": "callback_not_ignore_buff_painkillers",
             "value": "hudlist_not_ignore_buff_painkillers",
@@ -82,7 +82,7 @@
         {
             "type": "toggle",
             "id": "hudlist_not_ignore_buff_partner_in_crime",
-            "title": "sydneyhud_hudlist_not_ignore_buff_partner_in_crime",
+            "title": "menu_control_freak_beta",
             "callback": "callback_not_ignore_buff_partner_in_crime",
             "value": "hudlist_not_ignore_buff_partner_in_crime",
             "default_value": false
@@ -90,7 +90,7 @@
         {
             "type": "toggle",
             "id": "hudlist_not_ignore_buff_quick_fix",
-            "title": "sydneyhud_hudlist_not_ignore_buff_quick_fix",
+            "title": "menu_tea_time_beta",
             "description": "sydneyhud_hudlist_not_ignore_buff_quick_fix_desc",
             "callback": "callback_not_ignore_buff_quick_fix",
             "value": "hudlist_not_ignore_buff_quick_fix",
@@ -99,7 +99,7 @@
         {
             "type": "toggle",
             "id": "hudlist_not_ignore_buff_uppers",
-            "title": "sydneyhud_hudlist_not_ignore_buff_uppers",
+            "title": "menu_tea_cookies_beta",
             "callback": "callback_not_ignore_buff_uppers",
             "value": "hudlist_not_ignore_buff_uppers",
             "default_value": true

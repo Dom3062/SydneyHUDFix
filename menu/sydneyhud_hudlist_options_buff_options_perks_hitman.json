@@ -1,12 +1,12 @@
 {
     "menu_id": "sydneyhud_hudlist_options_buff_options_perks_hitman",
     "parent_menu_id": "sydneyhud_hudlist_options_buff_options_perks",
-    "title": "sydneyhud_hudlist_options_buff_options_perks_hitman",
+    "title": "menu_st_spec_5",
     "items": [
         {
             "type": "toggle",
             "id": "hudlist_not_ignore_buff_tooth_and_claw",
-            "title": "sydneyhud_hudlist_not_ignore_buff_tooth_and_claw",
+            "title": "menu_deck5_9",
             "description": "sydneyhud_hudlist_not_ignore_buff_tooth_and_claw_desc",
             "callback": "callback_not_ignore_buff_tooth_and_claw",
             "value": "hudlist_not_ignore_buff_tooth_and_claw",

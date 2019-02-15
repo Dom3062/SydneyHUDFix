@@ -240,6 +240,10 @@
     "sydneyhud_hudlist_options_civilian_color_desc": "Configure la couleur des civils",
     "sydneyhud_hudlist_options_enemy_color": "Couleur de l'ennemi",
     "sydneyhud_hudlist_options_enemy_color_desc": "Configure la couleur de l'ennemi",
+    "sydneyhud_hudlist_not_ignore_buff_bloodthirst_basic" : "Soif De Sang (Basique)",
+    "sydneyhud_hudlist_not_ignore_buff_bloodthirst_aced" : "Soif De Sang (As)",
+    "sydneyhud_hudlist_not_ignore_buff_running_from_death_basic" : "Course Contre La Mort (Basique)",
+    "sydneyhud_hudlist_not_ignore_buff_running_from_death_aced" : "Course Contre La Mort (As)",
     
     "sydneyhud_hud_tweaks": "Amélioration de l'HUD",
     "sydneyhud_hud_tweaks_assault": "Bannière d'Assaut",

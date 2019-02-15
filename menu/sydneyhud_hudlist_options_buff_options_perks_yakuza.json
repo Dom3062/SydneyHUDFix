@@ -1,12 +1,12 @@
 {
     "menu_id": "sydneyhud_hudlist_options_buff_options_perks_yakuza",
     "parent_menu_id": "sydneyhud_hudlist_options_buff_options_perks",
-    "title": "sydneyhud_hudlist_options_buff_options_perks_yakuza",
+    "title": "menu_st_spec_12",
     "items": [
         {
             "type": "toggle",
             "id": "hudlist_not_ignore_buff_yakuza",
-            "title": "sydneyhud_hudlist_not_ignore_buff_yakuza",
+            "title": "menu_st_spec_12",
             "callback": "callback_not_ignore_buff_yakuza",
             "value": "hudlist_not_ignore_buff_yakuza",
             "default_value": false
