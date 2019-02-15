@@ -1,7 +1,7 @@
 {
     "menu_id": "sydneyhud_hudlist_options_buff_options_skills_fugitive",
     "parent_menu_id": "sydneyhud_hudlist_options_buff_options_skills",
-    "title": "st_menu_hoxton",
+    "title": "st_menu_hoxton_pack",
     "items": [
         {
             "type": "toggle",
