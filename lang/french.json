@@ -263,6 +263,7 @@
     "sydneyhud_kill_counter_options_desc": "Configure le compteur de kills",
     "sydneyhud_language": "Langue",
     "sydneyhud_language_desc": "Choisissez le language de votre choix pour SydneyHUD",
+    "sydneyhud_language_autodetect" : "Detecte automatiquement",
     "sydneyhud_load_preplanning" : "Charge la planification",
     "sydneyhud_load_preplanning_desc" : "Charge votre planification",
     "sydneyhud_menu_tweaks": "menu / Amélioration du lobby",

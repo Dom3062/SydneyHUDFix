@@ -438,6 +438,7 @@
     "sydneyhud_kill_counter_options_desc": "Настройка счетчика убийств",
     "sydneyhud_language": "Язык",
     "sydneyhud_language_desc": "Выберите язык, который вы хотите видеть в SydneyHUD",
+    "sydneyhud_language_autodetect" : "Автообнаружение модов",
     "sydneyhud_load_preplanning" : "Загрузить препланирование",
     "sydneyhud_load_preplanning_desc" : "Назначить кнопку,чтобы загрузить готовый шаблон препланирования.",
     "sydneyhud_menu_tweaks": "Настройки меню/лобби",

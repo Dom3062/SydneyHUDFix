@@ -11,6 +11,7 @@
             "description": "sydneyhud_language_desc",
             "callback": "callback_sydneyhud_language",
             "items": [
+                "sydneyhud_language_autodetect",
                 "sydneyhud_language_english",
                 "sydneyhud_language_japanese",
                 "sydneyhud_language_french",

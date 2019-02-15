@@ -438,6 +438,7 @@
     "sydneyhud_kill_counter_options_desc": "Configure kill counter",
     "sydneyhud_language": "Language",
     "sydneyhud_language_desc": "Choose the language you want to see in SydneyHUD",
+    "sydneyhud_language_autodetect" : "Autodetect",
     "sydneyhud_load_preplanning" : "Load Preplanning",
     "sydneyhud_load_preplanning_desc" : "Loads your Preplanning",
     "sydneyhud_menu_tweaks": "Menu/lobby tweaks",

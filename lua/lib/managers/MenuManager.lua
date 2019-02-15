@@ -32,15 +32,29 @@ local col_ext =
     Load our localization keys for our menu, and menu items.
 ]]
 Hooks:Add("LocalizationManagerPostInit", "LocalizationManagerPostInit_sydneyhud", function(loc)
-    for _, filename in pairs(file.GetFiles(SydneyHUD._path .. "lang/")) do
-        local str = filename:match('^(.*).json$')
-        -- if str and Idstring(str) and Idstring(str):key() == SystemInfo:language():key() then
-        local langid = SydneyHUD:GetOption("language")
-        -- log(SydneyHUD.dev..langid)
-        if str == SydneyHUD._language[langid] then
-            loc:load_localization_file(SydneyHUD._path .. "lang/" .. filename)
-            log(SydneyHUD.info.."language: "..filename)
-            break
+    if SydneyHUD:GetOption("language") == 1 then
+        local language_filename = nil
+        for _, filename in pairs(file.GetFiles(SydneyHUD._path .. "lang/")) do
+            local str = filename:match('^(.*).json$')
+            if str and Idstring(str) and Idstring(str):key() == SystemInfo:language():key() then
+                language_filename = str
+                break
+            end
+        end
+        if language_filename then
+            loc:load_localization_file(SydneyHUD._path .. "lang/" .. language_filename .. ".json")
+        end
+    else
+        for _, filename in pairs(file.GetFiles(SydneyHUD._path .. "lang/")) do
+            local str = filename:match('^(.*).json$')
+            -- if str and Idstring(str) and Idstring(str):key() == SystemInfo:language():key() then
+            local langid = SydneyHUD:GetOption("language") - 1
+            -- log(SydneyHUD.dev..langid)
+            if str == SydneyHUD._language[langid] then
+                loc:load_localization_file(SydneyHUD._path .. "lang/" .. filename)
+                log(SydneyHUD.info .. "language: " .. filename)
+                break
+            end
         end
     end
     loc:load_localization_file(SydneyHUD._path .. "lang/english.json", false)
