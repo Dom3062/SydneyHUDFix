@@ -161,7 +161,7 @@ end
 
 function HUDManager:_mugshot_id_to_panel_id(id)
     for _, data in pairs(managers.criminals:characters()) do
-        if data.data.mugshot_id == id then
+        if data and data.data and data.data.mugshot_id == id then
             return data.data.panel_id
         end
     end
@@ -169,7 +169,7 @@ end
 
 function HUDManager:_mugshot_id_to_unit(id)
     for _, data in pairs(managers.criminals:characters()) do
-        if data.data.mugshot_id == id then
+        if data and data.data and data.data.mugshot_id == id then
             return data.unit
         end
     end
