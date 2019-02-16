@@ -1,4 +1,6 @@
-dofile(SydneyHUD._lua_path .. "lib/managers/HUDList.lua")
+if SydneyHUD:GetOption("hudlist_enable") then
+    dofile(SydneyHUD._lua_path .. "lib/managers/HUDList.lua")
+end
 
 local init_original = HUDManager.init
 local _create_downed_hud_original = HUDManager._create_downed_hud
@@ -278,6 +280,10 @@ end
 
 function HUDManager:hide_underdog()
     self._teammate_panels[ HUDManager.PLAYER_PANEL ]:hide_underdog()
+end
+
+if not SydneyHUD:GetOption("hudlist_enable") then
+    return
 end
 
 local _setup_player_info_hud_pd2_original = HUDManager._setup_player_info_hud_pd2

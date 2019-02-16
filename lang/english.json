@@ -256,6 +256,7 @@
     "sydneyhud_hps_meter": "HPS meter Setting",
     "sydneyhud_hps_meter_desc": "Configure Heal per second meter",
 
+    "sydneyhud_hudlist_enable" : "Enable HUDList",
     "sydneyhud_hudlist_off" : "Off",
     "sydneyhud_hudlist_all" : "All",
     "sydneyhud_hudlist_aggregate" : "Aggregate",

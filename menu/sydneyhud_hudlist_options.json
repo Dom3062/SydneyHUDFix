@@ -4,5 +4,17 @@
     "title": "sydneyhud_hudlist_options",
     "description": "sydneyhud_hudlist_options_desc",
     "items": [
+        {
+            "type": "toggle",
+            "id": "hudlist_enable",
+            "title": "sydneyhud_hudlist_enable",
+            "callback": "callback_hudlist_enable",
+            "value": "hudlist_enable",
+            "default_value": true
+        },
+        {
+            "type" : "divider",
+            "size" : 16
+        }
     ]
 }

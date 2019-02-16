@@ -1509,9 +1509,8 @@ else
         end
     end
 
-
+    
     HUDList = HUDList or {}
-
     HUDList.Base = HUDList.Base or class()
     HUDList.Base._item_number = 0	--Unique ID for all items created, incremented in HUDList.Base:init()
     function HUDList.Base:init(id, ppanel, data)

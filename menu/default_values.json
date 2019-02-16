@@ -47,6 +47,7 @@
     "hold_to_pick_delay": 0.1,
     "hps_refresh_rate": 1,
 
+    "hudlist_enable" : true,
     "hudlist_left_list_scale" : 1,
     "hudlist_show_timers": true,
     "hudlist_show_ammo_bags": 2,
