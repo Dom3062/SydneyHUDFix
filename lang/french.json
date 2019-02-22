@@ -472,7 +472,7 @@
 "sydneyhud_save_preplanning_desc": "Sauvegarde votre planification",
 "sydneyhud_show_assault_states": "Montrer les États d'assaut",
 "sydneyhud_show_assault_states_desc": "Montre les États d'assaut (Contrôle, Anticipation, Développement, Support et Retrait) dans la boîte d'assaut\nCette option n'est pas disponible en cas d'assaut sans fin et quand le capitaine est présent",
-"sydneyhud_show_assault_states_disabled_desc": "Le menu est désactivé et les options dans le menu ne peuvent être changés pendant que BAI est activé\nChangez ces options dans le menu de BAI",
+"sydneyhud_show_assault_states_disabled_desc": "Cette option est désactivée et ne peut être changée tant que BAI est actif\nChangez cette option dans le menu des options de BAI",
 "sydneyhud_time_format": "Format de Temps",
 "sydneyhud_time_format_desc": "Change le format de temps utilisé par 'Temps Restant'",
 "sydneyhud_time_format_1": "xx.xx (en s)",
