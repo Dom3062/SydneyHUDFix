@@ -79,7 +79,8 @@ local CharacterData = {
     ["swat_turret"] = "SWAT TURRET",
     ["cop_female"] = "FEMALE POLICE OFFICER",
     ["heavy_swat_sniper"] = "ZEAL SNIPER",
-    ["mute_security_undominatable"] = "SOLOMON GARRETT"
+    ["mute_security_undominatable"] = "SOLOMON GARRETT",
+    ["captain"] = "BOAT CREW"
 }
 
 local function FixNames()
