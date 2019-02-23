@@ -45,10 +45,10 @@ Hooks:Add("LocalizationManagerPostInit", "LocalizationManagerPostInit_sydneyhud"
             loc:load_localization_file(SydneyHUD._path .. "lang/" .. language_filename .. ".json")
         end
     else
+        local langid = SydneyHUD:GetOption("language") - 1
         for _, filename in pairs(file.GetFiles(SydneyHUD._path .. "lang/")) do
             local str = filename:match('^(.*).json$')
             -- if str and Idstring(str) and Idstring(str):key() == SystemInfo:language():key() then
-            local langid = SydneyHUD:GetOption("language") - 1
             -- log(SydneyHUD.dev..langid)
             if str == SydneyHUD._language[langid] then
                 loc:load_localization_file(SydneyHUD._path .. "lang/" .. filename)
@@ -84,11 +84,12 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_sydneyhud", function(m
 
     MenuCallbackHandler.SydneyHUDPanelFocus = function(node, focus)
         SydneyHUD:SetVisibility(focus)
+        local menu_id = node:parameters()["menu_id"]
         if focus then
-            SydneyHUD:SetTop(pos[node:parameters()["menu_id"]] or 0.10)
-            SydneyHUD:SetBoxColor(col[node:parameters()["menu_id"]] or nil, col_ext[node:parameters()["menu_id"]] or nil) -- Nil colors are always resolved as White in SydneyHUD
+            SydneyHUD:SetTop(pos[menu_id] or 0.10)
+            SydneyHUD:SetBoxColor(col[menu_id] or nil, col_ext[menu_id] or nil) -- Nil colors are always resolved as White in SydneyHUD
         end
-        if node:parameters()["menu_id"] == "sydneyhud_gadget_options_turret" then
+        if menu_id == "sydneyhud_gadget_options_turret" then
             SydneyHUD:SetVisibility(focus, SydneyHUD.color_box_2)
             SydneyHUD:SetVisibility(focus, SydneyHUD.color_box_3)
             SydneyHUD:SetVisibility(focus, SydneyHUD.text_box)
@@ -101,10 +102,13 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_sydneyhud", function(m
         end
     end
 
-    MenuCallbackHandler.SydneyHUD_HUDTweaks_ChangedFocus = function(node, focus)
+    MenuCallbackHandler.SydneyHUD_HUDTweaks_Assault_ChangedFocus = function(node, focus)
         if BAI then
-            node:item("sydneyhud_hud_tweaks_assault"):set_enabled(false)
-            node:item("sydneyhud_hud_tweaks_assault"):set_parameter("help_id", "sydneyhud_show_assault_states_disabled_desc")
+            local items = { "show_assault_states", "enable_enhanced_assault_banner", "enhanced_assault_spawns", "enhanced_assault_time", "time_format", "enhanced_assault_count"}
+            for _, v in pairs(items) do
+                node:item(v):set_enabled(false)
+                node:item(v):set_parameter("help_id", "sydneyhud_hud_tweaks_assault_disabled_desc")
+            end
         end
     end
 

@@ -423,8 +423,8 @@
     
     "sydneyhud_hud_tweaks": "Изменения HUD'a",
     "sydneyhud_hud_tweaks_assault": "Баннер штурма",
-    "sydneyhud_hud_tweaks_assault_disabled_desc" : "Это опция выключена и не может быть изменена, пока включен BAI.\nВы можете изменить эту опцию в настройках мода BAI.",
     "sydneyhud_hud_tweaks_assault_desc": "Настройка расширенного баннера штурма.",
+    "sydneyhud_hud_tweaks_assault_disabled_desc" : "Это опция выключена и не может быть изменена, пока включен BAI.\nВы можете изменить эту опцию в настройках мода BAI.",
     "sydneyhud_hud_tweaks_desc": "Дополнительные настройки HUD.",
     "sydneyhud_hud_tweaks_interact": "Настройки взаимодействия",
     "sydneyhud_hud_tweaks_interact_desc": "Изменение настроек взаимодействия.",

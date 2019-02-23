@@ -3,6 +3,7 @@
     "parent_menu_id": "sydneyhud_hud_tweaks",
     "title": "sydneyhud_hud_tweaks_assault",
     "description": "sydneyhud_hud_tweaks_assault_desc",
+    "focus_changed_callback" : "SydneyHUD_HUDTweaks_Assault_ChangedFocus",
     "items": [
         {
             "type": "toggle",
