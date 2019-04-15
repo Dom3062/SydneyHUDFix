@@ -1,5 +1,6 @@
 local set_tweak_data_original = BaseInteractionExt.set_tweak_data
 local interact_start_original = BaseInteractionExt.interact_start
+local interact_interupt_original = BaseInteractionExt.interact_interupt
 
 function BaseInteractionExt:set_tweak_data(...)
     local old_tweak = self.tweak_data
@@ -27,6 +28,25 @@ function BaseInteractionExt:interact_start(player, data)
 			})
 		end
     return interact_start_original(self, player, data)
+end
+
+function BaseInteractionExt:interact_interupt(player, complete)
+	local string_macros = {}
+
+	self:_add_string_macros(string_macros)
+	if SydneyHUD:GetOption("push_to_interact") and self:can_interact(player) and tonumber(self:check_interact_time()) >= SydneyHUD:GetOption("push_to_interact_delay") then
+		if self.tweak_data == "corpse_alarm_pager" then return interact_interupt_original(self, player, complete) end
+		local text_id = self._tweak_data.text_id or alive(self._unit) and self._unit:base().interaction_text_id and self._unit:base():interaction_text_id()
+		local text = managers.localization:text(text_id, string_macros)
+		local icon = self._tweak_data.icon
+		managers.hud:show_interact({
+			text = text,
+			icon = icon,
+			force = true
+		})
+		return true
+	end
+	return interact_interupt_original(self, player, complete)
 end
 
 function BaseInteractionExt:check_interact_time()
