@@ -20,6 +20,34 @@ local function format_time_string(value)
     return frmt_string
 end
 
+Ignore_Waypoints = {
+	[135076] = { ignore = true },							-- Lab rats cloaker safe 2
+	[135246] = { ignore = true },							-- Lab rats cloaker safe 3
+	[135247] = { ignore = true },							-- Lab rats cloaker safe 4
+	[145557] = { ignore = true },							-- Safehouse Killhouse Timer
+	[145676] = { ignore = true },							-- Safehouse Hockeygame Timer
+	[400003] = { ignore = true },							-- Prison Nightmare Big Loot timer
+	[100007] = { ignore = true },							--Cursed kill room timer
+	[100888] = { ignore = true },							--Cursed kill room timer
+	[100889] = { ignore = true },							--Cursed kill room timer
+	[100891] = { ignore = true },							--Cursed kill room timer
+	[100892] = { ignore = true },							--Cursed kill room timer
+	[100878] = { ignore = true },							--Cursed kill room timer
+	[100176] = { ignore = true },							--Cursed kill room timer
+	[100177] = { ignore = true },							--Cursed kill room timer
+	[100029] = { ignore = true },							--Cursed kill room timer
+	[141821] = { ignore = true },							--Cursed kill room safe 1 timer
+	[141822] = { ignore = true },							--Cursed kill room safe 1 timer
+	[140321] = { ignore = true },							--Cursed kill room safe 2 timer
+	[140322] = { ignore = true },							--Cursed kill room safe 2 timer
+	[139821] = { ignore = true },							--Cursed kill room safe 3 timer
+	[139822] = { ignore = true },							--Cursed kill room safe 3 timer
+	[141321] = { ignore = true },							--Cursed kill room safe 4 timer
+	[141322] = { ignore = true },							--Cursed kill room safe 4 timer
+	[140821] = { ignore = true },							--Cursed kill room safe 5 timer
+	[140822] = { ignore = true },							--Cursed kill room safe 5 timer
+}
+
 function TimerWaypoint:init(id, ws, data)
     TimerWaypoint.super.init(self, id, ws, data)
 
@@ -108,7 +136,7 @@ local function timer_clbk(event, key, data)
     local id = "timer_wp_" .. key
 
     if event == "set_active" then
-        if data.active then
+        if data.active and not Ignore_Waypoints[data.id] then
             local texture, texture_rect = tweak_data.hud_icons:get_icon_data(icon_table[data.device_type or "timer"])
             local params = {
                 position = data.unit:position(),
