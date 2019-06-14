@@ -102,7 +102,14 @@
     "health_bar_color_desc": "Изменение цвета полоски жизней AI.",
     "health_bar_color_mix_blue": "Синий Микс.",
     "health_bar_color_mix_green": "Зеленый микс.",
+
+    "hud_assault_alpha_fss_mod_1" : "САМОУБЙИСТВО",
+    "hud_assault_alpha_fss_mod_2" : "МАЗОХИЗМ",
+    "hud_assault_alpha_fss_mod_3" : "МАЗОХИСТ?",
     "hud_assault_endless" : "БЕСКОНЕЧНАЯ ОСАДА",
+    "hud_assault_endless_fss_mod_1" : "БЕСКОНЕЧНАЯ ЖАЖДА САМОУБИЙСТВА В ПРОЦЕССЕ",
+    "hud_assault_endless_fss_mod_2" : "БЕСКОНЕЧНАЯ ЖАЖДА МАЗОХИЗМА В ПРОЦЕССЕ",
+    "hud_assault_endless_fss_mod_3" : "А ТЫ ТОЧНО МАЗОХИСТ?",
     "hud_phase" : "Фаза осады:",
     "hud_control" : "Контроль",
     "hud_anticipation" : "Ожидание",
@@ -115,6 +122,7 @@
     "hud_wave": "Волна: ",
     "hud_min" : "мин",
     "hud_s" : "с",
+    
     "hud_hold" : "Удерживайте",
     "hud_press" : "Нажмите",
     "hold_to_pick": "Удержание для подбора",

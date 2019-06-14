@@ -17,31 +17,28 @@ function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
         self.is_client = not self.is_host
         self.is_skirmish = managers.skirmish and managers.skirmish:is_skirmish() or false
         self.is_crimespree = managers.crime_spree and managers.crime_spree:is_active() or false
-        self.multiplayer_game = false
+        self.BAI_host = false
         self.send_time_left = true
         if self.is_client then -- Safe House Nightmare, The Biker Heist Day 2, Cursed Kill Room, Escape: Garage, Escape: Cafe, Escape: Cafe (Day)
             self.heists_with_endless_assaults = { "haunted", "chew", "hvh", "escape_garage", "escape_cafe", "escape_cafe_day" }
             self.endless_client = table.contains(self.heists_with_endless_assaults, Global.game_settings.level_id)
-            self.number_of_peers = LuaNetworking:GetNumberOfPeers()
-            self.sustain_duration_min_max = {
-                40,
-                120,
-                160
-            }
-            self.sustain_duration_balance_mul = {
-                1,
-                1.1,
-                1.2,
-                1.3
-            }
+            self.diff = 0.5 -- 50%
         end
         self.assault_state = "nil"
         self.show_popup = true
         dofile(SydneyHUD._lua_path .. "lib/managers/LocalizationManager.lua")
         dofile(SydneyHUD._lua_path .. "lib/managers/hud/HUDAssaultCorner_AssaultStates.lua")
+        dofile(SydneyHUD._lua_path .. "lib/managers/hud/HUDAssaultCorner_AssaultTime.lua")
+        SydneyHUD:EasterEggInit()
         if self.is_client then
             managers.localization:SetClient()
         end
+        self.spam =
+        {
+            ["build"] = "Build",
+            ["sustain"] = "Sustain",
+            ["fade"] = "Fade"
+        }
     end
     if self._hud_panel:child("hostages_panel") then
         self:_hide_hostages()
@@ -163,10 +160,8 @@ function HUDAssaultCorner:feed_heist_time(t)
 end
 
 function HUDAssaultCorner:SpamChat(phase)
-    if Network:is_server() then
-        if SydneyHUD:GetOption("assault_phase_chat_info") then
-            SydneyHUD:SendChatMessage("Assault", phase .. " Wave: " .. self._wave_number, SydneyHUD:GetOption("assault_phase_chat_info_feed"))
-        end
+    if Network:is_server() and SydneyHUD:GetOption("assault_phase_chat_info") then
+        SydneyHUD:SendChatMessage("Assault", phase .. " Wave: " .. self._wave_number, SydneyHUD:GetOption("assault_phase_chat_info_feed"))
     end
 end
 
@@ -195,24 +190,25 @@ function HUDAssaultCorner:_show_hostages(...)
 end
 
 function HUDAssaultCorner:SetTimer()
+    if self.is_host then
+        return
+    end
     if self.is_skirmish then
-        self.client_time_left = TimerManager:game():time() + 140 -- Calculated from skirmishtweakdata.lua (2 minutes and 20 seconds); Build: 15s, Sustain: 120s, Fade: 5s
+        self.client_time_left = TimerManager:game():time() + 140 -- Calculated from skirmishtweakdata.lua (2 minutes and 20 seconds = 140 seconds); Build: 15s, Sustain: 120s, Fade: 5s
     else
-        if self.is_crimespree then
-            --local sustain_duration = (self.sustain_duration_min_max[math.clamp(self._wave_number, 1, 3)] * self.sustain_duration_balance_mul[math.clamp(self.number_of_peers, 1, 4)])
-            --local difference = managers.modifiers:modify_value("GroupAIStateBesiege:SustainEndTime", sustain_duration) - sustain_duration
-            self.client_time_left = TimerManager:game():time() + 240 -- 4 minutes
-            if managers.crime_spree:server_spree_level() > 500 then
-                self.client_time_left = self.client_time_left + 120
-            end
-        else
-            -- Build: 35s; Sustain: Depends on number of players and wave intensity (or number); Fade: 5s
-            self.client_time_left = TimerManager:game():time() + 35 + (self.sustain_duration_min_max[math.clamp(self._wave_number, 1, 3)] * self.sustain_duration_balance_mul[math.clamp(self.number_of_peers, 1, 4)]) + 5
+        -- Build: 35s; Sustain: Depends on number of players and wave diff; Fade: 5s
+        local sustain = self:CalculateValueFromDiff()
+        self.client_time_left = TimerManager:game():time() + 35 + sustain + 5
+        if self.is_crimespree and managers.crime_spree:DoesServerHasAssaultExtenderModifier() then
+            self.client_time_left = self.client_time_left + (sustain / 2)
         end
     end
 end
 
 function HUDAssaultCorner:SetTimeLeft(time)
+    if self.is_host then
+        return
+    end
     self.client_time_left = TimerManager:game():time() + time
 end
 
@@ -250,7 +246,7 @@ function HUDAssaultCorner:GetAssaultTime(sender)
 end
 
 function HUDAssaultCorner:GetTimeLeft()
-    if self.send_time_left and self.client_time_left - TimerManager:game():time() > 40 then
+    if self.send_time_left and (self.client_time_left - TimerManager:game():time() > 40) then
         self.send_time_left = false
         LuaNetworking:SendToPeer(1, "BAI_Message", "RequestCurrentAssaultTimeLeft")
     end
@@ -261,12 +257,10 @@ function HUDAssaultCorner:start_assault_callback()
     if self:GetEndlessAssault() then
         self:_start_endless_assault(self:_get_assault_endless_strings())
     else
-        if self.is_client and SydneyHUD:GetOption("enable_enhanced_assault_banner") then
-            self:SetTimer()
-        end
+        self:SetTimer()
         if SydneyHUD:GetOption("enable_enhanced_assault_banner") then
             if SydneyHUD:GetOption("show_assault_states") then
-                if self.is_host or (self.is_client and self.multiplayer_game) then
+                if self.is_host or (self.is_client and self.BAI_host) then
                     self:_start_assault(self:_get_assault_state_strings_info("build"))
                     self:_update_assault_hud_color(self:GetStateColor("build"))
                 else
@@ -281,7 +275,7 @@ function HUDAssaultCorner:start_assault_callback()
             end    
         else
             if SydneyHUD:GetOption("show_assault_states") then
-                if self.is_host or (self.is_client and self.multiplayer_game) then
+                if self.is_host or (self.is_client and self.BAI_host) then
                     self:_start_assault(self:_get_assault_state_strings("build"))
                     self:_update_assault_hud_color(self:GetStateColor("build"))
                 else
@@ -330,47 +324,48 @@ function HUDAssaultCorner:_start_assault(text_list)
 end
 
 function HUDAssaultCorner:_get_assault_endless_strings()
-    local end_line = "hud_assault_" .. (SydneyHUD:GetOption("center_assault_banner") and "padlock" or "end_line")
+    local text = "hud_assault_endless" .. self:GetFactionAssaultText()
     if managers.job:current_difficulty_stars() > 0 then
         local ids_risk = Idstring("risk")
         return {
-            "hud_assault_endless",
-            end_line,
+            text,
+            "hud_assault_padlock",
             ids_risk,
-            end_line,
-            "hud_assault_endless",
-            end_line,
+            "hud_assault_padlock",
+            text,
+            "hud_assault_padlock",
             ids_risk,
-            end_line
+            "hud_assault_padlock"
         }
     else
         return {
-            "hud_assault_endless",
-            end_line,
-            "hud_assault_endless",
-            end_line,
-            "hud_assault_endless",
-            end_line
+            text,
+            "hud_assault_padlock",
+            text,
+            "hud_assault_padlock",
+            text,
+            "hud_assault_padlock"
         }
     end
 end
 
 function HUDAssaultCorner:_get_assault_strings_info()
     if self.is_host and not SydneyHUD:GetOption("enhanced_assault_time") and not SydneyHUD:GetOption("enhanced_assault_spawns") and not SydneyHUD:GetOption("enhanced_assault_count") then
-        return self:_get_assault_state_strings()
+        return self:_get_assault_strings()
     elseif self.is_client and not SydneyHUD:GetOption("enhanced_assault_time") and not SydneyHUD:GetOption("enhanced_assault_count") then
-        return self:_get_assault_state_strings()
+        return self:_get_assault_strings()
     end
+    local text = "hud_assault_assault" .. self:GetFactionAssaultText()
     if managers.job:current_difficulty_stars() > 0 then
         local ids_risk = Idstring("risk")
         return {
-            "hud_assault_assault",
+            text,
             "hud_assault_end_line",
             "hud_assault_info",
             "hud_assault_end_line",
             ids_risk,
             "hud_assault_end_line",
-            "hud_assault_assault",
+            text,
             "hud_assault_end_line",
             "hud_assault_info",
             "hud_assault_end_line",
@@ -379,11 +374,11 @@ function HUDAssaultCorner:_get_assault_strings_info()
         }
     else
         return {
-            "hud_assault_assault",
+            text,
             "hud_assault_end_line",
             "hud_assault_info",
             "hud_assault_end_line",
-            "hud_assault_assault",
+            text,
             "hud_assault_end_line",
             "hud_assault_info",
             "hud_assault_end_line"
@@ -392,10 +387,8 @@ function HUDAssaultCorner:_get_assault_strings_info()
 end
 
 function HUDAssaultCorner:SetImage(image)
-    if image then
-        if SydneyHUD:IsOr(image, "assault", "padlock") then
-            self._hud_panel:child("assault_panel"):child("icon_assaultbox"):set_image("guis/textures/pd2/hud_icon_" .. image .. "box")
-        end
+    if image and SydneyHUD:IsOr(image, "assault", "padlock") then
+        self._hud_panel:child("assault_panel"):child("icon_assaultbox"):set_image("guis/textures/pd2/hud_icon_" .. image .. "box")
     end
 end
 
@@ -405,7 +398,7 @@ end
 
 if Global.game_settings.level_id == "pbr" then
     function HUDAssaultCorner:SetNormalAssaultOverride() -- Beneath the Mountain only
-        --[[if self.is_host and self.multiplayer_game then
+        --[[if self.is_host and self.BAI_host then
             LuaNetworking:SendToPeers("BAI_Message", "NormalAssaultOverride")
         end]]
         self:SetImage("assault")
@@ -414,7 +407,7 @@ if Global.game_settings.level_id == "pbr" then
             if self.is_host then
                 self:UpdateAssaultStateOverride(managers.groupai:state():GetAssaultState())
             else
-                if not self.multiplayer_game then
+                if not self.BAI_host then
                     self:_update_assault_hud_color(self._assault_color)
                     self:_set_text_list(self:_get_assault_strings())
                 end
@@ -446,6 +439,7 @@ function HUDAssaultCorner:UpdateAssaultState(state)
         if SydneyHUD:GetOption("show_assault_states") then
             if state and self.assault_state ~= state then
                 self.assault_state = state
+                SydneyHUD:SyncAssaultState(state)
                 if state == "build" then
                     self:SpamChat("Build")
                     self:_update_assault_hud_color(self:GetStateColor(state))
@@ -454,11 +448,8 @@ function HUDAssaultCorner:UpdateAssaultState(state)
                     end
                     return
                 end
-                if state == "anticipation" and self.is_client and not self.multiplayer_game then
+                if state == "anticipation" and self.is_client and not self.BAI_host then
                     return
-                end
-                if not SydneyHUD:IsOr(state, "control", "anticipation") then
-                    LuaNetworking:SendToPeers("BAI_AssaultState", state)
                 end
                 if SydneyHUD:IsOr(state, "control", "anticipation") then
                     if not self._assault then
@@ -480,20 +471,14 @@ function HUDAssaultCorner:UpdateAssaultState(state)
                     else
                         self:_set_text_list(self:_get_assault_state_strings(state))
                     end
-                    if state == "sustain" then
-                        self:SpamChat("Sustain")
-                    else
-                        self:SpamChat("Fade")
-                    end
+                    self:SpamChat(self.spam[state])
                 end
                 self:_update_assault_hud_color(self:GetStateColor(state))
             end
         else
             if state and self.assault_state ~= state then
                 self.assault_state = state
-                if self.is_host and not SydneyHUD:IsOr(state, "control", "anticipation", "build") then
-                    LuaNetworking:SendToPeers("BAI_AssaultState", state)
-                end
+                SydneyHUD:SyncAssaultState(state)
             end
         end
     end
@@ -519,17 +504,9 @@ function HUDAssaultCorner:UpdateAssaultStateOverride(state)
                         self:_set_text_list(self:_get_assault_state_strings(state))
                     end
                     self:_update_assault_hud_color(self:GetStateColor(state))
-                    if state == "build" then
-                        self:SpamChat("Build")
-                    elseif state == "sustain" then
-                        self:SpamChat("Sustain")
-                    else
-                        self:SpamChat("Fade")
-                    end
-                    if self.is_host then
-                        LuaNetworking:SendToPeers("BAI_AssaultStateOverride", state)
-                    end
+                    self:SpamChat(self.spam[state])
                 end
+                SydneyHUD:SyncAssaultState(state, true)
             end
         end
     end
@@ -600,16 +577,17 @@ function HUDAssaultCorner:_get_state_strings(state)
 end
     
 function HUDAssaultCorner:_get_assault_state_strings()
+    local text = "hud_assault_assault" .. self:GetFactionAssaultText()
     if managers.job:current_difficulty_stars() > 0 then
         local ids_risk = Idstring("risk")
         return {
-            "hud_assault_assault",
+            text,
             "hud_assault_end_line",
             "hud_assault_phase",
             "hud_assault_end_line",
             ids_risk,
             "hud_assault_end_line",
-            "hud_assault_assault",
+            text,
             "hud_assault_end_line",
             "hud_assault_phase",
             "hud_assault_end_line",
@@ -618,11 +596,11 @@ function HUDAssaultCorner:_get_assault_state_strings()
         }
     else
         return {
-            "hud_assault_assault",
+            text,
             "hud_assault_end_line",
             "hud_assault_phase",
             "hud_assault_end_line",
-            "hud_assault_assault",
+            text,
             "hud_assault_end_line",
             "hud_assault_phase",
             "hud_assault_end_line"
@@ -636,10 +614,11 @@ function HUDAssaultCorner:_get_assault_state_strings_info()
     elseif self.is_client and not SydneyHUD:GetOption("enhanced_assault_time") and not SydneyHUD:GetOption("enhanced_assault_count") then
         return self:_get_assault_state_strings()
     end
+    local text = "hud_assault_assault" .. self:GetFactionAssaultText()
     if managers.job:current_difficulty_stars() > 0 then
         local ids_risk = Idstring("risk")
         return {
-            "hud_assault_assault",
+            text,
             "hud_assault_end_line",
             "hud_assault_phase",
             "hud_assault_end_line",
@@ -647,7 +626,7 @@ function HUDAssaultCorner:_get_assault_state_strings_info()
             "hud_assault_end_line",
             ids_risk,
             "hud_assault_end_line",
-            "hud_assault_assault",
+            text,
             "hud_assault_end_line",
             "hud_assault_phase",
             "hud_assault_end_line",
@@ -658,13 +637,13 @@ function HUDAssaultCorner:_get_assault_state_strings_info()
         }
     else
         return {
-            "hud_assault_assault",
+            text,
             "hud_assault_end_line",
             "hud_assault_phase",
             "hud_assault_end_line",
             "hud_assault_info",
             "hud_assault_end_line",
-            "hud_assault_assault",
+            text,
             "hud_assault_end_line",
             "hud_assault_phase",
             "hud_assault_end_line",
@@ -681,7 +660,7 @@ function HUDAssaultCorner:_end_assault()
 		return
 	end
     if SydneyHUD:GetOption("show_assault_states") then
-        if self.is_host or (self.is_client and self.multiplayer_game) then
+        if self.is_host or (self.is_client and self.BAI_host) then
             self.show_popup = false
             self:_start_assault(self:_get_state_strings("control"))
             self:_update_assault_hud_color(self:GetStateColor("control"))
@@ -700,8 +679,8 @@ function HUDAssaultCorner:_end_assault()
     self:SetImage("assault")
 end
 
-function HUDAssaultCorner:SetMultiplayerGame(setter)
-    self.multiplayer_game = setter
+function HUDAssaultCorner:SetBAIHost(setter)
+    self.BAI_host = setter
 end
 
 function HUDAssaultCorner:show_point_of_no_return_timer()
@@ -730,19 +709,26 @@ if SydneyHUD:GetOption("center_assault_banner") then
     end
 end
 
+function HUDAssaultCorner:GetFactionAssaultText()
+    if SydneyHUD.EasterEgg.FSS.AIReactionTimeTooHigh and math.random(0, 100) % 25 == 0 then
+        return "_fss_mod_" .. math.random(1, 3)
+    end
+    return ""
+end
+
 Hooks:Add("NetworkReceivedData", "NetworkReceivedData_BAI", function(sender, id, data)
     if id == "BAI_Message" then
         if data == "endless_triggered" then -- Client
             managers.hud._hud_assault_corner:SetEndlessClient(true)
         end
         if data == "BAI?" then -- Host
-            managers.hud._hud_assault_corner:SetMultiplayerGame(true)
             LuaNetworking:SendToPeer(sender, id, "BAI!")
         end
         if data == "BAI!" then -- Client
-            managers.hud._hud_assault_corner:SetMultiplayerGame(true)
+            managers.hud._hud_assault_corner:SetBAIHost(true)
             LuaNetworking:SendToPeer(1, id, "IsEndlessAssault?")
-            LuaNetworking:SendToPeer(1, id, "SendAssaultStates")
+            LuaNetworking:SendToPeer(1, "BAI_EasterEgg", "AIReactionTimeTooHigh?")
+            --LuaNetworking:SendToPeer(1, id, BAI.data.ResendAS)
         end
         if data == "IsEndlessAssault?" then -- Host
             if managers.hud._hud_assault_corner:get_assault_mode() ~= "phalanx" and managers.groupai:state():get_hunt_mode() then -- Notifies drop-in client about Endless Assault in progress
@@ -751,8 +737,6 @@ Hooks:Add("NetworkReceivedData", "NetworkReceivedData_BAI", function(sender, id,
         end
         if data == "NormalAssaultOverride" then -- Client
             managers.hud._hud_assault_corner:SetNormalAssaultOverride()
-        end
-        if data == "SendAssaultStates" then -- Host; does nothing
         end
         if data == "RequestCurrentAssaultState" then -- Host
             LuaNetworking:SendToPeer(sender, "BAI_AssaultStateOverride", managers.groupai:state():GetAssaultState())
@@ -774,22 +758,24 @@ Hooks:Add("NetworkReceivedData", "NetworkReceivedData_BAI", function(sender, id,
     if id == "BAI_AdvancedAssaultInfo_TimeLeft" then -- Client
         managers.hud._hud_assault_corner:SetTimeLeft(data)
     end
+    if id == "BAI_EasterEgg" then
+        if data == "AIReactionTimeTooHigh?" then -- Host
+            if SydneyHUD.EasterEgg.FSS.AIReactionTimeTooHigh then
+                LuaNetworking:SendToPeer(sender, id, "AIReactionTimeTooHigh")
+            end
+        end
+        if data == "AIReactionTimeTooHigh" then -- Client
+            SydneyHUD.EasterEgg.FSS.AIReactionTimeTooHigh = true
+        end
+    end
+    if id == "BAI_EasterEgg_Reset" then
+        SydneyHUD.EasterEgg.FSS.AIReactionTimeTooHigh = false
+        LuaNetworking:SendToPeer(1, "BAI_EasterEgg", "AIReactionTimeTooHigh?")
+    end
 end)
 
 Hooks:Add("BaseNetworkSessionOnLoadComplete", "BaseNetworkSessionOnLoadComplete_BAI", function(local_peer, id)
     if Network:is_client() then
         LuaNetworking:SendToPeer(1, "BAI_Message", "BAI?")
-    end
-end)
-
-Hooks:Add("BaseNetworkSessionOnPeerRemoved", "BaseNetworkSessionOnPeerRemoved_BAI", function(peer, peer_id, reason)
-    if Network:is_client() then
-        managers.hud._hud_assault_corner.number_of_peers = managers.hud._hud_assault_corner.number_of_peers - 1
-    end
-end)
-
-Hooks:Add("NetworkManagerOnPeerAdded", "NetworkManagerOnPeerAdded_BAI", function(peer, peer_id)
-    if Network:is_client() then
-        managers.hud._hud_assault_corner.number_of_peers = managers.hud._hud_assault_corner.number_of_peers + 1
     end
 end)

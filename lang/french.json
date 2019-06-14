@@ -102,7 +102,14 @@
     "health_bar_color_desc": "Choisit la couleur de la barre de santé",
     "health_bar_color_mix_blue": "Bleu mixte",
     "health_bar_color_mix_green": "Vert mixte",
+
+    "hud_assault_assault_fss_mod_1" : "SUICIDE EN COURS",
+    "hud_assault_assault_fss_mod_2" : "MASOCHISME EN COURS",
+    "hud_assault_assault_fss_mod_3" : "VOUS ÊTES UN MASOCHISTE ?",
     "hud_assault_endless": "ASSAUT SANS FIN EN COURS",
+    "hud_assault_endless_fss_mod_1" : "SUICIDE SANS FIN EN COURS",
+    "hud_assault_endless_fss_mod_2" : "MASOCHISME SANS FIN EN COURS",
+    "hud_assault_endless_fss_mod_3" : "VOUS ÊTES VRAIMENT UN MASOCHISTE",
     "hud_phase": "Phase d'assaut : ",
     "hud_control": "Contrôle",
     "hud_anticipation": "Anticipation",
@@ -115,6 +122,7 @@
     "hud_wave": "Vagues : ",
     "hud_min": "min",
     "hud_s": "s",
+
     "hud_hold": "Maintenir",
     "hud_press": "Appuyer sur",
     "hold_to_pick": "Maintiens pour prendre",

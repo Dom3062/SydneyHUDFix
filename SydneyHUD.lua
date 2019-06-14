@@ -38,6 +38,14 @@ if not SydneyHUD.setup then
     -- var for script
     SydneyHUD._last_removed_time = 0
 
+    SydneyHUD.EasterEgg = 
+    {
+        FSS =
+        {
+            AIReactionTimeTooHigh = false
+        }
+    }
+
     SydneyHUD._down_count = {}
 
     SydneyHUD._language =
@@ -595,6 +603,25 @@ if not SydneyHUD.setup then
 --[[     function SydneyHUD:Unhook(mod, id)
         Hooks:RemovePostHook((mod and (mod .. "_") or "BAI_") .. id)
     end ]]
+
+    function SydneyHUD:EasterEggInit()
+        self.EasterEgg.FSS.AIReactionTimeTooHigh = (FullSpeedSwarm and (FullSpeedSwarm.settings.task_throughput > 600 or FullSpeedSwarm.settings.task_throughput == 0) and Network:is_server() and Global.game_settings.difficulty == "sm_wish") or
+            (managers.crime_spree and managers.crime_spree:is_active() and managers.crime_spree:server_spree_level() >= 500 or false)
+    end
+
+    function SydneyHUD:SyncAssaultState(state, override, stealth_broken, no_as_mod)
+        if Network:is_client() then
+            return
+        end
+        if state then
+            if not self:IsOr(state, "control", "anticipation", "build") or stealth_broken then
+                LuaNetworking:SendToPeers("BAI_AssaultState" .. (override and "Override" or ""), state)
+            end
+            if not no_as_mod then
+                LuaNetworking:SendToPeers("AssaultStates_Net", state)
+            end
+        end
+    end
 
     SydneyHUD:Load()
     SydneyHUD.setup = true

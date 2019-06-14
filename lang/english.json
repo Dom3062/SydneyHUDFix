@@ -102,7 +102,14 @@
     "health_bar_color_desc": "Choose health bar color",
     "health_bar_color_mix_blue": "Mixed Blue",
     "health_bar_color_mix_green": "Mixed Green",
+
+    "hud_assault_assault_fss_mod_1" : "SUICIDE IN PROGRESS",
+    "hud_assault_assault_fss_mod_2" : "MASOCHISM IN PROGRESS",
+    "hud_assault_assault_fss_mod_3" : "ARE YOU A MASOCHIST?",
     "hud_assault_endless" : "ENDLESS POLICE ASSAULT IN PROGRESS",
+    "hud_assault_endless_fss_mod_1" : "ENDLESS SUICIDE IN PROGRESS",
+    "hud_assault_endless_fss_mod_2" : "ENDLESS MASOCHISM IN PROGRESS",
+    "hud_assault_endless_fss_mod_3" : "YOU REALLY ARE A MASOCHIST",
     "hud_phase" : "Assault Phase: ",
     "hud_control" : "Control",
     "hud_anticipation" : "Anticipation",
@@ -115,6 +122,7 @@
     "hud_wave": "Wave: ",
     "hud_min" : "min",
     "hud_s" : "s",
+
     "hud_hold" : "Hold",
     "hud_press" : "Press",
     "hold_to_pick": "Hold to pick",
