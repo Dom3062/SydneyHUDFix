@@ -21,6 +21,7 @@ local show_interact_original = HUDManager.show_interact
 local remove_interact_original = HUDManager.remove_interact
 local custom_radial_original = HUDManager.set_teammate_custom_radial
 
+local last_removed_time = 0
 function HUDManager:init(...)
     init_original(self, ...)
     self._deferred_detections = {}
@@ -116,7 +117,7 @@ end
 local feed_heist_time_original = HUDManager.feed_heist_time
 function HUDManager:feed_heist_time(t)
     if SydneyHUD:GetOption("enable_corpse_remover_plus") then
-        if t - SydneyHUD._last_removed_time >= SydneyHUD:GetOption("remove_interval") then
+        if t - last_removed_time >= SydneyHUD:GetOption("remove_interval") then
             if SydneyHUD:GetOption("remove_shield") then
                 if managers.enemy then
                     local enemy_data = managers.enemy._enemy_data
@@ -133,7 +134,7 @@ function HUDManager:feed_heist_time(t)
                     managers.enemy:dispose_all_corpses()
                 end
             end
-            SydneyHUD._last_removed_time = t
+            last_removed_time = t
         end
     end
     feed_heist_time_original(self, t)

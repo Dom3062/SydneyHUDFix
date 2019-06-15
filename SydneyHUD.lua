@@ -35,9 +35,6 @@ if not SydneyHUD.setup then
     SydneyHUD.error = "[SydneyHUD Error] "
     SydneyHUD.dev = "[SydneyHUD Dev] "
 
-    -- var for script
-    SydneyHUD._last_removed_time = 0
-
     SydneyHUD.EasterEgg = 
     {
         FSS =
