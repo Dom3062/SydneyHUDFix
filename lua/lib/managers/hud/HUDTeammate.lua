@@ -600,10 +600,12 @@ function HUDTeammate:set_detection_risk(risk)
 end
 
 function HUDTeammate:increment_kill_count(is_special, headshot)
-    self._kill_count = self._kill_count + 1
-    self._kill_count_special = self._kill_count_special + (is_special and 1 or 0)
-    self._headshot_kills = self._headshot_kills + (headshot and 1 or 0)
-    self:_update_kill_count_text()
+    if self._kill_count then
+        self._kill_count = self._kill_count + 1
+        self._kill_count_special = self._kill_count_special + (is_special and 1 or 0)
+        self._headshot_kills = self._headshot_kills + (headshot and 1 or 0)
+        self:_update_kill_count_text()
+    end
 end
 
 function HUDTeammate:_update_kill_count_text()
