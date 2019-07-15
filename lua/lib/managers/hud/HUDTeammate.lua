@@ -485,6 +485,9 @@ function HUDTeammate:increment_revives()
     end
 end
 
+function HUDTeammate:UpdateRevives(new_downs)
+end
+
 function HUDTeammate:reset_revives()
     if self._revives_counter then
         self._revives_count = 0
@@ -568,12 +571,14 @@ end
 
 function HUDTeammate:set_health(data)
     if data.revives then
-        local revive_colors = { Color("FF8000"), Color("FFFF00"), Color("80FF00"), Color("00FF00") }
-        self._revives_counter:set_color(revive_colors[data.revives - 1] or Color.red)
-        if self._main_player and managers.player:has_category_upgrade("player", "messiah_revive_from_bleed_out") then
-            self._revives_counter:set_text(tostring(data.revives - 1) .. "/" .. tostring(managers.player._messiah_charges or 0))
-        else
-            self._revives_counter:set_text(tostring(data.revives - 1))
+        if self._revives_counter then
+            local revive_colors = { Color("FF8000"), Color("FFFF00"), Color("80FF00"), Color("00FF00") }
+            self._revives_counter:set_color(revive_colors[data.revives - 1] or Color.red)
+            if self._main_player and managers.player:has_category_upgrade("player", "messiah_revive_from_bleed_out") then
+                self._revives_counter:set_text(tostring(data.revives - 1) .. "/" .. tostring(managers.player._messiah_charges or 0))
+            else
+                self._revives_counter:set_text(tostring(data.revives - 1))
+            end
         end
         self:set_player_in_custody(data.revives - 1 < 0)
     end
