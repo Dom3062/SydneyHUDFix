@@ -457,14 +457,16 @@ end
 
 function HUDTeammate:set_max_stamina(value)
     self._max_stamina = value
-    local w = self._stamina_bar:w()
-    local threshold = tweak_data.player.movement_state.stamina.MIN_STAMINA_THRESHOLD
-    local angle = 360 * (1 - threshold/self._max_stamina) - 90
-    local x = 0.5 * w * math.cos(angle) + w * 0.5 + self._stamina_bar:x()
-    local y = 0.5 * w * math.sin(angle) + w * 0.5 + self._stamina_bar:y()
-    self._stamina_line:set_x(x)
-    self._stamina_line:set_y(y)
-    self._stamina_line:set_rotation(angle)
+    if self._stamina_bar then
+        local w = self._stamina_bar:w()
+        local threshold = tweak_data.player.movement_state.stamina.MIN_STAMINA_THRESHOLD
+        local angle = 360 * (1 - threshold/self._max_stamina) - 90
+        local x = 0.5 * w * math.cos(angle) + w * 0.5 + self._stamina_bar:x()
+        local y = 0.5 * w * math.sin(angle) + w * 0.5 + self._stamina_bar:y()
+        self._stamina_line:set_x(x)
+        self._stamina_line:set_y(y)
+        self._stamina_line:set_rotation(angle)
+    end
     self:set_stamina_meter_visibility(true)
 end
 
