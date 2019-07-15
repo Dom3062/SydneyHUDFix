@@ -46,35 +46,27 @@ end
 
 
 function HUDTeammate:show_underdog()
-
     local teammate_panel = self._panel:child( "player" )
     local radial_health_panel = teammate_panel:child( "radial_health_panel" )
     local underdog_glow = radial_health_panel:child( "underdog_glow" )
-
     if not self._underdog_animation then
         underdog_glow:set_visible( true )
         underdog_glow:animate( callback( self , self , "_animate_glow" ) )
-
         self._underdog_animation = true
     end
-
 end
 
 function HUDTeammate:hide_underdog()
-
     local teammate_panel = self._panel:child( "player" )
     local radial_health_panel = teammate_panel:child( "radial_health_panel" )
     local underdog_glow = radial_health_panel:child( "underdog_glow" )
-
     if self._underdog_animation then
         underdog_glow:set_alpha( 0 )
         underdog_glow:set_visible( false )
         underdog_glow:stop()
-
         self._underdog_animation = nil
     end
-
-    end
+end
 
 function HUDTeammate:_animate_glow( glow )
     local t = 0
@@ -471,7 +463,9 @@ function HUDTeammate:set_max_stamina(value)
 end
 
 function HUDTeammate:set_current_stamina(value)
-    self._stamina_bar:set_color(Color(1, value/self._max_stamina, 0, 0))
+    if self._stamina_bar then
+        self._stamina_bar:set_color(Color(1, value/self._max_stamina, 0, 0))
+    end
 end
 
 function HUDTeammate:set_stamina_meter_visibility(visible)
