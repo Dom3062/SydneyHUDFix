@@ -45,7 +45,7 @@ function HUDTeammate:show_underdog()
     local teammate_panel = self._panel:child( "player" )
     local radial_health_panel = teammate_panel:child( "radial_health_panel" )
     local underdog_glow = radial_health_panel:child( "underdog_glow" )
-    if not self._underdog_animation then
+    if not self._underdog_animation and underdog_glow then
         underdog_glow:set_visible( true )
         underdog_glow:animate( callback( self , self , "_animate_glow" ) )
         self._underdog_animation = true
@@ -56,7 +56,7 @@ function HUDTeammate:hide_underdog()
     local teammate_panel = self._panel:child( "player" )
     local radial_health_panel = teammate_panel:child( "radial_health_panel" )
     local underdog_glow = radial_health_panel:child( "underdog_glow" )
-    if self._underdog_animation then
+    if self._underdog_animation and underdog_glow then
         underdog_glow:set_alpha( 0 )
         underdog_glow:set_visible( false )
         underdog_glow:stop()
