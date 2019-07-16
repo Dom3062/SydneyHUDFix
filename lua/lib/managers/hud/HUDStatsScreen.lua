@@ -1,15 +1,11 @@
-local update_stats_screen_original = HUDStatsScreen._update_stats_screen_day
-local init_original = HUDStatsScreen.init
-local show_original = HUDStatsScreen.show
-
 local custom_character_colors = {
     dallas = Color(1, 0, 0.6, 0.8),
     wolf = Color(1, 0.4, 0, 0),
     chains = Color(1, 0.6, 0.8, 0.2),
-    hoxton = Color(1, 1, 0.2, 0.7),
-    jowi = Color(1, 0.43, 0.48, 0.55),
-    old_hoxton = Color(1, 1, 0.43, 0.78),
-    female_1 = Color(1, 0.54, 0.17, 0.89),
+    hoxton = Color(1, 1, 0.2, 0.7), -- Houston
+    jowi = Color(1, 0.43, 0.48, 0.55), -- John Wick
+    old_hoxton = Color(1, 1, 0.43, 0.78), -- Hoxton
+    female_1 = Color(1, 0.54, 0.17, 0.89), -- Clover
     dragan = Color(1, 1, 0.14, 0),
     jacket = Color(1, 0.9, 0.91, 0.98),
     bonnie = Color(1, 0.91, 0.59, 0.48),
@@ -21,12 +17,13 @@ local custom_character_colors = {
     -- defaults to Color.white, if not set
 }
 
+local init_original = HUDStatsScreen.init
 function HUDStatsScreen:init()
     init_original(self)
     local right_panel = self._full_hud_panel:child("right_panel")
     local day_wrapper_panel = right_panel:child("day_wrapper_panel")
     self:clean_up(right_panel)
-    if managers.job:is_current_job_professional() then
+    if Global.game_settings.one_down then
         day_wrapper_panel:child("day_title"):set_color(Color.red)
     end
     local paygrade_text = day_wrapper_panel:text({
@@ -880,6 +877,7 @@ function HUDStatsScreen:clean_up(right_panel)
     end
 end
 
+local update_stats_screen_original = HUDStatsScreen._update_stats_screen_day
 function HUDStatsScreen:_update_stats_screen_day(right_panel)
     update_stats_screen_original(self, right_panel)
     self:clean_up(right_panel)
@@ -887,6 +885,7 @@ function HUDStatsScreen:_update_stats_screen_day(right_panel)
 end
 
 -- Lobby Player Info compat
+local show_original = HUDStatsScreen.show
 function HUDStatsScreen:show()
     show_original(self)
     local right_panel = managers.hud:script(managers.hud.STATS_SCREEN_FULLSCREEN).panel:child("right_panel")
