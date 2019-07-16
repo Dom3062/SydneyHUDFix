@@ -3,6 +3,15 @@ function MenuCallbackHandler:is_dlc_latest_locked(...)
     return SydneyHUD:GetOption("remove_ads") and false or is_dlc_latest_locked_original(self, ...)
 end
 
+local old_resume = MenuCallbackHandler.resume_game
+function MenuCallbackHandler:resume_game()
+    old_resume(self)
+    if SydneyHUD.Update then
+        SydneyHUD.Update = false
+        managers.hud:Update()
+    end
+end
+
 local pos =
 {
     ["sydneyhud_hud_tweaks_waypoint"] = 0.125,
@@ -61,7 +70,7 @@ Hooks:Add("LocalizationManagerPostInit", "LocalizationManagerPostInit_sydneyhud"
     loc:load_localization_file(SydneyHUD._path .. "lang/languages.json")
 end)
 
-Hooks:Add("MenuManagerBuildCustomMenus", "MenuManagerBuildCustomMenus_sydneyhud", function(menu_manager, nodes)
+Hooks:Add("MenuManagerBuildCustomMenus", "MenuManagerBuildCustomMenus_SydneyHUD", function(menu_manager, nodes)
     if nodes.main then
         MenuHelper:AddMenuItem(nodes.main, "crimenet_contract_special", "menu_cn_premium_buy", "menu_cn_premium_buy_desc", "crimenet", "after")
     end
@@ -70,7 +79,7 @@ end)
 --[[
     Setup our menu callbacks and build the menu from our json file.
 ]]
-Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_sydneyhud", function(menu_manager)
+Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_SydneyHUD", function(menu_manager)
     --[[
         Setup our callbacks as defined in our item callback keys, and perform our logic on the data retrieved.
     ]]
@@ -1104,6 +1113,9 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_sydneyhud", function(m
     MenuCallbackHandler.SydneyHUDSave = function(this, item)
         SydneyHUD:Save()
         SydneyHUD:DestroyPanel()
+        if Utils:IsInHeist() then
+            SydneyHUD.Update = true
+        end
     end
 
     SydneyHUD:InitAllMenus()

@@ -1,10 +1,4 @@
 local init_original = HUDTeammate.init
-local set_name_original = HUDTeammate.set_name
-local set_state_original = HUDTeammate.set_state
-local set_health_original = HUDTeammate.set_health
-local teammate_progress_original = HUDTeammate.teammate_progress
-local set_ammo_amount_by_type_original = HUDTeammate.set_ammo_amount_by_type
-
 function HUDTeammate:init(i, ...)
     init_original(self, i, ...)
     if self._main_player then
@@ -18,6 +12,10 @@ function HUDTeammate:init(i, ...)
     end
     self:_init_killcount()
     self:_init_revivecount()
+end
+
+function HUDTeammate:Update()
+    self:refresh_kill_count_visibility()
 end
 
 function HUDTeammate:inject_health_glow()
@@ -40,10 +38,8 @@ function HUDTeammate:inject_health_glow()
         layer = 2,
         blend_mode = "add"
     })
-
     underdog_glow:set_center( radial_health_panel:w() / 2 , radial_health_panel:h() / 2 )
 end
-
 
 function HUDTeammate:show_underdog()
     local teammate_panel = self._panel:child( "player" )
@@ -70,7 +66,6 @@ end
 
 function HUDTeammate:_animate_glow( glow )
     local t = 0
-
     while true do
         t = t + coroutine.yield()
         glow:set_alpha( ( math.abs( math.sin( ( 4 + t ) * 360 * 4 / 4 ) ) ) )
@@ -96,7 +91,6 @@ function HUDTeammate:_init_stamina_meter()
     })
     self._stamina_bar:set_color(Color(1, 1, 0, 0))
     self._stamina_bar:set_center(radial_health_panel:child("radial_health"):center())
-
     self._stamina_line = radial_health_panel:rect({
         color = Color.red,
         w = radial_health_panel:w() * 0.10,
@@ -146,6 +140,8 @@ function HUDTeammate:_init_revivecount()
 end
 
 function HUDTeammate:_init_killcount()
+    self:reset_kill_count()
+    self:refresh_kill_count_visibility()
     self._kills_panel = self._panel:panel({
         name = "kills_panel",
         visible = true,
@@ -199,8 +195,6 @@ function HUDTeammate:_init_killcount()
         w = text_w + 4,
         h = text_h
     })
-    self:reset_kill_count()
-    self:refresh_kill_count_visibility()
 end
 
 function HUDTeammate:_init_interact_info()
@@ -382,6 +376,7 @@ function HUDTeammate:update_armor_timer(t)
     end
 end
 
+local teammate_progress_original = HUDTeammate.teammate_progress
 function HUDTeammate:teammate_progress(enabled, tweak_data_id, timer, success, ...)
     teammate_progress_original(self, enabled, tweak_data_id, timer, success, ...)
     if enabled then
@@ -565,6 +560,7 @@ function HUDTeammate:change_health(change_of_health)
     end
 end
 
+local set_health_original = HUDTeammate.set_health
 function HUDTeammate:set_health(data)
     if data.revives then
         if self._revives_counter then
@@ -612,7 +608,6 @@ function HUDTeammate:_update_kill_count_text()
     end
     self._kills_text:set_text(kill_string)
     self:_update_kill_count_pos()
-    self:refresh_kill_count_visibility()
     if not self._color_pos then 
         self._color_pos = 1
     end
@@ -634,6 +629,7 @@ function HUDTeammate:reset_kill_count()
     self:_update_kill_count_text()
 end
 
+local set_name_original = HUDTeammate.set_name
 function HUDTeammate:set_name(teammate_name, ...)
     if teammate_name ~= self._name then
         self._name = teammate_name
@@ -710,6 +706,7 @@ function HUDTeammate:refresh_kill_count_visibility()
     self._kills_panel:set_visible((not self._ai or SydneyHUD:GetOption("show_ai_kills")) and SydneyHUD:GetOption("enable_kill_counter"))
 end
 
+local set_state_original = HUDTeammate.set_state
 function HUDTeammate:set_state(...)
     set_state_original(self, ...)
     self:refresh_kill_count_visibility()
@@ -721,6 +718,7 @@ function HUDTeammate:set_state(...)
     end
 end
 
+local set_ammo_amount_by_type_original = HUDTeammate.set_ammo_amount_by_type
 function HUDTeammate:set_ammo_amount_by_type(type, max_clip, current_clip, current_left, max, ...)
     if SydneyHUD:GetOption("improved_ammo_count") then
         local weapon_panel = self._player_panel:child("weapons_panel"):child(type .. "_weapon_panel")

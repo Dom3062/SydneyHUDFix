@@ -2,36 +2,29 @@ if SydneyHUD:GetOption("hudlist_enable") then
     dofile(SydneyHUD._lua_path .. "lib/managers/HUDList.lua")
 end
 
-local init_original = HUDManager.init
-local _create_downed_hud_original = HUDManager._create_downed_hud
-local set_stamina_value_original = HUDManager.set_stamina_value
-local set_max_stamina_original = HUDManager.set_max_stamina
-local set_mugshot_downed_original = HUDManager.set_mugshot_downed
-local set_mugshot_custody_original = HUDManager.set_mugshot_custody
-local set_mugshot_normal_original = HUDManager.set_mugshot_normal
-local teammate_progress_original = HUDManager.teammate_progress
-local show_casing_original = HUDManager.show_casing
-local hide_casing_original = HUDManager.hide_casing
-local show_point_of_no_return_timer_original = HUDManager.show_point_of_no_return_timer
-local hide_point_of_no_return_timer_original = HUDManager.hide_point_of_no_return_timer
-local set_player_condition_original = HUDManager.set_player_condition
-local set_slot_outfit_original = HUDManager.set_slot_outfit
-local add_teammate_panel_original = HUDManager.add_teammate_panel
-local show_interact_original = HUDManager.show_interact
-local remove_interact_original = HUDManager.remove_interact
-local custom_radial_original = HUDManager.set_teammate_custom_radial
-
 local last_removed_time = 0
+
+local init_original = HUDManager.init
 function HUDManager:init(...)
     init_original(self, ...)
     self._deferred_detections = {}
 end
 
+function HUDManager:Update()
+    for _, panel in pairs(self._teammate_panels) do -- HUDTeammate
+        if panel then
+            panel:Update()
+        end
+    end
+end
+
+local set_slot_outfit_original = HUDManager.set_slot_outfit
 function HUDManager:set_slot_outfit(peer_id, criminal_name, outfit, ...)
     self:set_slot_detection(peer_id, outfit, true)
     return set_slot_outfit_original(self, peer_id, criminal_name, outfit, ...)
 end
 
+local add_teammate_panel_original = HUDManager.add_teammate_panel
 function HUDManager:add_teammate_panel(character_name, player_name, ai, peer_id, ...)
     local result = add_teammate_panel_original(self, character_name, player_name, ai, peer_id, ...)
     for pid, risk in pairs(self._deferred_detections) do
@@ -59,6 +52,7 @@ function HUDManager:set_slot_detection(peer_id, outfit, unpacked)
     self._deferred_detections[peer_id] = risk
 end
 
+local set_player_condition_original = HUDManager.set_player_condition
 function HUDManager:set_player_condition(icon_data, text)
     set_player_condition_original(self, icon_data, text)
     if icon_data == "mugshot_in_custody" then
@@ -72,6 +66,7 @@ function HUDManager:change_health(...)
     self._teammate_panels[self.PLAYER_PANEL]:change_health(...)
 end
 
+local _create_downed_hud_original = HUDManager._create_downed_hud
 function HUDManager:_create_downed_hud(...)
     _create_downed_hud_original(self, ...)
     if SydneyHUD:GetOption("center_assault_banner") then
@@ -81,6 +76,7 @@ function HUDManager:_create_downed_hud(...)
     end
 end
 
+local show_casing_original = HUDManager.show_casing
 function HUDManager:show_casing(...)
     self._hud_heist_timer._heist_timer_panel:set_visible(not SydneyHUD:GetOption("center_assault_banner"))
     if self:alive("guis/mask_off_hud") and SydneyHUD:GetOption("center_assault_banner") then
@@ -89,16 +85,19 @@ function HUDManager:show_casing(...)
     show_casing_original(self, ...)
 end
 
+local hide_casing_original = HUDManager.hide_casing
 function HUDManager:hide_casing(...)
     hide_casing_original(self, ...)
     self._hud_heist_timer._heist_timer_panel:set_visible(true)
 end
 
+local show_point_of_no_return_timer_original = HUDManager.show_point_of_no_return_timer
 function HUDManager:show_point_of_no_return_timer(...)
     self._hud_heist_timer._heist_timer_panel:set_visible(not SydneyHUD:GetOption("center_assault_banner"))
     show_point_of_no_return_timer_original(self, ...)
 end
 
+local hide_point_of_no_return_timer_original = HUDManager.hide_point_of_no_return_timer
 function HUDManager:hide_point_of_no_return_timer(...)
     hide_point_of_no_return_timer_original(self, ...)
     self._hud_heist_timer._heist_timer_panel:set_visible(true)
@@ -150,6 +149,7 @@ function HUDManager:update_inspire_timer(...)
     self._teammate_panels[self.PLAYER_PANEL]:update_inspire_timer(...)
 end
 
+local teammate_progress_original = HUDManager.teammate_progress
 function HUDManager:teammate_progress(peer_id, type_index, enabled, tweak_data_id, timer, success, ...)
     teammate_progress_original(self, peer_id, type_index, enabled, tweak_data_id, timer, success, ...)
     local label = self:_name_label_by_peer_id(peer_id)
@@ -178,6 +178,7 @@ function HUDManager:_mugshot_id_to_unit(id)
     end
 end
 
+local set_mugshot_downed_original = HUDManager.set_mugshot_downed
 function HUDManager:set_mugshot_downed(id)
     local panel_id = self:_mugshot_id_to_panel_id(id)
     local unit = self:_mugshot_id_to_unit(id)
@@ -187,6 +188,7 @@ function HUDManager:set_mugshot_downed(id)
     return set_mugshot_downed_original(self, id)
 end
 
+local set_mugshot_custody_original = HUDManager.set_mugshot_custody
 function HUDManager:set_mugshot_custody(id)
     local panel_id = self:_mugshot_id_to_panel_id(id)
     if panel_id then
@@ -196,6 +198,7 @@ function HUDManager:set_mugshot_custody(id)
     return set_mugshot_custody_original(self, id)
 end
 
+local set_mugshot_normal_original = HUDManager.set_mugshot_normal
 function HUDManager:set_mugshot_normal(id)
     local panel_id = self:_mugshot_id_to_panel_id(id)
     if panel_id then
@@ -231,11 +234,13 @@ function HUDManager:teammate_panel_from_peer_id(id)
     end
 end
 
+local set_stamina_value_original = HUDManager.set_stamina_value
 function HUDManager:set_stamina_value(value, ...)
     self._teammate_panels[HUDManager.PLAYER_PANEL]:set_current_stamina(value)
     return set_stamina_value_original(self, value, ...)
 end
 
+local set_max_stamina_original = HUDManager.set_max_stamina
 function HUDManager:set_max_stamina(value, ...)
     self._teammate_panels[HUDManager.PLAYER_PANEL]:set_max_stamina(value)
     return set_max_stamina_original(self, value, ...)
@@ -253,6 +258,7 @@ function HUDManager:press_substitute(text, new)
     return text:gsub(managers.localization:text("hud_hold"), new)
 end
 
+local show_interact_original = HUDManager.show_interact
 function HUDManager.show_interact(self, data)
     if self._interact_visible and not data.force then
         return
@@ -266,6 +272,7 @@ function HUDManager.show_interact(self, data)
     return show_interact_original(self, data)
 end
 
+local remove_interact_original = HUDManager.remove_interact
 function HUDManager.remove_interact(self)
     self._interact_visible = nil
     return remove_interact_original(self)
@@ -311,6 +318,7 @@ function HUDManager:update(t, dt, ...)
     return update_original(self, t, dt, ...)
 end
 
+local custom_radial_original = HUDManager.set_teammate_custom_radial
 function HUDManager:set_teammate_custom_radial(i, data)
     if SydneyHUD:GetOption("swansong_effect") then
         local hud = managers.hud:script(PlayerBase.PLAYER_INFO_HUD_FULLSCREEN_PD2)
