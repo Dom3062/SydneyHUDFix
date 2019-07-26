@@ -1,22 +1,23 @@
 if GameSetup then
-
     local init_managers_original = GameSetup.init_managers
-    local update_original = GameSetup.update
-
     function GameSetup:init_managers(managers, ...)
         managers.waypoints = managers.waypoints or WaypointManager:new()
         return init_managers_original(self, managers, ...)
     end
 
+    local _f_init_finalize = GameSetup.init_finalize
+    function GameSetup:init_finalize()
+        _f_init_finalize(self)
+        CustomWaypoint:init_finalize()
+    end
+
+    local update_original = GameSetup.update
     function GameSetup:update(t, dt, ...)
         managers.waypoints:update(t, dt)
         return update_original(self, t, dt, ...)
     end
-
 else
-
     WaypointManager = WaypointManager or class()
-
     function WaypointManager:init()
         self._waypoints = {}
         self._waypoint_index = {}
@@ -109,7 +110,6 @@ else
     CustomWaypoint.OFFSCREEN_TYPE = 3	--circle, ellipse, border
     CustomWaypoint.OFFSCREEN_RADIUS_SCALE = 1	--Radius multiplier for circle/ellipse offscreen size
     CustomWaypoint.TRANSIT_SPEED = 0.35			--Transition time from offscreen position to onscreen position when not using border offscreen mode
-
     function CustomWaypoint:init(id, ws, data)
         data = data or {}
         self._id = id
@@ -131,6 +131,19 @@ else
             w = 20,
             h = 20,
         })
+    end
+
+    function CustomWaypoint:init_finalize()
+        local table =
+        {
+            [1] = "circle",
+            [2] = "ellipse",
+            [3] = "border"
+        }
+        
+        self.OFFSCREEN_TYPE = table[math.clamp(SydneyHUD:GetOption("offscreen_type"), 1, 3)]
+        self.OFFSCREEN_RADIUS_SCALE = SydneyHUD:GetOption("offscreen_radius_scale")
+        self.TRANSIT_SPEED = SydneyHUD:GetOption("transit_speed")
     end
 
     function CustomWaypoint:setup_arrow()
@@ -330,18 +343,4 @@ else
     function CustomWaypoint:_visibility_state_change()
 
     end
-
-    function CustomWaypoint:ChangeVariables()
-        local table =
-        {
-            [1] = "circle",
-            [2] = "ellipse",
-            [3] = "border"
-        }
-        
-        self.OFFSCREEN_TYPE = table[math.clamp(SydneyHUD:GetOption("offscreen_type"), 1, 3)]
-        self.OFFSCREEN_RADIUS_SCALE = SydneyHUD:GetOption("offscreen_radius_scale")
-        self.TRANSIT_SPEED = SydneyHUD:GetOption("transit_speed")		
-    end
-
 end

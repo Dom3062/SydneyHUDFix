@@ -622,9 +622,6 @@ if not SydneyHUD.setup then
 
     SydneyHUD:Load()
     SydneyHUD.setup = true
-    if CustomWaypoint then
-        CustomWaypoint:ChangeVariables() -- Hack
-    end
     log(SydneyHUD.info .. "SydneyHUD loaded.")
 end
 
