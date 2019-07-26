@@ -140,8 +140,6 @@ function HUDTeammate:_init_revivecount()
 end
 
 function HUDTeammate:_init_killcount()
-    self:reset_kill_count()
-    self:refresh_kill_count_visibility()
     self._kills_panel = self._panel:panel({
         name = "kills_panel",
         visible = true,
@@ -195,6 +193,8 @@ function HUDTeammate:_init_killcount()
         w = text_w + 4,
         h = text_h
     })
+    self:reset_kill_count()
+    self:refresh_kill_count_visibility()
 end
 
 function HUDTeammate:_init_interact_info()
