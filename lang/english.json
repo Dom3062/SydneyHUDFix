@@ -453,6 +453,12 @@
     "sydneyhud_load_preplanning_desc" : "Loads your Preplanning",
     "sydneyhud_menu_tweaks": "Menu/lobby tweaks",
     "sydneyhud_menu_tweaks_desc": "Skip screens, show/hide weapons",
+
+    "sydneyhud_music_tweaks" : "Music Tweaks",
+    "sydneyhud_music_tweaks_desc" : "Changes behavior how music should function",
+    "sydneyhud_music_on_steam_overlay" : "Keep the music on Steam Overlay",
+    "sydneyhud_music_on_steam_overlay_desc" : "When opening Steam Overlay keep the music playing (Menu only)\nWhen changed a heist restart is required to take effect",
+
     "sydneyhud_ok" : "Ok",
     "sydneyhud_options": "SydneyHUD",
     "sydneyhud_options_desc": "SydneyHUD options",
