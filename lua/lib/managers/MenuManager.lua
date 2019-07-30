@@ -1085,6 +1085,11 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_SydneyHUD", function(m
         SydneyHUD._data.swansong_effect = item:value() == "on"
     end
 
+    -- Music Tweaks
+    MenuCallbackHandler.callback_music_on_steam_overlay = function(self, item)
+        SydneyHUD._data.music_on_steam_overlay = item:value() == "on"
+    end
+
     -- SydneyHUD
     MenuCallbackHandler.callback_sydneyhud_language = function(self, item)
         SydneyHUD._data.language = item:value()

@@ -1,0 +1,17 @@
+{
+    "menu_id": "sydneyhud_music_tweaks",
+    "parent_menu_id": "sydneyhud_options",
+    "title": "sydneyhud_music_tweaks",
+    "description": "sydneyhud_music_tweaks_desc",
+    "items": [
+        {
+            "type": "toggle",
+            "id": "music_on_steam_overlay",
+            "title": "sydneyhud_music_on_steam_overlay",
+            "description": "sydneyhud_music_on_steam_overlay_desc",
+            "callback": "callback_music_on_steam_overlay",
+            "value": "music_on_steam_overlay",
+            "default_value": true
+        }
+    ]
+}

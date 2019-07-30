@@ -118,7 +118,9 @@ if not SydneyHUD.setup then
         "sydneyhud_hud_tweaks_interact",
         "sydneyhud_hud_tweaks_name",
         "sydneyhud_hud_tweaks_panel",
-        "sydneyhud_hud_tweaks_waypoint"
+        "sydneyhud_hud_tweaks_waypoint",
+
+        "sydneyhud_music_tweaks"
     }
     SydneyHUD._hook_files = {
         ["lib/entry"] = "lib/Entry.lua",
@@ -132,6 +134,7 @@ if not SydneyHUD.setup then
         ["lib/managers/hud/hudteammate"] = "lib/managers/hud/HUDTeammate.lua",
         ["lib/managers/hudmanager"] = "lib/managers/HUDManager.lua",
         ["lib/managers/hudmanagerpd2"] = "lib/managers/HUDManagerPD2.lua",
+        ["lib/managers/musicmanager"] = "lib/managers/MusicManager.lua",
         ["lib/managers/menu/blackmarketgui"] = "lib/managers/menu/BlackMarketGUI.lua",
         ["lib/managers/menu/contractboxgui"] = "lib/managers/menu/ContractBoxGui.lua",
         ["lib/managers/menu/lootdropscreengui"] = "lib/managers/menu/LootDropScreenGui.lua",
@@ -193,6 +196,7 @@ if not SydneyHUD.setup then
         ["lib/utils/propertymanager"] = "lib/utils/PropertyManager.lua",
         ["lib/utils/temporarypropertymanager"] = "lib/utils/TemporaryPropertyManager.lua"
     }
+
     SydneyHUD._poco_conflicting_defaults = {
         buff = {
             mirrorDirection = true,

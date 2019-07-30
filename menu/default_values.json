@@ -200,6 +200,7 @@
     "lobby_skins_mode": 4,
     "loot_screen_skip": 2,
     "move_lpi_lobby_box": true,
+    "music_on_steam_overlay" : true,
     "offscreen_type": 3,
     "offscreen_radius_scale" : 1,
     "push_to_interact": true,
