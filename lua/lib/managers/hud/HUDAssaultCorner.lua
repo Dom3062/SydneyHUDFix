@@ -3,7 +3,7 @@ function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
     init_original(self, hud, full_hud, tweak_hud)
     self.center_assault_banner = SydneyHUD:GetOption("center_assault_banner")
     self.hudlist_enemy = SydneyHUD:GetModOption("hudlist", "show_enemies")
-    if not BAI then -- Initialize these variables when BAI is not installed or not running
+    if not BAI then -- Initialize these variables when BAI is not installed or running
         self._assault_endless_color = Color.red
         self._state_control_color = Color.white
         self._state_anticipation_color = Color(255, 186, 204, 28) / 255
