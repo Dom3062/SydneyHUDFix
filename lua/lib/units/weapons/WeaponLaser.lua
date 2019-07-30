@@ -1,11 +1,19 @@
 local init_original = WeaponLaser.init
 local update_original = WeaponLaser.update
 
-WeaponLaser._suffix_map = {
+WeaponLaser._suffix_map =
+{
     cop_sniper = "_snipers",
     turret_module_active = "_turret",
     turret_module_rearming = "_turretr",
     turret_module_mad = "_turretm"
+}
+
+WeaponLaser._ignore_suffix_map =
+{
+    [""] = true,
+    ["default"] = true,
+    ["player"] = true
 }
 
 function WeaponLaser:init(...)
@@ -17,7 +25,7 @@ end
 function WeaponLaser:update(unit, t, dt, ...)
     update_original(self, unit, t, dt, ...)
     local theme = self._theme_type
-    if theme == "default" or theme == "player" or theme == "" then
+    if self._ignore_suffix_map[theme] then
         return
     end
     local suffix = self._suffix_map[theme]

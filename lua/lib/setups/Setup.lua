@@ -1,6 +1,5 @@
 printf = printf or function(...) end
 if RequiredScript == "lib/setups/setup" and Setup then
-
     local init_managers_original = Setup.init_managers
     local update_original = Setup.update
 
@@ -14,7 +13,6 @@ if RequiredScript == "lib/setups/setup" and Setup then
         managers.gameinfo:update(t, dt)
         return update_original(self, t, dt, ...)
     end
-
 else
 
     GameInfoManager = GameInfoManager or class()
@@ -380,7 +378,6 @@ else
 		end
 	end
 	
-	local _interactive_unit_event_original = GameInfoManager._interactive_unit_event
 	function GameInfoManager:_interactive_unit_event(event, key, data)
 		if GameInfoManager._DEPLOYABLES.interaction_ids[data.interact_id] then
 			local ignore_lookup = GameInfoManager._DEPLOYABLES.ignore_ids
@@ -389,9 +386,33 @@ else
 			if not (ignore_lookup[level] and ignore_lookup[level][data.editor_id]) then
 				self:_deployable_interaction_handler(event, key, data)
 			end
-		end
+        end
+        
+        local lookup = GameInfoManager._LOOT
+		local carry_id = data.unit:carry_data() and data.unit:carry_data():carry_id() or 
+			lookup.interaction_to_carry[data.interact_id] or 
+			(self._loot[key] and self._loot[key].carry_id)
 		
-		return _interactive_unit_event_original(self, event, key, data)
+		if carry_id then
+			local level_id = managers.job:current_level_id()
+			
+			if not (lookup.ignore_ids[level_id] and lookup.ignore_ids[level_id][data.editor_id]) and not (lookup.conditional_ignore_ids[data.editor_id] and lookup.conditional_ignore_ids[data.editor_id]()) then
+				data.carry_id = carry_id
+				self:_loot_interaction_handler(event, key, data)
+			end
+        end
+        
+        if GameInfoManager._PICKUPS.interaction_ids[data.interact_id] then
+			local level_id = managers.job:current_level_id()
+			
+			if not (GameInfoManager._PICKUPS.ignore_ids[level_id] and GameInfoManager._PICKUPS.ignore_ids[level_id][data.editor_id]) then
+				self:_special_equipment_interaction_handler(event, key, data)
+			end
+        end
+        
+        if data.interact_id == "corpse_alarm_pager" then
+			self:_pager_event(event, key, data)
+		end
     end
     
     function GameInfoManager:init_sentry_plugin()
@@ -582,25 +603,6 @@ else
 				self:_listener_callback("loot_count", "change", self._loot[key].carry_id, self._loot[key], value)
 			end
 		end
-	end
-	
-	local _interactive_unit_event_original_two = GameInfoManager._interactive_unit_event
-	function GameInfoManager:_interactive_unit_event(event, key, data)
-		local lookup = GameInfoManager._LOOT
-		local carry_id = data.unit:carry_data() and data.unit:carry_data():carry_id() or 
-			lookup.interaction_to_carry[data.interact_id] or 
-			(self._loot[key] and self._loot[key].carry_id)
-		
-		if carry_id then
-			local level_id = managers.job:current_level_id()
-			
-			if not (lookup.ignore_ids[level_id] and lookup.ignore_ids[level_id][data.editor_id]) and not (lookup.conditional_ignore_ids[data.editor_id] and lookup.conditional_ignore_ids[data.editor_id]()) then
-				data.carry_id = carry_id
-				self:_loot_interaction_handler(event, key, data)
-			end
-		end
-		
-		return _interactive_unit_event_original_two(self, event, key, data)
 	end
 
     GameInfoManager._INTERACTIONS = {
@@ -995,19 +997,6 @@ else
 			end
 		end
 	end
-	
-	local _interactive_unit_event_original_three = GameInfoManager._interactive_unit_event
-	function GameInfoManager:_interactive_unit_event(event, key, data)
-		if GameInfoManager._PICKUPS.interaction_ids[data.interact_id] then
-			local level_id = managers.job:current_level_id()
-			
-			if not (GameInfoManager._PICKUPS.ignore_ids[level_id] and GameInfoManager._PICKUPS.ignore_ids[level_id][data.editor_id]) then
-				self:_special_equipment_interaction_handler(event, key, data)
-			end
-		end
-		
-		return _interactive_unit_event_original_three(self, event, key, data)
-    end
     
     function GameInfoManager:init_pagers_plugin()
 		self._pagers = self._pagers or {}
@@ -1049,15 +1038,6 @@ else
 			end
 		end
 	end
-	
-	local _interactive_unit_event_original_four = GameInfoManager._interactive_unit_event
-	function GameInfoManager:_interactive_unit_event(event, key, data)
-		if data.interact_id == "corpse_alarm_pager" then
-			self:_pager_event(event, key, data)
-		end
-		
-		return _interactive_unit_event_original_four(self, event, key, data)
-    end
     
     function GameInfoManager:init_ecms_plugin()
 		self._ecms = self._ecms or {}
