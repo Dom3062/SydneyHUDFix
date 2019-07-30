@@ -47,7 +47,7 @@ end
 function CrimeSpreeManager:DoesServerHasAssaultExtenderModifier()
     local server_modifiers = self._global.server_modifiers or {}
     for _, data in ipairs(server_modifiers) do
-        if data.id == "assault_extender" then
+        if data and data.id and data.id == "assault_extender" then
             return true
         end
     end
