@@ -165,7 +165,7 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_SydneyHUD", function(m
 
     -- Left Panel
     MenuCallbackHandler.callback_left_list_scale = function(self, item)
-        SydneyHUD._data.hudlist_left_list_scale = math.floor(item:value())
+        SydneyHUD._data.hudlist_left_list_scale = item:value()
     end
 
     MenuCallbackHandler.callback_show_ammo_bags = function(self, item)
