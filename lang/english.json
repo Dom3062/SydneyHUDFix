@@ -91,6 +91,7 @@
     "enhanced_assault_time_desc": "Shows 'Time Left' in the Assault Box.\nThis option is not accurate on client when host does not have BAI/SydneyHUD running (depends on enhanced assault banner).",
     "equipment_interrupt": "Inventory key interrupt",
     "equipment_interrupt_desc": "Interrupt interaction by inventory key [G], instead of interaction key [F]",
+    "equipment_interrupt_press" : "Press [G] to release",
     "flashlight_angle": "Flashlight angle",
     "flashlight_angle_desc": "Angle/width of beam, 0-160 (default 60)",
     "flashlight_range": "Flashlight range",
