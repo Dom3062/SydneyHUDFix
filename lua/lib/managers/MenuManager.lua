@@ -214,7 +214,7 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_SydneyHUD", function(m
 
     -- Right Panel
     MenuCallbackHandler.callback_right_list_scale = function(self, item)
-        SydneyHUD._data.hudlist_right_list_scale = math.floor(item:value())
+        SydneyHUD._data.hudlist_right_list_scale = item:value()
     end
 
     MenuCallbackHandler.callback_show_loot = function(self, item)
@@ -292,7 +292,7 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_SydneyHUD", function(m
     end
 
     MenuCallbackHandler.callback_buff_list_scale = function(self, item)
-        SydneyHUD._data.hudlist_buff_list_scale = math.floor(item:value())
+        SydneyHUD._data.hudlist_buff_list_scale = item:value()
     end
 
     MenuCallbackHandler.callback_show_buffs = function(self, item)
