@@ -3,19 +3,10 @@
     "description": "All-In-One HUD mod",
     "author": "SydneyMOD Project Team; Fixes and improvements by Dom",
     "contact": "http://steamcommunity.com/groups/SydneyMOD",
-    "version": "4.1.1",
+    "version": "4.1.2 Beta",
     "blt_version": 2,
     "color": "0.3 0 1",
     "image": "logo.png",
-    "updates": [
-        {
-            "identifier": "SydneyHUD",
-            "host":
-            {
-                "meta": "https://www.dropbox.com/s/b9b4lcozb2687h3/meta.json?raw=1"
-            }
-        }
-    ],
     "pre_hooks": [
         {
             "hook_id": "lib/entry",
