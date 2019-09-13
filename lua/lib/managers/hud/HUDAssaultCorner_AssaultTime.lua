@@ -1,5 +1,5 @@
 -- Can't optimize it further because I can't use GroupAIStateBase functions on client
-function HUDAssaultCorner:CalculateValueFromDiff()
+function HUDAssaultCorner:CalculateSustainDurationFromDiff()
     self:_calculate_difficulty_ratio()
     return math.lerp(self:_get_difficulty_dependent_value(tweak_data.group_ai.besiege.assault.sustain_duration_min), self:_get_difficulty_dependent_value(tweak_data.group_ai.besiege.assault.sustain_duration_max), math.random()) * self:_get_balancing_multiplier(tweak_data.group_ai.besiege.assault.sustain_duration_balance_mul)
 end

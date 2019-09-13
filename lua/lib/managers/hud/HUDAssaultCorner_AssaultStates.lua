@@ -1,4 +1,4 @@
-if Global.game_settings.level_id == "Enemy_Spawner" then
+if SydneyHUD:IsOr(Global.game_settings.level_id, "Enemy_Spawner", "enemy_spawner2") then
     return
 end
 

@@ -2,6 +2,7 @@
 local spacer = string.rep(" ", 10)
 local sep = string.format("%s%s%s", spacer, managers.localization:text("hud_assault_end_line"), spacer)
 local crimespree = managers.crime_spree:is_active()
+local assault_extender = false
 local skirmish = managers.skirmish:is_skirmish()
 local tweak, gai_state, assault_data, get_value, get_mult
 if Network:is_server() then
@@ -26,22 +27,118 @@ function LocalizationManager:SetClient()
     self.is_client = true
 end
 
+function LocalizationManager:SetVariables()
+    self.show_spawns_left = SydneyHUD:GetOption("enhanced_assault_spawns")
+    self.show_time_left = SydneyHUD:GetOption("enhanced_assault_time")
+    self.time_left_format = SydneyHUD:GetOption("time_format")
+    self.show_wave_number = SydneyHUD:GetOption("enhanced_assault_count")
+end
+
+function LocalizationManager:CSAE_Activate()
+    assault_extender = true
+end
+
 function LocalizationManager:hud_assault_enhanced()
+    if tweak and gai_state and assault_data and assault_data.active then
+        local s = nil
+
+        if self.show_spawns_left then
+            local spawns = get_value(gai_state, tweak.force_pool) * get_mult(gai_state, tweak.force_pool_balance_mul)
+            local spawns_left = self:text("hud_spawns_left") .. "  " .. math.round(math.max(spawns - assault_data.force_spawned, 0))
+            s = string.format("%s", spawns_left)
+        end
+
+        if self.show_time_left then
+            local add
+            local time_left = assault_data.phase_end_t - gai_state._t -- Removing 350 here will make Time Left more accurate
+            if crimespree or assault_extender then
+                local sustain_duration = math.lerp(get_value(gai_state, tweak.sustain_duration_min), get_value(gai_state, tweak.sustain_duration_max), math.random()) * get_mult(gai_state, tweak.sustain_duration_balance_mul)
+                add = managers.modifiers:modify_value("GroupAIStateBesiege:SustainEndTime", sustain_duration) - sustain_duration
+                if add == 0 and gai_state._assault_number == 1 and assault_data.phase == "build" then
+                    add = sustain_duration / 2 
+                end
+            end
+            if assault_data.phase == "build" then
+                if skirmish then
+                    time_left = 140 - time_left -- 140 is precalculated from SkirmishTweakData.lua
+                else
+                    local sustain_duration = math.lerp(get_value(gai_state, tweak.sustain_duration_min), get_value(gai_state, tweak.sustain_duration_max), math.random()) * get_mult(gai_state, tweak.sustain_duration_balance_mul)
+                    time_left = time_left + sustain_duration + tweak.fade_duration
+                    if add then
+                        time_left = time_left + add
+                    end
+                end
+            elseif assault_data.phase == "sustain" then
+                time_left = time_left + tweak.fade_duration
+                if add then
+                    time_left = time_left + add
+                end
+            end
+
+            if time_left < 0 then
+                time_left = self:text("hud_time_left") .. " " .. self:text("hud_overdue")
+            else
+                if self.time_left_format == 1 or self.time_left_format == 2 then
+                    time_left = self:text("hud_time_left") .. " " .. string.format("%.2f", time_left)
+                    if self.time_left_format == 2 then
+                        time_left = time_left .. " " .. self:text("hud_s")
+                    end
+                elseif self.time_left_format == 3 or self.time_left_format == 4 then
+                    time_left = self:text("hud_time_left") .. " " .. string.format("%.0f", time_left)
+                    if self.time_left_format == 4 then
+                        time_left = time_left .. "  " .. self:text("hud_s")
+                    end
+                else
+                    local min = math.floor(time_left / 60)
+                    local s = math.floor(time_left % 60)
+                    if s >= 60 then
+                        s = s - 60
+                        min = min + 1
+                    end
+                    if self.time_left_format == 5 then
+                        time_left = self:text("hud_time_left") .. " " .. string.format("%.0f%s%s%s%.0f%s%s", min, " ", self:text("hud_min"), "  ", s, " ", self:text("hud_s"))
+                    else
+                        time_left = self:text("hud_time_left") .. " " .. string.format("%.0f%s%s", min, ":", (s <= 9 and "0" .. string.format("%.0f", s) or string.format("%.0f", s)))
+                    end
+                end
+            end
+            if s then
+                s = string.format("%s%s%s", s, sep, time_left)
+            else
+                s = string.format("%s", time_left)
+            end
+        end
+        
+        if self.show_wave_number then
+            if s then
+                s = s .. sep .. self:text("hud_wave")
+            else
+                s = self:text("hud_wave")
+            end
+            s = s .. string.format("%d", gai_state._assault_number)
+        end
+        
+        if s then
+            return s
+        end
+        return self:text("hud_time_left") .. " " .. self:text("hud_overdue")
+    end
+
     if self.is_client then
         local time
-        if SydneyHUD:GetOption("enhanced_assault_time") then
+        if self.show_time_left then
             local client_time_left = managers.hud._hud_assault_corner:GetTimeLeft()
             if client_time_left < 0 then
                 time = self:text("hud_time_left") .. " " .. self:text("hud_overdue")
             else
-                if SydneyHUD:IsOr(SydneyHUD:GetOption("time_format"), 1, 2) then
+                if SydneyHUD:IsOr(self.time_format, 1, 2) then
                     time = self:text("hud_time_left") .. " " .. string.format("%.2f", client_time_left)
-                    if SydneyHUD:GetOption("time_format") == 2 then
+                    if self.time_format == 2 then
                         time = time .. " " .. self:text("hud_s")
                     end
-                elseif SydneyHUD:IsOr(SydneyHUD:GetOption("time_format"), 3, 4) then
+                elseif SydneyHUD:IsOr(self.time_format, 3, 4) then
                     time = self:text("hud_time_left") .. " " .. string.format("%.0f", client_time_left)
-                    if SydneyHUD:GetOption("time_format") == 4 then
+                    if self.time_format == 4 then
                         time = time .. "  " .. self:text("hud_s")
                     end
                 else
@@ -51,7 +148,7 @@ function LocalizationManager:hud_assault_enhanced()
                         s = s - 60
                         min = min + 1
                     end
-                    if SydneyHUD:GetOption("time_format") == 5 then
+                    if self.time_format == 5 then
                         time = self:text("hud_time_left") .. " " .. string.format("%.0f%s%s%s%.0f%s%s", min, " ", self:text("hud_min"), "  ", s, " ", self:text("hud_s"))
                     else
                         time = self:text("hud_time_left") .. " " .. string.format("%.0f%s%s", min, ":", (s <= 9 and "0" .. string.format("%.0f", s) or string.format("%.0f", s)))
@@ -59,7 +156,7 @@ function LocalizationManager:hud_assault_enhanced()
                 end
             end
         end
-        if SydneyHUD:GetOption("enhanced_assault_count") then
+        if self.show_wave_number then
             if not time then
                 time = self:text("hud_wave") .. string.format("%d", managers.hud._hud_assault_corner._wave_number)
             else
@@ -68,79 +165,7 @@ function LocalizationManager:hud_assault_enhanced()
         end
         return time or (self:text("hud_time_left") .. "" .. self:text("hud_overdue"))
     end
-    
-    local groupaistate = managers.groupai:state()
-    local finaltext
-    if SydneyHUD:GetOption("enhanced_assault_spawns") then
-        local spawns = groupaistate:_get_difficulty_dependent_value(tweak_data.group_ai.besiege.assault.force_pool) * groupaistate:_get_balancing_multiplier(tweak_data.group_ai.besiege.assault.force_pool_balance_mul)
-        finaltext = self:text("hud_spawns_left") .. string.format("%d", spawns - groupaistate._task_data.assault.force_spawned)
-    end
-    if SydneyHUD:GetOption("enhanced_assault_time") then
-        if not finaltext then
-            finaltext = self:text("hud_time_left")
-        else
-            finaltext = finaltext .. sep .. self:text("hud_time_left")
-        end
-        local add
-        local atime = groupaistate._task_data.assault.phase_end_t - groupaistate._t
-        if crimespree then
-            local sustain_duration = math.lerp(get_value(gai_state, tweak.sustain_duration_min), get_value(gai_state, tweak.sustain_duration_max), 0.5) * get_mult(gai_state, tweak.sustain_duration_balance_mul)
-            add = managers.modifiers:modify_value("GroupAIStateBesiege:SustainEndTime", sustain_duration) - sustain_duration
-        end
-        if assault_data.phase == "build" then
-            if skirmish then
-                atime = 140 - (assault_data.phase_end_t - groupaistate._t) -- 140 is precalculated from SkirmishTweakData.lua
-            else
-                local sustain_duration = math.lerp(get_value(gai_state, tweak.sustain_duration_min), get_value(gai_state, tweak.sustain_duration_max), 0.5) * get_mult(gai_state, tweak.sustain_duration_balance_mul)
-                atime = atime + sustain_duration + tweak.fade_duration
-                if add then
-                    atime = atime + add
-                end
-            end
-        elseif assault_data.phase == "sustain" then
-            atime = atime + tweak.fade_duration
-            if add then
-                atime = atime + add
-            end
-        end
-
-        if atime < 0 then
-            finaltext = finaltext .. " " .. self:text("hud_overdue")
-        else
-            if SydneyHUD:IsOr(SydneyHUD:GetOption("time_format"), 1, 2) then
-                finaltext = finaltext .. string.format("%.2f", atime)
-                if SydneyHUD:GetOption("time_format") == 2 then
-                    finaltext = finaltext .. " " .. self:text("hud_s")
-                end
-            elseif SydneyHUD:IsOr(SydneyHUD:GetOption("time_format"), 3, 4) then
-                finaltext = finaltext .. string.format("%.0f", atime)
-                if SydneyHUD:GetOption("time_format") == 4 then
-                    finaltext = finaltext .. " " .. self:text("hud_s")
-                end
-            else
-                local min = math.floor(atime / 60)
-                local s = math.floor(atime % 60)
-                if s >= 60 then
-                    s = s - 60
-                    min = min + 1
-                end
-                if SydneyHUD:GetOption("time_format") == 5 then
-                    finaltext = finaltext .. " " .. string.format("%.0f%s%s%s%.0f%s%s", min, " ", self:text("hud_min"), "  ", s, " ", self:text("hud_s"))
-                else
-                    finaltext = finaltext .. " " .. string.format("%.0f%s%s", min, ":", (s <= 9 and "0" .. string.format("%.0f", s) or string.format("%.0f", s)))
-                end
-            end
-        end
-    end
-    if SydneyHUD:GetOption("enhanced_assault_count") then
-        if not finaltext then
-            finaltext = self:text("hud_wave")
-        else
-            finaltext = finaltext .. sep .. self:text("hud_wave")
-        end
-        finaltext = finaltext .. string.format("%d", managers.hud._hud_assault_corner._wave_number)
-    end
-    return finaltext
+    return self:text("hud_time_left") .. " " .. self:text("hud_overdue")
 end
 
 function LocalizationManager:hud_phase()
