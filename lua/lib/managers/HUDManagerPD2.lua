@@ -290,34 +290,6 @@ function HUDManager:hide_underdog()
     self._teammate_panels[ HUDManager.PLAYER_PANEL ]:hide_underdog()
 end
 
-if not SydneyHUD:GetOption("hudlist_enable") then
-    return
-end
-
-local _setup_player_info_hud_pd2_original = HUDManager._setup_player_info_hud_pd2
-function HUDManager:_setup_player_info_hud_pd2(...)
-    _setup_player_info_hud_pd2_original(self, ...)
-    if not managers.hudlist then
-        managers.hudlist = HUDListManager:new(managers.hud:script(PlayerBase.PLAYER_INFO_HUD_PD2).panel)
-        managers.hudlist:post_init()
-        HUDListManager.add_post_init_event(function()
-            if not GameInfoManager then
-                return log_error("Script requires GameInfoManager to function, aborting setup")
-            else
-                managers.gameinfo:add_scheduled_callback("HUDList_setup_clbk", 1, function()
-                    managers.hudlist:setup()
-                end)
-            end
-        end)
-    end
-end
-
-local update_original = HUDManager.update
-function HUDManager:update(t, dt, ...)
-    managers.hudlist:update(t, dt)
-    return update_original(self, t, dt, ...)
-end
-
 local custom_radial_original = HUDManager.set_teammate_custom_radial
 function HUDManager:set_teammate_custom_radial(i, data)
     if SydneyHUD:GetOption("swansong_effect") then
@@ -350,6 +322,34 @@ function HUDManager:set_teammate_custom_radial(i, data)
         end
     end
     return custom_radial_original(self, i, data)
+end
+
+if not SydneyHUD:GetOption("hudlist_enable") then
+    return
+end
+
+local _setup_player_info_hud_pd2_original = HUDManager._setup_player_info_hud_pd2
+function HUDManager:_setup_player_info_hud_pd2(...)
+    _setup_player_info_hud_pd2_original(self, ...)
+    if not managers.hudlist then
+        managers.hudlist = HUDListManager:new(managers.hud:script(PlayerBase.PLAYER_INFO_HUD_PD2).panel)
+        managers.hudlist:post_init()
+        HUDListManager.add_post_init_event(function()
+            if not GameInfoManager then
+                return log_error("Script requires GameInfoManager to function, aborting setup")
+            else
+                managers.gameinfo:add_scheduled_callback("HUDList_setup_clbk", 1, function()
+                    managers.hudlist:setup()
+                end)
+            end
+        end)
+    end
+end
+
+local update_original = HUDManager.update
+function HUDManager:update(t, dt, ...)
+    managers.hudlist:update(t, dt)
+    return update_original(self, t, dt, ...)
 end
 
 local _f_activate_objective = HUDManager.activate_objective
