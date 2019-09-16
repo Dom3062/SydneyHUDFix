@@ -2,7 +2,7 @@ local init_original = PlayerTweakData.init
 function PlayerTweakData:init()
     init_original(self)
     if SydneyHUD:GetOption("anti_bobble") then
-        for k, v in pairs(self.stances) do
+        for _, v in pairs(self.stances) do
             v.standard.shakers.breathing.amplitude = 0
             v.crouched.shakers.breathing.amplitude = 0
             v.standard.vel_overshot.yaw_neg = 0

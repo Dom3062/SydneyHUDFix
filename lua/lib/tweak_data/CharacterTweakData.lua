@@ -1,5 +1,4 @@
 local _init_civilian_original = CharacterTweakData._init_civilian
-
 function CharacterTweakData:_init_civilian(...)
     _init_civilian_original(self, ...)
     if SydneyHUD:GetOption("civilian_spot") then
