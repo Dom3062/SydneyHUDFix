@@ -6,7 +6,7 @@ local GetTime = function()
 end
 
 local text
-local visible -- Hack, don't try to fix it
+local visible = false -- Hack, don't try to fix it
 local _f_receive_message = ChatGui.receive_message
 function ChatGui:receive_message(name, message, color, icon)
     if SydneyHUD:GetOption("show_heist_time") then
