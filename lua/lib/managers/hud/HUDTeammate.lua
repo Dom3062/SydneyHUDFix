@@ -14,7 +14,7 @@ function HUDTeammate:init(i, ...)
     self:_init_revivecount()
 end
 
-function HUDTeammate:Update()
+function HUDTeammate:SydneyHUDUpdate()
     self:refresh_kill_count_visibility()
 end
 
@@ -713,8 +713,7 @@ function HUDTeammate:set_state(...)
     if self._ai then
         self._kills_panel:set_bottom(self._panel:child("player"):bottom())
     else
-        local name_label = self._panel:child("name")
-        self._kills_panel:set_bottom(name_label:bottom())
+        self._kills_panel:set_bottom(self._panel:child("name"):bottom())
     end
 end
 
