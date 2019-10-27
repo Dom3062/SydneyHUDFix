@@ -3,25 +3,19 @@ if SydneyHUD:GetOption("hudlist_enable") then
 end
 
 local last_removed_time = 0
-
 local init_original = HUDManager.init
 function HUDManager:init(...)
     init_original(self, ...)
     self._deferred_detections = {}
 end
 
-function HUDManager:Update()
-    for _, panel in pairs(self._teammate_panels) do -- HUDTeammate
-        if panel then
-            panel:Update()
-        end
-    end
-end
-
+--[[
+    Sets detection risk for all human players
+]]
 local set_slot_outfit_original = HUDManager.set_slot_outfit
 function HUDManager:set_slot_outfit(peer_id, criminal_name, outfit, ...)
     self:set_slot_detection(peer_id, outfit, true)
-    return set_slot_outfit_original(self, peer_id, criminal_name, outfit, ...)
+    set_slot_outfit_original(self, peer_id, criminal_name, outfit, ...)
 end
 
 local add_teammate_panel_original = HUDManager.add_teammate_panel
@@ -52,6 +46,10 @@ function HUDManager:set_slot_detection(peer_id, outfit, unpacked)
     self._deferred_detections[peer_id] = risk
 end
 
+--[[
+    mugshot_in_custody = Hides all info panels in your health bar when you went to custody
+    mugshot_normal = Shows all info panels in your health bar when you are out of custody
+]]
 local set_player_condition_original = HUDManager.set_player_condition
 function HUDManager:set_player_condition(icon_data, text)
     set_player_condition_original(self, icon_data, text)
@@ -60,10 +58,6 @@ function HUDManager:set_player_condition(icon_data, text)
     elseif icon_data == "mugshot_normal" then
         self._teammate_panels[self.PLAYER_PANEL]:set_player_in_custody(false)
     end
-end
-
-function HUDManager:change_health(...)
-    self._teammate_panels[self.PLAYER_PANEL]:change_health(...)
 end
 
 local _create_downed_hud_original = HUDManager._create_downed_hud
@@ -119,9 +113,7 @@ function HUDManager:feed_heist_time(t)
         if t - last_removed_time >= SydneyHUD:GetOption("remove_interval") then
             if SydneyHUD:GetOption("remove_shield") then
                 if managers.enemy then
-                    local enemy_data = managers.enemy._enemy_data
-                    local corpses = enemy_data.corpses
-                    for u_key, u_data in pairs(corpses) do
+                    for u_key, u_data in pairs(managers.enemy._enemy_data.corpses) do
                         if u_data.unit:inventory() ~= nil then
                             u_data.unit:inventory():destroy_all_items()
                         end
@@ -138,7 +130,7 @@ function HUDManager:feed_heist_time(t)
     end
     feed_heist_time_original(self, t)
     self._hud_assault_corner:feed_heist_time(t)
-    self._teammate_panels[self.PLAYER_PANEL]:change_health(0) -- force refresh hps meter atleast every second.
+    self._teammate_panels[self.PLAYER_PANEL]:change_health() -- force refresh hps meter atleast every second.
 end
 
 function HUDManager:update_armor_timer(...)
@@ -185,7 +177,7 @@ function HUDManager:set_mugshot_downed(id)
     if panel_id and unit and unit:movement().current_state_name and unit:movement():current_state_name() == "bleed_out" then
         self._teammate_panels[panel_id]:increment_revives()
     end
-    return set_mugshot_downed_original(self, id)
+    set_mugshot_downed_original(self, id)
 end
 
 local set_mugshot_custody_original = HUDManager.set_mugshot_custody
@@ -195,7 +187,7 @@ function HUDManager:set_mugshot_custody(id)
         self._teammate_panels[panel_id]:reset_revives()
         self._teammate_panels[panel_id]:set_player_in_custody(true)
     end
-    return set_mugshot_custody_original(self, id)
+    set_mugshot_custody_original(self, id)
 end
 
 local set_mugshot_normal_original = HUDManager.set_mugshot_normal
@@ -204,7 +196,7 @@ function HUDManager:set_mugshot_normal(id)
     if panel_id then
         self._teammate_panels[panel_id]:set_player_in_custody(false)
     end
-    return set_mugshot_normal_original(self, id)
+    set_mugshot_normal_original(self, id)
 end
 
 function HUDManager:reset_teammate_revives(panel_id)
@@ -248,10 +240,6 @@ end
 
 function HUDManager:increment_kill_count(teammate_panel_id, is_special, headshot)
     self._teammate_panels[teammate_panel_id]:increment_kill_count(is_special, headshot)
-end
-
-function HUDManager:reset_kill_count(teammate_panel_id)
-    self._teammate_panels[teammate_panel_id]:reset_kill_count()
 end
 
 function HUDManager:press_substitute(text, new)
@@ -321,7 +309,15 @@ function HUDManager:set_teammate_custom_radial(i, data)
             swan_song_left:set_visible(false)
         end
     end
-    return custom_radial_original(self, i, data)
+    custom_radial_original(self, i, data)
+end
+
+function HUDManager:SydneyHUDUpdate()
+    for _, panel in pairs(self._teammate_panels) do -- HUDTeammate
+        if panel then
+            panel:SydneyHUDUpdate()
+        end
+    end
 end
 
 if not SydneyHUD:GetOption("hudlist_enable") then
@@ -329,9 +325,12 @@ if not SydneyHUD:GetOption("hudlist_enable") then
 end
 
 local _setup_player_info_hud_pd2_original = HUDManager._setup_player_info_hud_pd2
-function HUDManager:_setup_player_info_hud_pd2(...)
-    _setup_player_info_hud_pd2_original(self, ...)
+function HUDManager:_setup_player_info_hud_pd2()
+    _setup_player_info_hud_pd2_original(self)
     if not managers.hudlist then
+        if not self:alive(PlayerBase.PLAYER_INFO_HUD_PD2) then
+            return
+        end
         managers.hudlist = HUDListManager:new(managers.hud:script(PlayerBase.PLAYER_INFO_HUD_PD2).panel)
         managers.hudlist:post_init()
         HUDListManager.add_post_init_event(function()
@@ -347,9 +346,9 @@ function HUDManager:_setup_player_info_hud_pd2(...)
 end
 
 local update_original = HUDManager.update
-function HUDManager:update(t, dt, ...)
+function HUDManager:update(t, dt)
     managers.hudlist:update(t, dt)
-    return update_original(self, t, dt, ...)
+    update_original(self, t, dt)
 end
 
 local _f_activate_objective = HUDManager.activate_objective
