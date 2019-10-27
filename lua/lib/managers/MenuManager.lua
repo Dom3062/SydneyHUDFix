@@ -8,7 +8,7 @@ function MenuCallbackHandler:resume_game()
     old_resume(self)
     if SydneyHUD.Update then
         SydneyHUD.Update = false
-        managers.hud:Update()
+        managers.hud:SydneyHUDUpdate()
     end
 end
 
@@ -112,7 +112,7 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_SydneyHUD", function(m
     end
 
     MenuCallbackHandler.SydneyHUD_HUDTweaks_Assault_ChangedFocus = function(node, focus)
-        if BAI then
+        if BAI and focus then
             local items = { "show_assault_states", "enable_enhanced_assault_banner", "enhanced_assault_spawns", "enhanced_assault_time", "time_format", "enhanced_assault_count"}
             for _, v in pairs(items) do
                 node:item(v):set_enabled(false)
@@ -1088,6 +1088,10 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_SydneyHUD", function(m
     -- Music Tweaks
     MenuCallbackHandler.callback_music_on_steam_overlay = function(self, item)
         SydneyHUD._data.music_on_steam_overlay = item:value() == "on"
+    end
+
+    MenuCallbackHandler.callback_shuffle_music = function(self, item)
+        SydneyHUD._data.shuffle_music = item:value() == "on"
     end
 
     -- SydneyHUD

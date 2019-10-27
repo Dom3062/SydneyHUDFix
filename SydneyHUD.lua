@@ -165,6 +165,7 @@ if not SydneyHUD.setup then
         ["lib/setups/setup"] = "lib/setups/Setup.lua",
         ["lib/states/ingamewaitingforplayers"] = "lib/states/IngameWaitingForPlayersState.lua",
         ["lib/tweak_data/charactertweakdata"] = "lib/tweak_data/CharacterTweakData.lua",
+        ["lib/tweak_data/levelstweakdata"] = "lib/tweak_data/LevelsTweakData.lua",
         ["lib/tweak_data/playertweakdata"] = "lib/tweak_data/PlayerTweakData.lua",
         ["lib/units/beings/player/huskplayermovement"] = "lib/units/beings/player/HuskPlayerMovement.lua",
         ["lib/units/beings/player/playerdamage"] = "lib/units/beings/player/PlayerDamage.lua",
@@ -419,14 +420,15 @@ if not SydneyHUD.setup then
             end
 
             SydneyHUD._down_count[peer_id] = (SydneyHUD._down_count[peer_id] or 0) + 1
-
+            local is_feed
+            
             if SydneyHUD._down_count[peer_id] == warn_down and SydneyHUD:GetOption("critical_down_warning_chat_info") then
                 local message = peer:name() .. " was downed " .. tostring(SydneyHUD._down_count[peer_id]) .. " times"
-                local is_feed = SydneyHUD:GetOption("critical_down_warning_chat_info_feed")
+                is_feed = SydneyHUD:GetOption("critical_down_warning_chat_info_feed")
                 self:SendChatMessage("Warning!", message, is_feed, "ff0000")
             elseif SydneyHUD:GetOption("down_warning_chat_info") then
                 local message = peer:name() .. " was downed (" .. tostring(SydneyHUD._down_count[peer_id]) .. "/" .. warn_down .. ")"
-                local is_feed = SydneyHUD:GetOption("down_warning_chat_info_feed")
+                is_feed = SydneyHUD:GetOption("down_warning_chat_info_feed")
                 self:SendChatMessage("Warning", message, is_feed, "ff0000")
             end
         end
@@ -620,6 +622,7 @@ if not SydneyHUD.setup then
             end
             if not no_as_mod then
                 LuaNetworking:SendToPeers("AssaultStates_Net", state)
+                LuaNetworking:SendToPeers("SyncAssaultPhase", state) -- KineticHUD
             end
         end
     end

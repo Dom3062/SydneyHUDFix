@@ -12,6 +12,15 @@
             "callback": "callback_music_on_steam_overlay",
             "value": "music_on_steam_overlay",
             "default_value": true
+        },
+        {
+            "type" : "toggle",
+            "id" : "shuffle_music",
+            "title" : "sydneyhud_shuffle_music",
+            "description" : "sydneyhud_shuffle_music_desc",
+            "callback" : "callback_shuffle_music",
+            "value" : "shuffle_music",
+            "default_value" : true
         }
     ]
 }

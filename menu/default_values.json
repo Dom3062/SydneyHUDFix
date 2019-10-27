@@ -213,6 +213,7 @@
     "replenished_chat_info": false,
     "replenished_chat_info_feed": false,
     "set_gadget_id_on" : 0,
+    "shuffle_music" : true,
     "show_ai_kills": true,
     "show_assault_states": true,
     "show_armor_timer": true,
