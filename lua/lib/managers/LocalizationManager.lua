@@ -23,15 +23,12 @@ function LocalizationManager:text(string_id, macros)
     return text_original(self, string_id, macros)
 end
 
-function LocalizationManager:SetClient()
-    self.is_client = true
-end
-
-function LocalizationManager:SetVariables()
+function LocalizationManager:SetVariables(client)
     self.show_spawns_left = SydneyHUD:GetOption("enhanced_assault_spawns")
     self.show_time_left = SydneyHUD:GetOption("enhanced_assault_time")
     self.time_left_format = SydneyHUD:GetOption("time_format")
     self.show_wave_number = SydneyHUD:GetOption("enhanced_assault_count")
+    self.is_client = client
 end
 
 function LocalizationManager:CSAE_Activate()
@@ -108,7 +105,7 @@ function LocalizationManager:hud_assault_enhanced()
                 s = string.format("%s", time_left)
             end
         end
-        
+
         if self.show_wave_number then
             if s then
                 s = s .. sep .. self:text("hud_wave")
