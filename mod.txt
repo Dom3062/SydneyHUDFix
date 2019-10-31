@@ -350,6 +350,15 @@
             "run_in_menu": true,
             "run_in_game": true,
             "localized": true
+        },
+        {
+            "keybind_id": "shuffle_music",
+            "name": "sydneyhud_shuffle_music",
+            "description": "sydneyhud_shuffle_music_keybind_desc",
+            "script_path": "script/ShuffleMusic.lua",
+            "run_in_menu": false,
+            "run_in_game": true,
+            "localized": true
         }
     ]
 }

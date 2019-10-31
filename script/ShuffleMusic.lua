@@ -1,5 +1,6 @@
 function Change()
     if IsMusicChangeAllowed() then
+        managers.music:check_music_switch()
     end
 end
 
