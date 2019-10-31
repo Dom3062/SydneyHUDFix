@@ -5,28 +5,28 @@
     "items": [
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_calm",
+            "id": "hudlist_ignore_buff_calm",
             "title": "menu_deck19_5",
-            "callback": "callback_not_ignore_buff_calm",
-            "value": "hudlist_not_ignore_buff_calm",
-            "default_value": true
+            "callback": "callback_ignore_buff_calm",
+            "value": "hudlist_ignore_buff_calm",
+            "default_value": false
         },
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_stoic_flask",
+            "id": "hudlist_ignore_buff_stoic_flask",
             "title": "bm_grenade_damage_control",
-            "callback": "callback_not_ignore_buff_stoic_flask",
-            "value": "hudlist_not_ignore_buff_stoic_flask",
-            "default_value": true
+            "callback": "callback_ignore_buff_stoic_flask",
+            "value": "hudlist_ignore_buff_stoic_flask",
+            "default_value": false
         },
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_virtue_cooldown",
-            "title": "sydneyhud_hudlist_not_ignore_buff_virtue_cooldown",
-            "description": "sydneyhud_hudlist_not_ignore_buff_virtue_cooldown_desc",
-            "callback": "callback_not_ignore_buff_virtue_cooldown",
-            "value": "hudlist_not_ignore_buff_virtue_cooldown",
-            "default_value": true
+            "id": "hudlist_ignore_buff_virtue_cooldown",
+            "title": "sydneyhud_hudlist_ignore_buff_virtue_cooldown",
+            "description": "sydneyhud_hudlist_ignore_buff_virtue_cooldown_desc",
+            "callback": "callback_ignore_buff_virtue_cooldown",
+            "value": "hudlist_ignore_buff_virtue_cooldown",
+            "default_value": false
         }
     ]
 }

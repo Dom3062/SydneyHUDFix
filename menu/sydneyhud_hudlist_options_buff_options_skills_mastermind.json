@@ -5,112 +5,112 @@
     "items": [
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_aggressive_reload",
+            "id": "hudlist_ignore_buff_aggressive_reload",
             "title": "menu_speedy_reload_beta",
-            "callback": "callback_not_ignore_buff_aggressive_reload",
-            "value": "hudlist_not_ignore_buff_aggressive_reload",
-            "default_value": true
+            "callback": "callback_ignore_buff_aggressive_reload",
+            "value": "hudlist_ignore_buff_aggressive_reload",
+            "default_value": false
         },
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_ammo_efficiency",
+            "id": "hudlist_ignore_buff_ammo_efficiency",
             "title": "menu_single_shot_ammo_return_beta",
-            "callback": "callback_not_ignore_buff_ammo_efficiency",
-            "value": "hudlist_not_ignore_buff_ammo_efficiency",
-            "default_value": true
+            "callback": "callback_ignore_buff_ammo_efficiency",
+            "value": "hudlist_ignore_buff_ammo_efficiency",
+            "default_value": false
         },
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_combat_medic",
+            "id": "hudlist_ignore_buff_combat_medic",
             "title": "menu_combat_medic_beta",
-            "description": "sydneyhud_hudlist_not_ignore_buff_combat_medic_desc",
-            "callback": "callback_not_ignore_buff_combat_medic",
-            "value": "hudlist_not_ignore_buff_combat_medic",
-            "default_value": true
+            "description": "sydneyhud_hudlist_ignore_buff_combat_medic_desc",
+            "callback": "callback_ignore_buff_combat_medic",
+            "value": "hudlist_ignore_buff_combat_medic",
+            "default_value": false
         },
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_forced_friendship",
+            "id": "hudlist_ignore_buff_forced_friendship",
             "title": "menu_triathlete_beta",
-            "description": "sydneyhud_hudlist_not_ignore_buff_forced_friendship_desc",
-            "callback": "callback_not_ignore_buff_forced_friendship",
-            "value": "hudlist_not_ignore_buff_forced_friendship",
-            "default_value": true
+            "description": "sydneyhud_hudlist_ignore_buff_forced_friendship_desc",
+            "callback": "callback_ignore_buff_forced_friendship",
+            "value": "hudlist_ignore_buff_forced_friendship",
+            "default_value": false
         },
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_hostage_taker",
+            "id": "hudlist_ignore_buff_hostage_taker",
             "title": "menu_black_marketeer_beta",
-            "description":"sydneyhud_hudlist_not_ignore_buff_hostage_taker_desc",
-            "callback": "callback_not_ignore_buff_hostage_taker",
-            "value": "hudlist_not_ignore_buff_hostage_taker",
-            "default_value": false
+            "description":"sydneyhud_hudlist_ignore_buff_hostage_taker_desc",
+            "callback": "callback_ignore_buff_hostage_taker",
+            "value": "hudlist_ignore_buff_hostage_taker",
+            "default_value": true
         },
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_inspire",
+            "id": "hudlist_ignore_buff_inspire",
             "title": "menu_inspire_beta",
-            "callback": "callback_not_ignore_buff_inspire",
-            "value": "hudlist_not_ignore_buff_inspire",
-            "default_value": true
+            "callback": "callback_ignore_buff_inspire",
+            "value": "hudlist_ignore_buff_inspire",
+            "default_value": false
         },
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_inspire_boost_cooldown",
-            "title": "sydneyhud_hudlist_not_ignore_buff_inspire_boost_cooldown",
-            "callback": "callback_not_ignore_buff_inspire_boost_cooldown",
-            "value": "hudlist_not_ignore_buff_inspire_boost_cooldown",
-            "default_value": true
+            "id": "hudlist_ignore_buff_inspire_boost_cooldown",
+            "title": "sydneyhud_hudlist_ignore_buff_inspire_boost_cooldown",
+            "callback": "callback_ignore_buff_inspire_boost_cooldown",
+            "value": "hudlist_ignore_buff_inspire_boost_cooldown",
+            "default_value": false
         },
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_inspire_revive_cooldown",
-            "title": "sydneyhud_hudlist_not_ignore_buff_inspire_revive_cooldown",
-            "callback": "callback_not_ignore_buff_inspire_revive_cooldown",
-            "value": "hudlist_not_ignore_buff_inspire_revive_cooldown",
-            "default_value": true
+            "id": "hudlist_ignore_buff_inspire_revive_cooldown",
+            "title": "sydneyhud_hudlist_ignore_buff_inspire_revive_cooldown",
+            "callback": "callback_ignore_buff_inspire_revive_cooldown",
+            "value": "hudlist_ignore_buff_inspire_revive_cooldown",
+            "default_value": false
         },
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_painkillers",
+            "id": "hudlist_ignore_buff_painkillers",
             "title": "menu_fast_learner_beta",
-            "description": "sydneyhud_hudlist_not_ignore_buff_painkillers_desc",
-            "callback": "callback_not_ignore_buff_painkillers",
-            "value": "hudlist_not_ignore_buff_painkillers",
-            "default_value": true
+            "description": "sydneyhud_hudlist_ignore_buff_painkillers_desc",
+            "callback": "callback_ignore_buff_painkillers",
+            "value": "hudlist_ignore_buff_painkillers",
+            "default_value": false
         },
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_partner_in_crime",
+            "id": "hudlist_ignore_buff_partner_in_crime",
             "title": "menu_control_freak_beta",
-            "callback": "callback_not_ignore_buff_partner_in_crime",
-            "value": "hudlist_not_ignore_buff_partner_in_crime",
-            "default_value": false
+            "callback": "callback_ignore_buff_partner_in_crime",
+            "value": "hudlist_ignore_buff_partner_in_crime",
+            "default_value": true
         },
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_quick_fix",
+            "id": "hudlist_ignore_buff_quick_fix",
             "title": "menu_tea_time_beta",
-            "description": "sydneyhud_hudlist_not_ignore_buff_quick_fix_desc",
-            "callback": "callback_not_ignore_buff_quick_fix",
-            "value": "hudlist_not_ignore_buff_quick_fix",
-            "default_value": true
-        },
-        {
-            "type": "toggle",
-            "id": "hudlist_not_ignore_buff_uppers",
-            "title": "menu_tea_cookies_beta",
-            "callback": "callback_not_ignore_buff_uppers",
-            "value": "hudlist_not_ignore_buff_uppers",
-            "default_value": true
-        },
-        {
-            "type": "toggle",
-            "id": "hudlist_not_ignore_buff_uppers_cooldown",
-            "title": "sydneyhud_hudlist_not_ignore_buff_uppers_cooldown",
-            "callback": "callback_not_ignore_buff_uppers_cooldown",
-            "value": "hudlist_not_ignore_buff_uppers_cooldown",
+            "description": "sydneyhud_hudlist_ignore_buff_quick_fix_desc",
+            "callback": "callback_ignore_buff_quick_fix",
+            "value": "hudlist_ignore_buff_quick_fix",
             "default_value": false
+        },
+        {
+            "type": "toggle",
+            "id": "hudlist_ignore_buff_uppers",
+            "title": "menu_tea_cookies_beta",
+            "callback": "callback_ignore_buff_uppers",
+            "value": "hudlist_ignore_buff_uppers",
+            "default_value": false
+        },
+        {
+            "type": "toggle",
+            "id": "hudlist_ignore_buff_uppers_cooldown",
+            "title": "sydneyhud_hudlist_ignore_buff_uppers_cooldown",
+            "callback": "callback_ignore_buff_uppers_cooldown",
+            "value": "hudlist_ignore_buff_uppers_cooldown",
+            "default_value": true
         }
     ]
 }

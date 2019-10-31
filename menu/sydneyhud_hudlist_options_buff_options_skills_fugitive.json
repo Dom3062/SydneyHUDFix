@@ -5,85 +5,85 @@
     "items": [
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_berserker",
+            "id": "hudlist_ignore_buff_berserker",
             "title": "menu_wolverine_beta",
-            "callback": "callback_not_ignore_buff_berserker",
-            "value": "hudlist_not_ignore_buff_berserker",
+            "callback": "callback_ignore_buff_berserker",
+            "value": "hudlist_ignore_buff_berserker",
+            "default_value": true
+        },
+        {
+            "type": "toggle",
+            "id": "hudlist_ignore_buff_bloodthirst_basic",
+            "title": "sydneyhud_hudlist_ignore_buff_bloodthirst_basic",
+            "description": "sydneyhud_hudlist_ignore_buff_bloodthirst_basic_desc",
+            "callback": "callback_ignore_buff_bloodthirst_basic",
+            "value": "hudlist_ignore_buff_bloodthirst_basic",
             "default_value": false
         },
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_bloodthirst_basic",
-            "title": "sydneyhud_hudlist_not_ignore_buff_bloodthirst_basic",
-            "description": "sydneyhud_hudlist_not_ignore_buff_bloodthirst_basic_desc",
-            "callback": "callback_not_ignore_buff_bloodthirst_basic",
-            "value": "hudlist_not_ignore_buff_bloodthirst_basic",
-            "default_value": true
+            "id": "hudlist_ignore_buff_bloodthirst_aced",
+            "title": "sydneyhud_hudlist_ignore_buff_bloodthirst_aced",
+            "callback": "callback_ignore_buff_bloodthirst_aced",
+            "value": "hudlist_ignore_buff_bloodthirst_aced",
+            "default_value": false
         },
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_bloodthirst_aced",
-            "title": "sydneyhud_hudlist_not_ignore_buff_bloodthirst_aced",
-            "callback": "callback_not_ignore_buff_bloodthirst_aced",
-            "value": "hudlist_not_ignore_buff_bloodthirst_aced",
-            "default_value": true
-        },
-        {
-            "type": "toggle",
-            "id": "hudlist_not_ignore_buff_desperado",
+            "id": "hudlist_ignore_buff_desperado",
             "title": "menu_expert_handling",
-            "callback": "callback_not_ignore_buff_desperado",
-            "value": "hudlist_not_ignore_buff_desperado",
-            "default_value": true
+            "callback": "callback_ignore_buff_desperado",
+            "value": "hudlist_ignore_buff_desperado",
+            "default_value": false
         },
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_messiah",
+            "id": "hudlist_ignore_buff_messiah",
             "title": "menu_pistol_beta_messiah",
-            "callback": "callback_not_ignore_buff_messiah",
-            "value": "hudlist_not_ignore_buff_messiah",
-            "default_value": true
+            "callback": "callback_ignore_buff_messiah",
+            "value": "hudlist_ignore_buff_messiah",
+            "default_value": false
         },
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_running_from_death_basic",
-            "title": "sydneyhud_hudlist_not_ignore_buff_running_from_death_basic",
-            "callback": "callback_not_ignore_buff_running_from_death_basic",
-            "value": "hudlist_not_ignore_buff_running_from_death_basic",
-            "default_value": true
+            "id": "hudlist_ignore_buff_running_from_death_basic",
+            "title": "sydneyhud_hudlist_ignore_buff_running_from_death_basic",
+            "callback": "callback_ignore_buff_running_from_death_basic",
+            "value": "hudlist_ignore_buff_running_from_death_basic",
+            "default_value": false
         },
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_running_from_death_aced",
-            "title": "sydneyhud_hudlist_not_ignore_buff_running_from_death_aced",
-            "callback": "callback_not_ignore_buff_running_from_death_aced",
-            "value": "hudlist_not_ignore_buff_running_from_death_aced",
-            "default_value": true
+            "id": "hudlist_ignore_buff_running_from_death_aced",
+            "title": "sydneyhud_hudlist_ignore_buff_running_from_death_aced",
+            "callback": "callback_ignore_buff_running_from_death_aced",
+            "value": "hudlist_ignore_buff_running_from_death_aced",
+            "default_value": false
         },
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_swan_song",
+            "id": "hudlist_ignore_buff_swan_song",
             "title": "menu_perseverance_beta",
-            "callback": "callback_not_ignore_buff_swan_song",
-            "value": "hudlist_not_ignore_buff_swan_song",
-            "default_value": false
-        },
-        {
-            "type": "toggle",
-            "id": "hudlist_not_ignore_buff_trigger_happy",
-            "title": "menu_trigger_happy_beta",
-            "callback": "callback_not_ignore_buff_trigger_happy",
-            "value": "hudlist_not_ignore_buff_trigger_happy",
-            "default_value": false
-        },
-        {
-            "type": "toggle",
-            "id": "hudlist_not_ignore_buff_up_you_go",
-            "title": "menu_up_you_go_beta",
-            "description": "sydneyhud_hudlist_not_ignore_buff_up_you_go_desc",
-            "callback": "callback_not_ignore_buff_up_you_go",
-            "value": "hudlist_not_ignore_buff_up_you_go",
+            "callback": "callback_ignore_buff_swan_song",
+            "value": "hudlist_ignore_buff_swan_song",
             "default_value": true
+        },
+        {
+            "type": "toggle",
+            "id": "hudlist_ignore_buff_trigger_happy",
+            "title": "menu_trigger_happy_beta",
+            "callback": "callback_ignore_buff_trigger_happy",
+            "value": "hudlist_ignore_buff_trigger_happy",
+            "default_value": true
+        },
+        {
+            "type": "toggle",
+            "id": "hudlist_ignore_buff_up_you_go",
+            "title": "menu_up_you_go_beta",
+            "description": "sydneyhud_hudlist_ignore_buff_up_you_go_desc",
+            "callback": "callback_ignore_buff_up_you_go",
+            "value": "hudlist_ignore_buff_up_you_go",
+            "default_value": false
         }
     ]
 }

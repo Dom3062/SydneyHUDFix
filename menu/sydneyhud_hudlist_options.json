@@ -6,10 +6,10 @@
     "items": [
         {
             "type": "toggle",
-            "id": "hudlist_enable",
-            "title": "sydneyhud_hudlist_enable",
-            "callback": "callback_hudlist_enable",
-            "value": "hudlist_enable",
+            "id": "hudlist_enabled",
+            "title": "sydneyhud_hudlist_enabled",
+            "callback": "callback_hudlist_enabled",
+            "value": "hudlist_enabled",
             "default_value": true
         },
         {

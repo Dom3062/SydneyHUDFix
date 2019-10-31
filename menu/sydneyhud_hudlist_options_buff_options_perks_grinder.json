@@ -5,20 +5,20 @@
     "items": [
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_histamine",
+            "id": "hudlist_ignore_buff_histamine",
             "title": "menu_deck11_1",
-            "callback": "callback_not_ignore_buff_histamine",
-            "value": "hudlist_not_ignore_buff_histamine",
-            "default_value": true
+            "callback": "callback_ignore_buff_histamine",
+            "value": "hudlist_ignore_buff_histamine",
+            "default_value": false
         },
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_histamine_cooldown",
-            "title": "sydneyhud_hudlist_not_ignore_buff_histamine_cooldown",
-            "description": "sydneyhud_hudlist_not_ignore_buff_histamine_cooldown_desc",
-            "callback": "callback_not_ignore_buff_histamine_cooldown",
-            "value": "hudlist_not_ignore_buff_histamine_cooldown",
-            "default_value": false
+            "id": "hudlist_ignore_buff_histamine_cooldown",
+            "title": "sydneyhud_hudlist_ignore_buff_histamine_cooldown",
+            "description": "sydneyhud_hudlist_ignore_buff_histamine_cooldown_desc",
+            "callback": "callback_ignore_buff_histamine_cooldown",
+            "value": "hudlist_ignore_buff_histamine_cooldown",
+            "default_value": true
         }
     ]
 }

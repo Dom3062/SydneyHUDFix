@@ -5,20 +5,20 @@
     "items": [
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_injector",
+            "id": "hudlist_ignore_buff_injector",
             "title": "bm_ability_chico_injector",
-            "callback": "callback_not_ignore_buff_injector",
-            "value": "hudlist_not_ignore_buff_injector",
-            "default_value": true
+            "callback": "callback_ignore_buff_injector",
+            "value": "hudlist_ignore_buff_injector",
+            "default_value": false
         },
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_injector_cooldown",
-            "title": "sydneyhud_hudlist_not_ignore_buff_injector_cooldown",
-            "description": "sydneyhud_hudlist_not_ignore_buff_injector_cooldown_desc",
-            "callback": "callback_not_ignore_buff_injector_cooldown",
-            "value": "hudlist_not_ignore_buff_injector_cooldown",
-            "default_value": false
+            "id": "hudlist_ignore_buff_injector_cooldown",
+            "title": "sydneyhud_hudlist_ignore_buff_injector_cooldown",
+            "description": "sydneyhud_hudlist_ignore_buff_injector_cooldown_desc",
+            "callback": "callback_ignore_buff_injector_cooldown",
+            "value": "hudlist_ignore_buff_injector_cooldown",
+            "default_value": true
         }
     ]
 }

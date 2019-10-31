@@ -5,30 +5,30 @@
     "items": [
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_armor_break_invulnerability",
-            "title": "sydneyhud_hudlist_not_ignore_buff_armor_break_invulnerability",
-            "description": "sydneyhud_hudlist_not_ignore_buff_armor_break_invulnerability_desc",
-            "callback": "callback_not_ignore_buff_armor_break_invulnerability",
-            "value": "hudlist_not_ignore_buff_armor_break_invulnerability",
+            "id": "hudlist_ignore_buff_armor_break_invulnerability",
+            "title": "sydneyhud_hudlist_ignore_buff_armor_break_invulnerability",
+            "description": "sydneyhud_hudlist_ignore_buff_armor_break_invulnerability_desc",
+            "callback": "callback_ignore_buff_armor_break_invulnerability",
+            "value": "hudlist_ignore_buff_armor_break_invulnerability",
+            "default_value": false
+        },
+        {
+            "type": "toggle",
+            "id": "hudlist_ignore_buff_armor_break_invulnerability_cooldown",
+            "title": "sydneyhud_hudlist_ignore_buff_armor_break_invulnerability_cooldown",
+            "description": "sydneyhud_hudlist_ignore_buff_armor_break_invulnerability_cooldown_desc",
+            "callback": "callback_ignore_buff_armor_break_invulnerability_cooldown",
+            "value": "hudlist_ignore_buff_armor_break_invulnerability_cooldown",
             "default_value": true
         },
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_armor_break_invulnerability_cooldown",
-            "title": "sydneyhud_hudlist_not_ignore_buff_armor_break_invulnerability_cooldown",
-            "description": "sydneyhud_hudlist_not_ignore_buff_armor_break_invulnerability_cooldown_desc",
-            "callback": "callback_not_ignore_buff_armor_break_invulnerability_cooldown",
-            "value": "hudlist_not_ignore_buff_armor_break_invulnerability_cooldown",
-            "default_value": false
-        },
-        {
-            "type": "toggle",
-            "id": "hudlist_not_ignore_buff_close_contact_no_talk",
-            "title": "sydneyhud_hudlist_not_ignore_buff_close_contact_no_talk",
-            "description": "sydneyhud_hudlist_not_ignore_buff_close_contact_no_talk_desc",
-            "callback": "callback_not_ignore_buff_close_contact_no_talk",
-            "value": "hudlist_not_ignore_buff_close_contact_no_talk",
-            "default_value": false
+            "id": "hudlist_ignore_buff_close_contact_no_talk",
+            "title": "sydneyhud_hudlist_ignore_buff_close_contact_no_talk",
+            "description": "sydneyhud_hudlist_ignore_buff_close_contact_no_talk_desc",
+            "callback": "callback_ignore_buff_close_contact_no_talk",
+            "value": "hudlist_ignore_buff_close_contact_no_talk",
+            "default_value": true
         }
     ]
 }

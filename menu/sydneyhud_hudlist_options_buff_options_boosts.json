@@ -6,19 +6,19 @@
     "items": [
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_some_invulnerability_cooldown",
-            "title": "sydneyhud_hudlist_not_ignore_buff_some_invulnerability_cooldown",
-            "callback": "callback_not_ignore_buff_some_invulnerability_cooldown",
-            "value": "hudlist_not_ignore_buff_some_invulnerability_cooldown",
-            "default_value": true
+            "id": "hudlist_ignore_buff_some_invulnerability_cooldown",
+            "title": "sydneyhud_hudlist_ignore_buff_some_invulnerability_cooldown",
+            "callback": "callback_ignore_buff_some_invulnerability_cooldown",
+            "value": "hudlist_ignore_buff_some_invulnerability_cooldown",
+            "default_value": false
         },
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_self_healer_cooldown",
-            "title": "sydneyhud_hudlist_not_ignore_buff_self_healer_cooldown",
-            "callback": "callback_not_ignore_buff_self_healer_cooldown",
-            "value": "hudlist_not_ignore_buff_self_healer_cooldown",
-            "default_value": true
+            "id": "hudlist_ignore_buff_self_healer_cooldown",
+            "title": "sydneyhud_hudlist_ignore_buff_self_healer_cooldown",
+            "callback": "callback_ignore_buff_self_healer_cooldown",
+            "value": "hudlist_ignore_buff_self_healer_cooldown",
+            "default_value": false
         },
         {
             "type" : "divider",
@@ -26,11 +26,11 @@
         },
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_ai_inspire_cooldown",
-            "title": "sydneyhud_hudlist_not_ignore_buff_ai_inspire_cooldown",
-            "callback": "callback_not_ignore_buff_ai_inspire_cooldown",
-            "value": "hudlist_not_ignore_buff_ai_inspire_cooldown",
-            "default_value": true
+            "id": "hudlist_ignore_buff_ai_inspire_cooldown",
+            "title": "sydneyhud_hudlist_ignore_buff_ai_inspire_cooldown",
+            "callback": "callback_ignore_buff_ai_inspire_cooldown",
+            "value": "hudlist_ignore_buff_ai_inspire_cooldown",
+            "default_value": false
         }
     ]
 }

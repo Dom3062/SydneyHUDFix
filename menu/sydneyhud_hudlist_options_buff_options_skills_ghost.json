@@ -5,44 +5,44 @@
     "items": [
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_dire_need",
+            "id": "hudlist_ignore_buff_dire_need",
             "title": "menu_dire_need_beta",
-            "callback": "callback_not_ignore_buff_dire_need",
-            "value": "hudlist_not_ignore_buff_dire_need",
-            "default_value": true
-        },
-        {
-            "type": "toggle",
-            "id": "hudlist_not_ignore_buff_second_wind",
-            "title": "menu_scavenger_beta",
-            "callback": "callback_not_ignore_buff_second_wind",
-            "value": "hudlist_not_ignore_buff_second_wind",
-            "default_value": true
-        },
-        {
-            "type": "toggle",
-            "id": "hudlist_not_ignore_buff_sixth_sense",
-            "title": "menu_chameleon_beta",
-            "callback": "callback_not_ignore_buff_sixth_sense",
-            "value": "hudlist_not_ignore_buff_sixth_sense",
-            "default_value": true
-        },
-        {
-            "type": "toggle",
-            "id": "hudlist_not_ignore_buff_unseen_strike",
-            "title": "menu_unseen_strike_beta",
-            "callback": "callback_not_ignore_buff_unseen_strike",
-            "value": "hudlist_not_ignore_buff_unseen_strike",
-            "default_value": true
-        },
-        {
-            "type": "toggle",
-            "id": "hudlist_not_ignore_buff_unseen_strike_cooldown",
-            "title": "sydneyhud_hudlist_not_ignore_buff_unseen_strike_cooldown",
-            "description": "sydneyhud_hudlist_not_ignore_buff_unseen_strike_cooldown_desc",
-            "callback": "callback_not_ignore_buff_unseen_strike_cooldown",
-            "value": "hudlist_not_ignore_buff_unseen_strike_cooldown",
+            "callback": "callback_ignore_buff_dire_need",
+            "value": "hudlist_ignore_buff_dire_need",
             "default_value": false
+        },
+        {
+            "type": "toggle",
+            "id": "hudlist_ignore_buff_second_wind",
+            "title": "menu_scavenger_beta",
+            "callback": "callback_ignore_buff_second_wind",
+            "value": "hudlist_ignore_buff_second_wind",
+            "default_value": false
+        },
+        {
+            "type": "toggle",
+            "id": "hudlist_ignore_buff_sixth_sense",
+            "title": "menu_chameleon_beta",
+            "callback": "callback_ignore_buff_sixth_sense",
+            "value": "hudlist_ignore_buff_sixth_sense",
+            "default_value": false
+        },
+        {
+            "type": "toggle",
+            "id": "hudlist_ignore_buff_unseen_strike",
+            "title": "menu_unseen_strike_beta",
+            "callback": "callback_ignore_buff_unseen_strike",
+            "value": "hudlist_ignore_buff_unseen_strike",
+            "default_value": false
+        },
+        {
+            "type": "toggle",
+            "id": "hudlist_ignore_buff_unseen_strike_cooldown",
+            "title": "sydneyhud_hudlist_ignore_buff_unseen_strike_cooldown",
+            "description": "sydneyhud_hudlist_ignore_buff_unseen_strike_cooldown_desc",
+            "callback": "callback_ignore_buff_unseen_strike_cooldown",
+            "value": "hudlist_ignore_buff_unseen_strike_cooldown",
+            "default_value": true
         }
     ]
 }

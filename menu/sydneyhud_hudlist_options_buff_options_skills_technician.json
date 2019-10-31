@@ -5,11 +5,11 @@
     "items": [
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_lock_n_load",
+            "id": "hudlist_ignore_buff_lock_n_load",
             "title": "menu_shock_and_awe_beta",
-            "callback": "callback_not_ignore_buff_lock_n_load",
-            "value": "hudlist_not_ignore_buff_lock_n_load",
-            "default_value": true
+            "callback": "callback_ignore_buff_lock_n_load",
+            "value": "hudlist_ignore_buff_lock_n_load",
+            "default_value": false
         }
     ]
 }

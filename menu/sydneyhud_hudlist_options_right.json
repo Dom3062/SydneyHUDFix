@@ -31,8 +31,8 @@
                 "sydneyhud_hudlist_all",
                 "sydneyhud_hudlist_aggregate"
             ],
-            "value": "hudlist_show_body_bags",
-            "default_value": 1
+            "value": "hudlist_show_loot",
+            "default_value": 2
         },
         {
             "type": "toggle",
@@ -55,10 +55,10 @@
                 "sydneyhud_hudlist_aggregate"
             ],
             "value": "hudlist_show_enemies",
-            "default_value": 1
+            "default_value": 2
         },
         {
-            "type": "toggle",
+            "type": "multiple_choice",
             "id": "hudlist_show_hostages",
             "title": "sydneyhud_hudlist_show_hostages",
             "description": "sydneyhud_hudlist_show_hostages_desc",
@@ -69,7 +69,7 @@
                 "sydneyhud_hudlist_aggregate"
             ],
             "value": "hudlist_show_hostages",
-            "default_value": 1
+            "default_value": 2
         },
         {
             "type": "toggle",

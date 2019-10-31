@@ -5,12 +5,12 @@
     "items": [
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_800_pound_gorilla",
+            "id": "hudlist_ignore_buff_800_pound_gorilla",
             "title": "menu_deck2_9",
-            "description": "sydneyhud_hudlist_not_ignore_buff_800_pound_gorilla_desc",
-            "callback": "callback_not_ignore_buff_800_pound_gorilla",
-            "value": "hudlist_not_ignore_buff_800_pound_gorilla",
-            "default_value": false
+            "description": "sydneyhud_hudlist_ignore_buff_800_pound_gorilla_desc",
+            "callback": "callback_ignore_buff_800_pound_gorilla",
+            "value": "hudlist_ignore_buff_800_pound_gorilla",
+            "default_value": true
         }
     ]
 }

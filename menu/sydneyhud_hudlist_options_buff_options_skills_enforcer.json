@@ -5,55 +5,55 @@
     "items": [
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_bullet_storm",
+            "id": "hudlist_ignore_buff_bullet_storm",
             "title": "menu_ammo_reservoir",
-            "callback": "callback_not_ignore_buff_bullet_storm",
-            "value": "hudlist_not_ignore_buff_bullet_storm",
-            "default_value": true
+            "callback": "callback_ignore_buff_bullet_storm",
+            "value": "hudlist_ignore_buff_bullet_storm",
+            "default_value": false
         },
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_bullseye_cooldown",
-            "title": "sydneyhud_hudlist_not_ignore_buff_bullseye_cooldown",
-            "callback": "callback_not_ignore_buff_bullseye_cooldown",
-            "value": "hudlist_not_ignore_buff_bullseye_cooldown",
-            "default_value": true
+            "id": "hudlist_ignore_buff_bullseye_cooldown",
+            "title": "sydneyhud_hudlist_ignore_buff_bullseye_cooldown",
+            "callback": "callback_ignore_buff_bullseye_cooldown",
+            "value": "hudlist_ignore_buff_bullseye_cooldown",
+            "default_value": false
         },
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_die_hard",
+            "id": "hudlist_ignore_buff_die_hard",
             "title": "menu_show_of_force_beta",
-            "description": "sydneyhud_hudlist_not_ignore_buff_die_hard_desc",
-            "callback": "callback_not_ignore_buff_die_hard",
-            "value": "hudlist_not_ignore_buff_die_hard",
-            "default_value": false
-        },
-        {
-            "type": "toggle",
-            "id": "hudlist_not_ignore_buff_overkill",
-            "title": "menu_overkill",
-            "description": "sydneyhud_hudlist_not_ignore_buff_overkill_desc",
-            "callback": "callback_not_ignore_buff_overkill",
-            "value": "hudlist_not_ignore_buff_overkill",
-            "default_value": false
-        },
-        {
-            "type": "toggle",
-            "id": "hudlist_not_ignore_buff_shock_and_awe",
-            "title": "menu_iron_man_beta",
-            "description": "sydneyhud_hudlist_not_ignore_buff_shock_and_awe_desc",
-            "callback": "callback_not_ignore_buff_shock_and_awe",
-            "value": "hudlist_not_ignore_buff_shock_and_awe",
+            "description": "sydneyhud_hudlist_ignore_buff_die_hard_desc",
+            "callback": "callback_ignore_buff_die_hard",
+            "value": "hudlist_ignore_buff_die_hard",
             "default_value": true
         },
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_underdog",
-            "title": "menu_underdog_beta",
-            "description": "sydneyhud_hudlist_not_ignore_buff_underdog_desc",
-            "callback": "callback_not_ignore_buff_underdog",
-            "value": "hudlist_not_ignore_buff_underdog",
+            "id": "hudlist_ignore_buff_overkill",
+            "title": "menu_overkill",
+            "description": "sydneyhud_hudlist_ignore_buff_overkill_desc",
+            "callback": "callback_ignore_buff_overkill",
+            "value": "hudlist_ignore_buff_overkill",
+            "default_value": true
+        },
+        {
+            "type": "toggle",
+            "id": "hudlist_ignore_buff_shock_and_awe",
+            "title": "menu_iron_man_beta",
+            "description": "sydneyhud_hudlist_ignore_buff_shock_and_awe_desc",
+            "callback": "callback_ignore_buff_shock_and_awe",
+            "value": "hudlist_ignore_buff_shock_and_awe",
             "default_value": false
+        },
+        {
+            "type": "toggle",
+            "id": "hudlist_ignore_buff_underdog",
+            "title": "menu_underdog_beta",
+            "description": "sydneyhud_hudlist_ignore_buff_underdog_desc",
+            "callback": "callback_ignore_buff_underdog",
+            "value": "hudlist_ignore_buff_underdog",
+            "default_value": true
         }
     ]
 }

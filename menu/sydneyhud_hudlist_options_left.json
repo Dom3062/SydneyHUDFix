@@ -32,21 +32,21 @@
             ],
             "callback": "callback_show_ammo_bags",
             "value": "hudlist_show_ammo_bags",
-            "default_value": 2
+            "default_value": 3
         },
         {
             "type": "multiple_choice",
-            "id": "hudlist_show_doctor_bags",
-            "title": "sydneyhud_hudlist_show_doctor_bags",
-            "description": "sydneyhud_hudlist_show_doctor_bags_desc",
+            "id": "hudlist_show_doc_bags",
+            "title": "sydneyhud_hudlist_show_doc_bags",
+            "description": "sydneyhud_hudlist_show_doc_bags_desc",
             "items" : [
                 "sydneyhud_hudlist_off",
                 "sydneyhud_hudlist_all",
                 "sydneyhud_hudlist_aggregate"
             ],
-            "callback": "callback_show_doctor_bags",
-            "value": "hudlist_show_doctor_bags",
-            "default_value": 2
+            "callback": "callback_show_doc_bags",
+            "value": "hudlist_show_doc_bags",
+            "default_value": 3
         },
         {
             "type": "multiple_choice",
@@ -60,7 +60,7 @@
             ],
             "callback": "callback_show_body_bags",
             "value": "hudlist_show_body_bags",
-            "default_value": 2
+            "default_value": 3
         },
         {
             "type": "multiple_choice",
@@ -74,7 +74,7 @@
             ],
             "callback": "callback_show_grenade_crates",
             "value": "hudlist_show_grenade_crates",
-            "default_value": 2
+            "default_value": 3
         },
         {
             "type": "multiple_choice",
@@ -88,7 +88,7 @@
             ],
             "callback": "callback_show_sentries",
             "value": "hudlist_show_sentries",
-            "default_value": 2
+            "default_value": 3
         },
         {
             "type": "multiple_choice",
@@ -102,7 +102,7 @@
             ],
             "callback": "callback_show_minions",
             "value": "hudlist_show_minions",
-            "default_value": 2
+            "default_value": 3
         },
         {
             "type": "toggle",

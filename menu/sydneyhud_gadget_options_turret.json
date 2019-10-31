@@ -25,7 +25,7 @@
             "description": "laser_color_laser_color",
             "callback": "callback_laser_color_r_turret",
             "value": "laser_color_r_turret",
-            "max": 1,
+            "max": 2.55,
             "min": 0,
             "step": 0.01,
             "default_value": 0
@@ -37,10 +37,10 @@
             "description": "laser_color_laser_color",
             "callback": "callback_laser_color_g_turret",
             "value": "laser_color_g_turret",
-            "max": 1,
+            "max": 2.55,
             "min": 0,
             "step": 0.01,
-            "default_value": 1
+            "default_value": 2.55
         },
         {
             "type": "slider",
@@ -49,7 +49,7 @@
             "description": "laser_color_laser_color",
             "callback": "callback_laser_color_b_turret",
             "value": "laser_color_b_turret",
-            "max": 1,
+            "max": 2.55,
             "min": 0,
             "step": 0.01,
             "default_value": 0
@@ -74,10 +74,10 @@
             "description": "laser_color_ray_alpha_desc",
             "callback": "callback_laser_color_a_turret",
             "value": "laser_color_a_turret",
-            "max": 1,
+            "max": 2.55,
             "min": 0,
             "step": 0.01,
-            "default_value": 0.5
+            "default_value": 0.38
         },
         {
             "type": "slider",
@@ -86,10 +86,10 @@
             "description": "laser_glow_desc",
             "callback": "callback_laser_glow_turret",
             "value": "laser_glow_turret",
-            "max": 1,
+            "max": 2.55,
             "min": 0,
             "step": 0.01,
-            "default_value": 1
+            "default_value": 2.55
         },
         {
             "type": "slider",
@@ -127,7 +127,7 @@
             "description": "laser_color_laser_color",
             "callback": "callback_laser_color_r_turretr",
             "value": "laser_color_r_turretr",
-            "max": 1,
+            "max": 2.55,
             "min": 0,
             "step": 0.01,
             "default_value": 0
@@ -139,10 +139,10 @@
             "description": "laser_color_laser_color",
             "callback": "callback_laser_color_g_turretr",
             "value": "laser_color_g_turretr",
-            "max": 1,
+            "max": 2.55,
             "min": 0,
             "step": 0.01,
-            "default_value": 1
+            "default_value": 2.55
         },
         {
             "type": "slider",
@@ -151,7 +151,7 @@
             "description": "laser_color_laser_color",
             "callback": "callback_laser_color_b_turretr",
             "value": "laser_color_b_turretr",
-            "max": 1,
+            "max": 2.55,
             "min": 0,
             "step": 0.01,
             "default_value": 0
@@ -176,10 +176,10 @@
             "description": "laser_color_ray_alpha_desc",
             "callback": "callback_laser_color_a_turretr",
             "value": "laser_color_a_turretr",
-            "max": 1,
+            "max": 2.55,
             "min": 0,
             "step": 0.01,
-            "default_value": 0.5
+            "default_value": 0.38
         },
         {
             "type": "slider",
@@ -188,10 +188,10 @@
             "description": "laser_glow_desc",
             "callback": "callback_laser_glow_turretr",
             "value": "laser_glow_turretr",
-            "max": 1,
+            "max": 2.55,
             "min": 0,
             "step": 0.01,
-            "default_value": 1
+            "default_value": 2.55
         },
         {
             "type": "slider",
@@ -229,7 +229,7 @@
             "description": "laser_color_laser_color",
             "callback": "callback_laser_color_r_turretm",
             "value": "laser_color_r_turretm",
-            "max": 1,
+            "max": 2.55,
             "min": 0,
             "step": 0.01,
             "default_value": 0
@@ -241,10 +241,10 @@
             "description": "laser_color_laser_color",
             "callback": "callback_laser_color_g_turretm",
             "value": "laser_color_g_turretm",
-            "max": 1,
+            "max": 2.55,
             "min": 0,
             "step": 0.01,
-            "default_value": 1
+            "default_value": 2.55
         },
         {
             "type": "slider",
@@ -253,7 +253,7 @@
             "description": "laser_color_laser_color",
             "callback": "callback_laser_color_b_turretm",
             "value": "laser_color_b_turretm",
-            "max": 1,
+            "max": 2.55,
             "min": 0,
             "step": 0.01,
             "default_value": 0
@@ -278,10 +278,10 @@
             "description": "laser_color_ray_alpha_desc",
             "callback": "callback_laser_color_a_turretm",
             "value": "laser_color_a_turretm",
-            "max": 1,
+            "max": 2.55,
             "min": 0,
             "step": 0.01,
-            "default_value": 0.5
+            "default_value": 0.38
         },
         {
             "type": "slider",
@@ -290,10 +290,10 @@
             "description": "laser_glow_desc",
             "callback": "callback_laser_glow_turretm",
             "value": "laser_glow_turretm",
-            "max": 1,
+            "max": 2.55,
             "min": 0,
             "step": 0.01,
-            "default_value": 1
+            "default_value": 2.55
         },
         {
             "type": "slider",

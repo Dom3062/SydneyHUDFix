@@ -37,39 +37,39 @@ end
 
 HUDListManager.ListOptions = HUDListManager.ListOptions or {
 	--General settings
-	right_list_y = SydneyHUD:GetOption("center_assault_banner") and 0 or 50,	--Margin from top for the right list
-	right_list_scale = SydneyHUD:GetModOption("hudlist", "right_list_scale"),	--Size scale of right list
-	left_list_y = 40,	--Margin from top for the left list
-	left_list_scale = SydneyHUD:GetModOption("hudlist", "left_list_scale"),	--Size scale of left list
-	buff_list_y = SydneyHUD:GetModOption("hudlist", "buff_list_y"),	--Margin from bottom for the buff list
-	buff_list_scale = SydneyHUD:GetModOption("hudlist", "buff_list_scale"),	--Size scale of buff list
+	right_list_y = SydneyHUD:GetOption("center_assault_banner") and 0 or 50, --Margin from top for the right list
+	right_list_scale = SydneyHUD:GetModOption("hudlist", "right_list_scale"), --Size scale of right list
+	left_list_y = 40, --Margin from top for the left list
+	left_list_scale = SydneyHUD:GetModOption("hudlist", "left_list_scale"), --Size scale of left list
+	buff_list_y = SydneyHUD:GetModOption("hudlist", "buff_list_y"), --Margin from bottom for the buff list
+	buff_list_scale = SydneyHUD:GetModOption("hudlist", "buff_list_scale"), --Size scale of buff list
 
 	--Left side list
 	show_timers = SydneyHUD:GetModOption("hudlist", "show_timers"),	--Drills, time locks, hacking etc.
-	show_ammo_bags = SydneyHUD:GetModOption("hudlist", "show_ammo_bags"),	--Show ammo bags/shelves and remaining amount
-	show_doc_bags = SydneyHUD:GetModOption("hudlist", "show_doctor_bags"),	--Show doc bags/cabinets and remaining charges
-	show_body_bags = SydneyHUD:GetModOption("hudlist", "show_body_bags"),	--Show body bags and remaining amount. Auto-disabled if heist goes loud
-	show_grenade_crates = SydneyHUD:GetModOption("hudlist", "show_grenade_crates"),	--Show grenade crates with remaining amount
-	show_sentries = SydneyHUD:GetModOption("hudlist", "show_sentries"),	--Deployable sentries, color-coded by owner
-	show_ecms = SydneyHUD:GetModOption("hudlist", "show_ecms"),	--Active ECMs with time remaining
-	show_ecm_retrigger = SydneyHUD:GetModOption("hudlist", "show_ecm_retrigger"),	--Countdown for player owned ECM feedback retrigger delay
-	show_minions = SydneyHUD:GetModOption("hudlist", "show_minions"),	--Converted enemies, type and health
-	show_pagers = SydneyHUD:GetModOption("hudlist", "show_pagers"),	--Show currently active pagers
-	show_tape_loop = SydneyHUD:GetModOption("hudlist", "show_tape_loop"),	--Show active tape loop duration
+	show_ammo_bags = SydneyHUD:GetModOption("hudlist", "show_ammo_bags") - 1, --Show ammo bags/shelves and remaining amount
+	show_doc_bags = SydneyHUD:GetModOption("hudlist", "show_doc_bags") - 1, --Show doc bags/cabinets and remaining charges
+	show_body_bags = SydneyHUD:GetModOption("hudlist", "show_body_bags") - 1, --Show body bags and remaining amount. Auto-disabled if heist goes loud
+	show_grenade_crates = SydneyHUD:GetModOption("hudlist", "show_grenade_crates") - 1,	--Show grenade crates with remaining amount
+	show_sentries = SydneyHUD:GetModOption("hudlist", "show_sentries") - 1, --Deployable sentries, color-coded by owner
+	show_ecms = SydneyHUD:GetModOption("hudlist", "show_ecms"), --Active ECMs with time remaining
+	show_ecm_retrigger = SydneyHUD:GetModOption("hudlist", "show_ecm_retrigger"), --Countdown for player owned ECM feedback retrigger delay
+	show_minions = SydneyHUD:GetModOption("hudlist", "show_minions") - 1, --Converted enemies, type and health
+	show_pagers = SydneyHUD:GetModOption("hudlist", "show_pagers"), --Show currently active pagers
+	show_tape_loop = SydneyHUD:GetModOption("hudlist", "show_tape_loop"), --Show active tape loop duration
 
 	--Right side list
-	show_enemies = SydneyHUD:GetModOption("hudlist", "show_enemies"),		--Currently spawned enemies
-	show_turrets = SydneyHUD:GetModOption("hudlist", "show_turrets"),	--Show active SWAT turrets
-	show_civilians = SydneyHUD:GetModOption("hudlist", "show_civilians"),	--Currently spawned, untied civs
-	show_hostages = SydneyHUD:GetModOption("hudlist", "show_hostages"),	--Currently tied civilian and dominated cops
-	show_minion_count = SydneyHUD:GetModOption("hudlist", "show_minion_count"),	--Current number of jokered enemies
-	show_pager_count = SydneyHUD:GetModOption("hudlist", "show_pager_count"),	--Show number of triggered pagers (only counts pagers triggered while you were present). Auto-disabled if heist goes loud
-	show_camera_count = SydneyHUD:GetModOption("hudlist", "show_camera_count"),	--Show number of active cameras on the map. Auto-disabled if heist goes loud (experimental, has some issues)
-	show_body_count = SydneyHUD:GetModOption("hudlist", "show_body_count"),		--Show number of corpses/body bags on map. Auto-disabled if heist goes loud
-	show_loot = SydneyHUD:GetModOption("hudlist", "show_loot"),	--Show spawned and active loot bags/piles (may not be shown if certain mission parameters has not been met)
+	show_enemies = SydneyHUD:GetModOption("hudlist", "show_enemies") - 1, --Currently spawned enemies
+	show_turrets = SydneyHUD:GetModOption("hudlist", "show_turrets"), --Show active SWAT turrets
+	show_civilians = SydneyHUD:GetModOption("hudlist", "show_civilians"), --Currently spawned, untied civs
+	show_hostages = SydneyHUD:GetModOption("hudlist", "show_hostages") - 1, --Currently tied civilian and dominated cops
+	show_minion_count = SydneyHUD:GetModOption("hudlist", "show_minion_count"), --Current number of jokered enemies
+	show_pager_count = SydneyHUD:GetModOption("hudlist", "show_pager_count"), --Show number of triggered pagers (only counts pagers triggered while you were present). Auto-disabled if heist goes loud
+	show_camera_count = SydneyHUD:GetModOption("hudlist", "show_camera_count"), --Show number of active cameras on the map. Auto-disabled if heist goes loud (experimental, has some issues)
+	show_body_count = SydneyHUD:GetModOption("hudlist", "show_body_count"),	 --Show number of corpses/body bags on map. Auto-disabled if heist goes loud
+	show_loot = SydneyHUD:GetModOption("hudlist", "show_loot") - 1,	--Show spawned and active loot bags/piles (may not be shown if certain mission parameters has not been met)
 	separate_bagged_loot = SydneyHUD:GetModOption("hudlist", "separate_bagged_loot"),	 --Show bagged/unbagged loot as separate values
 	show_special_pickups = SydneyHUD:GetModOption("hudlist", "show_special_pickups"),	--Show number of special equipment/items
-    ignore_special_pickups = {	--Exclude specific special pickups from showing
+    ignore_special_pickups = { --Exclude specific special pickups from showing
         crowbar = SydneyHUD:GetHUDListItemOption("crowbar"),
         keycard = SydneyHUD:GetHUDListItemOption("keycard"),
         courier = SydneyHUD:GetHUDListItemOption("courier"),
@@ -104,7 +104,7 @@ HUDListManager.ListOptions = HUDListManager.ListOptions or {
         melee_stack_damage = SydneyHUD:GetHUDListBuffOption("overdog_melee_damage"),
         messiah = SydneyHUD:GetHUDListBuffOption("messiah"),
         muscle_regen = SydneyHUD:GetHUDListBuffOption("800_pound_gorilla"),
-        overdog = SydneyHUD:GetHUDListBuffOption("overdog_melee_damage"),
+        overdog = SydneyHUD:GetHUDListBuffOption("overdog_damage_reduction"),
         overkill = SydneyHUD:GetHUDListBuffOption("overkill"),
         pain_killer = SydneyHUD:GetHUDListBuffOption("painkillers"),	--true,
         partner_in_crime = SydneyHUD:GetHUDListBuffOption("partner_in_crime"),
@@ -1428,6 +1428,36 @@ function HUDListManager:_player_action_event(event, id, data)
 			item:set_active(activate)
 		else
 			printf("(%.2f) HUDListManager:_player_action_event(%s, %s): No map entry for item", Application:time(), event, id)
+		end
+	end
+end
+
+function HUDListManager:change_ignore_buff_setting(buff, value)
+	if HUDListManager.ListOptions.ignore_buffs[buff] ~= value then
+		HUDListManager.ListOptions.ignore_buffs[buff] = value
+		
+		if managers.hudlist then
+			managers.hudlist:_set_ignored_buff(buff, value)
+		end
+	end
+end
+
+function HUDListManager:change_ignore_player_action_setting(action, value)
+	if HUDListManager.ListOptions.ignore_player_actions[action] ~= value then
+		HUDListManager.ListOptions.ignore_player_actions[action] = value
+		
+		if managers.hudlist then
+			managers.hudlist:_set_ignored_player_action(action, value)
+		end
+	end
+end
+
+function HUDListManager:change_ignore_special_pickup_setting(pickup, value)
+	if HUDListManager.ListOptions.ignore_special_pickups[pickup] ~= value then
+		HUDListManager.ListOptions.ignore_special_pickups[pickup] = value
+		
+		if managers.hudlist then
+			managers.hudlist:_set_ignored_special_pickup(pickup, value)
 		end
 	end
 end

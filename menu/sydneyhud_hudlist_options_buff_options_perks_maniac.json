@@ -5,11 +5,11 @@
     "items": [
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_excitement",
+            "id": "hudlist_ignore_buff_excitement",
             "title": "menu_deck14_1",
-            "callback": "callback_not_ignore_buff_excitement",
-            "value": "hudlist_not_ignore_buff_excitement",
-            "default_value": true
+            "callback": "callback_ignore_buff_excitement",
+            "value": "hudlist_ignore_buff_excitement",
+            "default_value": false
         }
     ]
 }

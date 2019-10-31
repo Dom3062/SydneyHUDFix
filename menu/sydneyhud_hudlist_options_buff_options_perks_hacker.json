@@ -5,19 +5,19 @@
     "items": [
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_pocket_jammer_cooldown",
-            "title": "sydneyhud_hudlist_not_ignore_buff_pocket_jammer_cooldown",
-            "callback": "callback_not_ignore_buff_pocket_jammer_cooldown",
-            "value": "hudlist_not_ignore_buff_pocket_jammer_cooldown",
-            "default_value": true
+            "id": "hudlist_ignore_buff_pocket_jammer_cooldown",
+            "title": "sydneyhud_hudlist_ignore_buff_pocket_jammer_cooldown",
+            "callback": "callback_ignore_buff_pocket_jammer_cooldown",
+            "value": "hudlist_ignore_buff_pocket_jammer_cooldown",
+            "default_value": false
         },
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_kluge",
+            "id": "hudlist_ignore_buff_kluge",
             "title": "menu_deck21_7",
-            "callback": "callback_not_ignore_buff_kluge",
-            "value": "hudlist_not_ignore_buff_kluge",
-            "default_value": true
+            "callback": "callback_ignore_buff_kluge",
+            "value": "hudlist_ignore_buff_kluge",
+            "default_value": false
         }
     ]
 }

@@ -5,12 +5,12 @@
     "items": [
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_tooth_and_claw",
+            "id": "hudlist_ignore_buff_tooth_and_claw",
             "title": "menu_deck5_9",
-            "description": "sydneyhud_hudlist_not_ignore_buff_tooth_and_claw_desc",
-            "callback": "callback_not_ignore_buff_tooth_and_claw",
-            "value": "hudlist_not_ignore_buff_tooth_and_claw",
-            "default_value": false
+            "description": "sydneyhud_hudlist_ignore_buff_tooth_and_claw_desc",
+            "callback": "callback_ignore_buff_tooth_and_claw",
+            "value": "hudlist_ignore_buff_tooth_and_claw",
+            "default_value": true
         }
     ]
 }

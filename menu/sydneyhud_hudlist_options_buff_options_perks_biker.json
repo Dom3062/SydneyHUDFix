@@ -5,11 +5,11 @@
     "items": [
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_prospect",
+            "id": "hudlist_ignore_buff_prospect",
             "title": "menu_deck16_1",
-            "callback": "callback_not_ignore_buff_prospect",
-            "value": "hudlist_not_ignore_buff_prospect",
-            "default_value": true
+            "callback": "callback_ignore_buff_prospect",
+            "value": "hudlist_ignore_buff_prospect",
+            "default_value": false
         }
     ]
 }

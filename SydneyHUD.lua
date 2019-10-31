@@ -35,6 +35,10 @@ if not SydneyHUD.setup then
     SydneyHUD.error = "[SydneyHUD Error] "
     SydneyHUD.dev = "[SydneyHUD Dev] "
 
+    SydneyHUD.SaveDataVer = 2
+
+    SydneyHUD.ModVersion = nil -- Used for caching mod version
+
     SydneyHUD.EasterEgg = 
     {
         FSS =
@@ -72,7 +76,7 @@ if not SydneyHUD.setup then
         "sydneyhud_hudlist_options",
         "sydneyhud_hudlist_options_left",
         "sydneyhud_hudlist_options_right",
-        "sydneyhud_hudlist_options_right_not_ignore",
+        "sydneyhud_hudlist_options_right_ignore",
         "sydneyhud_hudlist_options_buff",
         "sydneyhud_hudlist_options_buff_options",
         "sydneyhud_hudlist_options_buff_options_buff",
@@ -227,6 +231,8 @@ if not SydneyHUD.setup then
     function SydneyHUD:Save()
         local file = io.open(self._data_path, "w+")
         if file then
+            self._data.SaveDataVer = self.SaveDataVer
+            self._data.SydneyHUDVersion = self:GetVersion()
             file:write(json.encode(self._data))
             file:close()
         end
@@ -239,12 +245,18 @@ if not SydneyHUD.setup then
         self:LoadDefaults()
         local file = io.open(self._data_path, "r")
         if file then
-            for k, v in pairs(json.decode(file:read("*all"))) do
-                if self._data[k] ~= nil then
-                    self._data[k] = v
-                end
-            end
+            local table = json.decode(file:read("*all")) or {}
             file:close()
+            if table.SaveDataVer and table.SaveDataVer == self.SaveDataVer then
+                for k, v in pairs(table) do
+                    if self._data[k] ~= nil then
+                        self._data[k] = v
+                    end
+                end
+            else
+                self.SaveDataNotCompatible = true
+                self:Save()
+            end
         end
         self:CheckPoco()
     end
@@ -258,15 +270,15 @@ if not SydneyHUD.setup then
     end
 
     function SydneyHUD:GetHUDListItemOption(item_name)
-        return not self:GetOption("hudlist_not_ignore_item_" .. item_name)
+        return self:GetOption("hudlist_ignore_item_" .. item_name)
     end
 
     function SydneyHUD:GetHUDListBuffOption(buff_name)
-        return not self:GetOption("hudlist_not_ignore_buff_" .. buff_name)
+        return self:GetOption("hudlist_ignore_buff_" .. buff_name)
     end
 
     function SydneyHUD:GetHUDListPlayerActionOption(action_name)
-        return not self:GetOption("hudlist_not_ignore_player_action_" .. action_name)
+        return self:GetOption("hudlist_ignore_player_action_" .. action_name)
     end
 
     function SydneyHUD:LoadDefaults()
@@ -351,12 +363,17 @@ if not SydneyHUD.setup then
     end
 
     function SydneyHUD:GetVersion()
+        if self.ModVersion then -- Caching
+            return self.ModVersion
+        end
         for _, mod in ipairs(BLT.Mods:Mods()) do
             if mod:GetName() == "SydneyHUD" then -- I don't understand, why BLT is checking every mod it's identifier (mod folder name) and not mod name defined in mod.txt
-                return tostring(mod:GetVersion() or "(n/a)")
+                self.ModVersion = tostring(mod:GetVersion() or "(n/a)")
+                return self.ModVersion
             end
         end
-        return "(n/a)"
+        self.ModVersion = "(n/a)"
+        return self.ModVersion
     end
 
     function SydneyHUD:SendChatMessage(name, message, isfeed, color)
@@ -421,7 +438,7 @@ if not SydneyHUD.setup then
 
             SydneyHUD._down_count[peer_id] = (SydneyHUD._down_count[peer_id] or 0) + 1
             local is_feed
-            
+
             if SydneyHUD._down_count[peer_id] == warn_down and SydneyHUD:GetOption("critical_down_warning_chat_info") then
                 local message = peer:name() .. " was downed " .. tostring(SydneyHUD._down_count[peer_id]) .. " times"
                 is_feed = SydneyHUD:GetOption("critical_down_warning_chat_info_feed")
@@ -587,7 +604,7 @@ if not SydneyHUD.setup then
             return Color.white
         end
         extension = extension or ""
-        return Color(1, SydneyHUD._data[color .. "_r" .. extension], SydneyHUD._data[color .. "_g" .. extension], SydneyHUD._data[color .. "_b" .. extension]) -- Already converted from 255 format
+        return Color(255, SydneyHUD._data[color .. "_r" .. extension] * 100, SydneyHUD._data[color .. "_g" .. extension] * 100, SydneyHUD._data[color .. "_b" .. extension] * 100) / 255
     end
 
     function SydneyHUD:IsOr(string, ...)

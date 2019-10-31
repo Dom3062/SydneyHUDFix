@@ -5,12 +5,12 @@
     "items": [
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_liquid_armor",
+            "id": "hudlist_ignore_buff_liquid_armor",
             "title": "menu_deck3_9",
-            "description": "sydneyhud_hudlist_not_ignore_buff_liquid_armor_desc",
-            "callback": "callback_not_ignore_buff_liquid_armor",
-            "value": "hudlist_not_ignore_buff_liquid_armor",
-            "default_value": true
+            "description": "sydneyhud_hudlist_ignore_buff_liquid_armor_desc",
+            "callback": "callback_ignore_buff_liquid_armor",
+            "value": "hudlist_ignore_buff_liquid_armor",
+            "default_value": false
         }
     ]
 }

@@ -5,38 +5,38 @@
     "items": [
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_smoke_grenade",
-            "title": "sydneyhud_hudlist_not_ignore_buff_smoke_grenade",
-            "description": "sydneyhud_hudlist_not_ignore_buff_smoke_grenade_desc",
-            "callback": "callback_not_ignore_buff_smoke_grenade",
-            "value": "hudlist_not_ignore_buff_smoke_grenade",
-            "default_value": false
-        },
-        {
-            "type": "toggle",
-            "id": "hudlist_not_ignore_buff_smoke_screen",
-            "title": "sydneyhud_hudlist_not_ignore_buff_smoke_screen",
-            "description": "sydneyhud_hudlist_not_ignore_buff_smoke_screen_desc",
-            "callback": "callback_not_ignore_buff_smoke_screen",
-            "value": "hudlist_not_ignore_buff_smoke_screen",
+            "id": "hudlist_ignore_buff_smoke_grenade",
+            "title": "sydneyhud_hudlist_ignore_buff_smoke_grenade",
+            "description": "sydneyhud_hudlist_ignore_buff_smoke_grenade_desc",
+            "callback": "callback_ignore_buff_smoke_grenade",
+            "value": "hudlist_ignore_buff_smoke_grenade",
             "default_value": true
         },
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_twitch",
+            "id": "hudlist_ignore_buff_smoke_screen",
+            "title": "sydneyhud_hudlist_ignore_buff_smoke_screen",
+            "description": "sydneyhud_hudlist_ignore_buff_smoke_screen_desc",
+            "callback": "callback_ignore_buff_smoke_screen",
+            "value": "hudlist_ignore_buff_smoke_screen",
+            "default_value": false
+        },
+        {
+            "type": "toggle",
+            "id": "hudlist_ignore_buff_twitch",
             "title": "menu_deck18_3",
-            "callback": "callback_not_ignore_buff_twitch",
-            "value": "hudlist_not_ignore_buff_twitch",
-            "default_value": false
+            "callback": "callback_ignore_buff_twitch",
+            "value": "hudlist_ignore_buff_twitch",
+            "default_value": true
         },
         {
             "type": "toggle",
-            "id": "hudlist_not_ignore_buff_twitch_cooldown",
-            "title": "sydneyhud_hudlist_not_ignore_buff_twitch_cooldown",
-            "description": "sydneyhud_hudlist_not_ignore_buff_twitch_cooldown_desc",
-            "callback": "callback_not_ignore_buff_twitch_cooldown",
-            "value": "hudlist_not_ignore_buff_twitch_cooldown",
-            "default_value": true
+            "id": "hudlist_ignore_buff_twitch_cooldown",
+            "title": "sydneyhud_hudlist_ignore_buff_twitch_cooldown",
+            "description": "sydneyhud_hudlist_ignore_buff_twitch_cooldown_desc",
+            "callback": "callback_ignore_buff_twitch_cooldown",
+            "value": "hudlist_ignore_buff_twitch_cooldown",
+            "default_value": false
         }
     ]
 }

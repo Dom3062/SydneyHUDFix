@@ -22,10 +22,10 @@
             "description": "",
             "callback": "callback_enemy_color_r",
             "value": "enemy_color_r",
-            "max": 1,
+            "max": 2.55,
             "min": 0,
             "step": 0.01,
-            "default_value": 1
+            "default_value": 2.55
         },
         {
             "type": "slider",
@@ -34,10 +34,10 @@
             "description": "",
             "callback": "callback_enemy_color_g",
             "value": "enemy_color_g",
-            "max": 1,
+            "max": 2.55,
             "min": 0,
             "step": 0.01,
-            "default_value": 1
+            "default_value": 0
         },
         {
             "type": "slider",
@@ -46,10 +46,10 @@
             "description": "",
             "callback": "callback_enemy_color_b",
             "value": "enemy_color_b",
-            "max": 1,
+            "max": 2.55,
             "min": 0,
             "step": 0.01,
-            "default_value": 1
+            "default_value": 0
         }
     ]
 }
