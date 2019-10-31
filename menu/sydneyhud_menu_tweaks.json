@@ -47,11 +47,7 @@
         },
         {
             "type": "divider",
-            "size": 16
-        },
-        {
-            "type": "divider",
-            "size": 16
+            "size": 32
         },
         {
             "type": "toggle",
