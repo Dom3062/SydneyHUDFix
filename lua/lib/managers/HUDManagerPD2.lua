@@ -1,7 +1,3 @@
-if SydneyHUD:GetOption("hudlist_enable") then
-    dofile(SydneyHUD._lua_path .. "lib/managers/HUDList.lua")
-end
-
 local last_removed_time = 0
 local init_original = HUDManager.init
 function HUDManager:init(...)
@@ -318,11 +314,81 @@ function HUDManager:SydneyHUDUpdate()
             panel:SydneyHUDUpdate()
         end
     end
+    if self.UpdateHUDListSettings then
+        --self:UpdateHUDListSettings()
+    end
 end
 
-if not SydneyHUD:GetOption("hudlist_enable") then
+
+if not SydneyHUD:GetOption("hudlist_enabled") then
     return
 end
+
+function HUDManager:UpdateHUDListSettings()
+    local options = HUDListManager.ListOptions
+    local avoid = --not changeable by the player
+    {
+        ["right_list_y"] = true,
+        ["left_list_y"] = true
+    }
+    local minus_one = --multichoice
+    {
+        ["show_ammo_bags"] = true,
+        ["show_doc_bags"] = true,
+        ["show_body_bags"] = true,
+        ["show_grenade_crates"] = true,
+        ["show_sentries"] = true,
+        ["show_minions"] = true,
+        ["show_enemies"] = true,
+        ["show_hostages"] = true,
+        ["show_loot"] = true
+    }
+    local k2
+    for k, _ in pairs(options) do
+        if type(options[k]) ~= "table" and not avoid[k] then
+            if minus_one[k] then
+                managers.hudlist:change_setting(k, SydneyHUD:GetModOption("hudlisk", k) - 1)
+            else
+                managers.hudlist:change_setting(k, SydneyHUD:GetModOption("hudlist", k))
+            end
+            log(SydneyHUD.dev .. "k: " .. k)
+        else
+            log(SydneyHUD.dev .. "k is table; skipping")
+        end
+    end
+    for k, _ in pairs(options.ignore_special_pickups) do
+        managers.hudlist:change_ignore_special_pickup_setting(k, SydneyHUD:GetHUDListItemOption(k))
+    end
+    local tbl =
+    {
+        ["aggressive_reload_aced"] = "aggressive_reload",
+        ["armor_break_invulnerable"] = "armor_break_invulnerability",
+        ["biker"] = "prospect",
+        ["chico_injector"] = "injector",
+        ["close_contact"] = "close_contact_no_talk",
+        ["grinder"] = "histamine",
+        ["maniac"] = "excitement",
+        ["melee_stack_damage"] = "overdog_melee_damage",
+        ["muscle_regen"] = "800_pound_gorilla",
+        ["overdog"] = "overdog_damage_reduction",
+        ["pain_killers"] = "painkillers",
+        ["running_from_death"] = "running_from_death_basic",
+        ["sicario_dodge"] = "twitch",
+
+        -- Custom buff
+        ["crew_inspire"] = "ai_inspire_cooldown"
+    }
+    for k, _ in pairs(options.ignore_buffs) do
+        k2 = tbl[k] or k
+        managers.hudlist:change_ignore_buff_setting(k, SydneyHUD:GetHUDListBuffOption(k2))
+    end
+    
+    for k, _ in pairs(options.ignore_player_actions) do
+        managers.hudlist:change_ignore_player_action_setting(k, SydneyHUD:GetHUDListPlayerActionOption(k))
+    end
+end
+
+dofile(SydneyHUD._lua_path .. "lib/managers/HUDList.lua")
 
 local _setup_player_info_hud_pd2_original = HUDManager._setup_player_info_hud_pd2
 function HUDManager:_setup_player_info_hud_pd2()
