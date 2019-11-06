@@ -59,7 +59,7 @@ function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
         self._hud_panel:child("casing_panel"):child("icon_casingbox"):set_visible(false)
         self._hud_panel:child("point_of_no_return_panel"):set_right(self._hud_panel:w() / 2 + 150)
         self._hud_panel:child("point_of_no_return_panel"):child("icon_noreturnbox"):set_visible(false)
-        self._hud_panel:child("buffs_panel"):set_x(self._hud_panel:child("assault_panel"):right())
+        self._hud_panel:child("buffs_panel"):set_x(self._hud_panel:child("assault_panel"):right() - 20)
         self._vip_bg_box:set_x(0) -- left align this "buff"
         self._last_assault_timer_size = 0
         self._assault_timer = HUDHeistTimer:new({
