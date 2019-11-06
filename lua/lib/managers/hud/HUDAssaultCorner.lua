@@ -3,6 +3,7 @@ function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
     init_original(self, hud, full_hud, tweak_hud)
     self.center_assault_banner = SydneyHUD:GetOption("center_assault_banner")
     self.hudlist_enemy = SydneyHUD:GetModOption("hudlist", "show_enemies")
+    self.hudlist_enabled = SydneyHUD:GetModOption("hudlist", "enabled")
     if not BAI then -- Initialize these variables when BAI is not installed or running
         self._assault_endless_color = Color.red
         self._state_control_color = Color.white
@@ -48,7 +49,7 @@ function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
             ["fade"] = "Fade"
         }
     end
-    if self._hud_panel:child("hostages_panel") then
+    if self._hud_panel:child("hostages_panel") and self.hudlist_enabled then
         self:_hide_hostages()
     end
     if self.center_assault_banner then
@@ -84,7 +85,7 @@ function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
         self._casing_timer._timer_text:set_align("left")
         self._casing_timer._timer_text:set_vertical("center")
         self._casing_timer._timer_text:set_color(Color.white:with_alpha(0.9))
-        if managers.skirmish and managers.skirmish:is_skirmish() and SydneyHUD:GetModOption("hudlist", "show_enemies") == 1 and self.center_assault_banner then
+        if managers.skirmish and managers.skirmish:is_skirmish() and self.hudlist_enemy == 1 and self.center_assault_banner then
             if self._hud_panel:child("wave_panel") then
                 self._hud_panel:remove(self._hud_panel:child("wave_panel"))
             end
@@ -189,13 +190,9 @@ function HUDAssaultCorner:sync_set_assault_mode(mode)
     old_sync_set_assault_mode(self, mode)
     self._assault_vip = mode == "phalanx"
     if SydneyHUD:GetOption("show_assault_states") and mode ~= "phalanx" and self.is_host then
-        self:UpdateAssaultState("fade") -- When Captain is defeated, Assault state is automatically set to Fade state
+        self:UpdateAssaultState("fade") -- When Captain is defeated, automatically set Assault state to Fade state
     end
     self:SetTimeLeft(5)
-end
-
-function HUDAssaultCorner:_show_hostages(...)
-    return
 end
 
 function HUDAssaultCorner:SetTimer()
@@ -526,7 +523,7 @@ function HUDAssaultCorner:UpdateAssaultStateOverride(state)
 end
 
 function HUDAssaultCorner:_set_hostages_offseted(is_offseted)
-    if self.center_assault_banner and self.hudlist_enemy ~= 1 then -- 1 = All enemies
+    if self.center_assault_banner and (self.hudlist_enemy ~= 1 or not self.hudlist_enabled) then -- 1 = All enemies
         return
     end
 
