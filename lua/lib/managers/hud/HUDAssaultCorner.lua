@@ -180,6 +180,11 @@ function HUDAssaultCorner:HUDTimer(visibility)
     end
 end
 
+if SydneyHUD:GetModOption("hudlist", "enabled") then
+    function HUDAssaultCorner:_show_hostages()
+    end
+end
+
 if BAI then -- Halt execution here, because the first four functions have nothing to do with BAI
     log(SydneyHUD.info .. "Execution of HUDAssaultCorner.lua halted because BAI is installed. Using BAI's version of HUDAssaultCorner file.")
     return
