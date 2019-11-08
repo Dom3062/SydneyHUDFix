@@ -793,7 +793,7 @@ Hooks:Add("NetworkReceivedData", "NetworkReceivedData_BAI", function(sender, id,
 
     -- KineticHUD
     if id == "DownCounterStandalone" then
-        managers.hud:SetCompatibleHost()
+        managers.hud._hud_assault_corner:SetCompatibleHost()
     end
     if id == "SyncAssaultPhase" then
         if SydneyHUD:GetOption("show_assault_states") then
