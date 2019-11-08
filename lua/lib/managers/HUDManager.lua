@@ -81,7 +81,8 @@ local CharacterData = {
     ["heavy_swat_sniper"] = "ZEAL SNIPER",
     ["mute_security_undominatable"] = "SOLOMON GARRETT",
     ["captain"] = "BOAT CREW",
-    ["shadow_spooc"] = "ARK GUARDIAN"
+    ["shadow_spooc"] = "ARK GUARDIAN",
+    ["bolivian_indoors_mex"] = "BOLIVIAN SECURITY"
 }
 
 local function FixNames()
@@ -101,7 +102,7 @@ local function FixNames()
         CharacterData["shield"] = "ZEAL SHIELD"
         CharacterData["taser"] = "ZEAL TASER"
     end
-    if SydneyHUD:IsOr(level_id, "kosugi", "pbr", "dark", "des", "bph", "vit") then -- Shadow Raid, Beneath the Mountain, Murky Station, Henry's Rock, Hell's Island, The White House
+    if SydneyHUD:IsOr(level_id, "kosugi", "pbr", "dark", "des", "bph", "vit", "mex", "mex_cooking") then -- Shadow Raid, Beneath the Mountain, Murky Station, Henry's Rock, Hell's Island, The White House, Border Crossing, Border Crystals
         CharacterData["fbi"] = "MURKYWATER LIGHT"
         CharacterData["fbi_swat"] = "MURKYWATER LIGHT"
         CharacterData["city_swat"] = "MURKYWATER"
