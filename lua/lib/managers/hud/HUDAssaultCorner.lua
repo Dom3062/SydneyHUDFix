@@ -10,7 +10,7 @@ function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
         self._state_anticipation_color = Color(255, 186, 204, 28) / 255
         self._state_build_color = Color(255, 255, 255, 0) / 255
         self._state_sustain_color = Color(255, 237, 127, 127) / 255
-        self._state_fade_color = self._state_anticipation_color
+        self._state_fade_color = Color(255, 0, 255, 255) / 255
         self.heists_with_fake_endless_assaults = { "framing_frame_1", "gallery", "watchdogs_2", "bph" } -- Framing Frame Day 1, Art Gallery, Watch Dogs Day 2, Hell's Island
         self._no_endless_assault_override = table.contains(self.heists_with_fake_endless_assaults, Global.game_settings.level_id)
         self.endless_client = false
