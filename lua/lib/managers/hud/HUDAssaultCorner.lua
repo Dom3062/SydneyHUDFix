@@ -224,7 +224,7 @@ function HUDAssaultCorner:SetTimeLeft(time)
 end
 
 function HUDAssaultCorner:GetAssaultTime(sender)
-    if self.is_host and self._assault and not self._assault_endless and not self._assault_vip then
+    if self.is_host and self._assault and not self._assault_endless and not self._assault_vip and sender then
         local tweak = tweak_data.group_ai.besiege.assault
         local gai_state = managers.groupai:state()
         local assault_data = gai_state and gai_state._task_data.assault
@@ -411,41 +411,31 @@ function HUDAssaultCorner:SetEndlessClient(setter, dont_override)
     self.endless_client = setter
 end
 
-if Global.game_settings.level_id == "pbr" then
-    function HUDAssaultCorner:SetNormalAssaultOverride() -- Beneath the Mountain only
-        --[[if self.is_host and self.CompatibleHost then
-            LuaNetworking:SendToPeers("BAI_Message", "NormalAssaultOverride")
-        end]]
-        self:SetImage("assault")
-        self._assault_endless = false
-        if SydneyHUD:GetOption("show_assault_states") then
-            if self.is_host then
-                self:UpdateAssaultStateOverride(managers.groupai:state():GetAssaultState())
-            else
-                if not self.BAIHost then
-                    self:_update_assault_hud_color(self._assault_color)
-                    self:_set_text_list(self:_get_assault_strings())
-                end
-            end
+function HUDAssaultCorner:SetNormalAssaultOverride()
+    if self._assault_vip then
+        return
+    end
+    self:SetImage("assault")
+    self._assault_endless = false
+    if SydneyHUD:GetOption("show_assault_states") then
+        if self.is_host then
+            self:UpdateAssaultStateOverride(managers.groupai:state():GetAssaultState())
         else
-            self:_update_assault_hud_color(self._assault_color)
-            if SydneyHUD:GetOption("enable_enhanced_assault_banner") then
-                self:_set_text_list(self:_get_assault_strings_info())
-                if self.is_client then
-                    LuaNetworking:SendToPeer(1, "BAI_Message", "RequestCurrentAssaultTimeLeft")
-                end
-            else
+            if not self.BAIHost then
+                self:_update_assault_hud_color(self._assault_color)
                 self:_set_text_list(self:_get_assault_strings())
             end
         end
-    end
-
-    local _f_queue_dialog = DialogManager.queue_dialog -- Fix for Beneath the Mountain
-    function DialogManager:queue_dialog(id, ...)
-        if id == "Play_loc_jr1_23" then
-            managers.hud._hud_assault_corner:SetNormalAssaultOverride()
+    else
+        self:_update_assault_hud_color(self._assault_color)
+        if SydneyHUD:GetOption("enable_enhanced_assault_banner") then
+            self:_set_text_list(self:_get_assault_strings_info())
+            if self.is_client then
+                LuaNetworking:SendToPeer(1, "BAI_Message", "RequestCurrentAssaultTimeLeft")
+            end
+        else
+            self:_set_text_list(self:_get_assault_strings())
         end
-        return _f_queue_dialog(self, id, ...)
     end
 end
 
@@ -694,9 +684,9 @@ function HUDAssaultCorner:_end_assault()
     self:SetImage("assault")
 end
 
-function HUDAssaultCorner:SetCompatibleHost(BAI)
+function HUDAssaultCorner:SetCompatibleHost(BAIHost)
     self.CompatibleHost = true
-    if BAI then
+    if BAIHost then
         self.BAIHost = true
     end
 end
