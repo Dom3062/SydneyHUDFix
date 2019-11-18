@@ -82,7 +82,7 @@ local CharacterData = {
     ["mute_security_undominatable"] = "SOLOMON GARRETT",
     ["captain"] = "BOAT CREW",
     ["shadow_spooc"] = "ARK GUARDIAN",
-    ["bolivian_indoors_mex"] = "BOLIVIAN SECURITY"
+    ["bolivian_indoors_mex"] = "BOLIVIAN GUARD"
 }
 
 local function FixNames()
@@ -110,6 +110,8 @@ local function FixNames()
         CharacterData["medic"] = "MURKYWATER MEDIC"
         CharacterData["taser"] = "MURKYWATER TASER"
         CharacterData["tank"] = "MURKYWATER BULLDOZER"
+        CharacterData["tank_medic"] = "MURKYWATER MEDIC DOZER"
+        CharacterData["tank_mini"] = "MURKYWATER MINIGUN DOZER"
         CharacterData["spooc"] = "MURKYWATER CLOAKER"
         CharacterData["shield"] = "MURKYWATER SHIELD"
         CharacterData["swat"] = "MURKYWATER LIGHT" -- Death Sentence
