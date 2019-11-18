@@ -177,44 +177,36 @@ end
 
 function PlayerStandard:_start_action_reload(t, ...)
     _start_action_reload_original(self, t, ...)
-    if self._equipped_unit:base():can_reload() and managers.player:current_state() ~= "bleed_out" and SydneyHUD:GetOption("show_reload_interaction") then
-        self._state_data._isReloading = true
-        managers.hud:show_interaction_bar(0, self._state_data.reload_expire_t or 0)
-        self._state_data.reload_offset = t
-    end
-    if self._state_data.reload_expire_t then
+    if self._equipped_unit:base():can_reload() then
+        if managers.player:current_state() ~= "bleed_out" and SydneyHUD:GetOption("show_reload_interaction") then
+            self._state_data._isReloading = true
+            managers.hud:animate_interaction_bar(0, self._state_data.reload_expire_t - t)
+        end
         managers.gameinfo:event("player_action", "activate", "reload", { duration = self._state_data.reload_expire_t - t })
     end
 end
 
-function PlayerStandard:_update_reload_timers(t, dt, input, ...)
-    local reloading = self._state_data.reload_expire_t
-    _update_reload_timers_original(self, t, dt, input, ...)
-    if reloading and not self._state_data.reload_expire_t then
+function PlayerStandard:_update_reload_timers(t, dt, input)
+    local reload = self._state_data.reload_expire_t
+    _update_reload_timers_original(self, t, dt, input)
+    if reload and not self._state_data.reload_expire_t then
         managers.gameinfo:event("player_action", "deactivate", "reload")
-    end
-    if SydneyHUD:GetOption("show_reload_interaction") then
-        if not self._state_data.reload_expire_t and self._state_data._isReloading then
+        if self._state_data._isReloading then
             managers.hud:hide_interaction_bar(true)
             self._state_data._isReloading = false
-        elseif self._state_data._isReloading and managers.player:current_state() ~= "bleed_out" then
-            managers.hud:set_interaction_bar_width(
-                t and t - self._state_data.reload_offset or 0,
-                self._state_data.reload_expire_t and self._state_data.reload_expire_t - self._state_data.reload_offset or 0
-            )
         end
     end
 end
 
-function PlayerStandard:_interupt_action_reload(t, ...)
+function PlayerStandard:_interupt_action_reload(t)
     if self._state_data.reload_expire_t then
         managers.gameinfo:event("player_action", "deactivate", "reload")
     end
-    if self._state_data._isReloading and managers.player:current_state() ~= "bleed_out" and SydneyHUD:GetOption("show_reload_interaction") then
+    if self._state_data._isReloading and managers.player:current_state() ~= "bleed_out" then
         managers.hud:hide_interaction_bar(false)
         self._state_data._isReloading = false
     end
-    return _interupt_action_reload_original(self, t, ...)
+    return _interupt_action_reload_original(self, t)
 end
 
 function PlayerStandard:_update_melee_timers(t, ...)
