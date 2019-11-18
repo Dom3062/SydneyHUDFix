@@ -177,7 +177,6 @@ function PlayerDamage:clear_delayed_damage(...)
     return clear_delayed_damage_original(self, ...)
 end
 
-
 local MUSCLE_REGEN_ACTIVE = false
 local HOSTAGE_REGEN_ACTIVE = false
 local PASSIVE_REGEN_BUFFS = {
@@ -211,4 +210,10 @@ function PlayerDamage:check_passive_regen_buffs(buff)
             end
         end
     end
+end
+
+local _f_on_incapacitated = PlayerDamage.on_incapacitated
+function PlayerDamage:on_incapacitated()
+    _f_on_incapacitated(self)
+    managers.hud:hide_interaction_bar()
 end
