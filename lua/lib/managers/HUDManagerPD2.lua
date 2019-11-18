@@ -1,4 +1,3 @@
-local last_removed_time = 0
 local init_original = HUDManager.init
 function HUDManager:init(...)
     init_original(self, ...)
@@ -105,25 +104,6 @@ end
 
 local feed_heist_time_original = HUDManager.feed_heist_time
 function HUDManager:feed_heist_time(t)
-    if SydneyHUD:GetOption("enable_corpse_remover_plus") then
-        if t - last_removed_time >= SydneyHUD:GetOption("remove_interval") then
-            if SydneyHUD:GetOption("remove_shield") then
-                if managers.enemy then
-                    for u_key, u_data in pairs(managers.enemy._enemy_data.corpses) do
-                        if u_data.unit:inventory() ~= nil then
-                            u_data.unit:inventory():destroy_all_items()
-                        end
-                    end
-                end
-            end
-            if SydneyHUD:GetOption("remove_body") then
-                if managers.enemy and not managers.groupai:state():whisper_mode() then
-                    managers.enemy:dispose_all_corpses()
-                end
-            end
-            last_removed_time = t
-        end
-    end
     feed_heist_time_original(self, t)
     self._hud_assault_corner:feed_heist_time(t)
     self._teammate_panels[self.PLAYER_PANEL]:change_health() -- force refresh hps meter atleast every second.

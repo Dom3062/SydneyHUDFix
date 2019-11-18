@@ -210,3 +210,8 @@ function CopDamage:sync_damage_dot(attacker_unit, damage_percent, death, variant
     end
     return sync_damage_dot_original(self, attacker_unit, damage_percent, death, variant, hurt_animation, weapon_id, ...)
 end
+
+if SydneyHUD:GetOption("block_helmets") then
+    function CopDamage:_spawn_head_gadget()
+    end
+end

@@ -124,12 +124,15 @@ if not SydneyHUD.setup then
         "sydneyhud_hud_tweaks_panel",
         "sydneyhud_hud_tweaks_waypoint",
 
-        "sydneyhud_music_tweaks"
+        "sydneyhud_music_tweaks",
+
+        "sydneyhud_optimization_tweaks"
     }
     SydneyHUD._hook_files = {
         ["lib/entry"] = "lib/Entry.lua",
         ["lib/managers/chatmanager"] = "lib/managers/ChatManager.lua",
         ["lib/managers/enemymanager"] = "lib/managers/EnemyManager.lua",
+        ["lib/managers/gameplaycentralmanager"] = "lib/managers/GamePlayCentralManager.lua",
         ["lib/managers/group_ai_states/groupaistatebase"] = "lib/managers/group_ai_states/GroupAIStateBase.lua",
         ["lib/managers/hud/hudassaultcorner"] = "lib/managers/hud/HUDAssaultCorner.lua",
         ["lib/managers/hud/hudinteraction"] = "lib/managers/hud/HUDInteraction.lua",

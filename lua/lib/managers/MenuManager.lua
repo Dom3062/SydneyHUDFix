@@ -1094,6 +1094,31 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_SydneyHUD", function(m
         SydneyHUD._data.shuffle_music = item:value() == "on"
     end
 
+    -- Optimization Tweaks
+    MenuCallbackHandler.callback_block_blood_decals = function(self, item)
+        SydneyHUD._data.block_bullet_decals = item:value() == "on"
+    end
+
+    MenuCallbackHandler.callback_block_bullet_decals = function(self, item)
+        SydneyHUD._data.block_bullet_decals = item:value() == "on"
+    end
+
+    MenuCallbackHandler.callback_block_corpses = function(self, item)
+        SydneyHUD._data.block_corpses = item:value() == "on"
+    end
+
+    MenuCallbackHandler.callback_block_helmets = function(self, item)
+        SydneyHUD._data.block_helmets = item:value() == "on"
+    end
+
+    MenuCallbackHandler.callback_block_magazines = function(self, item)
+        SydneyHUD._data.block_magazines = item:value() == "on"
+    end
+
+    MenuCallbackHandler.callback_block_shields = function(self, item)
+        SydneyHUD._data.block_shields = item:value() == "on"
+    end
+
     -- SydneyHUD
     MenuCallbackHandler.callback_sydneyhud_language = function(self, item)
         SydneyHUD._data.language = item:value()

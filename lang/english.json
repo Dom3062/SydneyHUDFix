@@ -467,6 +467,22 @@
     "sydneyhud_savedata_not_compatible_desc" : "Looks like the inner workings of SydneyHUD has changed and made your SydneyHUD's saved settings incompatible with this new version of SydneyHUD. It's a shame I can't load your savedata, but atleast I loaded default values, so you don't crash.\n\nSorry for the inconvenience.",
 
     "sydneyhud_ok" : "Ok",
+
+    "sydneyhud_optimization_tweaks" : "Optimization Tweaks",
+    "sydneyhud_optimization_tweaks_desc" : "Changes that can improve your performance a bit\nAll options require a heist restart to take effect",
+    "sydneyhud_optimization_tweaks_block_bullet_decals" : "Block Bullet Decals",
+    "sydneyhud_optimization_tweaks_block_bullet_decals_desc" : "Blocks all bullet holes",
+    "sydneyhud_optimization_tweaks_block_blood_decals" : "Block Blood Decals",
+    "sydneyhud_optimization_tweaks_block_blood_decals_desc" : "Blocks blood from spawning",
+    "sydneyhud_optimization_tweaks_block_corpses" : "Block Corpses",
+    "sydneyhud_optimization_tweaks_block_corpses_desc" : "When enabled, all enemies will despawn immediately upon death",
+    "sydneyhud_optimization_tweaks_block_helmets" : "Block Helmets",
+    "sydneyhud_optimization_tweaks_block_helmets_desc" : "Blocks helmet popping up when an enemy died from headshot",
+    "sydneyhud_optimization_tweaks_block_magazines" : "Block Magazines",
+    "sydneyhud_optimization_tweaks_block_magazines_desc" : "Blocks empty magazines on the ground",
+    "sydneyhud_optimization_tweaks_block_shields" : "Block Shields",
+    "sydneyhud_optimization_tweaks_block_shields_desc" : "Blocks lying shields on the ground",
+
     "sydneyhud_options": "SydneyHUD",
     "sydneyhud_options_desc": "SydneyHUD options",
     "sydneyhud_pocohud_config_fixed" : "SydneyHUD: PocoHUD config fixed",
