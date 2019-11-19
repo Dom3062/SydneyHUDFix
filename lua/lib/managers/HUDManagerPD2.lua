@@ -124,7 +124,7 @@ function HUDManager:teammate_progress(peer_id, type_index, enabled, tweak_data_i
     local panel = self:teammate_panel_from_peer_id(peer_id)
     if panel then
         if label then
-            self._teammate_panels[panel]:set_interact_text((label.panel:child("action"):text()))
+            self._teammate_panels[panel]:set_interact_text(label.panel:child("action"):text())
         end
         self._teammate_panels[panel]:set_interact_visibility(enabled)
     end
