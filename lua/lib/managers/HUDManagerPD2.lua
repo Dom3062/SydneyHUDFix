@@ -238,6 +238,7 @@ end
 
 function HUDManager:animate_interaction_bar(current, total)
     self:show_interaction_bar(current, total)
+    self._hud_interaction._animated = true
 
     local function feed_circle(o, total)
 		local t = 0
