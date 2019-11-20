@@ -1,21 +1,4 @@
 local _do_action_intimidate_original = PlayerStandard._do_action_intimidate
-local _start_action_melee_original = PlayerStandard._start_action_melee
-local _start_action_interact_original = PlayerStandard._start_action_interact
-local _interupt_action_interact_original = PlayerStandard._interupt_action_interact
-local _start_action_charging_weapon_original = PlayerStandard._start_action_charging_weapon
-local _end_action_charging_weapon_original = PlayerStandard._end_action_charging_weapon
-local _check_action_throw_grenade_original = PlayerStandard._check_action_throw_grenade
-local _check_action_interact_original = PlayerStandard._check_action_interact
-local _start_action_reload_original = PlayerStandard._start_action_reload
-local _update_reload_timers_original = PlayerStandard._update_reload_timers
-local _interupt_action_reload_original = PlayerStandard._interupt_action_reload
-local _update_melee_timers_original = PlayerStandard._update_melee_timers
-local _do_melee_damage_original = PlayerStandard._do_melee_damage
-local _interupt_action_melee_original = PlayerStandard._interupt_action_melee
-local update_original = PlayerStandard.update
-local _get_interaction_target_original = PlayerStandard._get_interaction_target
-local _get_intimidation_action_original = PlayerStandard._get_intimidation_action
-
 function PlayerStandard:_do_action_intimidate(t, interact_type, ...)
     if interact_type == "cmd_gogo" or interact_type == "cmd_get_up" then
         local duration = (tweak_data.upgrades.morale_boost_base_cooldown * managers.player:upgrade_value("player", "morale_boost_cooldown_multiplier", 1)) or 3.5
@@ -26,14 +9,14 @@ function PlayerStandard:_do_action_intimidate(t, interact_type, ...)
     return _do_action_intimidate_original(self, t, interact_type, ...)
 end
 
+local _do_melee_damage_original = PlayerStandard._do_melee_damage
 function PlayerStandard:_do_melee_damage(t, ...)
     if self._state_data.melee_start_t then
         managers.gameinfo:event("player_action", "deactivate", "melee_charge")
     end
-    if SydneyHUD:GetOption("show_melee_interaction") then
-        managers.hud:hide_interaction_bar(false)
-        self._state_data._need_show_interact = nil
-        self._state_data._at_max_melee = nil
+    if self._state_data.charging_melee then
+        managers.hud:hide_interaction_bar()
+        self._state_data.charging_melee = false
     end
     local result = _do_melee_damage_original(self, t, ...)
 		
@@ -52,15 +35,21 @@ function PlayerStandard:_do_melee_damage(t, ...)
     return result
 end
 
-function PlayerStandard:_start_action_melee(t, input, instant, ...)
+local _start_action_melee_original = PlayerStandard._start_action_melee
+function PlayerStandard:_start_action_melee(t, input, instant)
     if not instant then
         local duration = tweak_data.blackmarket.melee_weapons[managers.blackmarket:equipped_melee_weapon()].stats.charge_time
         managers.gameinfo:event("player_action", "activate", "melee_charge")
         managers.gameinfo:event("player_action", "set_duration", "melee_charge", { duration = duration })
+        if SydneyHUD:GetOption("show_melee_interaction") then
+            managers.hud:animate_interaction_bar(0, duration, true)
+            self._state_data.charging_melee = true
+        end
     end
-    return _start_action_melee_original(self, t, input, instant, ...)
+    return _start_action_melee_original(self, t, input, instant)
 end
 
+local _start_action_interact_original = PlayerStandard._start_action_interact
 function PlayerStandard:_start_action_interact(...)
     if managers.player:has_category_upgrade("player", "interacting_damage_multiplier") then
         local value = managers.player:upgrade_value("player", "interacting_damage_multiplier", 0)
@@ -71,6 +60,7 @@ function PlayerStandard:_start_action_interact(...)
     return _start_action_interact_original(self, ...)
 end
 
+local _interupt_action_interact_original = PlayerStandard._interupt_action_interact
 function PlayerStandard:_interupt_action_interact(...)
     if self._interact_expire_t and managers.player:has_category_upgrade("player", "interacting_damage_multiplier") then
         managers.gameinfo:event("buff", "deactivate", "die_hard")
@@ -79,12 +69,14 @@ function PlayerStandard:_interupt_action_interact(...)
     return _interupt_action_interact_original(self, ...)
 end
 
+local _start_action_charging_weapon_original = PlayerStandard._start_action_charging_weapon
 function PlayerStandard:_start_action_charging_weapon(t, ...)
     managers.gameinfo:event("player_action", "activate", "weapon_charge")
     managers.gameinfo:event("player_action", "set_duration", "weapon_charge", { duration = self._equipped_unit:base():charge_max_t() })
     return _start_action_charging_weapon_original(self, t, ...)
 end
 
+local _end_action_charging_weapon_original = PlayerStandard._end_action_charging_weapon
 function PlayerStandard:_end_action_charging_weapon(...)
     if self._state_data.charging_weapon then
         managers.gameinfo:event("player_action", "deactivate", "weapon_charge")
@@ -170,11 +162,13 @@ function PlayerStandard:_check_damage_stack_skill(t, category)
     end
 end
 
+local update_original = PlayerStandard.update
 function PlayerStandard:update(t, ...)
     managers.hud:update_inspire_timer(self._ext_movement:morale_boost() and managers.enemy:get_delayed_clbk_expire_t(self._ext_movement:morale_boost().expire_clbk_id) - t or -1)
     return update_original(self, t, ...)
 end
 
+local _start_action_reload_original = PlayerStandard._start_action_reload
 function PlayerStandard:_start_action_reload(t, ...)
     _start_action_reload_original(self, t, ...)
     if self._equipped_unit:base():can_reload() then
@@ -186,62 +180,42 @@ function PlayerStandard:_start_action_reload(t, ...)
     end
 end
 
+local _update_reload_timers_original = PlayerStandard._update_reload_timers
 function PlayerStandard:_update_reload_timers(t, dt, input)
     local reload = self._state_data.reload_expire_t
     _update_reload_timers_original(self, t, dt, input)
     if reload and not self._state_data.reload_expire_t then
         managers.gameinfo:event("player_action", "deactivate", "reload")
-        if self._state_data._isReloading then
-            managers.hud:hide_interaction_bar(true)
-            self._state_data._isReloading = false
-        end
+        self._state_data._isReloading = false
     end
 end
 
+local _interupt_action_reload_original = PlayerStandard._interupt_action_reload
 function PlayerStandard:_interupt_action_reload(t)
     if self._state_data.reload_expire_t then
         managers.gameinfo:event("player_action", "deactivate", "reload")
     end
     if self._state_data._isReloading and managers.player:current_state() ~= "bleed_out" then
-        managers.hud:hide_interaction_bar(false)
+        managers.hud:hide_interaction_bar()
         self._state_data._isReloading = false
     end
     return _interupt_action_reload_original(self, t)
 end
 
-function PlayerStandard:_update_melee_timers(t, ...)
-    if SydneyHUD:GetOption("show_melee_interaction") then
-        if self._state_data.meleeing and not self._state_data.melee_attack_allowed_t and not tweak_data.blackmarket.melee_weapons[managers.blackmarket:equipped_melee_weapon()].instant then
-            --if math.clamp(t - (self._state_data.melee_start_t or 0), 0, tweak_data.blackmarket.melee_weapons[managers.blackmarket:equipped_melee_weapon()].stats.charge_time) < 0.12 or self._state_data._at_max_melee then
-            if math.clamp(t - (self._state_data.melee_start_t or 0), 0, tweak_data.blackmarket.melee_weapons[managers.blackmarket:equipped_melee_weapon()].stats.charge_time) >= tweak_data.blackmarket.melee_weapons[managers.blackmarket:equipped_melee_weapon()].stats.charge_time then
-                managers.hud:hide_interaction_bar(true)
-                self._state_data._at_max_melee = true
-            elseif math.clamp(t - (self._state_data.melee_start_t or 0), 0, tweak_data.blackmarket.melee_weapons[managers.blackmarket:equipped_melee_weapon()].stats.charge_time) >= 0.12 and self._state_data._need_show_interact == nil then
-                self._state_data._need_show_interact = true
-            elseif self._state_data._need_show_interact then
-                managers.hud:show_interaction_bar(0, tweak_data.blackmarket.melee_weapons[managers.blackmarket:equipped_melee_weapon()].stats.charge_time or 0)
-                self._state_data._need_show_interact = false
-            else
-                managers.hud:set_interaction_bar_width(math.clamp(t - (self._state_data.melee_start_t or 0), 0, tweak_data.blackmarket.melee_weapons[managers.blackmarket:equipped_melee_weapon()].stats.charge_time), tweak_data.blackmarket.melee_weapons[managers.blackmarket:equipped_melee_weapon()].stats.charge_time)
-            end
-        end
-    end
-    return _update_melee_timers_original(self, t, ...)
-end
-
+local _interupt_action_melee_original = PlayerStandard._interupt_action_melee
 function PlayerStandard:_interupt_action_melee(...)
     if self._state_data.melee_start_t then
         managers.gameinfo:event("player_action", "deactivate", "melee_charge")
     end
-    if SydneyHUD:GetOption("show_melee_interaction") and self._state_data.meleeing then
-        self._state_data._need_show_interact = nil
-        self._state_data._at_max_melee = nil
-        managers.hud:hide_interaction_bar(false)
+    if self._state_data.charging_melee then
+        managers.hud:hide_interaction_bar()
+        self._state_data.charging_melee = false
     end
     _interupt_action_melee_original(self, ...)
 end
 
 local TIMEOUT = 0.25
+local _check_action_throw_grenade_original = PlayerStandard._check_action_throw_grenade
 function PlayerStandard:_check_action_throw_grenade(t, input, ...)
     if input.btn_throw_grenade_press then
         if SydneyHUD:GetOption("anti_stealth_grenades") and managers.groupai:state():whisper_mode() and (t - (self._last_grenade_t or 0) >= TIMEOUT) then
@@ -252,6 +226,7 @@ function PlayerStandard:_check_action_throw_grenade(t, input, ...)
     return _check_action_throw_grenade_original(self, t, input, ...)
 end
 
+local _check_action_interact_original = PlayerStandard._check_action_interact
 function PlayerStandard:_check_action_interact(t, input, ...)
     local check_interact = {} and (self._interact_params or 0)
     if not (self:_check_interact_toggle(t, input) and SydneyHUD:GetOption("push_to_interact") and check_interact.timer >= SydneyHUD:GetOption("push_to_interact_delay")) then
@@ -326,6 +301,7 @@ function PlayerStandard:getUnitRotation(unit)
     return -(rotation + 180)
 end
 
+local _get_interaction_target_original = PlayerStandard._get_interaction_target
 function PlayerStandard:_get_interaction_target(char_table, my_head_pos, cam_fwd, ...)
     local range = tweak_data.player.long_dis_interaction.highlight_range * managers.player:upgrade_value("player", "intimidate_range_mul", 1) * managers.player:upgrade_value("player", "passive_intimidate_range_mul", 1)
     if SydneyHUD:GetOption("civilian_spot") then
@@ -339,6 +315,7 @@ function PlayerStandard:_get_interaction_target(char_table, my_head_pos, cam_fwd
 end
 
 PlayerStandard.MARK_CIVILIANS_VOCAL = SydneyHUD:GetOption("civilian_spot_voice")
+local _get_intimidation_action_original = PlayerStandard._get_intimidation_action
 function PlayerStandard:_get_intimidation_action(prime_target, ...)
     if SydneyHUD:GetOption("civilian_spot") then
         if prime_target and prime_target.unit_type == 1 and prime_target.unit:movement():cool() and managers.player:has_category_upgrade("player", "sec_camera_highlight_mask_off") then

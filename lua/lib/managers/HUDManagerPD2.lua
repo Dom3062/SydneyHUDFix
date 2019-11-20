@@ -236,18 +236,22 @@ function HUDManager.show_interact(self, data)
     return show_interact_original(self, data)
 end
 
-function HUDManager:animate_interaction_bar(current, total)
+function HUDManager:animate_interaction_bar(current, total, hide)
     self:show_interaction_bar(current, total)
     self._hud_interaction._animated = true
 
-    local function feed_circle(o, total)
+    local function feed_circle(o, total, hide)
 		local t = 0
 
 		while t < total do
 			t = t + coroutine.yield()
 
 			self:set_interaction_bar_width(t, total)
-		end
+        end
+
+        if hide then
+            self:hide_interaction_bar(true)
+        end
     end
     
     if _G.IS_VR then
@@ -255,7 +259,7 @@ function HUDManager:animate_interaction_bar(current, total)
 	end
 
 	self._hud_interaction._interact_circle._panel:stop()
-	self._hud_interaction._interact_circle._panel:animate(feed_circle, total)
+	self._hud_interaction._interact_circle._panel:animate(feed_circle, total, hide == nil)
 end
 
 local remove_interact_original = HUDManager.remove_interact
