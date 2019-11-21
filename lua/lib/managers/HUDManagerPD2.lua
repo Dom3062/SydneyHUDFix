@@ -223,13 +223,13 @@ function HUDManager:press_substitute(text, new)
 end
 
 local show_interact_original = HUDManager.show_interact
-function HUDManager.show_interact(self, data)
+function HUDManager:show_interact(data)
     if self._interact_visible and not data.force then
         return
     end
 
     if SydneyHUD:GetOption("push_to_interact") and SydneyHUD:GetOption("push_to_interact_delay") >= 0 then
-        data.text = HUDManager:press_substitute(data.text, managers.localization:text("hud_press"))
+        data.text = self:press_substitute(data.text, managers.localization:text("hud_press"))
     end
 
     self._interact_visible = true
@@ -263,7 +263,7 @@ function HUDManager:animate_interaction_bar(current, total, hide)
 end
 
 local remove_interact_original = HUDManager.remove_interact
-function HUDManager.remove_interact(self)
+function HUDManager:remove_interact()
     self._interact_visible = nil
     return remove_interact_original(self)
 end
@@ -320,6 +320,7 @@ function HUDManager:SydneyHUDUpdate()
             panel:SydneyHUDUpdate()
         end
     end
+    self._hud_interaction:SydneyHUDUpdate() -- HUDInteraction
     if self.UpdateHUDListSettings then
         --self:UpdateHUDListSettings()
     end

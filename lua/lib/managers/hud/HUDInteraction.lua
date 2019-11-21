@@ -36,24 +36,27 @@ function HUDInteraction:init(hud, child_name)
     self._bgtext3:set_x(self._bgtext3:x() - 1)
     self._bgtext4:set_y(self._hud_panel:h() / 2 - 1)
     self._bgtext4:set_x(self._bgtext4:x() + 1)
+    self:SydneyHUDUpdate()
+end
+
+function HUDInteraction:SydneyHUDUpdate()
+    self.show_interaction_circle = SydneyHUD:GetOption("show_interaction_circle")
+    self.show_interaction_text = SydneyHUD:GetOption("show_interaction_text")
+    self.show_text_borders = SydneyHUD:GetOption("show_text_borders")
 end
 
 local show_interaction_bar_original = HUDInteraction.show_interaction_bar
 function HUDInteraction:show_interaction_bar(current, total)
     show_interaction_bar_original(self, current, total)
-    self._interact_circle:set_visible(SydneyHUD:GetOption("show_interaction_circle"))
-    self._interact_timer_text:set_visible(SydneyHUD:GetOption("show_interaction_text"))
+    self._interact_circle:set_visible(self.show_interaction_circle)
+    self._interact_timer_text:set_visible(self.show_interaction_text)
     for i = 1, 4 do
-        self["_bgtext" .. i]:set_visible(SydneyHUD:GetOption("show_interaction_text") and SydneyHUD:GetOption("show_text_borders"))
+        self["_bgtext" .. i]:set_visible(self.show_interaction_text and self.show_text_borders)
     end
 end
 
 local set_interaction_bar_width_original = HUDInteraction.set_interaction_bar_width
 function HUDInteraction:set_interaction_bar_width(current, total)
-    if not complete and self._animated and self._interact_circle then
-        self._animated = nil
-        self._interact_circle._panel:stop()
-    end
     set_interaction_bar_width_original(self, current, total)
     if not self._interact_timer_text then
         return
@@ -74,7 +77,11 @@ end
 
 local hide_interaction_bar_original = HUDInteraction.hide_interaction_bar
 function HUDInteraction:hide_interaction_bar(complete)
-    hide_interaction_bar_original(self, complete and SydneyHUD:GetOption("show_interaction_circle"))
+    if not complete and self._animated and self._interact_circle then
+        self._animated = nil
+        self._interact_circle._panel:stop()
+    end
+    hide_interaction_bar_original(self, complete and self.show_interaction_circle)
     self._interact_timer_text:set_visible(false)
     for i = 1, 4 do
         self["_bgtext" .. i]:set_visible(false)
