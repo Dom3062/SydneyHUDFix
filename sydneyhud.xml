@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+<mod>
+    <hooks>
+        <!-- SydneyHUD's Main Code -->
+        <pre hook_id="core/lib/utils/coreapp" script_path="SydneyHUD.lua"/>
+
+        <group hook_id="lib/" script_path="lua/lib/">
+            <!-- lib/entry -->
+            <pre :hook_id="entry" :script_path="Entry.lua"/>
+
+            <!-- lib/managers -->
+            <group :hook_id="managers/" :script_path="managers/">
+                <post :hook_id="chatmanager" :script_path="ChatManager.lua"/>
+                <post :hook_id="enemymanager" :script_path="EnemyManager.lua"/>
+                <post :hook_id="gameplaycentralmanager" :script_path="GamePlayCentralManager.lua"/>
+
+                <post :hook_id="group_ai_states/groupaistatebase" :script_path="group_ai_states/GroupAIStateBase.lua"/>
+
+                <!-- lib/managers/hud -->
+                <group :hook_id="hud/" :script_path="hud/">
+                    <post :hook_id="hudassaultcorner" :script_path="HUDAssaultCorner.lua"/>
+                    <post :hook_id="hudinteraction" :script_path="HUDInteraction.lua"/>
+                    <post :hook_id="hudstatsscreen" :script_path="HUDStatsScreen.lua"/>
+                    <post :hook_id="hudsuspicious" :script_path="HUDSuspicious.lua"/>
+                    <post :hook_id="hudteammate" :script_path="HUDTeammate.lua"/>
+                </group>
+
+                <post :hook_id="hudmanager" :script_path="HUDManager.lua"/>
+                <post :hook_id="hudmanagerpd2" :script_path="HUDManagerPD2.lua"/>
+
+                <!-- lib/managers/menu -->
+                <group :hook_id="menu/" :script_path="menu/">
+                    <post :hook_id="blackmarketgui" :script_path="BlackMarketGui.lua"/>
+                    <post :hook_id="contractboxgui" :script_path="ContractBoxGui.lua"/>
+                    <post :hook_id="lootdropscreengui" :script_path="LootDropScreenGui.lua"/>
+                    <post :hook_id="menubackdropgui" :script_path="MenuBackDropGui.lua"/>
+                    <post :hook_id="menucomponentmanager" :script_path="MenuComponentManager.lua"/>
+                    <post :hook_id="menunodegui" :script_path="MenuNodeGui.lua"/>
+                    <post :hook_id="menuscenemanager" :script_path="MenuSceneManager.lua"/>
+                    <post :hook_id="missionbriefinggui" :script_path="MissionBriefingGui.lua"/>
+                    <post :hook_id="stageendscreengui" :script_path="StageEndScreenGui.lua"/>
+                </group>
+
+                <post :hook_id="menumanager" :script_path="MenuManager.lua"/>
+                <post :hook_id="missionassetsmanager" :script_path="MissionAssetsManager.lua"/>
+                <post :hook_id="moneymanager" :script_path="MoneyManager.lua"/>
+                <post :hook_id="musicmanager" :script_path="MusicManager.lua"/>
+                <post :hook_id="objectinteractionmanager" :script_path="ObjectInteractionManager.lua"/>
+                <post :hook_id="playermanager" :script_path="PlayerManager.lua"/>
+                <post :hook_id="trademanager" :script_path="TradeManager.lua"/>
+            </group>
+
+            <!-- lib/modifiers/boosts -->
+            <group :hook_id="modifiers/boosts/" :script_path="modifiers/boosts/">
+                <post :hook_id="gagemodifierlifesteal" :script_path="GageModifierLifeSteal.lua"/>
+                <post :hook_id="gagemodifiermeleeinvincibility" :script_path="GageModifierMeleeInvincibility.lua"/>
+            </group>
+
+            <!-- lib/network -->
+            <group :hook_id="network/" :script_path="network/">
+                <!-- lib/network/base -->
+                <group :hook_id="base/" :script_path="base/">
+                    <post :hook_id="networkpeer" :script_path="NetworkPeer.lua"/>
+
+                    <post :hook_id="handlers/connectionnetworkhandler" :script_path="handlers/ConnectionNetworkHandler.lua"/>
+                </group>
+
+                <post :hook_id="handlers/unitnetworkhandler" :script_path="handlers/UnitNetworkHandler.lua"/>
+            </group>
+
+            <!-- lib/player_actions/skills -->
+            <group :hook_id="player_actions/skills/" :script_path="player_actions/skills/">
+                <post :hook_id="playeractionammoefficiency" :script_path="PlayerActionAmmoEfficiency.lua"/>
+                <post :hook_id="playeractionbloodthirstbase" :script_path="PlayerActionBloodthirstBase.lua"/>
+                <post :hook_id="playeractiondireneed" :script_path="PlayerActionDireNeed.lua"/>
+                <post :hook_id="playeractionexperthandling" :script_path="PlayerActionExpertHandling.lua"/>
+                <post :hook_id="playeractionshockandawe" :script_path="PlayerActionShockAndAwe.lua"/>
+                <post :hook_id="playeractiontriggerhappy" :script_path="PlayerActionTriggerHappy.lua"/>
+                <post :hook_id="playeractionunseenstrike" :script_path="PlayerActionUnseenStrike.lua"/>
+            </group>
+
+            <!-- lib/setups -->
+            <group :hook_id="setups/" :script_path="setups/">
+                <pre :hook_id="setup" :script_path="Setup.lua"/>
+                <post :hook_id="setup" :script_path="Setup.lua"/>
+                <pre :hook_id="gamesetup" :script_path="GameSetup.lua"/>
+                <post :hook_id="gamesetup" :script_path="GameSetup.lua"/>
+                <post :hook_id="gamesetup" :script_path="DeployableWaypoint.lua"/>
+                <post :hook_id="gamesetup" :script_path="TimerWaypoint.lua"/>
+            </group>
+
+            <post :hook_id="states/ingamewaitingforplayers" :script_path="states/IngameWaitingForPlayers.lua"/>
+
+            <!-- lib/tweak_data -->
+            <group :hook_id="tweak_data/" :script_path="tweak_data/">
+                <post :hook_id="charactertweakdata" :script_path="CharacterTweakData.lua"/>
+                <post :hook_id="levelstweakdata" :script_path="LevelsTweakData.lua"/>
+                <post :hook_id="playertweakdata" :script_path="PlayerTweakData.lua"/>
+            </group>
+
+            <!-- lib/units -->
+            <group :hook_id="units/" :script_path="units/">
+                <!-- lib/units/beings/player -->
+                <group :hook_id="beings/player/" :script_path="beings/player/">
+                    <post :hook_id="huskplayermovement" :script_path="HuskPlayerMovement.lua"/>
+                    <post :hook_id="playerdamage" :script_path="PlayerDamage.lua"/>
+                    <post :hook_id="playerinventory" :script_path="PlayerInventory.lua"/>
+                    <post :hook_id="playermovement" :script_path="PlayerMovement.lua"/>
+
+                    <!-- lib/units/beings/player/states -->
+                    <group :hook_id="states/" :script_path="states/">
+                        <post :hook_id="playerbleedout" :script_path="PlayerBleedOut.lua"/>
+                        <post :hook_id="playercarry" :script_path="PlayerCarry.lua"/>
+                        <post :hook_id="playercivilian" :script_path="PlayerCivilian.lua"/>
+                        <post :hook_id="playerdriving" :script_path="PlayerDriving.lua"/>
+                        <post :hook_id="playermaskoff" :script_path="PlayerMaskOff.lua"/>
+                        <post :hook_id="playerstandard" :script_path="PlayerStandard.lua"/>
+                    </group>
+                </group>
+
+                <post :hook_id="cop/copdamage" :script_path="cop/CopDamage.lua"/>
+
+                <!-- lib/units/equipment -->
+                <group :hook_id="equipment/" :script_path="equipment/">
+                    <post :hook_id="ammo_bag/ammobagbase" :script_path="ammo_bag/AmmoBagBase.lua"/>
+                    <post :hook_id="bodybags_bag/bodybagsbagbase" :script_path="bodybags_bag/BodyBagsBagBase.lua"/>
+                    <post :hook_id="doctor_bag/doctorbagbase" :script_path="doctor_bag/DoctorBagBase.lua"/>
+                    <post :hook_id="ecm_jammer/ecmjammerbase" :script_path="ecm_jammer/ECMJammerBase.lua"/>
+                    <post :hook_id="grenade_case/grenadecasebase" :script_path="grenade_case/GrenadeCrateBase.lua"/>
+
+                    <!-- lib/units/equipment/sentry_gun -->
+                    <group :hook_id="sentry_gun/" :script_path="sentry_gun/">
+                        <post :hook_id="sentrygunbase" :script_path="SentryGunBase.lua"/>
+                        <post :hook_id="sentrygundamage" :script_path="SentryGunDamage.lua"/>
+                    </group>
+                </group>
+
+                <post :hook_id="interactions/interactionext" :script_path="interactions/InteractionExt.lua"/>
+
+                <!-- lib/units/props -->
+                <group :hook_id="props/" :script_path="props/">
+                    <post :hook_id="digitalgui" :script_path="DigitalGui.lua"/>
+                    <post :hook_id="securitycamera" :script_path="SecurityCamera.lua"/>
+                    <post :hook_id="securitylockgui" :script_path="SecurityLockGui.lua"/>
+                    <post :hook_id="timergui" :script_path="TimerGui.lua"/>
+                </group>
+
+                <!-- lib/units/weapons -->
+                <group :hook_id="weapons/" :script_path="weapons/">
+                    <post :hook_id="newraycastweaponbase" :script_path="NewRayCastWeaponBase.lua"/>
+                    <post :hook_id="sentrygunweapon" :script_path="SecurityGunWeapon.lua"/>
+                    <post :hook_id="weaponflashlight" :script_path="WeaponFlashLight.lua"/>
+                    <post :hook_id="weaponlaser" :script_path="WeaponLaser.lua"/>
+                </group>
+            </group>
+
+            <!-- lib/units -->
+            <group :hook_id="utils/" :script_path="utils/">
+                <post :hook_id="propertymanager" :script_path="PropertyManager.lua"/>
+                <post :hook_id="temporarypropertymanager" :script_path="TemporaryPropertyManager.lua"/>
+            </group>
+        </group>
+    </hooks>
+</mod>

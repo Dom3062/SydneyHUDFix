@@ -19,8 +19,9 @@ end
     We cache the ModPath directory, so that when our hooks are called, we aren't using the ModPath from a
         different mod.
 ]]
-SydneyHUD = SydneyHUD or {}
-if not SydneyHUD.setup then
+
+if not SydneyHUD then
+    SydneyHUD = {}
 
     --[[
         Alias for EZ to write log
@@ -127,82 +128,6 @@ if not SydneyHUD.setup then
         "sydneyhud_music_tweaks",
 
         "sydneyhud_optimization_tweaks"
-    }
-    SydneyHUD._hook_files = {
-        ["lib/entry"] = "lib/Entry.lua",
-        ["lib/managers/chatmanager"] = "lib/managers/ChatManager.lua",
-        ["lib/managers/enemymanager"] = "lib/managers/EnemyManager.lua",
-        ["lib/managers/gameplaycentralmanager"] = "lib/managers/GamePlayCentralManager.lua",
-        ["lib/managers/group_ai_states/groupaistatebase"] = "lib/managers/group_ai_states/GroupAIStateBase.lua",
-        ["lib/managers/hud/hudassaultcorner"] = "lib/managers/hud/HUDAssaultCorner.lua",
-        ["lib/managers/hud/hudinteraction"] = "lib/managers/hud/HUDInteraction.lua",
-        ["lib/managers/hud/hudstatsscreen"] = "lib/managers/hud/HUDStatsScreen.lua",
-        ["lib/managers/hud/hudsuspicion"] = "lib/managers/hud/HUDSuspicion.lua",
-        ["lib/managers/hud/hudteammate"] = "lib/managers/hud/HUDTeammate.lua",
-        ["lib/managers/hudmanager"] = "lib/managers/HUDManager.lua",
-        ["lib/managers/hudmanagerpd2"] = "lib/managers/HUDManagerPD2.lua",
-        ["lib/managers/musicmanager"] = "lib/managers/MusicManager.lua",
-        ["lib/managers/menu/blackmarketgui"] = "lib/managers/menu/BlackMarketGUI.lua",
-        ["lib/managers/menu/contractboxgui"] = "lib/managers/menu/ContractBoxGui.lua",
-        ["lib/managers/menu/lootdropscreengui"] = "lib/managers/menu/LootDropScreenGui.lua",
-        ["lib/managers/menu/menubackdropgui"] = "lib/managers/menu/MenuBackDropGUI.lua",
-        ["lib/managers/menu/menucomponentmanager"] = "lib/managers/menu/MenuComponentManager.lua",
-        ["lib/managers/menu/menunodegui"] = "lib/managers/menu/MenuNodeGui.lua",
-        ["lib/managers/menu/menuscenemanager"] = "lib/managers/menu/MenuSceneManager.lua",
-        ["lib/managers/menu/missionbriefinggui"] = "lib/managers/menu/MissionBriefingGui.lua",
-        ["lib/managers/menu/stageendscreengui"] = "lib/managers/menu/StageEndScreenGui.lua",
-        ["lib/managers/menumanager"] = "lib/managers/MenuManager.lua",
-        ["lib/managers/missionassetsmanager"] = "lib/managers/MissionAssetsManager.lua",
-        ["lib/managers/moneymanager"] = "lib/managers/MoneyManager.lua",
-        ["lib/managers/objectinteractionmanager"] = "lib/managers/ObjectInteractionManager.lua",
-        ["lib/managers/playermanager"] = "lib/managers/PlayerManager.lua",
-        ["lib/managers/trademanager"] = "lib/managers/TradeManager.lua",
-        ["lib/modifiers/boosts/gagemodifierlifesteal"] = "lib/modifiers/boosts/GageModifierLifeSteal.lua",
-        ["lib/modifiers/boosts/gagemodifiermeleeinvincibility"] = "lib/modifiers/boosts/GageMeleeModifierInvincibility.lua",
-        ["lib/network/base/handlers/connectionnetworkhandler"] = "lib/network/base/handlers/ConnectionNetworkHandler.lua",
-        ["lib/network/base/networkpeer"] = "lib/network/base/NetworkPeer.lua",
-        ["lib/network/handlers/unitnetworkhandler"] = "lib/network/handlers/UnitNetworkHandler.lua",
-        ["lib/player_actions/skills/playeractionammoefficiency"] = "lib/player_actions/skills/PlayerActionAmmoEfficiency.lua",
-        ["lib/player_actions/skills/playeractionbloodthirstbase"] = "lib/player_actions/skills/PlayerActionBloodthirstBase.lua",
-        ["lib/player_actions/skills/playeractiondireneed"] = "lib/player_actions/skills/PlayerActionDireNeed.lua",
-        ["lib/player_actions/skills/playeractionexperthandling"] = "lib/player_actions/skills/PlayerActionExpertHandling.lua",
-        ["lib/player_actions/skills/playeractionshockandawe"] = "lib/player_actions/skills/PlayerActionShockAndAwe.lua",
-        ["lib/player_actions/skills/playeractiontriggerhappy"] = "lib/player_actions/skills/PlayerActionTriggerHappy.lua",
-        ["lib/player_actions/skills/playeractionunseenstrike"] = "lib/player_actions/skills/PlayerActionUnseenStrike.lua",
-        ["lib/setups/setup"] = "lib/setups/Setup.lua",
-        ["lib/states/ingamewaitingforplayers"] = "lib/states/IngameWaitingForPlayersState.lua",
-        ["lib/tweak_data/charactertweakdata"] = "lib/tweak_data/CharacterTweakData.lua",
-        ["lib/tweak_data/levelstweakdata"] = "lib/tweak_data/LevelsTweakData.lua",
-        ["lib/tweak_data/playertweakdata"] = "lib/tweak_data/PlayerTweakData.lua",
-        ["lib/units/beings/player/huskplayermovement"] = "lib/units/beings/player/HuskPlayerMovement.lua",
-        ["lib/units/beings/player/playerdamage"] = "lib/units/beings/player/PlayerDamage.lua",
-        ["lib/units/beings/player/playerinventory"] = "lib/units/beings/player/PlayerInventory.lua",
-        ["lib/units/beings/player/playermovement"] = "lib/units/beings/player/PlayerMovement.lua",
-        ["lib/units/beings/player/states/playerbleedout"] = "lib/units/beings/player/states/PlayerBleedOut.lua",
-        ["lib/units/beings/player/states/playercarry"] = "lib/units/beings/player/states/PlayerCarry.lua",
-        ["lib/units/beings/player/states/playercivilian"] = "lib/units/beings/player/states/PlayerCivilian.lua",
-        ["lib/units/beings/player/states/playerdriving"] = "lib/units/beings/player/states/PlayerDriving.lua",
-        ["lib/units/beings/player/states/playermaskoff"] = "lib/units/beings/player/states/PlayerMaskOff.lua",
-        ["lib/units/beings/player/states/playerstandard"] = "lib/units/beings/player/states/PlayerStandard.lua",
-        ["lib/units/enemies/cop/copdamage"] = "lib/units/enemies/cop/CopDamage.lua",
-        ["lib/units/equipment/ammo_bag/ammobagbase"] = "lib/units/equipment/ammo_bag/AmmoBagBase.lua",
-        ["lib/units/equipment/bodybags_bag/bodybagsbagbase"] = "lib/units/equipment/bodybags_bag/BodyBagBase.lua",
-        ["lib/units/equipment/doctor_bag/doctorbagbase"] = "lib/units/equipment/doctor_bag/DoctorBagBase.lua",
-        ["lib/units/equipment/ecm_jammer/ecmjammerbase"] = "lib/units/equipment/ecm_jammer/ECMJammerBase.lua",
-        ["lib/units/equipment/grenade_crate/grenadecratebase"] = "lib/units/equipment/grenade_crate/GrenadeCrateBase.lua",
-        ["lib/units/equipment/sentry_gun/sentrygunbase"] = "lib/units/equipment/sentry_gun/SentryGunBase.lua",
-        ["lib/units/equipment/sentry_gun/sentrygundamage"] = "lib/units/equipment/sentry_gun/SentryGunDamage.lua",
-        ["lib/units/interactions/interactionext"] = "lib/units/interactions/InteractionExt.lua",
-        ["lib/units/props/digitalgui"] = "lib/units/props/DigitalGui.lua",
-        ["lib/units/props/securitycamera"] = "lib/units/props/SecurityCamera.lua",
-        ["lib/units/props/securitylockgui"] = "lib/units/props/SecurityLockGui.lua",
-        ["lib/units/props/timergui"] = "lib/units/props/TimerGui.lua",
-        ["lib/units/weapons/newraycastweaponbase"] = "lib/units/weapons/NewRayCastWeaponBase.lua",
-        ["lib/units/weapons/sentrygunweapon"] = "lib/units/weapons/SentryGunWeapon.lua",
-        ["lib/units/weapons/weaponflashlight"] = "lib/units/weapons/WeaponFlashlight.lua",
-        ["lib/units/weapons/weaponlaser"] = "lib/units/weapons/WeaponLaser.lua",
-        ["lib/utils/propertymanager"] = "lib/utils/PropertyManager.lua",
-        ["lib/utils/temporarypropertymanager"] = "lib/utils/TemporaryPropertyManager.lua"
     }
 
     SydneyHUD._poco_conflicting_defaults = {
@@ -332,19 +257,6 @@ if not SydneyHUD.setup then
                 }
             }
             QuickMenu:new(menu_title, menu_message, menu_options, true)
-        end
-    end
-
-    function SydneyHUD:SafeDoFile(fileName)
-        local success, errorMsg = pcall(function()
-            if io.file_is_readable(fileName) then
-                dofile(fileName)
-            else
-                log(SydneyHUD.error .. "Can't open file '" .. fileName .. "'!")
-            end
-        end)
-        if not success then
-            log(SydneyHUD.error .. "File: " .. fileName .. "\n" .. errorMsg)
         end
     end
 
@@ -648,15 +560,5 @@ if not SydneyHUD.setup then
     end
 
     SydneyHUD:Load()
-    SydneyHUD.setup = true
     log(SydneyHUD.info .. "SydneyHUD loaded.")
-end
-
-if RequiredScript then
-    local requiredScript = RequiredScript:lower()
-    if SydneyHUD._hook_files[requiredScript] then
-        SydneyHUD:SafeDoFile(SydneyHUD._lua_path .. SydneyHUD._hook_files[requiredScript])
-    else
-        log(SydneyHUD.warn .. "unlinked script called: " .. requiredScript)
-    end
 end
