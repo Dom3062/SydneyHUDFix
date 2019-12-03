@@ -148,7 +148,7 @@
                 <!-- lib/units/weapons -->
                 <group :hook_id="weapons/" :script_path="weapons/">
                     <post :hook_id="newraycastweaponbase" :script_path="NewRayCastWeaponBase.lua"/>
-                    <post :hook_id="sentrygunweapon" :script_path="SecurityGunWeapon.lua"/>
+                    <post :hook_id="sentrygunweapon" :script_path="SentryGunWeapon.lua"/>
                     <post :hook_id="weaponflashlight" :script_path="WeaponFlashLight.lua"/>
                     <post :hook_id="weaponlaser" :script_path="WeaponLaser.lua"/>
                 </group>
