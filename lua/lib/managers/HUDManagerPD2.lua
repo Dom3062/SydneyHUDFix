@@ -424,8 +424,10 @@ function HUDManager:update(t, dt)
     update_original(self, t, dt)
 end
 
-local _f_activate_objective = HUDManager.activate_objective
-function HUDManager:activate_objective(data)
-    _f_activate_objective(self, data)
-    managers.hudlist:change_setting("left_list_y", data.amount and 62 or 40)
-end
+--if not BAI then -- Preparing for BAI74
+    local _f_activate_objective = HUDManager.activate_objective
+    function HUDManager:activate_objective(data)
+        _f_activate_objective(self, data)
+        managers.hudlist:list("left_list")._panel:animate(callback(nil, _G, "HUDList_set_offset"), data.amount or nil)
+    end
+--end
