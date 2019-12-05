@@ -435,14 +435,10 @@ if not SydneyHUD then
 
     function SydneyHUD:CreateTexts()
         if alive(self._panel) and not self.text_box then
-            self.text_box = self:CreateText(self:GetText("enable_laser_options_turret"), 0.12, 0.25)
-            self.text_box_2 = self:CreateText(self:GetText("enable_laser_options_turretr"), 0.22, 0.25)
-            self.text_box_3 = self:CreateText(self:GetText("enable_laser_options_turretm"), 0.32, 0.25)
+            self.text_box = self:CreateText("enable_laser_options_turret", 0.12, 5, self.color_box)
+            self.text_box_2 = self:CreateText("enable_laser_options_turretr", 0.22, 5, self.color_box_2)
+            self.text_box_3 = self:CreateText("enable_laser_options_turretm", 0.32, 5, self.color_box_3)
         end
-    end
-
-    function SydneyHUD:GetText(text)
-        return managers.localization:text(text) .. ":"
     end
 
     function SydneyHUD:MakeFineText(text)
@@ -452,23 +448,27 @@ if not SydneyHUD then
         text:set_position(math.round(text:x()), math.round(text:y()))
     end
 
-    function SydneyHUD:CreateText(text, x, y)
+    function SydneyHUD:CreateText(text, x, y, color_box)
         local txt = self._panel:text({
             h = 0, -- This value changes during text resize
-            w = 0, -- This one also
+            w = 0, -- This one too
             valign = 'center',
             halign = 'center',
             font = tweak_data.menu.pd2_large_font,
             font_size = tweak_data.menu.pd2_small_font_size,
-            text = text,
+            text = managers.localization:text(text) .. ":",
             visible = false,
             color = Color.white,
             layer = 350, --tweak_data.gui.MENU_LAYER - 50,
             blend_mode = 'add'
         })
-        self:SetRight(y or 0.02, txt)
         self:SetTop(x, txt)
         self:MakeFineText(txt) -- Resizes text to fit the text in the panel
+        if color_box then
+            txt:set_right(color_box:x() - y)
+        else
+            self:SetRight(y or 0.02, txt)
+        end
         return txt
     end
 
