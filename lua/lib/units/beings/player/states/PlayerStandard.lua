@@ -303,8 +303,8 @@ end
 
 local _get_interaction_target_original = PlayerStandard._get_interaction_target
 function PlayerStandard:_get_interaction_target(char_table, my_head_pos, cam_fwd, ...)
-    local range = tweak_data.player.long_dis_interaction.highlight_range * managers.player:upgrade_value("player", "intimidate_range_mul", 1) * managers.player:upgrade_value("player", "passive_intimidate_range_mul", 1)
     if SydneyHUD:GetOption("civilian_spot") then
+        local range = tweak_data.player.long_dis_interaction.highlight_range * managers.player:upgrade_value("player", "intimidate_range_mul", 1) * managers.player:upgrade_value("player", "passive_intimidate_range_mul", 1)
         for u_key, u_data in pairs(managers.enemy:all_civilians()) do
             if u_data.unit:movement():cool() then
                 self:_add_unit_to_char_table(char_table, u_data.unit, 1, range, false, false, 0.001, my_head_pos, cam_fwd)
