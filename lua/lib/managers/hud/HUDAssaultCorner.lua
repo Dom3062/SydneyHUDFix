@@ -700,6 +700,7 @@ function HUDAssaultCorner:show_point_of_no_return_timer()
     point_of_no_return_panel:animate(callback(self, self, "_animate_show_noreturn"), delay_time)
     self:_set_feedback_color(self._noreturn_color)
     self._point_of_no_return = true
+    self:HUDTimer(false)
 end
 
 if SydneyHUD:GetOption("center_assault_banner") then
