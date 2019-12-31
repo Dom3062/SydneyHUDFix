@@ -79,6 +79,10 @@
             "callback": "callback_enhanced_assault_count",
             "value": "enhanced_assault_count",
             "default_value": true
+        },
+        {
+            "type": "divider",
+            "size": 16
         }
     ]
 }

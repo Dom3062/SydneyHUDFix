@@ -17,6 +17,10 @@
             "default_value": 14
         },
         {
+            "type": "divider",
+            "size": 16
+        },
+        {
             "type": "toggle",
             "id": "enable_pacified",
             "title": "enable_pacified",
@@ -43,6 +47,15 @@
             "size": 16
         },
         {
+            "type": "multiple_choice",
+            "id": "enemy_health_bar",
+            "title": "",
+            "items": [
+                "show_enemy_health"
+            ],
+            "default_value": "show_enemy_health"
+        },
+        {
             "type": "toggle",
             "id": "show_enemy_health",
             "title": "show_enemy_health",
@@ -67,6 +80,10 @@
             "default_value": 2
         },
         {
+            "type": "divider",
+            "size": 16
+        },
+        {
             "type": "toggle",
             "id": "show_damage_popup",
             "title": "show_damage_popup",
@@ -76,6 +93,10 @@
             "default_value": true
         },
         {
+            "type": "divider",
+            "size": 16
+        },
+        {
             "type": "toggle",
             "id": "show_trade_delay",
             "title": "show_trade_delay",
@@ -83,6 +104,10 @@
             "callback": "callback_show_trade_delay",
             "value": "show_trade_delay",
             "default_value": true
+        },
+        {
+            "type": "divider",
+            "size": 16
         },
         {
             "type": "toggle",

@@ -1,8 +1,8 @@
 {
-    "menu_id": "sydneyhud_hps_meter",
-    "parent_menu_id": "sydneyhud_options",
-    "title": "sydneyhud_hps_meter",
-    "description": "sydneyhud_hps_meter_desc",
+    "menu_id": "sydneyhud_hud_tweaks_hps_meter",
+    "parent_menu_id": "sydneyhud_hud_tweaks",
+    "title": "sydneyhud_hud_tweaks_hps_meter",
+    "description": "sydneyhud_hud_tweaks_hps_meter_desc",
     "items": [
         {
             "type": "toggle",

@@ -113,9 +113,8 @@ if not SydneyHUD then
         "sydneyhud_chat_info",
         "sydneyhud_experimental",
         "sydneyhud_gameplay_tweaks",
-        "sydneyhud_hps_meter",
         "sydneyhud_interact_tweaks",
-        "sydneyhud_kill_counter_options",
+
         "sydneyhud_menu_tweaks",
 
         "sydneyhud_hud_tweaks",
@@ -124,6 +123,8 @@ if not SydneyHUD then
         "sydneyhud_hud_tweaks_name",
         "sydneyhud_hud_tweaks_panel",
         "sydneyhud_hud_tweaks_waypoint",
+        "sydneyhud_hud_tweaks_kill_counter",
+        "sydneyhud_hud_tweaks_hps_meter",
 
         "sydneyhud_music_tweaks",
 
@@ -219,6 +220,7 @@ if not SydneyHUD then
         for _, menu in pairs(self._menus) do
             MenuHelper:LoadFromJsonFile(self._path .. "menu/" .. menu .. ".json", self, self._data)
         end
+        --MenuHelper:LoadFromJsonFile(self._path .. "menu/sydneyhud_hud_tweaks_assault_states.json", self, self._data.assault_states) -- Rewrite this when more menus will use this
     end
 
     function SydneyHUD:ForceReloadAllMenus()
@@ -233,6 +235,17 @@ if not SydneyHUD then
                 end
             end
         end
+
+        -- HUD Tweaks Assault State
+        --[[for _, _item in pairs(MenuHelper:GetMenu("sydneyhud_hud_tweaks_assault_states")._items_list) do
+            if _item._type == "toggle" then
+                _item.selected = self._data[_item._parameters.name] and 1 or 2
+            elseif _item._type == "multi_choice" then
+                _item._current_index = self._data[_item._parameters.name]
+            elseif _item._type == "slider" then
+                _item._value = self._data[_item._parameters.name]
+            end
+        end]]
     end
 
     function SydneyHUD:CheckPoco()

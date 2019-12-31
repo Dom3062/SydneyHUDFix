@@ -1,8 +1,8 @@
 {
-    "menu_id": "sydneyhud_kill_counter_options",
-    "parent_menu_id": "sydneyhud_options",
-    "title": "sydneyhud_kill_counter_options",
-    "description": "sydneyhud_kill_counter_options_desc",
+    "menu_id": "sydneyhud_hud_tweaks_kill_counter",
+    "parent_menu_id": "sydneyhud_hud_tweaks",
+    "title": "sydneyhud_hud_tweaks_kill_counter",
+    "description": "sydneyhud_hud_tweaks_kill_counter_desc",
     "items": [
         {
             "type": "toggle",

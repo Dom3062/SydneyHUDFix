@@ -1,0 +1,109 @@
+{
+    "menu_id": "sydneyhud_hud_tweaks_assault_states",
+    "parent_menu_id": "sydneyhud_hud_tweaks_assault",
+    "title": "sydneyhud_hud_tweaks_assault_states",
+    "description": "sydneyhud_hud_tweaks_assault_states_desc",
+    "items": [
+        {
+            "type": "multiple_choice",
+            "id": "bai_control",
+            "title": "",
+            "items": [
+                "hud_control"
+            ],
+            "value": "hud_control"
+        },
+        {
+            "type" : "toggle",
+            "id" : "bai_control_box_enabled_choice",
+            "title" : "bai_enabled",
+            "description" : "bai_enabled_not_assault_desc",
+            "callback" : "callback_bai_control_box_enabled",
+            "default_value" : true
+        },
+        {
+            "type": "divider",
+            "size": 32
+        },
+        {
+            "type": "multiple_choice",
+            "id": "bai_anticipation",
+            "title": "",
+            "items": [
+                "hud_anticipation"
+            ],
+            "value": "hud_anticipation"
+        },
+        {
+            "type" : "toggle",
+            "id" : "bai_anticipation_box_enabled_choice",
+            "title" : "bai_enabled",
+            "description" : "bai_enabled_not_assault_desc",
+            "callback" : "callback_bai_anticipation_box_enabled",
+            "default_value" : true
+        },
+        {
+            "type": "divider",
+            "size": 32
+        },
+        {
+            "type": "multiple_choice",
+            "id": "bai_build",
+            "title": "",
+            "items": [
+                "hud_build"
+            ],
+            "value": "hud_build"
+        },
+        {
+            "type" : "toggle",
+            "id" : "bai_build_box_enabled_choice",
+            "title" : "bai_enabled",
+            "description" : "bai_enabled_assault_desc",
+            "callback" : "callback_bai_build_box_enabled",
+            "default_value" : true
+        },
+        {
+            "type": "divider",
+            "size": 32
+        },
+        {
+            "type": "multiple_choice",
+            "id": "bai_sustain",
+            "title": "",
+            "items": [
+                "hud_sustain"
+            ],
+            "value": "hud_sustain"
+        },
+        {
+            "type" : "toggle",
+            "id" : "bai_sustain_box_enabled_choice",
+            "title" : "bai_enabled",
+            "description" : "bai_enabled_assault_desc",
+            "callback" : "callback_bai_sustain_box_enabled",
+            "default_value" : true
+        },
+        {
+            "type": "divider",
+            "size": 32
+        },
+        {
+            "type": "multiple_choice",
+            "id": "bai_fade",
+            "title": "",
+            "items": [
+                "hud_fade"
+            ],
+            "value": "hud_fade"
+        },
+        {
+            "type" : "toggle",
+            "id" : "bai_fade_box_enabled_choice",
+            "title" : "bai_enabled",
+            "description" : "bai_enabled_assault_desc",
+            "callback" : "callback_bai_fade_box_enabled",
+            "default_value" : true
+        }
+    ]
+}
