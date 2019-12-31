@@ -1,7 +1,7 @@
 local _add_version_string_original = MenuNodeMainGui._add_version_string
 function MenuNodeMainGui:_add_version_string()
     _add_version_string_original(self)
-    self._version_string:set_text("PAYDAY2 v" .. Application:version() .. " with SydneyHUD v" .. SydneyHUD:GetVersion())
+    self._version_string:set_text("PAYDAY 2 v" .. Application:version() .. managers.localization:text("sydneyhud_with_version") .. SydneyHUD:GetVersion())
     if SydneyHUD:GetOption("remove_ads") then
         self._version_string:set_align("right")
     end
