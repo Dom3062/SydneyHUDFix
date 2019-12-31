@@ -119,7 +119,7 @@
                     </group>
                 </group>
 
-                <post :hook_id="cop/copdamage" :script_path="cop/CopDamage.lua"/>
+                <post :hook_id="enemies/cop/copdamage" :script_path="enemies/cop/CopDamage.lua"/>
 
                 <!-- lib/units/equipment -->
                 <group :hook_id="equipment/" :script_path="equipment/">
