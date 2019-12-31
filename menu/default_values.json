@@ -4,6 +4,14 @@
     "anti_stealth_grenades": false,
     "assault_phase_chat_info": true,
     "assault_phase_chat_info_feed": true,
+    "assault_states":
+    {
+        "control": true,
+        "anticipation": true,
+        "build": true,
+        "sustain": true,
+        "fade": true
+    },
     "auto_laser": true,
     "auto_sentry_ap": true,
     "block_blood_decals" : false,
@@ -216,6 +224,7 @@
     "replenished_chat_info_feed": false,
     "set_gadget_id_on" : 0,
     "shuffle_music" : true,
+    "show_advanced_assault_info" : true,
     "show_ai_kills": true,
     "show_assault_states": true,
     "show_armor_timer": true,

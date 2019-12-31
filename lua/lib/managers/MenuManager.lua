@@ -951,6 +951,9 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_SydneyHUD", function(m
     MenuCallbackHandler.callback_show_assault_states = function(self, item)
         SydneyHUD._data.show_assault_states = item:value() == "on"
     end
+    MenuCallbackHandler.callback_show_advanced_assault_info = function(self, item)
+        SydneyHUD._data.show_advanced_assault_info = item:value() == "on"
+    end
     MenuCallbackHandler.callback_enhanced_assault_spawns = function(self, item)
         SydneyHUD._data.enhanced_assault_spawns = item:value() == "on"
     end
