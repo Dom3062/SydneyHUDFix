@@ -34,7 +34,7 @@ function BaseInteractionExt:interact_interupt(player, complete)
 	local string_macros = {}
 
 	self:_add_string_macros(string_macros)
-	if SydneyHUD:GetOption("push_to_interact") and self:_get_timer() > 0 and self:can_interact(player) then
+	if SydneyHUD:GetOption("push_to_interact") and self:can_interact(player) and self._tweak_data.timer and self:_get_timer() > 0 then
         if self.tweak_data == "corpse_alarm_pager" then
             interact_interupt_original(self, player, complete)
             return
