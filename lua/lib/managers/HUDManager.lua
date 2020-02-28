@@ -134,9 +134,8 @@ local function FixNames()
     end
 end
 
-FixNames()
-
 Hooks:PostHook(HUDManager, "_player_hud_layout", "uHUDPostHUDManagerPlayerInfoHUDLayout", function(self)
+    FixNames()
     local unit_health_main = managers.hud:script(PlayerBase.PLAYER_INFO_HUD_PD2).panel:panel({
         name 	= "unit_health_main",
         halign 	= "grow",
