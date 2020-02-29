@@ -82,27 +82,20 @@ local CharacterData = {
     ["mute_security_undominatable"] = "SOLOMON GARRETT",
     ["captain"] = "BOAT CREW",
     ["shadow_spooc"] = "ARK GUARDIAN",
-    ["bolivian_indoors_mex"] = "BOLIVIAN GUARD"
+    ["bolivian_indoors_mex"] = "BOLIVIAN GUARD",
+    ["security_mex"] = "SPANISH SECURITY GUARD",
+    ["civilian_mariachi"] = "MARIACHI CIVILIAN"
 }
 
 local function FixNames()
-    local level_id, difficulty = Global.game_settings.level_id, Global.game_settings.difficulty
-    if SydneyHUD:IsOr(level_id, "hox_1", "hox_2") then
+    local faction, difficulty, level_id = tweak_data.levels:get_ai_group_type(), Global.game_settings.difficulty, Global.game_settings.level_id
+    if SydneyHUD:IsOr(level_id, "hox_1", "hox_2") then -- Hoxton Breakout
         CharacterData["old_hoxton_mission"] = "HOXTON"
     end
-    if SydneyHUD:IsOr(difficulty, "easy_wish", "overkill_290") then -- Mayhem or Death Wish
-        CharacterData["city_swat"] = "GENSEC SWAT UNIT"
-        CharacterData["fbi_heavy_swat"] = "GENSEC HEAVY SWAT"
+    if level_id == "pbr" then -- Beneath the Mountain
+        CharacterData["old_hoxton_mission"] = "LOCKE"
     end
-    if difficulty == "sm_wish" then -- Death Sentence
-        CharacterData["swat"] = "ZEAL SWAT UNIT"
-        CharacterData["heavy_swat"] = "ZEAL HEAVY SWAT"
-        CharacterData["tank"] = "ZEALDOZER"
-        CharacterData["spooc"] = "ZEAL CLOAKER"
-        CharacterData["shield"] = "ZEAL SHIELD"
-        CharacterData["taser"] = "ZEAL TASER"
-    end
-    if SydneyHUD:IsOr(level_id, "kosugi", "pbr", "dark", "des", "bph", "vit", "mex", "mex_cooking") then -- Shadow Raid, Beneath the Mountain, Murky Station, Henry's Rock, Hell's Island, The White House, Border Crossing, Border Crystals
+    if faction == "murkywater" then -- Every mission with Murkywater enemies
         CharacterData["fbi"] = "MURKYWATER LIGHT"
         CharacterData["fbi_swat"] = "MURKYWATER LIGHT"
         CharacterData["city_swat"] = "MURKYWATER"
@@ -116,11 +109,8 @@ local function FixNames()
         CharacterData["shield"] = "MURKYWATER SHIELD"
         CharacterData["swat"] = "MURKYWATER LIGHT" -- Death Sentence
         CharacterData["heavy_swat"] = "MURKYWATER HEAVY" -- Death Sentence
-        if level_id == "pbr" then -- Beneath the Mountain
-            CharacterData["old_hoxton_mission"] = "LOCKE"
-        end
-    end
-    if level_id == "mad" then -- Boiling Point
+        return
+    elseif faction == "russian" then -- Every mission with Russian enemies
         CharacterData["fbi_swat"] = "RUSSIAN LIGHT"
         CharacterData["city_swat"] = "RUSSIAN LIGHT"
         CharacterData["fbi_heavy_swat"] = "RUSSIAN HEAVY"
@@ -131,6 +121,37 @@ local function FixNames()
         CharacterData["taser"] = "RUSSIAN TASER"
         CharacterData["medic"] = "RUSSIAN MEDIC"
         CharacterData["swat_turret"] = "RUSSIAN TURRET"
+        return
+    elseif faction == "federales" then -- Every mission with Federales enemies
+        CharacterData["cop"] = "SPANISH POLICE OFFICER"
+        CharacterData["fbi"] = "FEDERALE LIGHT SWAT"
+        CharacterData["fbi_swat"] = "FEDERALE LIGHT SWAT"
+        CharacterData["city_swat"] = "FEDERALE SWAT"
+        CharacterData["fbi_heavy_swat"] = "FEDERALE HEAVY SWAT"
+        CharacterData["medic"] = "FEDERALE MEDIC"
+        CharacterData["taser"] = "FEDERALE TASER"
+        CharacterData["sniper"] = "FEDERALE SNIPER"
+        CharacterData["tank"] = "FEDERALE BULLDOZER"
+        CharacterData["tank_medic"] = "FEDERALE MEDIC DOZER"
+        CharacterData["tank_mini"] = "FEDERALE MINIGUN DOZER"
+        CharacterData["spooc"] = "FEDERALE CLOAKER"
+        CharacterData["shield"] = "FEDERALE SHIELD"
+        CharacterData["swat_turret"] = "FEDERALE TURRET"
+        CharacterData["swat"] = "FEDERALE LIGHT SWAT" -- Death Sentence
+        CharacterData["heavy_swat"] = "FEDERALE HEAVY SWAT" -- Death Sentence
+        return
+    end
+    if SydneyHUD:IsOr(difficulty, "easy_wish", "overkill_290") then -- Mayhem or Death Wish
+        CharacterData["city_swat"] = "GENSEC SWAT UNIT"
+        CharacterData["fbi_heavy_swat"] = "GENSEC HEAVY SWAT"
+    end
+    if difficulty == "sm_wish" then -- Death Sentence
+        CharacterData["swat"] = "ZEAL SWAT UNIT"
+        CharacterData["heavy_swat"] = "ZEAL HEAVY SWAT"
+        CharacterData["tank"] = "ZEALDOZER"
+        CharacterData["spooc"] = "ZEAL CLOAKER"
+        CharacterData["shield"] = "ZEAL SHIELD"
+        CharacterData["taser"] = "ZEAL TASER"
     end
 end
 
