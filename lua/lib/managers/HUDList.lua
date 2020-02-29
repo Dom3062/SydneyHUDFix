@@ -208,8 +208,9 @@ HUDListManager.UNIT_TYPES = {
 	heavy_swat_sniper =		{ type_id = "cop",			category = "enemies",	long_name = "H. Sniper" },
     bolivian_indoors =		{ type_id = "security",		category = "enemies",	long_name = "Sosa Security" },
     bolivian_indoors_mex =  { type_id = "security",         category = "enemies",   long_name = "Bolivian Guard" },
-	security = 					{ type_id = "security",		category = "enemies",	long_name = "Sec. guard" },
-	security_undominatable ={ type_id = "security",		category = "enemies",	long_name = "Sec. guard" },
+	security = 					{ type_id = "security",		category = "enemies",	long_name = "Sec. Guard" },
+    security_undominatable ={ type_id = "security",		category = "enemies",	long_name = "Sec. Guard" },
+    security_mex = { type_id = "security", category = "enemies", long_name = "Sp. Sec. G." },
 	gensec = 					{ type_id = "security",		category = "enemies",	long_name = "GenSec" },
 	bolivian =					{ type_id = "thug",			category = "enemies",	long_name = "Sosa Thug" },
 	gangster = 					{ type_id = "thug",			category = "enemies",	long_name = "Gangster" },
@@ -235,7 +236,8 @@ HUDListManager.UNIT_TYPES = {
 	phalanx_vip = 				{ type_id = "phalanx",		category = "enemies",	long_name = "Cpt. Winter" },
 	phalanx_minion = 			{ type_id = "phalanx",		category = "enemies",	long_name = "Phalanx" },
 	civilian = 					{ type_id = "civ",			category = "civilians",	long_name = "Civilian" },
-	civilian_female = 		{ type_id = "civ",			category = "civilians",	long_name = "Civilian" },
+    civilian_female = 		{ type_id = "civ",			category = "civilians",	long_name = "Civilian" },
+    civilian_mariachi = { type_id = "civ", category = "civilians", long_name = "Mariachi Civ." },
 	bank_manager = 			{ type_id = "civ",			category = "civilians",	long_name = "Bank mngr." },
 	--captain = 					{ type_id = "unique",		category = "civilians",	long_name = "Captain" },	--Alaska
 	--drunk_pilot = 				{ type_id = "unique",		category = "civilians",	long_name = "Pilot" },	--White X-mas
