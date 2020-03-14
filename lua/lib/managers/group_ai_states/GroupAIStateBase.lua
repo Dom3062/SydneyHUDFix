@@ -170,9 +170,3 @@ function GroupAIStateBase:register_ecm_jammer(unit, jam_settings, ...)
     end
     return register_ecm_jammer_original(self, unit, jam_settings, ...)
 end
-
-SydneyHUD:Hook(GroupAIStateBesiege, "set_wave_mode", function(self, flag)
-    if self._wave_mode and self._wave_mode == "besiege" and flag == "besiege" then
-        managers.hud._hud_assault_corner:SetNormalAssaultOverride()
-    end
-end)

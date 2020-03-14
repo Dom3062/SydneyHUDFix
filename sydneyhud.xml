@@ -15,6 +15,7 @@
                 <post :hook_id="gameplaycentralmanager" :script_path="GamePlayCentralManager.lua"/>
 
                 <post :hook_id="group_ai_states/groupaistatebase" :script_path="group_ai_states/GroupAIStateBase.lua"/>
+                <post :hook_id="group_ai_states/groupaistatebesiege" :script_path="group_ai_states/GroupAIStateBesiege.lua"/>
 
                 <!-- lib/managers/hud -->
                 <group :hook_id="hud/" :script_path="hud/">
