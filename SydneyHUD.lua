@@ -224,8 +224,8 @@ if not SydneyHUD then
     end
 
     function SydneyHUD:ForceReloadAllMenus()
-        for _,menu in pairs(self._menus) do
-            for _,_item in pairs(MenuHelper:GetMenu(menu)._items_list) do
+        for _, menu in pairs(self._menus) do
+            for _, _item in pairs(MenuHelper:GetMenu(menu)._items_list or {}) do
                 if _item._type == "toggle" then
                     _item.selected = self._data[_item._parameters.name] and 1 or 2
                 elseif _item._type == "multi_choice" then
