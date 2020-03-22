@@ -3,25 +3,11 @@
     "description": "All-In-One HUD mod",
     "author": "SydneyMOD Project Team; Fixes and improvements by Dom",
     "contact": "http://steamcommunity.com/groups/SydneyMOD",
-    "version": "4.1.5 Beta",
+    "version": "4.1.6 Beta",
     "blt_version": 2,
     "supermod_definition" : "sydneyhud.xml",
     "color": "0.3 0 1",
     "image": "logo.png",
-    "pre_hooks": [
-        {
-            "hook_id": "lib/entry",
-            "script_path": "lua/lib/Entry.lua"
-        },
-        {
-            "hook_id": "lib/setups/setup",
-            "script_path": "lua/lib/setups/Setup.lua"
-        },
-        {
-            "hook_id": "lib/setups/gamesetup",
-            "script_path": "lua/lib/setups/GameSetup.lua"
-        }
-    ],
     "keybinds": [
         {
             "keybind_id": "save_pre",
