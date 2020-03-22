@@ -186,7 +186,6 @@ function PlayerStandard:_update_reload_timers(t, dt, input)
     _update_reload_timers_original(self, t, dt, input)
     if reload and not self._state_data.reload_expire_t then
         managers.gameinfo:event("player_action", "deactivate", "reload")
-        self._state_data._isReloading = false
     end
 end
 
