@@ -547,6 +547,10 @@ if not SydneyHUD then
     function SydneyHUD:Hook(object, func, post_call)
         Hooks:PostHook(object, func, "SydneyHUD_" .. func, post_call)
     end
+
+    function SydneyHUD:PreHook(object, func, pre_call)
+        Hooks:PreHook(object, func, "SydneyHUD_Pre_" .. func, pre_call)
+    end
     
 --[[     function SydneyHUD:Unhook(mod, id)
         Hooks:RemovePostHook((mod and (mod .. "_") or "BAI_") .. id)
@@ -567,7 +571,7 @@ if not SydneyHUD then
             end
             if not no_as_mod then
                 LuaNetworking:SendToPeers("AssaultStates_Net", state)
-                LuaNetworking:SendToPeers("SyncAssaultPhase", state) -- KineticHUD
+                LuaNetworking:SendToPeers("SyncAssaultPhase", state) -- KineticHUD and NobleHUD
             end
         end
     end
