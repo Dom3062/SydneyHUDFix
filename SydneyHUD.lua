@@ -71,6 +71,7 @@ if not SydneyHUD then
         "sydneyhud_core",
 
         "sydneyhud_gadget_options",
+        "sydneyhud_gadget_options_player",
         "sydneyhud_gadget_options_sniper",
         "sydneyhud_gadget_options_turret",
 
