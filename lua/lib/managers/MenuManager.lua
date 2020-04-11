@@ -1099,7 +1099,7 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_SydneyHUD", function(m
 
     -- Optimization Tweaks
     MenuCallbackHandler.callback_block_blood_decals = function(self, item)
-        SydneyHUD._data.block_bullet_decals = item:value() == "on"
+        SydneyHUD._data.block_blood_decals = item:value() == "on"
     end
 
     MenuCallbackHandler.callback_block_bullet_decals = function(self, item)
