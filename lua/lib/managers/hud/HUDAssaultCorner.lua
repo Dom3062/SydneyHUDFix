@@ -788,6 +788,7 @@ Hooks:Add("NetworkReceivedData", "NetworkReceivedData_BAI", function(sender, id,
     end
     if id == "SyncAssaultPhase" then
         if SydneyHUD:GetOption("show_assault_states") then
+            data = utf8.to_lower(data)
             if data == "control" and managers.hud._hud_assault_corner._assault then
                 return
             end
