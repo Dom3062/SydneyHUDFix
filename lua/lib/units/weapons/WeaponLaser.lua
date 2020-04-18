@@ -1,5 +1,6 @@
 WeaponLaser._suffix_map =
 {
+    default = "_default",
     cop_sniper = "_snipers",
     turret_module_active = "_turret",
     turret_module_rearming = "_turretr",
@@ -26,12 +27,16 @@ function WeaponLaser:update(unit, t, dt, ...)
     if self._ignore_suffix_map[theme] then
         return
     end
-    local suffix = self._suffix_map[theme] or ""
+    local suffix = self._suffix_map[theme]
     if suffix then
         if SydneyHUD:GetOption("enable_laser_options" .. suffix) then
             local r, g, b = SydneyHUD:GetOption("laser_color_r" .. suffix), SydneyHUD:GetOption("laser_color_g" .. suffix), SydneyHUD:GetOption("laser_color_b" .. suffix)
             if SydneyHUD:GetOption("laser_color_rainbow" .. suffix) then
                 r, g, b = math.sin(135 * t + 0) / 2 + 0.5, math.sin(140 * t + 60) / 2 + 0.5, math.sin(145 * t + 120) / 2 + 0.5
+            end
+            if not r then
+                self:set_color(self:color())
+                return
             end
             self._themes[theme] = {
                 light = Color(r, g, b) * SydneyHUD:GetOption("laser_light" .. suffix),

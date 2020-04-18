@@ -728,23 +728,23 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_SydneyHUD", function(m
     end
 
     MenuCallbackHandler.callback_enable_laser_options = function(self, item)
-        SydneyHUD._data.enable_laser_options = item:value() == "on"
+        SydneyHUD._data.enable_laser_options_default = item:value() == "on"
     end
 
     MenuCallbackHandler.callback_laser_color_rainbow = function(self, item)
-        SydneyHUD._data.laser_color_rainbow = item:value() == "on"
+        SydneyHUD._data.laser_color_rainbow_default = item:value() == "on"
     end
 
     MenuCallbackHandler.callback_laser_color_a = function(self, item)
-        SydneyHUD._data.laser_color_a = item:value()
+        SydneyHUD._data.laser_color_a_default = item:value()
     end
 
     MenuCallbackHandler.callback_laser_glow = function(self, item)
-        SydneyHUD._data.laser_glow = item:value()
+        SydneyHUD._data.laser_glow_default = item:value()
     end
 
     MenuCallbackHandler.callback_laser_light = function(self, item)
-        SydneyHUD._data.laser_light = item:value()
+        SydneyHUD._data.laser_light_default = item:value()
     end
 
     MenuCallbackHandler.callback_enable_laser_options_snipers = function(self, item)
