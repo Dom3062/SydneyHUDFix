@@ -424,7 +424,7 @@ function HUDManager:update(t, dt)
     update_original(self, t, dt)
 end
 
---if not BAI then -- Preparing for BAI74
+--if not BAI then -- Preparing for BAI
     local _f_activate_objective = HUDManager.activate_objective
     function HUDManager:activate_objective(data)
         _f_activate_objective(self, data)
