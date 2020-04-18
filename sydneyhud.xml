@@ -156,7 +156,7 @@
                 </group>
             </group>
 
-            <!-- lib/units -->
+            <!-- lib/utils -->
             <group :hook_id="utils/" :script_path="utils/">
                 <post :hook_id="propertymanager" :script_path="PropertyManager.lua"/>
                 <post :hook_id="temporarypropertymanager" :script_path="TemporaryPropertyManager.lua"/>
