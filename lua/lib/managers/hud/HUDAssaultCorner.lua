@@ -35,6 +35,7 @@ function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
         dofile(SydneyHUD._lua_path .. "lib/managers/LocalizationManager.lua")
         dofile(SydneyHUD._lua_path .. "lib/managers/hud/HUDAssaultCorner_AssaultStates.lua")
         dofile(SydneyHUD._lua_path .. "lib/managers/hud/HUDAssaultCorner_AssaultTime.lua")
+        dofile(SydneyHUD._lua_path .. "lib/managers/group_ai_states/GroupAIStateBesiege.lua")
         if (managers.mutators and managers.mutators:are_mutators_active() and Global.mutators.active_on_load["MutatorAssaultExtender"]) or (self.is_crimespree and managers.crime_spree:DoesServerHasAssaultExtenderModifier()) then
             self.assault_extender_modifier = true
         end

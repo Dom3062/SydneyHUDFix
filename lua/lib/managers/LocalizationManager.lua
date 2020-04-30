@@ -6,7 +6,7 @@ local assault_extender = false
 local tweak, gai_state, assault_data, get_value, get_mult
 if Network:is_server() then
     tweak = tweak_data.group_ai.besiege.assault
-    if managers.hud._hud_assault_corner.is_skirmish then
+    if managers.skirmish and managers.skirmish:is_skirmish() then
         tweak = tweak_data.group_ai.skirmish.assault
     end
     gai_state = managers.groupai:state()
