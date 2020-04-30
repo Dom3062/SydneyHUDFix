@@ -44,6 +44,14 @@ function HUDAssaultCorner:_get_balancing_multiplier(balance_multipliers)
 	return balance_multipliers[nr_players]
 end
 
+function HUDAssaultCorner:GetCorrectDiff(level_id) -- Returns diff for heist in which I'm definitely sure about; more info: Mission Scripts from Frankelstner on Bitbucket
+    -- Safe House Raid, Alaskan Deal
+    if SydneyHUD:IsOr(level_id, "chill_combat", "wwh") then
+        return 1
+    end
+    return 0.5 -- Returns 0.5 (50%) if playing other heists
+end
+
 function CrimeSpreeManager:DoesServerHasAssaultExtenderModifier()
     local server_modifiers = self._global.server_modifiers or {}
     for _, data in ipairs(server_modifiers) do

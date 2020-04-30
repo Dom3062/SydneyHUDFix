@@ -12,7 +12,8 @@ function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
         self._state_sustain_color = Color(255, 237, 127, 127) / 255
         self._state_fade_color = Color(255, 0, 255, 255) / 255
         self.heists_with_fake_endless_assaults = { "framing_frame_1", "gallery", "watchdogs_2", "bph" } -- Framing Frame Day 1, Art Gallery, Watch Dogs Day 2, Hell's Island
-        self._no_endless_assault_override = table.contains(self.heists_with_fake_endless_assaults, Global.game_settings.level_id)
+        local level_id = Global.game_settings.level_id
+        self._no_endless_assault_override = table.contains(self.heists_with_fake_endless_assaults, level_id)
         self.endless_client = false
         self.is_host = Network:is_server()
         self.is_client = not self.is_host
@@ -26,8 +27,8 @@ function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
             self.heists_with_endless_assaults = { "haunted", "chew", "hvh", "escape_garage", "escape_cafe", "escape_cafe_day" }
             -- Pentpay Bank (Loud)
             self.custom_heists_with_endless_assault = { "q_bank_sky_loud" }
-            self.endless_client = table.contains(self.heists_with_endless_assaults, Global.game_settings.level_id) or table.contains(self.custom_heists_with_endless_assault, Global.game_settings.level_id)
-            self.diff = 0.5 -- 50%
+            self.endless_client = table.contains(self.heists_with_endless_assaults, level_id) or table.contains(self.custom_heists_with_endless_assault, level_id)
+            self.diff = self:GetCorrectDiff(level_id)
         end
         self.assault_state = "nil"
         self.show_popup = true
