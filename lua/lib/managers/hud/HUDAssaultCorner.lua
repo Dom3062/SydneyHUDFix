@@ -36,6 +36,7 @@ function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
         dofile(SydneyHUD._lua_path .. "lib/managers/hud/HUDAssaultCorner_AssaultStates.lua")
         dofile(SydneyHUD._lua_path .. "lib/managers/hud/HUDAssaultCorner_AssaultTime.lua")
         dofile(SydneyHUD._lua_path .. "lib/managers/group_ai_states/GroupAIStateBesiege.lua")
+        dofile(SydneyHUD._lua_path .. "SydneyAnimation.lua")
         if (managers.mutators and managers.mutators:are_mutators_active() and Global.mutators.active_on_load["MutatorAssaultExtender"]) or (self.is_crimespree and managers.crime_spree:DoesServerHasAssaultExtenderModifier()) then
             self.assault_extender_modifier = true
         end
@@ -427,12 +428,12 @@ function HUDAssaultCorner:SetNormalAssaultOverride()
             self:UpdateAssaultStateOverride(managers.groupai:state():GetAssaultState())
         else
             if not self.BAIHost then
-                self:_update_assault_hud_color(self._assault_color)
+                self:_animate_update_assault_hud_color(self._assault_color)
                 self:_set_text_list(self:_get_assault_strings())
             end
         end
     else
-        self:_update_assault_hud_color(self._assault_color)
+        self:_animate_update_assault_hud_color(self._assault_color)
         if SydneyHUD:GetOption("enable_enhanced_assault_banner") then
             self:_set_text_list(self:_get_assault_strings_info())
             if self.is_client then
@@ -483,7 +484,11 @@ function HUDAssaultCorner:UpdateAssaultState(state)
                     end
                     self:SpamChat(self.spam[state])
                 end
-                self:_update_assault_hud_color(self:GetStateColor(state))
+                if state == "control" then
+                    self:_update_assault_hud_color(self:GetStateColor(state))
+                else
+                    self:_animate_update_assault_hud_color(self:GetStateColor(state))
+                end
             end
         else
             if state and self.assault_state ~= state then
@@ -502,7 +507,7 @@ function HUDAssaultCorner:UpdateAssaultStateOverride(state)
                     self.assault_state = state
                     self._assault = true
                     self:_set_text_list(self:_get_state_strings(state))
-                    self:_update_assault_hud_color(self:GetStateColor(state))    
+                    self:_animate_update_assault_hud_color(self:GetStateColor(state))    
                 else
                     self.assault_state = state
                     if SydneyHUD:GetOption("enable_enhanced_assault_banner") then
@@ -513,7 +518,7 @@ function HUDAssaultCorner:UpdateAssaultStateOverride(state)
                     else
                         self:_set_text_list(self:_get_assault_state_strings(state))
                     end
-                    self:_update_assault_hud_color(self:GetStateColor(state))
+                    self:_animate_update_assault_hud_color(self:GetStateColor(state))
                     self:SpamChat(self.spam[state])
                 end
                 SydneyHUD:SyncAssaultState(state, true)
@@ -728,6 +733,10 @@ function HUDAssaultCorner:GetFactionAssaultText()
         return "_fss_mod_" .. math.random(1, 3)
     end
     return ""
+end
+
+function HUDAssaultCorner:_animate_update_assault_hud_color(color)
+    self._bg_box:animate(callback(SydneyAnimation, SydneyAnimation, "ColorChange"), color, callback(self, self, "_update_assault_hud_color"), self._current_assault_color)
 end
 
 Hooks:Add("NetworkReceivedData", "NetworkReceivedData_BAI", function(sender, id, data)

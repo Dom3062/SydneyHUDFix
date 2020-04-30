@@ -1,6 +1,8 @@
 4.1.9 (30. 04. 2020):
+Added Assault Panel color animation
 "Time Left" is now accurate in Holdout (host only)
 Time Left on client is more accurate in Safe House Raid and Alaskan Deal heists
+Fixed a crash that could happen when you started Holdout mission
 
 4.1.8 (18. 04. 2020):
 Fixed an issue where your weapon laser is always green
