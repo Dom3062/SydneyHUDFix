@@ -226,10 +226,17 @@ end
 function HUDAssaultCorner:GetAssaultTime(sender)
     if self.is_host and self._assault and not self._assault_endless and not self._assault_vip and sender then
         local tweak = tweak_data.group_ai.besiege.assault
+        if self.is_skirmish then
+            tweak = tweak_data.group_ai.skirmish.assault
+        end
         local gai_state = managers.groupai:state()
         local assault_data = gai_state and gai_state._task_data.assault
         local get_value = gai_state._get_difficulty_dependent_value or function() return 0 end
         local get_mult = gai_state._get_balancing_multiplier or function() return 0 end
+
+        if not (tweak and gai_state and assault_data and assault_data.active) then
+            return
+        end
         
         local time_left = assault_data.phase_end_t - gai_state._t
         local add
@@ -241,14 +248,10 @@ function HUDAssaultCorner:GetAssaultTime(sender)
             end
         end
         if assault_data.phase == "build" then
-            if self.is_skirmish then
-                time_left = 140 - time_left -- 140 is precalculated from SkirmishTweakData.lua
-            else
-                local sustain_duration = math.lerp(get_value(gai_state, tweak.sustain_duration_min), get_value(gai_state, tweak.sustain_duration_max), 0.5) * get_mult(gai_state, tweak.sustain_duration_balance_mul)
-                time_left = time_left + sustain_duration + tweak.fade_duration
-                if add then
-                    time_left = time_left + add
-                end
+            local sustain_duration = math.lerp(get_value(gai_state, tweak.sustain_duration_min), get_value(gai_state, tweak.sustain_duration_max), 0.5) * get_mult(gai_state, tweak.sustain_duration_balance_mul)
+            time_left = time_left + sustain_duration + tweak.fade_duration
+            if add then
+                time_left = time_left + add
             end
         elseif assault_data.phase == "sustain" then
             time_left = time_left + tweak.fade_duration

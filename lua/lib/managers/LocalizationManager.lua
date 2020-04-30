@@ -3,10 +3,12 @@ local spacer = string.rep(" ", 10)
 local sep = string.format("%s%s%s", spacer, managers.localization:text("hud_assault_end_line"), spacer)
 local crimespree = managers.crime_spree:is_active()
 local assault_extender = false
-local skirmish = managers.skirmish:is_skirmish()
 local tweak, gai_state, assault_data, get_value, get_mult
 if Network:is_server() then
     tweak = tweak_data.group_ai.besiege.assault
+    if managers.hud._hud_assault_corner.is_skirmish then
+        tweak = tweak_data.group_ai.skirmish.assault
+    end
     gai_state = managers.groupai:state()
     assault_data = gai_state and gai_state._task_data.assault
     get_value = gai_state._get_difficulty_dependent_value or function() return 0 end
@@ -56,14 +58,10 @@ function LocalizationManager:hud_assault_enhanced()
                 end
             end
             if assault_data.phase == "build" then
-                if skirmish then
-                    time_left = 140 - time_left -- 140 is precalculated from SkirmishTweakData.lua
-                else
-                    local sustain_duration = math.lerp(get_value(gai_state, tweak.sustain_duration_min), get_value(gai_state, tweak.sustain_duration_max), math.random()) * get_mult(gai_state, tweak.sustain_duration_balance_mul)
-                    time_left = time_left + sustain_duration + tweak.fade_duration
-                    if add then
-                        time_left = time_left + add
-                    end
+                local sustain_duration = math.lerp(get_value(gai_state, tweak.sustain_duration_min), get_value(gai_state, tweak.sustain_duration_max), math.random()) * get_mult(gai_state, tweak.sustain_duration_balance_mul)
+                time_left = time_left + sustain_duration + tweak.fade_duration
+                if add then
+                    time_left = time_left + add
                 end
             elseif assault_data.phase == "sustain" then
                 time_left = time_left + tweak.fade_duration
