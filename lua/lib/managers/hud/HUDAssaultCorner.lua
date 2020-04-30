@@ -22,6 +22,11 @@ function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
         self.CompatibleHost = false
         self.BAIHost = false
         self.send_time_left = true
+        dofile(SydneyHUD._lua_path .. "lib/managers/LocalizationManager.lua")
+        dofile(SydneyHUD._lua_path .. "lib/managers/hud/HUDAssaultCorner_AssaultStates.lua")
+        dofile(SydneyHUD._lua_path .. "lib/managers/hud/HUDAssaultCorner_AssaultTime.lua")
+        dofile(SydneyHUD._lua_path .. "lib/managers/group_ai_states/GroupAIStateBesiege.lua")
+        dofile(SydneyHUD._lua_path .. "SydneyAnimation.lua")
         if self.is_client then
             -- Safe House Nightmare, The Biker Heist Day 2, Cursed Kill Room, Escape: Garage, Escape: Cafe, Escape: Cafe (Day)
             self.heists_with_endless_assaults = { "haunted", "chew", "hvh", "escape_garage", "escape_cafe", "escape_cafe_day" }
@@ -32,11 +37,6 @@ function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
         end
         self.assault_state = "nil"
         self.show_popup = true
-        dofile(SydneyHUD._lua_path .. "lib/managers/LocalizationManager.lua")
-        dofile(SydneyHUD._lua_path .. "lib/managers/hud/HUDAssaultCorner_AssaultStates.lua")
-        dofile(SydneyHUD._lua_path .. "lib/managers/hud/HUDAssaultCorner_AssaultTime.lua")
-        dofile(SydneyHUD._lua_path .. "lib/managers/group_ai_states/GroupAIStateBesiege.lua")
-        dofile(SydneyHUD._lua_path .. "SydneyAnimation.lua")
         if (managers.mutators and managers.mutators:are_mutators_active() and Global.mutators.active_on_load["MutatorAssaultExtender"]) or (self.is_crimespree and managers.crime_spree:DoesServerHasAssaultExtenderModifier()) then
             self.assault_extender_modifier = true
         end
