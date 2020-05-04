@@ -94,7 +94,6 @@
 
             <!-- lib/tweak_data -->
             <group :hook_id="tweak_data/" :script_path="tweak_data/">
-                <post :hook_id="charactertweakdata" :script_path="CharacterTweakData.lua"/>
                 <post :hook_id="levelstweakdata" :script_path="LevelsTweakData.lua"/>
                 <post :hook_id="playertweakdata" :script_path="PlayerTweakData.lua"/>
             </group>
@@ -162,4 +161,7 @@
             </group>
         </group>
     </hooks>
+
+    <!-- Menu Textures -->
+    <:include src="assets/assets.xml"/>
 </mod>

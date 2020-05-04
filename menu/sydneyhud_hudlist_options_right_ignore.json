@@ -1,6 +1,6 @@
 {
     "menu_id": "sydneyhud_hudlist_options_right_ignore",
-    "parent_menu_id": "sydneyhud_hudlist_options_right",
+    "parent_menu": "sydneyhud_hudlist_options_right",
     "title": "sydneyhud_hudlist_options_right_ignore",
     "description": "sydneyhud_hudlist_options_right_ignore_desc",
     "items": [
@@ -8,7 +8,8 @@
             "type": "toggle",
             "id": "hudlist_ignore_item_crowbar",
             "title": "sydneyhud_hudlist_ignore_item_crowbar",
-            "callback": "callback_ignore_item_crowbar",
+            "description": "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_item_crowbar",
             "default_value": false
         },
@@ -16,7 +17,8 @@
             "type": "toggle",
             "id": "hudlist_ignore_item_keycard",
             "title": "sydneyhud_hudlist_ignore_item_keycard",
-            "callback": "callback_ignore_item_keycard",
+            "description": "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_item_keycard",
             "default_value": false
         },
@@ -24,7 +26,8 @@
             "type": "toggle",
             "id": "hudlist_ignore_item_courier",
             "title": "sydneyhud_hudlist_ignore_item_courier",
-            "callback": "callback_ignore_item_courier",
+            "description": "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_item_courier",
             "default_value": false
         },
@@ -32,7 +35,8 @@
             "type": "toggle",
             "id": "hudlist_ignore_item_planks",
             "title": "sydneyhud_hudlist_ignore_item_planks",
-            "callback": "callback_ignore_item_planks",
+            "description": "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_item_planks",
             "default_value": false
         },
@@ -40,7 +44,8 @@
             "type": "toggle",
             "id": "hudlist_ignore_item_meth_ingredients",
             "title": "sydneyhud_hudlist_ignore_item_meth_ingredients",
-            "callback": "callback_ignore_item_meth_ingredients",
+            "description": "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_item_meth_ingredients",
             "default_value": false
         },
@@ -49,7 +54,7 @@
             "id": "hudlist_ignore_item_secret_item",
             "title": "sydneyhud_hudlist_ignore_item_secret_item",
             "description": "sydneyhud_hudlist_ignore_item_secret_item_desc",
-            "callback": "callback_ignore_item_secret_item",
+            "callback": "SetValue",
             "value": "hudlist_ignore_item_secret_item",
             "default_value": false
         }

@@ -1,3 +1,7 @@
+4.2.0 (xx. 05. 2020):
+Redesigned mod options
+Fixed a crash when you were client
+
 4.1.9 (30. 04. 2020):
 Added Assault Panel color animation
 "Time Left" is now accurate in Holdout (host only)

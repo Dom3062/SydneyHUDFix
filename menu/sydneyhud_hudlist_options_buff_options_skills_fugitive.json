@@ -1,13 +1,14 @@
 {
     "menu_id": "sydneyhud_hudlist_options_buff_options_skills_fugitive",
-    "parent_menu_id": "sydneyhud_hudlist_options_buff_options_skills",
+    "parent_menu": "sydneyhud_hudlist_options_buff_options_skills",
     "title": "st_menu_hoxton_pack",
     "items": [
         {
             "type": "toggle",
             "id": "hudlist_ignore_buff_berserker",
             "title": "menu_wolverine_beta",
-            "callback": "callback_ignore_buff_berserker",
+            "description": "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_berserker",
             "default_value": true
         },
@@ -16,7 +17,7 @@
             "id": "hudlist_ignore_buff_bloodthirst_basic",
             "title": "sydneyhud_hudlist_ignore_buff_bloodthirst_basic",
             "description": "sydneyhud_hudlist_ignore_buff_bloodthirst_basic_desc",
-            "callback": "callback_ignore_buff_bloodthirst_basic",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_bloodthirst_basic",
             "default_value": false
         },
@@ -24,7 +25,8 @@
             "type": "toggle",
             "id": "hudlist_ignore_buff_bloodthirst_aced",
             "title": "sydneyhud_hudlist_ignore_buff_bloodthirst_aced",
-            "callback": "callback_ignore_buff_bloodthirst_aced",
+            "description": "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_bloodthirst_aced",
             "default_value": false
         },
@@ -32,7 +34,8 @@
             "type": "toggle",
             "id": "hudlist_ignore_buff_desperado",
             "title": "menu_expert_handling",
-            "callback": "callback_ignore_buff_desperado",
+            "description": "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_desperado",
             "default_value": false
         },
@@ -40,7 +43,8 @@
             "type": "toggle",
             "id": "hudlist_ignore_buff_messiah",
             "title": "menu_pistol_beta_messiah",
-            "callback": "callback_ignore_buff_messiah",
+            "description": "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_messiah",
             "default_value": false
         },
@@ -48,7 +52,8 @@
             "type": "toggle",
             "id": "hudlist_ignore_buff_running_from_death_basic",
             "title": "sydneyhud_hudlist_ignore_buff_running_from_death_basic",
-            "callback": "callback_ignore_buff_running_from_death_basic",
+            "description": "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_running_from_death_basic",
             "default_value": false
         },
@@ -56,7 +61,8 @@
             "type": "toggle",
             "id": "hudlist_ignore_buff_running_from_death_aced",
             "title": "sydneyhud_hudlist_ignore_buff_running_from_death_aced",
-            "callback": "callback_ignore_buff_running_from_death_aced",
+            "description": "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_running_from_death_aced",
             "default_value": false
         },
@@ -64,7 +70,8 @@
             "type": "toggle",
             "id": "hudlist_ignore_buff_swan_song",
             "title": "menu_perseverance_beta",
-            "callback": "callback_ignore_buff_swan_song",
+            "description": "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_swan_song",
             "default_value": true
         },
@@ -72,7 +79,8 @@
             "type": "toggle",
             "id": "hudlist_ignore_buff_trigger_happy",
             "title": "menu_trigger_happy_beta",
-            "callback": "callback_ignore_buff_trigger_happy",
+            "description": "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_trigger_happy",
             "default_value": true
         },
@@ -81,7 +89,7 @@
             "id": "hudlist_ignore_buff_up_you_go",
             "title": "menu_up_you_go_beta",
             "description": "sydneyhud_hudlist_ignore_buff_up_you_go_desc",
-            "callback": "callback_ignore_buff_up_you_go",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_up_you_go",
             "default_value": false
         }

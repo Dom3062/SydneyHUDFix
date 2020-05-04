@@ -36,7 +36,7 @@ if not SydneyHUD then
     SydneyHUD.error = "[SydneyHUD Error] "
     SydneyHUD.dev = "[SydneyHUD Dev] "
 
-    SydneyHUD.SaveDataVer = 2
+    SydneyHUD.SaveDataVer = 3
 
     SydneyHUD.ModVersion = nil -- Used for caching mod version
 
@@ -81,7 +81,6 @@ if not SydneyHUD then
         "sydneyhud_hudlist_options_right_ignore",
         "sydneyhud_hudlist_options_buff",
         "sydneyhud_hudlist_options_buff_options",
-        "sydneyhud_hudlist_options_buff_options_buff",
         "sydneyhud_hudlist_options_buff_options_skills",
         "sydneyhud_hudlist_options_buff_options_skills_mastermind",
         "sydneyhud_hudlist_options_buff_options_skills_enforcer",
@@ -217,13 +216,6 @@ if not SydneyHUD then
         default_file:close()
     end
 
-    function SydneyHUD:InitAllMenus()
-        for _, menu in pairs(self._menus) do
-            MenuHelper:LoadFromJsonFile(self._path .. "menu/" .. menu .. ".json", self, self._data)
-        end
-        --MenuHelper:LoadFromJsonFile(self._path .. "menu/sydneyhud_hud_tweaks_assault_states.json", self, self._data.assault_states) -- Rewrite this when more menus will use this
-    end
-
     function SydneyHUD:ForceReloadAllMenus()
         for _, menu in pairs(self._menus) do
             for _, _item in pairs(MenuHelper:GetMenu(menu)._items_list or {}) do
@@ -298,10 +290,12 @@ if not SydneyHUD then
         for _, mod in ipairs(BLT.Mods:Mods()) do
             if mod:GetName() == "SydneyHUD" then -- I don't understand, why BLT is checking every mod it's identifier (mod folder name) and not mod name defined in mod.txt
                 self.ModVersion = tostring(mod:GetVersion() or "(n/a)")
-                return self.ModVersion
+                break
             end
         end
-        self.ModVersion = "(n/a)"
+        if not self.ModVersion then
+            self.ModVersion = "(n/a)"
+        end
         return self.ModVersion
     end
 
@@ -533,7 +527,7 @@ if not SydneyHUD then
             return Color.white
         end
         extension = extension or ""
-        return Color(255, SydneyHUD._data[color .. "_r" .. extension] * 100, SydneyHUD._data[color .. "_g" .. extension] * 100, SydneyHUD._data[color .. "_b" .. extension] * 100) / 255
+        return Color(255, self._data[color .. "_r" .. extension], self._data[color .. "_g" .. extension], self._data[color .. "_b" .. extension]) / 255
     end
 
     function SydneyHUD:IsOr(string, ...)

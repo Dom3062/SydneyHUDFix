@@ -1,22 +1,87 @@
 {
-    "menu_id": "sydneyhud_options",
-    "parent_menu_id": "blt_options",
+    "menu_id": "sydneyhud_menu",
     "title": "sydneyhud_options",
     "description": "sydneyhud_options_desc",
-    "back_callback" : "SydneyHUDSave",
-    "focus_changed_callback" : "SydneyHUDChangedFocus",
     "items": [
+        {
+            "type" : "button",
+            "id" : "sydneyhud_core",
+            "title" : "sydneyhud_core",
+            "description" : "sydneyhud_core_desc",
+            "next_menu" : "sydneyhud_core"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_gadget_options",
+            "title" : "sydneyhud_gadget_options",
+            "description" : "sydneyhud_gadget_options_desc",
+            "next_menu" : "sydneyhud_gadget_options"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_hudlist_options",
+            "title" : "sydneyhud_hudlist_options",
+            "description" : "sydneyhud_hudlist_options_desc",
+            "next_menu" : "sydneyhud_hudlist_options"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_chat_info",
+            "title" : "sydneyhud_chat_info",
+            "description" : "sydneyhud_chat_info_desc",
+            "next_menu" : "sydneyhud_chat_info"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_experimental",
+            "title" : "sydneyhud_experimental",
+            "description" : "sydneyhud_experimental_desc",
+            "next_menu" : "sydneyhud_experimental"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_gameplay_tweaks",
+            "title" : "sydneyhud_gameplay_tweaks",
+            "description" : "sydneyhud_gameplay_tweaks_desc",
+            "next_menu" : "sydneyhud_gameplay_tweaks"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_interact_tweak",
+            "title" : "interact_tweak",
+            "description" : "interact_tweak_desc",
+            "next_menu" : "sydneyhud_interact_tweaks"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_hud_tweaks",
+            "title" : "sydneyhud_hud_tweaks",
+            "description" : "sydneyhud_hud_tweaks_desc",
+            "next_menu" : "sydneyhud_hud_tweaks"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_music_tweaks",
+            "title" : "sydneyhud_music_tweaks",
+            "description" : "sydneyhud_music_tweaks_desc",
+            "next_menu" : "sydneyhud_music_tweaks"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_optimization_tweaks",
+            "title" : "sydneyhud_optimization_tweaks",
+            "description" : "sydneyhud_optimization_tweaks_desc",
+            "next_menu" : "sydneyhud_optimization_tweaks"
+        },
+        {
+            "type" : "divider"
+        },
         {
             "type" : "button",
             "id" : "sydneyhud_reset",
             "title" : "sydneyhud_reset",
-            "desc" : "sydneyhud_reset_desc",
-            "callback" : "callback_sydneyhud_reset",
-            "menu_id" : "sydneyhud_options"
-        },
-        {
-            "type" : "divider",
-            "size" : 16
+            "description" : "sydneyhud_reset_desc",
+            "callback" : "SydneyHUDReset"
         }
     ]
 }

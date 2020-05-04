@@ -1,6 +1,6 @@
 {
     "menu_id": "sydneyhud_optimization_tweaks",
-    "parent_menu_id": "sydneyhud_options",
+    "parent_menu": "sydneyhud_menu",
     "title": "sydneyhud_optimization_tweaks",
     "description": "sydneyhud_optimization_tweaks_desc",
     "items": [
@@ -9,7 +9,7 @@
             "id": "block_blood_decals",
             "title": "sydneyhud_optimization_tweaks_block_blood_decals",
             "description": "sydneyhud_optimization_tweaks_block_blood_decals_desc",
-            "callback": "callback_block_blood_decals",
+            "callback": "SetValue",
             "value": "block_blood_decals",
             "default_value": false
         },
@@ -18,7 +18,7 @@
             "id": "block_bullet_decals",
             "title": "sydneyhud_optimization_tweaks_block_bullet_decals",
             "description": "sydneyhud_optimization_tweaks_block_bullet_decals_desc",
-            "callback": "callback_block_bullet_decals",
+            "callback": "SetValue",
             "value": "block_bullet_decals",
             "default_value": false
         },
@@ -27,7 +27,7 @@
             "id": "block_corpses",
             "title": "sydneyhud_optimization_tweaks_block_corpses",
             "description": "sydneyhud_optimization_tweaks_block_corpses_desc",
-            "callback": "callback_block_corpses",
+            "callback": "SetValue",
             "value": "block_corpses",
             "default_value": false
         },
@@ -36,7 +36,7 @@
             "id": "block_helmets",
             "title": "sydneyhud_optimization_tweaks_block_helmets",
             "description": "sydneyhud_optimization_tweaks_block_helmets_desc",
-            "callback": "callback_block_helmets",
+            "callback": "SetValue",
             "value": "block_helmets",
             "default_value": false
         },
@@ -45,7 +45,7 @@
             "id": "block_magazines",
             "title": "sydneyhud_optimization_tweaks_block_magazines",
             "description": "sydneyhud_optimization_tweaks_block_magazines_desc",
-            "callback": "callback_block_magazines",
+            "callback": "SetValue",
             "value": "block_magazines",
             "default_value": false
         },
@@ -54,7 +54,7 @@
             "id": "block_shields",
             "title": "sydneyhud_optimization_tweaks_block_shields",
             "description": "sydneyhud_optimization_tweaks_block_shields_desc",
-            "callback": "callback_block_shields",
+            "callback": "SetValue",
             "value": "block_shields",
             "default_value": false
         }

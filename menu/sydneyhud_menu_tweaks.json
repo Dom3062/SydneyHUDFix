@@ -1,6 +1,6 @@
 {
     "menu_id": "sydneyhud_menu_tweaks",
-    "parent_menu_id": "sydneyhud_options",
+    "parent_menu": "sydneyhud_menu",
     "title": "sydneyhud_menu_tweaks",
     "description": "sydneyhud_menu_tweaks_desc",
     "items": [
@@ -9,7 +9,7 @@
             "id": "remove_ads",
             "title": "remove_ads",
             "description": "remove_ads_desc",
-            "callback": "callback_remove_ads",
+            "callback": "SetValue",
             "value": "remove_ads",
             "default_value": true
         },
@@ -22,7 +22,7 @@
             "id": "lobby_skins_mode",
             "title": "lobby_skins_mode",
             "description": "lobby_skins_mode_desc",
-            "callback": "callback_lobby_skins_mode",
+            "callback": "SetValue",
             "items": [
                 "lobby_skins_vanilla",
                 "lobby_skins_none",
@@ -41,7 +41,7 @@
             "id": "move_lpi_lobby_box",
             "title": "move_lpi_lobby_box",
             "description": "move_lpi_lobby_box_desc",
-            "callback": "callback_move_lpi_lobby_box",
+            "callback": "SetValue",
             "value": "move_lpi_lobby_box",
             "default_value": true
         },
@@ -54,7 +54,7 @@
             "id": "skip_black_screen",
             "title": "skip_black_screen",
             "description": "skip_black_screen_desc",
-            "callback": "callback_skip_black_screen",
+            "callback": "SetValue",
             "value": "skip_black_screen",
             "default_value": true
         },
@@ -67,7 +67,7 @@
             "id": "skip_stat_screen",
             "title": "skip_stat_screen",
             "description": "skip_stat_screen_desc",
-            "callback": "callback_skip_stat_screen",
+            "callback": "SetValue",
             "value": "skip_stat_screen",
             "default_value": true
         },
@@ -76,11 +76,11 @@
             "id": "stat_screen_skip",
             "title": "stat_screen_skip",
             "description": "stat_screen_skip_desc",
-            "callback": "callback_stat_screen_skip",
+            "callback": "SetValue",
             "value": "stat_screen_skip",
             "max": 5,
             "min": 0,
-            "step": 1,
+            "step": 2,
             "default_value": 0
         },
         {
@@ -92,7 +92,7 @@
             "id": "skip_card_picking",
             "title": "skip_card_picking",
             "description": "skip_card_picking_desc",
-            "callback": "callback_skip_card_picking",
+            "callback": "SetValue",
             "value": "skip_card_picking",
             "default_value": true
         },
@@ -101,7 +101,7 @@
             "id": "skip_loot_screen",
             "title": "skip_loot_screen",
             "description": "skip_loot_screen_desc",
-            "callback": "callback_skip_loot_screen",
+            "callback": "SetValue",
             "value": "skip_loot_screen",
             "default_value": true
         },
@@ -110,11 +110,11 @@
             "id": "loot_screen_skip",
             "title": "loot_screen_skip",
             "description": "loot_screen_skip_desc",
-            "callback": "callback_loot_screen_skip",
+            "callback": "SetValue",
             "value": "loot_screen_skip",
             "max": 5,
             "min": 0,
-            "step": 1,
+            "step": 2,
             "default_value": 0
         }
     ]

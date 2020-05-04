@@ -1,6 +1,6 @@
 {
     "menu_id": "sydneyhud_hudlist_options_buff_player_actions",
-    "parent_menu_id": "sydneyhud_hudlist_options_buff",
+    "parent_menu": "sydneyhud_hudlist_options_buff",
     "title": "sydneyhud_hudlist_options_buff_player_action",
     "description": "sydneyhud_hudlist_options_buff_player_action_desc",
     "items": [
@@ -8,7 +8,8 @@
             "type": "toggle",
             "id": "hudlist_ignore_player_action_anarchist_armor_regeneration",
             "title": "sydneyhud_hudlist_ignore_player_action_anarchist_armor_regeneration",
-            "callback": "callback_ignore_player_action_anarchist_armor_regeneration",
+            "description" : "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_player_action_anarchist_armor_regeneration",
             "default_value": false
         },
@@ -16,7 +17,8 @@
             "type": "toggle",
             "id": "hudlist_ignore_player_action_reload",
             "title": "sydneyhud_hudlist_ignore_player_action_reload",
-            "callback": "callback_ignore_player_action_reload",
+            "description" : "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_player_action_reload",
             "default_value": false
         },
@@ -24,7 +26,8 @@
             "type": "toggle",
             "id": "hudlist_ignore_player_action_interact",
             "title": "sydneyhud_hudlist_ignore_player_action_interact",
-            "callback": "callback_ignore_player_action_interact",
+            "description" : "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_player_action_interact",
             "default_value": false
         },
@@ -32,7 +35,8 @@
             "type": "toggle",
             "id": "hudlist_ignore_player_action_melee_charge",
             "title": "sydneyhud_hudlist_ignore_player_action_melee_charge",
-            "callback": "callback_ignore_player_action_melee_charge",
+            "description" : "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_player_action_melee_charge",
             "default_value": false
         },
@@ -40,7 +44,8 @@
             "type": "toggle",
             "id": "hudlist_ignore_player_action_weapon_charge",
             "title": "sydneyhud_hudlist_ignore_player_action_weapon_charge",
-            "callback": "callback_ignore_player_action_weapon_charge",
+            "description" : "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_player_action_weapon_charge",
             "default_value": false
         },
@@ -48,7 +53,8 @@
             "type": "toggle",
             "id": "hudlist_ignore_player_action_standard_armor_regeneration",
             "title": "sydneyhud_hudlist_ignore_player_action_standard_armor_regeneration",
-            "callback": "callback_ignore_player_action_standard_armor_regeneration",
+            "description" : "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_player_action_standard_armor_regeneration",
             "default_value": false
         }

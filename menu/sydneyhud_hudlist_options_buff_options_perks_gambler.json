@@ -1,13 +1,14 @@
 {
     "menu_id": "sydneyhud_hudlist_options_buff_options_perks_gambler",
-    "parent_menu_id": "sydneyhud_hudlist_options_buff_options_perks",
+    "parent_menu": "sydneyhud_hudlist_options_buff_options_perks",
     "title": "menu_st_spec_10",
     "items": [
         {
             "type": "toggle",
             "id": "hudlist_ignore_buff_ammo_give_out_cooldown",
             "title": "sydneyhud_hudlist_ignore_buff_ammo_give_out_cooldown",
-            "callback": "callback_ignore_buff_ammo_give_out_cooldown",
+            "description" : "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_ammo_give_out_cooldown",
             "default_value": false
         },
@@ -15,7 +16,8 @@
             "type": "toggle",
             "id": "hudlist_ignore_buff_medical_supplies_cooldown",
             "title": "sydneyhud_hudlist_ignore_buff_medical_supplies_cooldown",
-            "callback": "callback_ignore_buff_medical_supplies_cooldown",
+            "description" : "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_medical_supplies_cooldown",
             "default_value": false
         }

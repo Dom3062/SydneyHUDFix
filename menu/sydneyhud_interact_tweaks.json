@@ -1,6 +1,6 @@
 {
     "menu_id": "sydneyhud_interact_tweaks",
-    "parent_menu_id": "sydneyhud_options",
+    "parent_menu": "sydneyhud_menu",
     "title": "interact_tweak",
     "description": "interact_tweak_desc",
     "items": [
@@ -9,21 +9,23 @@
             "id": "push_to_interact",
             "title": "push_to_interact",
             "description": "push_to_interact_desc",
-            "callback": "callback_push_to_interact",
+            "callback": "SetValue",
             "value": "push_to_interact",
-            "default_value": true
+            "default_value": true,
+            "is_parent" : true
         },
         {
             "type": "slider",
             "id": "push_to_interact_delay",
             "title": "push_to_interact_delay",
             "description": "push_to_interact_delay_desc",
-            "callback": "callback_push_to_interact_delay",
+            "callback": "SetValue",
             "value": "push_to_interact_delay",
             "max": 10,
             "min": 0,
-            "step": 0.1,
-            "default_value": 5.0
+            "step": 2,
+            "default_value": 5,
+            "parent" : "push_to_interact"
         },
         {
             "type": "divider",
@@ -34,7 +36,7 @@
             "id": "equipment_interrupt",
             "title": "equipment_interrupt",
             "description": "equipment_interrupt_desc",
-            "callback": "callback_equipment_interrupt",
+            "callback": "SetValue",
             "value": "equipment_interrupt",
             "default_value": true
         },
@@ -47,21 +49,23 @@
             "id": "hold_to_pick",
             "title": "hold_to_pick",
             "description": "hold_to_pick_desc",
-            "callback": "callback_hold_to_pick",
+            "callback": "SetValue",
             "value": "hold_to_pick",
-            "default_value": true
+            "default_value": true,
+            "is_parent" : true
         },
         {
             "type": "slider",
             "id": "hold_to_pick_delay",
             "title": "hold_to_pick_delay",
             "description": "hold_to_pick_delay_desc",
-            "callback": "callback_hold_to_pick_delay",
+            "callback": "SetValue",
             "value": "hold_to_pick_delay",
             "max": 1,
             "min": 0,
-            "step": 0.1,
-            "default_value": 0.1
+            "step": 2,
+            "default_value": 0.1,
+            "parent" : "hold_to_pick"
         },
         {
             "type": "divider",
@@ -72,7 +76,7 @@
             "id": "interact_time_hint",
             "title": "interact_time_hint",
             "description": "interact_time_hint_desc",
-            "callback": "callback_interact_time_hint",
+            "callback": "SetValue",
             "value": "interact_time_hint",
             "default_value": true
         }

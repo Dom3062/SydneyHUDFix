@@ -1,16 +1,16 @@
 {
     "menu_id": "sydneyhud_hud_tweaks_assault",
-    "parent_menu_id": "sydneyhud_hud_tweaks",
+    "parent_menu": "sydneyhud_hud_tweaks",
     "title": "sydneyhud_hud_tweaks_assault",
     "description": "sydneyhud_hud_tweaks_assault_desc",
-    "focus_changed_callback" : "SydneyHUD_HUDTweaks_Assault_ChangedFocus",
+    "created_menu_callback" : "SydneyHUDHUDTweaksAssaultMenuCreatedCallback",
     "items": [
         {
             "type": "toggle",
             "id": "center_assault_banner",
             "title": "center_assault_banner",
             "description": "center_assault_banner_desc",
-            "callback": "callback_center_assault_banner",
+            "callback": "SetValue",
             "value": "center_assault_banner",
             "default_value": true
         },
@@ -19,47 +19,49 @@
             "id" : "show_assault_states",
             "title" : "sydneyhud_show_assault_states",
             "description" : "sydneyhud_show_assault_states_desc",
-            "callback" : "callback_show_assault_states",
+            "callback" : "SetValue",
             "value" : "show_assault_states",
             "default_value" : true
         },
         {
-            "type" : "divider",
-            "value" : 32
+            "type" : "divider"
         },
         {
             "type": "toggle",
             "id": "enable_enhanced_assault_banner",
             "title": "enable_enhanced_assault_banner",
             "description": "enable_enhanced_assault_banner_desc",
-            "callback": "callback_enable_enhanced_assault_banner",
+            "callback": "SetValue",
             "value": "enable_enhanced_assault_banner",
-            "default_value": true
+            "default_value": true,
+            "is_parent" : true
         },
         {
             "type": "toggle",
             "id": "enhanced_assault_spawns",
             "title": "enhanced_assault_spawns",
             "description": "enhanced_assault_spawns_desc",
-            "callback": "callback_enhanced_assault_spawns",
+            "callback": "SetValue",
             "value": "enhanced_assault_spawns",
-            "default_value": true
+            "default_value": true,
+            "parent" : "enable_enhanced_assault_banner"
         },
         {
             "type": "toggle",
             "id": "enhanced_assault_time",
             "title": "enhanced_assault_time",
             "description": "enhanced_assault_time_desc",
-            "callback": "callback_enhanced_assault_time",
+            "callback": "SetValue",
             "value": "enhanced_assault_time",
-            "default_value": true
+            "default_value": true,
+            "parent" : "enable_enhanced_assault_banner"
         },
         {
             "type": "multiple_choice",
             "id": "time_format",
             "title": "sydneyhud_time_format",
             "description" : "sydneyhud_time_format_desc",
-            "callback": "callback_time_format",
+            "callback": "SetValue",
             "items": [
                 "sydneyhud_time_format_1",
                 "sydneyhud_time_format_2",
@@ -69,20 +71,18 @@
                 "sydneyhud_time_format_6"
             ],
             "value": "time_format",
-            "default_value": 1
+            "default_value": 1,
+            "parent" : "enable_enhanced_assault_banner"
         },
         {
             "type": "toggle",
             "id": "enhanced_assault_count",
             "title": "enhanced_assault_count",
             "description": "enhanced_assault_count_desc",
-            "callback": "callback_enhanced_assault_count",
+            "callback": "SetValue",
             "value": "enhanced_assault_count",
-            "default_value": true
-        },
-        {
-            "type": "divider",
-            "size": 16
+            "default_value": true,
+            "parent" : "enable_enhanced_assault_banner"
         }
     ]
 }

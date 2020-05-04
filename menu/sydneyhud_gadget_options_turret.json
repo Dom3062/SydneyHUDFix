@@ -1,311 +1,224 @@
 {
     "menu_id": "sydneyhud_gadget_options_turret",
-    "parent_menu_id": "sydneyhud_gadget_options",
+    "parent_menu": "sydneyhud_gadget_options",
     "title": "sydneyhud_gadget_options_turret",
     "description": "sydneyhud_gadget_options_turret_desc",
-    "focus_changed_callback" : "SydneyHUDPanelFocus",
     "items": [
         {
             "type": "toggle",
             "id": "enable_laser_options_turret",
             "title": "enable_laser_options_turret",
             "description": "enable_laser_options_turret_desc",
-            "callback": "callback_enable_laser_options_turret",
+            "callback": "SetValue",
             "value": "enable_laser_options_turret",
-            "default_value": true
+            "default_value": true,
+            "is_parent": true
         },
         {
-            "type": "divider",
-            "size": 32
-        },
-        {
-            "type": "slider",
-            "id": "laser_color_r_turret",
-            "title": "color_red",
-            "description": "laser_color_laser_color",
-            "callback": "callback_laser_color_r_turret",
-            "value": "laser_color_r_turret",
-            "max": 2.55,
-            "min": 0,
-            "step": 0.01,
-            "default_value": 0
-        },
-        {
-            "type": "slider",
-            "id": "laser_color_g_turret",
-            "title": "color_green",
-            "description": "laser_color_laser_color",
-            "callback": "callback_laser_color_g_turret",
-            "value": "laser_color_g_turret",
-            "max": 2.55,
-            "min": 0,
-            "step": 0.01,
-            "default_value": 2.55
-        },
-        {
-            "type": "slider",
-            "id": "laser_color_b_turret",
-            "title": "color_blue",
-            "description": "laser_color_laser_color",
-            "callback": "callback_laser_color_b_turret",
-            "value": "laser_color_b_turret",
-            "max": 2.55,
-            "min": 0,
-            "step": 0.01,
-            "default_value": 0
-        },
-        {
-            "type": "divider",
-            "size": 16
+            "type" : "color_select",
+            "id" : "laser_color_turret",
+            "title" : "enable_laser_options_turret",
+            "description" : "laser_color_laser_color",
+            "value" : "laser_color",
+            "value_extension" : "_turret",
+            "default_value" : [0, 255, 0],
+            "callback" : "SetTurretColor",
+            "parent" : "enable_laser_options_turret"
         },
         {
             "type": "toggle",
             "id": "laser_color_rainbow_turret",
             "title": "laser_color_rainbow",
             "description": "laser_color_rainbow_desc",
-            "callback": "callback_laser_color_rainbow_turret",
+            "callback": "SetValue",
             "value": "laser_color_rainbow_turret",
-            "default_value": true
+            "default_value": true,
+            "parent" : "enable_laser_options_turret"
         },
         {
             "type": "slider",
             "id": "laser_color_a_turret",
             "title": "laser_color_ray_alpha",
             "description": "laser_color_ray_alpha_desc",
-            "callback": "callback_laser_color_a_turret",
+            "callback": "SetValue",
             "value": "laser_color_a_turret",
             "max": 2.55,
             "min": 0,
-            "step": 0.01,
-            "default_value": 0.38
+            "step": 2,
+            "default_value": 0.38,
+            "parent" : "enable_laser_options_turret"
         },
         {
             "type": "slider",
             "id": "laser_glow_turret",
             "title": "laser_glow",
             "description": "laser_glow_desc",
-            "callback": "callback_laser_glow_turret",
+            "callback": "SetValue",
             "value": "laser_glow_turret",
             "max": 2.55,
             "min": 0,
-            "step": 0.01,
-            "default_value": 2.55
+            "step": 2,
+            "default_value": 0.51,
+            "parent" : "enable_laser_options_turret"
         },
         {
             "type": "slider",
             "id": "laser_light_turret",
             "title": "laser_light",
             "description": "laser_light_desc",
-            "callback": "callback_laser_light_turret",
+            "callback": "SetValue",
             "value": "laser_light_turret",
             "max": 10,
             "min": 0,
-            "step": 0.01,
-            "default_value": 10
+            "step": 2,
+            "default_value": 10,
+            "parent" : "enable_laser_options_turret"
         },
         {
-            "type": "divider",
-            "size": 64
+            "type": "divider"
         },
         {
             "type": "toggle",
             "id": "enable_laser_options_turretr",
             "title": "enable_laser_options_turretr",
             "description": "enable_laser_options_turretr_desc",
-            "callback": "callback_enable_laser_options_turretr",
+            "callback": "SetValue",
             "value": "enable_laser_options_turretr",
-            "default_value": true
+            "default_value": true,
+            "is_parent": true
         },
         {
-            "type": "divider",
-            "size": 32
-        },
-        {
-            "type": "slider",
-            "id": "laser_color_r_turretr",
-            "title": "color_red",
-            "description": "laser_color_laser_color",
-            "callback": "callback_laser_color_r_turretr",
-            "value": "laser_color_r_turretr",
-            "max": 2.55,
-            "min": 0,
-            "step": 0.01,
-            "default_value": 0
-        },
-        {
-            "type": "slider",
-            "id": "laser_color_g_turretr",
-            "title": "color_green",
-            "description": "laser_color_laser_color",
-            "callback": "callback_laser_color_g_turretr",
-            "value": "laser_color_g_turretr",
-            "max": 2.55,
-            "min": 0,
-            "step": 0.01,
-            "default_value": 2.55
-        },
-        {
-            "type": "slider",
-            "id": "laser_color_b_turretr",
-            "title": "color_blue",
-            "description": "laser_color_laser_color",
-            "callback": "callback_laser_color_b_turretr",
-            "value": "laser_color_b_turretr",
-            "max": 2.55,
-            "min": 0,
-            "step": 0.01,
-            "default_value": 0
-        },
-        {
-            "type": "divider",
-            "size": 16
+            "type" : "color_select",
+            "id" : "laser_color_turretr",
+            "title" : "enable_laser_options_turretm",
+            "description" : "laser_color_laser_color",
+            "value" : "laser_color",
+            "value_extension" : "_turretr",
+            "default_value" : [255, 255, 0],
+            "callback" : "SetTurretrColor",
+            "parent" : "enable_laser_options_turretr"
         },
         {
             "type": "toggle",
             "id": "laser_color_rainbow_turretr",
             "title": "laser_color_rainbow",
             "description": "laser_color_rainbow_desc",
-            "callback": "callback_laser_color_rainbow_turretr",
+            "callback": "SetValue",
             "value": "laser_color_rainbow_turretr",
-            "default_value": true
+            "default_value": true,
+            "parent" : "enable_laser_options_turretr"
         },
         {
             "type": "slider",
             "id": "laser_color_a_turretr",
             "title": "laser_color_ray_alpha",
             "description": "laser_color_ray_alpha_desc",
-            "callback": "callback_laser_color_a_turretr",
+            "callback": "SetValue",
             "value": "laser_color_a_turretr",
             "max": 2.55,
             "min": 0,
-            "step": 0.01,
-            "default_value": 0.38
+            "step": 2,
+            "default_value": 0.38,
+            "parent" : "enable_laser_options_turretr"
         },
         {
             "type": "slider",
             "id": "laser_glow_turretr",
             "title": "laser_glow",
             "description": "laser_glow_desc",
-            "callback": "callback_laser_glow_turretr",
+            "callback": "SetValue",
             "value": "laser_glow_turretr",
             "max": 2.55,
             "min": 0,
-            "step": 0.01,
-            "default_value": 2.55
+            "step": 2,
+            "default_value": 0.51,
+            "parent" : "enable_laser_options_turretr"
         },
         {
             "type": "slider",
             "id": "laser_light_turretr",
             "title": "laser_light",
             "description": "laser_light_desc",
-            "callback": "callback_laser_light_turretr",
+            "callback": "SetValue",
             "value": "laser_light_turretr",
             "max": 10,
             "min": 0,
-            "step": 0.01,
-            "default_value": 10
+            "step": 2,
+            "default_value": 10,
+            "parent" : "enable_laser_options_turretr"
         },
         {
-            "type": "divider",
-            "size": 64
+            "type": "divider"
         },
         {
             "type": "toggle",
             "id": "enable_laser_options_turretm",
             "title": "enable_laser_options_turretm",
             "description": "enable_laser_options_turretm_desc",
-            "callback": "callback_enable_laser_options_turretm",
+            "callback": "SetValue",
             "value": "enable_laser_options_turretm",
-            "default_value": true
+            "default_value": true,
+            "is_parent": true
         },
         {
-            "type": "divider",
-            "size": 32
-        },
-        {
-            "type": "slider",
-            "id": "laser_color_r_turretm",
-            "title": "color_red",
-            "description": "laser_color_laser_color",
-            "callback": "callback_laser_color_r_turretm",
-            "value": "laser_color_r_turretm",
-            "max": 2.55,
-            "min": 0,
-            "step": 0.01,
-            "default_value": 0
-        },
-        {
-            "type": "slider",
-            "id": "laser_color_g_turretm",
-            "title": "color_green",
-            "description": "laser_color_laser_color",
-            "callback": "callback_laser_color_g_turretm",
-            "value": "laser_color_g_turretm",
-            "max": 2.55,
-            "min": 0,
-            "step": 0.01,
-            "default_value": 2.55
-        },
-        {
-            "type": "slider",
-            "id": "laser_color_b_turretm",
-            "title": "color_blue",
-            "description": "laser_color_laser_color",
-            "callback": "callback_laser_color_b_turretm",
-            "value": "laser_color_b_turretm",
-            "max": 2.55,
-            "min": 0,
-            "step": 0.01,
-            "default_value": 0
-        },
-        {
-            "type": "divider",
-            "size": 16
+            "type" : "color_select",
+            "id" : "laser_color_turretm",
+            "title" : "enable_laser_options_turretr",
+            "description" : "laser_color_laser_color",
+            "value" : "laser_color",
+            "value_extension" : "_turretm",
+            "default_value" : [0, 255, 0],
+            "callback" : "SetTurretmColor",
+            "parent" : "enable_laser_options_turretm"
         },
         {
             "type": "toggle",
             "id": "laser_color_rainbow_turretm",
             "title": "laser_color_rainbow",
             "description": "laser_color_rainbow_desc",
-            "callback": "callback_laser_color_rainbow_turretm",
+            "callback": "SetValue",
             "value": "laser_color_rainbow_turretm",
-            "default_value": true
+            "default_value": true,
+            "parent" : "enable_laser_options_turretm"
         },
         {
             "type": "slider",
             "id": "laser_color_a_turretm",
             "title": "laser_color_ray_alpha",
             "description": "laser_color_ray_alpha_desc",
-            "callback": "callback_laser_color_a_turretm",
+            "callback": "SetValue",
             "value": "laser_color_a_turretm",
             "max": 2.55,
             "min": 0,
-            "step": 0.01,
-            "default_value": 0.38
+            "step": 2,
+            "default_value": 0.38,
+            "parent" : "enable_laser_options_turretm"
         },
         {
             "type": "slider",
             "id": "laser_glow_turretm",
             "title": "laser_glow",
             "description": "laser_glow_desc",
-            "callback": "callback_laser_glow_turretm",
+            "callback": "SetValue",
             "value": "laser_glow_turretm",
             "max": 2.55,
             "min": 0,
-            "step": 0.01,
-            "default_value": 2.55
+            "step": 2,
+            "default_value": 0.51,
+            "parent" : "enable_laser_options_turretm"
         },
         {
             "type": "slider",
             "id": "laser_light_turretm",
             "title": "laser_light",
             "description": "laser_light_desc",
-            "callback": "callback_laser_light_turretm",
+            "callback": "SetValue",
             "value": "laser_light_turretm",
             "max": 10,
             "min": 0,
-            "step": 0.01,
-            "default_value": 10
+            "step": 2,
+            "default_value": 10,
+            "parent" : "enable_laser_options_turretm"
         }
     ]
 }

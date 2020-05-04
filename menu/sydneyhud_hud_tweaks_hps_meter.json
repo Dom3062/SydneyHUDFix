@@ -1,6 +1,6 @@
 {
     "menu_id": "sydneyhud_hud_tweaks_hps_meter",
-    "parent_menu_id": "sydneyhud_hud_tweaks",
+    "parent_menu": "sydneyhud_hud_tweaks",
     "title": "sydneyhud_hud_tweaks_hps_meter",
     "description": "sydneyhud_hud_tweaks_hps_meter_desc",
     "items": [
@@ -9,21 +9,23 @@
             "id": "enable_hps_meter",
             "title": "enable_hps_meter",
             "description": "enable_hps_meter_desc",
-            "callback": "callback_enable_hps_meter",
+            "callback": "SetValue",
             "value": "enable_hps_meter",
-            "default_value": true
+            "default_value": true,
+            "is_parent" : true
         },
         {
             "type": "slider",
             "id": "hps_refresh_rate",
             "title": "hps_refresh_rate",
             "description": "hps_refresh_rate_desc",
-            "callback": "callback_hps_refresh_rate",
+            "callback": "SetValue",
             "value": "hps_refresh_rate",
             "max": 10,
             "min": 0.1,
-            "step": 1,
-            "default_value": 1
+            "step": 2,
+            "default_value": 1,
+            "parent" : "enable_hps_meter"
         },
         {
             "type": "divider",
@@ -34,30 +36,33 @@
             "id": "show_hps_current",
             "title": "show_hps_current",
             "description": "show_hps_current_desc",
-            "callback": "callback_show_hps_current",
+            "callback": "SetValue",
             "value": "show_hps_current",
-            "default_value": true
+            "default_value": true,
+            "parent" : "enable_hps_meter"
         },
         {
             "type": "slider",
             "id": "current_hps_timeout",
             "title": "current_hps_timeout",
             "description": "current_hps_timeout_desc",
-            "callback": "callback_current_hps_timeout",
+            "callback": "SetValue",
             "value": "current_hps_timeout",
             "max": 10,
             "min": 1,
-            "step": 1,
-            "default_value": 5
+            "step": 2,
+            "default_value": 5,
+            "parent" : "enable_hps_meter"
         },
         {
             "type": "toggle",
             "id": "show_hps_total",
             "title": "show_hps_total",
             "description": "show_hps_total_desc",
-            "callback": "callback_show_hps_total",
+            "callback": "SetValue",
             "value": "show_hps_total",
-            "default_value": true
+            "default_value": true,
+            "parent" : "enable_hps_meter"
         }
     ]
 }

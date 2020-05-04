@@ -1,13 +1,14 @@
 {
     "menu_id": "sydneyhud_hudlist_options_buff_options_skills_technician",
-    "parent_menu_id": "sydneyhud_hudlist_options_buff_options_skills",
+    "parent_menu": "sydneyhud_hudlist_options_buff_options_skills",
     "title": "st_menu_technician",
     "items": [
         {
             "type": "toggle",
             "id": "hudlist_ignore_buff_lock_n_load",
             "title": "menu_shock_and_awe_beta",
-            "callback": "callback_ignore_buff_lock_n_load",
+            "description" : "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_lock_n_load",
             "default_value": false
         }

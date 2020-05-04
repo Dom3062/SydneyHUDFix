@@ -1,55 +1,19 @@
 {
     "menu_id": "sydneyhud_hudlist_options_civilian_color",
-    "parent_menu_id": "sydneyhud_hudlist_options",
+    "parent_menu": "sydneyhud_hudlist_options",
     "title": "sydneyhud_hudlist_options_civilian_color",
     "description": "sydneyhud_hudlist_options_civilian_color_desc",
-    "focus_changed_callback" : "SydneyHUDPanelFocus",
+    "h" : 500,
     "items": [
         {
-            "type": "multiple_choice",
-            "id": "hudlist_civilian_color",
-            "description": "civilian_color_desc",
-            "title": "",
-            "items": [
-                "civilian_color"
-            ],
-            "value": "civilian_color"
-        },
-        {
-            "type": "slider",
-            "id": "hudlist_civilian_color_r",
-            "title": "color_red",
-            "description": "",
-            "callback": "callback_civilian_color_r",
-            "value": "civilian_color_r",
-            "max": 2.55,
-            "min": 0,
-            "step": 0.01,
-            "default_value": 0
-        },
-        {
-            "type": "slider",
-            "id": "hudlist_civilian_color_g",
-            "title": "color_green",
-            "description": "",
-            "callback": "callback_civilian_color_g",
-            "value": "civilian_color_g",
-            "max": 2.55,
-            "min": 0,
-            "step": 0.01,
-            "default_value": 2.55
-        },
-        {
-            "type": "slider",
-            "id": "hudlist_color_blue",
-            "title": "color_blue",
-            "description": "",
-            "callback": "callback_civilian_color_b",
-            "value": "civilian_color_b",
-            "max": 2.55,
-            "min": 0,
-            "step": 0.01,
-            "default_value": 2.55
+            "type" : "color_select",
+            "id" : "civilian_color",
+            "title" : "civilian_color",
+            "description" : "civilian_color_desc",
+            "value" : "civilian_color",
+            "value_extension" : "",
+            "default_value" : [0, 255, 255],
+            "callback" : "SetCivilianColor"
         }
     ]
 }

@@ -1,6 +1,6 @@
 {
     "menu_id": "sydneyhud_hud_tweaks",
-    "parent_menu_id": "sydneyhud_options",
+    "parent_menu": "sydneyhud_menu",
     "title": "sydneyhud_hud_tweaks",
     "description": "sydneyhud_hud_tweaks_desc",
     "items": [
@@ -9,11 +9,11 @@
             "id": "tab_font_size",
             "title": "tab_font_size",
             "description": "tab_font_size_desc",
-            "callback": "callback_tab_font_size",
+            "callback": "SetValue",
             "value": "tab_font_size",
             "max": 20,
             "min": 10,
-            "step": 1,
+            "step": 0,
             "default_value": 14
         },
         {
@@ -25,7 +25,7 @@
             "id": "enable_pacified",
             "title": "enable_pacified",
             "description": "enable_pacified_desc",
-            "callback": "callback_enable_pacified",
+            "callback": "SetValue",
             "value": "enable_pacified",
             "default_value": true
         },
@@ -38,7 +38,7 @@
             "id": "show_suspicion_text",
             "title": "show_suspicion_text",
             "description": "show_suspicion_text_desc",
-            "callback": "callback_show_suspicion_text",
+            "callback": "SetValue",
             "value": "show_suspicion_text",
             "default_value": true
         },
@@ -47,29 +47,21 @@
             "size": 16
         },
         {
-            "type": "multiple_choice",
-            "id": "enemy_health_bar",
-            "title": "",
-            "items": [
-                "show_enemy_health"
-            ],
-            "default_value": "show_enemy_health"
-        },
-        {
             "type": "toggle",
             "id": "show_enemy_health",
             "title": "show_enemy_health",
             "description": "show_enemy_health_desc",
-            "callback": "callback_show_enemy_health",
+            "callback": "SetValue",
             "value": "show_enemy_health",
-            "default_value": true
+            "default_value": true,
+            "is_parent" : true
         },
         {
             "type": "multiple_choice",
             "id": "health_bar_color",
             "title": "health_bar_color",
             "description": "health_bar_color_desc",
-            "callback": "callback_health_bar_color",
+            "callback": "SetValue",
             "items": [
                 "color_green",
                 "color_blue",
@@ -77,7 +69,8 @@
                 "health_bar_color_mix_blue"
             ],
             "value": "health_bar_color",
-            "default_value": 2
+            "default_value": 2,
+            "parent" : "show_enemy_health"
         },
         {
             "type": "divider",
@@ -88,7 +81,7 @@
             "id": "show_damage_popup",
             "title": "show_damage_popup",
             "description": "show_damage_popup_desc",
-            "callback": "callback_show_damage_popup",
+            "callback": "SetValue",
             "value": "show_damage_popup",
             "default_value": true
         },
@@ -101,7 +94,7 @@
             "id": "show_trade_delay",
             "title": "show_trade_delay",
             "description": "show_trade_delay_desc",
-            "callback": "callback_show_trade_delay",
+            "callback": "SetValue",
             "value": "show_trade_delay",
             "default_value": true
         },
@@ -111,12 +104,61 @@
         },
         {
             "type": "toggle",
-            "id": "show",
+            "id": "show_grenades_in_preplanning",
             "title": "show_grenades_in_preplanning",
             "description": "show_grenades_in_preplanning_desc",
-            "callback": "callback_show_grenades_in_preplanning",
+            "callback": "SetValue",
             "value": "show_grenades_in_preplanning",
             "default_value": true
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_hud_tweaks_assault",
+            "title" : "sydneyhud_hud_tweaks_assault",
+            "description" : "sydneyhud_hud_tweaks_assault_desc",
+            "next_menu" : "sydneyhud_hud_tweaks_assault"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_hud_tweaks_interact",
+            "title" : "sydneyhud_hud_tweaks_interact",
+            "description" : "sydneyhud_hud_tweaks_interact_desc",
+            "next_menu" : "sydneyhud_hud_tweaks_interact"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_hud_tweaks_name",
+            "title" : "sydneyhud_hud_tweaks_name",
+            "description" : "sydneyhud_hud_tweaks_name_desc",
+            "next_menu" : "sydneyhud_hud_tweaks_name"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_hud_tweaks_panel",
+            "title" : "sydneyhud_hud_tweaks_panel",
+            "description" : "sydneyhud_hud_tweaks_panel_desc",
+            "next_menu" : "sydneyhud_hud_tweaks_panel"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_hud_tweaks_waypoint",
+            "title" : "sydneyhud_hud_tweaks_waypoint",
+            "description" : "sydneyhud_hud_tweaks_waypoint_desc",
+            "next_menu" : "sydneyhud_hud_tweaks_waypoint"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_hud_tweaks_kill_counter",
+            "title" : "sydneyhud_hud_tweaks_kill_counter",
+            "description" : "sydneyhud_hud_tweaks_kill_counter_desc",
+            "next_menu" : "sydneyhud_hud_tweaks_kill_counter"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_hud_tweaks_hps_meter",
+            "title" : "sydneyhud_hud_tweaks_hps_meter",
+            "description" : "sydneyhud_hud_tweaks_hps_meter_desc",
+            "next_menu" : "sydneyhud_hud_tweaks_hps_meter"
         }
     ]
 }

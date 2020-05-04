@@ -1,13 +1,14 @@
 {
     "menu_id": "sydneyhud_hudlist_options_buff_options_skills_mastermind",
-    "parent_menu_id": "sydneyhud_hudlist_options_buff_options_skills",
+    "parent_menu": "sydneyhud_hudlist_options_buff_options_skills",
     "title": "st_menu_mastermind",
     "items": [
         {
             "type": "toggle",
             "id": "hudlist_ignore_buff_aggressive_reload",
             "title": "menu_speedy_reload_beta",
-            "callback": "callback_ignore_buff_aggressive_reload",
+            "description": "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_aggressive_reload",
             "default_value": false
         },
@@ -15,7 +16,8 @@
             "type": "toggle",
             "id": "hudlist_ignore_buff_ammo_efficiency",
             "title": "menu_single_shot_ammo_return_beta",
-            "callback": "callback_ignore_buff_ammo_efficiency",
+            "description": "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_ammo_efficiency",
             "default_value": false
         },
@@ -24,7 +26,7 @@
             "id": "hudlist_ignore_buff_combat_medic",
             "title": "menu_combat_medic_beta",
             "description": "sydneyhud_hudlist_ignore_buff_combat_medic_desc",
-            "callback": "callback_ignore_buff_combat_medic",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_combat_medic",
             "default_value": false
         },
@@ -33,7 +35,7 @@
             "id": "hudlist_ignore_buff_forced_friendship",
             "title": "menu_triathlete_beta",
             "description": "sydneyhud_hudlist_ignore_buff_forced_friendship_desc",
-            "callback": "callback_ignore_buff_forced_friendship",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_forced_friendship",
             "default_value": false
         },
@@ -42,7 +44,7 @@
             "id": "hudlist_ignore_buff_hostage_taker",
             "title": "menu_black_marketeer_beta",
             "description":"sydneyhud_hudlist_ignore_buff_hostage_taker_desc",
-            "callback": "callback_ignore_buff_hostage_taker",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_hostage_taker",
             "default_value": true
         },
@@ -50,7 +52,8 @@
             "type": "toggle",
             "id": "hudlist_ignore_buff_inspire",
             "title": "menu_inspire_beta",
-            "callback": "callback_ignore_buff_inspire",
+            "description": "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_inspire",
             "default_value": false
         },
@@ -58,7 +61,8 @@
             "type": "toggle",
             "id": "hudlist_ignore_buff_inspire_boost_cooldown",
             "title": "sydneyhud_hudlist_ignore_buff_inspire_boost_cooldown",
-            "callback": "callback_ignore_buff_inspire_boost_cooldown",
+            "description": "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_inspire_boost_cooldown",
             "default_value": false
         },
@@ -66,7 +70,8 @@
             "type": "toggle",
             "id": "hudlist_ignore_buff_inspire_revive_cooldown",
             "title": "sydneyhud_hudlist_ignore_buff_inspire_revive_cooldown",
-            "callback": "callback_ignore_buff_inspire_revive_cooldown",
+            "description": "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_inspire_revive_cooldown",
             "default_value": false
         },
@@ -75,7 +80,7 @@
             "id": "hudlist_ignore_buff_painkillers",
             "title": "menu_fast_learner_beta",
             "description": "sydneyhud_hudlist_ignore_buff_painkillers_desc",
-            "callback": "callback_ignore_buff_painkillers",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_painkillers",
             "default_value": false
         },
@@ -83,7 +88,8 @@
             "type": "toggle",
             "id": "hudlist_ignore_buff_partner_in_crime",
             "title": "menu_control_freak_beta",
-            "callback": "callback_ignore_buff_partner_in_crime",
+            "description": "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_partner_in_crime",
             "default_value": true
         },
@@ -92,7 +98,7 @@
             "id": "hudlist_ignore_buff_quick_fix",
             "title": "menu_tea_time_beta",
             "description": "sydneyhud_hudlist_ignore_buff_quick_fix_desc",
-            "callback": "callback_ignore_buff_quick_fix",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_quick_fix",
             "default_value": false
         },
@@ -100,7 +106,8 @@
             "type": "toggle",
             "id": "hudlist_ignore_buff_uppers",
             "title": "menu_tea_cookies_beta",
-            "callback": "callback_ignore_buff_uppers",
+            "description": "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_uppers",
             "default_value": false
         },
@@ -108,7 +115,8 @@
             "type": "toggle",
             "id": "hudlist_ignore_buff_uppers_cooldown",
             "title": "sydneyhud_hudlist_ignore_buff_uppers_cooldown",
-            "callback": "callback_ignore_buff_uppers_cooldown",
+            "description": "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_uppers_cooldown",
             "default_value": true
         }

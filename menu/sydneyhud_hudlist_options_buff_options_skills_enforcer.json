@@ -1,13 +1,14 @@
 {
     "menu_id": "sydneyhud_hudlist_options_buff_options_skills_enforcer",
-    "parent_menu_id": "sydneyhud_hudlist_options_buff_options_skills",
+    "parent_menu": "sydneyhud_hudlist_options_buff_options_skills",
     "title": "st_menu_enforcer",
     "items": [
         {
             "type": "toggle",
             "id": "hudlist_ignore_buff_bullet_storm",
             "title": "menu_ammo_reservoir",
-            "callback": "callback_ignore_buff_bullet_storm",
+            "description": "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_bullet_storm",
             "default_value": false
         },
@@ -15,7 +16,8 @@
             "type": "toggle",
             "id": "hudlist_ignore_buff_bullseye_cooldown",
             "title": "sydneyhud_hudlist_ignore_buff_bullseye_cooldown",
-            "callback": "callback_ignore_buff_bullseye_cooldown",
+            "description": "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_bullseye_cooldown",
             "default_value": false
         },
@@ -24,7 +26,7 @@
             "id": "hudlist_ignore_buff_die_hard",
             "title": "menu_show_of_force_beta",
             "description": "sydneyhud_hudlist_ignore_buff_die_hard_desc",
-            "callback": "callback_ignore_buff_die_hard",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_die_hard",
             "default_value": true
         },
@@ -33,7 +35,7 @@
             "id": "hudlist_ignore_buff_overkill",
             "title": "menu_overkill",
             "description": "sydneyhud_hudlist_ignore_buff_overkill_desc",
-            "callback": "callback_ignore_buff_overkill",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_overkill",
             "default_value": true
         },
@@ -42,7 +44,7 @@
             "id": "hudlist_ignore_buff_shock_and_awe",
             "title": "menu_iron_man_beta",
             "description": "sydneyhud_hudlist_ignore_buff_shock_and_awe_desc",
-            "callback": "callback_ignore_buff_shock_and_awe",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_shock_and_awe",
             "default_value": false
         },
@@ -51,7 +53,7 @@
             "id": "hudlist_ignore_buff_underdog",
             "title": "menu_underdog_beta",
             "description": "sydneyhud_hudlist_ignore_buff_underdog_desc",
-            "callback": "callback_ignore_buff_underdog",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_underdog",
             "default_value": true
         }

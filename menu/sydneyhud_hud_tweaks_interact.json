@@ -1,16 +1,15 @@
 {
     "menu_id": "sydneyhud_hud_tweaks_interact",
-    "parent_menu_id": "sydneyhud_hud_tweaks",
+    "parent_menu": "sydneyhud_hud_tweaks",
     "title": "sydneyhud_hud_tweaks_interact",
     "description": "sydneyhud_hud_tweaks_interact_desc",
-    "focus_changed_callback" : "SydneyHUDPanelFocus",
     "items": [
         {
             "type": "toggle",
             "id": "show_melee_interaction",
             "title": "show_melee_interaction",
             "description": "show_melee_interaction_desc",
-            "callback": "callback_show_melee_interaction",
+            "callback": "SetValue",
             "value": "show_melee_interaction",
             "default_value": true
         },
@@ -19,7 +18,7 @@
             "id": "show_reload_interaction",
             "title": "show_reload_interaction",
             "description": "show_reload_interaction_desc",
-            "callback": "callback_show_reload_interaction",
+            "callback": "SetValue",
             "value": "show_reload_interaction",
             "default_value": true
         },
@@ -28,7 +27,7 @@
             "id": "show_interaction_circle",
             "title": "show_interaction_circle",
             "description": "show_interaction_circle_desc",
-            "callback": "callback_show_interaction_circle",
+            "callback": "SetValue",
             "value": "show_interaction_circle",
             "default_value": true
         },
@@ -37,7 +36,7 @@
             "id": "show_interaction_text",
             "title": "show_interaction_text",
             "description": "show_interaction_text_desc",
-            "callback": "callback_show_interaction_text",
+            "callback": "SetValue",
             "value": "show_interaction_text",
             "default_value": true
         },
@@ -46,7 +45,7 @@
             "id": "show_text_borders",
             "title": "show_text_borders",
             "description": "show_text_borders_desc",
-            "callback": "callback_show_text_borders",
+            "callback": "SetValue",
             "value": "show_text_borders",
             "default_value": true
         },
@@ -55,50 +54,14 @@
             "size": 16
         },
         {
-            "type": "multiple_choice",
-            "id": "interaction_color",
-            "description": "interaction_color_desc",
-            "title": "",
-            "items": [
-                "interaction_color"
-            ],
-            "value": "interaction_color"
-        },
-        {
-            "type": "slider",
-            "id": "interaction_color_r",
-            "title": "color_red",
-            "description": "",
-            "callback": "callback_interaction_color_r",
-            "value": "interaction_color_r",
-            "max": 2.55,
-            "min": 0,
-            "step": 0.01,
-            "default_value": 2.55
-        },
-        {
-            "type": "slider",
-            "id": "interaction_color_g",
-            "title": "color_green",
-            "description": "",
-            "callback": "callback_interaction_color_g",
-            "value": "interaction_color_g",
-            "max": 2.55,
-            "min": 0,
-            "step": 0.01,
-            "default_value": 1.68
-        },
-        {
-            "type": "slider",
-            "id": "interaction_color_b",
-            "title": "color_blue",
-            "description": "",
-            "callback": "callback_interaction_color_b",
-            "value": "interaction_color_b",
-            "max": 2.55,
-            "min": 0,
-            "step": 0.01,
-            "default_value": 0
+            "type" : "color_select",
+            "id" : "interaction_color",
+            "title" : "interaction_color",
+            "description" : "interaction_color_desc",
+            "value" : "interaction_color",
+            "value_extension" : "",
+            "default_value" : [255, 168, 0],
+            "callback" : "SetInteractColor"
         }
     ]
 }

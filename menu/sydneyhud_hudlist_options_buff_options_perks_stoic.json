@@ -1,13 +1,14 @@
 {
     "menu_id": "sydneyhud_hudlist_options_buff_options_perks_stoic",
-    "parent_menu_id": "sydneyhud_hudlist_options_buff_options_perks",
+    "parent_menu": "sydneyhud_hudlist_options_buff_options_perks",
     "title": "menu_st_spec_19",
     "items": [
         {
             "type": "toggle",
             "id": "hudlist_ignore_buff_calm",
             "title": "menu_deck19_5",
-            "callback": "callback_ignore_buff_calm",
+            "description" : "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_calm",
             "default_value": false
         },
@@ -15,7 +16,8 @@
             "type": "toggle",
             "id": "hudlist_ignore_buff_stoic_flask",
             "title": "bm_grenade_damage_control",
-            "callback": "callback_ignore_buff_stoic_flask",
+            "description" : "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_stoic_flask",
             "default_value": false
         },
@@ -24,7 +26,7 @@
             "id": "hudlist_ignore_buff_virtue_cooldown",
             "title": "sydneyhud_hudlist_ignore_buff_virtue_cooldown",
             "description": "sydneyhud_hudlist_ignore_buff_virtue_cooldown_desc",
-            "callback": "callback_ignore_buff_virtue_cooldown",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_virtue_cooldown",
             "default_value": false
         }

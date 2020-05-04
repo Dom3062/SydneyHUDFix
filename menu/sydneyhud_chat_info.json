@@ -1,6 +1,6 @@
 {
     "menu_id": "sydneyhud_chat_info",
-    "parent_menu_id": "sydneyhud_options",
+    "parent_menu": "sydneyhud_menu",
     "title": "sydneyhud_chat_info",
     "description": "sydneyhud_chat_info_desc",
     "items": [
@@ -9,7 +9,7 @@
             "id": "show_heist_time",
             "title": "show_heist_time",
             "description": "show_heist_time_desc",
-            "callback": "callback_show_heist_time",
+            "callback": "SetValue",
             "value": "show_heist_time",
             "default_value": true
         },
@@ -18,7 +18,7 @@
             "id": "show_heist_time_24h_format",
             "title": "_24h_format",
             "description": "_24h_format_desc",
-            "callback" : "callback_24h_format",
+            "callback" : "SetValue",
             "value": "_24h_format",
             "default_value": true
         },
@@ -27,7 +27,7 @@
             "id": "chat_time_format",
             "title": "sydneyhud_time_format",
             "description" : "chat_time_format_desc",
-            "callback": "callback_chat_time_format",
+            "callback": "SetValue",
             "items": [
                 "chat_time_format_1",
                 "chat_time_format_2"
@@ -44,18 +44,20 @@
             "id": "assault_phase_chat_info",
             "title": "assault_phase_chat_info",
             "description": "assault_phase_chat_info_desc",
-            "callback": "callback_assault_phase_chat_info",
+            "callback": "SetValue",
             "value": "assault_phase_chat_info",
-            "default_value": true
+            "default_value": true,
+            "is_parent" : true
         },
         {
             "type": "toggle",
             "id": "assault_phase_chat_info_feed",
             "title": "assault_phase_chat_info_feed",
             "description": "assault_phase_chat_info_feed_desc",
-            "callback": "callback_assault_phase_chat_info_feed",
+            "callback": "SetValue",
             "value": "assault_phase_chat_info_feed",
-            "default_value": true
+            "default_value": false,
+            "parent" : "assault_phase_chat_info"
         },
         {
             "type": "divider",
@@ -66,18 +68,20 @@
             "id": "ecm_battery_chat_info",
             "title": "ecm_battery_chat_info",
             "description": "ecm_battery_chat_info_desc",
-            "callback": "callback_ecm_battery_chat_info",
+            "callback": "SetValue",
             "value": "ecm_battery_chat_info",
-            "default_value": true
+            "default_value": true,
+            "is_parent" : true
         },
         {
             "type": "toggle",
             "id": "ecm_battery_chat_info_feed",
             "title": "ecm_battery_chat_info_feed",
             "description": "ecm_battery_chat_info_feed_desc",
-            "callback": "callback_ecm_battery_chat_info_feed",
+            "callback": "SetValue",
             "value": "ecm_battery_chat_info_feed",
-            "default_value": true
+            "default_value": false,
+            "parent" : "ecm_battery_chat_info"
         },
         {
             "type": "divider",
@@ -88,18 +92,20 @@
             "id": "down_warning_chat_info",
             "title": "down_warning_chat_info",
             "description": "down_warning_chat_info_desc",
-            "callback": "callback_down_warning_chat_info",
+            "callback": "SetValue",
             "value": "down_warning_chat_info",
-            "default_value": true
+            "default_value": true,
+            "is_parent" : true
         },
         {
             "type": "toggle",
             "id": "down_warning_chat_info_feed",
             "title": "down_warning_chat_info_feed",
             "description": "down_warning_chat_info_feed_desc",
-            "callback": "callback_down_warning_chat_info_feed",
+            "callback": "SetValue",
             "value": "down_warning_chat_info_feed",
-            "default_value": true
+            "default_value": false,
+            "parent" : "down_warning_chat_info"
         },
         {
             "type": "divider",
@@ -110,18 +116,20 @@
             "id": "critical_down_warning_chat_info",
             "title": "critical_down_warning_chat_info",
             "description": "critical_down_warning_chat_info_desc",
-            "callback": "callback_critical_down_warning_chat_info",
+            "callback": "SetValue",
             "value": "critical_down_warning_chat_info",
-            "default_value": true
+            "default_value": true,
+            "is_parent" : true
         },
         {
             "type": "toggle",
             "id": "critical_down_warning_chat_info_feed",
             "title": "critical_down_warning_chat_info_feed",
             "description": "critical_down_warning_chat_info_feed_desc",
-            "callback": "callback_critical_down_warning_chat_info_feed",
+            "callback": "SetValue",
             "value": "critical_down_warning_chat_info_feed",
-            "default_value": true
+            "default_value": false,
+            "parent" : "critical_down_warning_chat_info"
         },
         {
             "type": "divider",
@@ -132,18 +140,20 @@
             "id": "replenished_chat_info",
             "title": "replenished_chat_info",
             "description": "replenished_chat_info_desc",
-            "callback": "callback_replenished_chat_info",
+            "callback": "SetValue",
             "value": "replenished_chat_info",
-            "default_value": true
+            "default_value": true,
+            "is_parent" : true
         },
         {
             "type": "toggle",
             "id": "replenished_chat_info_feed",
             "title": "replenished_chat_info_feed",
             "description": "replenished_chat_info_feed_desc",
-            "callback": "callback_replenished_chat_info_feed",
+            "callback": "SetValue",
             "value": "replenished_chat_info_feed",
-            "default_value": true
+            "default_value": false,
+            "parent" : "replenished_chat_info"
         },
         {
             "type": "divider",
@@ -154,7 +164,7 @@
             "id": "inspire_ace_chat_info",
             "title": "inspire_ace_chat_info",
             "description": "inspire_ace_chat_info_desc",
-            "callback": "callback_inspire_ace_chat_info",
+            "callback": "SetValue",
             "value": "inspire_ace_chat_info",
             "default_value": true
         }

@@ -1,19 +1,20 @@
 {
     "menu_id": "sydneyhud_hudlist_options_right",
-    "parent_menu_id": "sydneyhud_hudlist_options",
+    "parent_menu": "sydneyhud_hudlist_options",
     "title": "sydneyhud_hudlist_options_right",
     "description": "sydneyhud_hudlist_options_right_desc",
+    "created_menu_callback" : "HUDListOptionsRightCreated",
     "items": [
         {
             "type": "slider",
             "id": "hudlist_right_list_scale",
             "title": "sydneyhud_hudlist_scale",
             "description": "sydneyhud_hudlist_right_list_scale_desc",
-            "callback": "callback_right_list_scale",
+            "callback": "SetValue",
             "value": "hudlist_right_list_scale",
             "max": 2,
             "min": 0.5,
-            "step": 0.05,
+            "step": 2,
             "default_value": 1
         },
         {
@@ -25,7 +26,7 @@
             "id": "hudlist_show_loot",
             "title": "sydneyhud_hudlist_show_loot",
             "description": "sydneyhud_hudlist_show_loot_desc",
-            "callback": "callback_show_loot",
+            "callback": ["SetValue", "HUDListShowLootChanged"],
             "items": [
                 "sydneyhud_hudlist_off",
                 "sydneyhud_hudlist_all",
@@ -39,7 +40,7 @@
             "id": "hudlist_separate_bagged_loot",
             "title": "sydneyhud_hudlist_separate_bagged_loot",
             "description": "sydneyhud_hudlist_separate_bagged_loot_desc",
-            "callback": "callback_separate_bagged_loot",
+            "callback": "SetValue",
             "value": "hudlist_separate_bagged_loot",
             "default_value": true
         },
@@ -48,7 +49,7 @@
             "id": "hudlist_show_enemies",
             "title": "sydneyhud_hudlist_show_enemies",
             "description": "sydneyhud_hudlist_show_enemies_desc",
-            "callback": "callback_show_enemies",
+            "callback": "SetValue",
             "items": [
                 "sydneyhud_hudlist_off",
                 "sydneyhud_hudlist_all",
@@ -62,7 +63,7 @@
             "id": "hudlist_show_hostages",
             "title": "sydneyhud_hudlist_show_hostages",
             "description": "sydneyhud_hudlist_show_hostages_desc",
-            "callback": "callback_show_hostages",
+            "callback": "SetValue",
             "items": [
                 "sydneyhud_hudlist_off",
                 "sydneyhud_hudlist_all",
@@ -76,7 +77,7 @@
             "id": "hudlist_show_civilians",
             "title": "sydneyhud_hudlist_show_civilians",
             "description": "sydneyhud_hudlist_show_civilians_desc",
-            "callback": "callback_show_civilians",
+            "callback": "SetValue",
             "value": "hudlist_show_civilians",
             "default_value": true
         },
@@ -85,7 +86,7 @@
             "id": "hudlist_show_turrets",
             "title": "sydneyhud_hudlist_show_turrets",
             "description": "sydneyhud_hudlist_show_turrets_desc",
-            "callback": "callback_show_turrets",
+            "callback": "SetValue",
             "value": "hudlist_show_turrets",
             "default_value": true
         },
@@ -94,7 +95,7 @@
             "id": "hudlist_show_minion_count",
             "title": "sydneyhud_hudlist_show_minion_count",
             "description": "sydneyhud_hudlist_show_minion_count_desc",
-            "callback": "callback_show_minion_count",
+            "callback": "SetValue",
             "value": "hudlist_show_minion_count",
             "default_value": true
         },
@@ -103,7 +104,7 @@
             "id": "hudlist_show_pager_count",
             "title": "sydneyhud_hudlist_show_pager_count",
             "description": "sydneyhud_hudlist_show_pager_count_desc",
-            "callback": "callback_show_pager_count",
+            "callback": "SetValue",
             "value": "hudlist_show_pager_count",
             "default_value": true
         },
@@ -112,7 +113,7 @@
             "id": "hudlist_show_camera_count",
             "title": "sydneyhud_hudlist_show_camera_count",
             "description": "sydneyhud_hudlist_show_camera_count_desc",
-            "callback": "callback_show_camera_count",
+            "callback": "SetValue",
             "value": "hudlist_show_camera_count",
             "default_value": true
         },
@@ -121,7 +122,7 @@
             "id": "hudlist_show_body_count",
             "title": "sydneyhud_hudlist_show_body_count",
             "description": "sydneyhud_hudlist_show_body_count_desc",
-            "callback": "callback_show_body_count",
+            "callback": "SetValue",
             "value": "hudlist_show_body_count",
             "default_value": true
         },
@@ -130,13 +131,22 @@
             "id": "hudlist_show_special_pickups",
             "title": "sydneyhud_hudlist_show_special_pickups",
             "description": "sydneyhud_hudlist_show_special_pickups_desc",
-            "callback": "callback_show_special_pickups",
+            "callback": "SetValue",
             "value": "hudlist_show_special_pickups",
-            "default_value": true
+            "default_value": true,
+            "is_parent" : true
         },
         {
             "type": "divider",
             "size": 12
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_hudlist_options_right_ignore",
+            "title" : "sydneyhud_hudlist_options_right_ignore",
+            "description" : "sydneyhud_hudlist_options_right_ignore_desc",
+            "next_menu" : "sydneyhud_hudlist_options_right_ignore",
+            "parent" : "hudlist_show_special_pickups"
         }
     ]
 }

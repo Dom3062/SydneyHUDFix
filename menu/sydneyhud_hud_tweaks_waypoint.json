@@ -1,62 +1,25 @@
 {
     "menu_id": "sydneyhud_hud_tweaks_waypoint",
-    "parent_menu_id": "sydneyhud_hud_tweaks",
+    "parent_menu": "sydneyhud_hud_tweaks",
     "title": "sydneyhud_hud_tweaks_waypoint",
     "description": "sydneyhud_hud_tweaks_waypoint_desc",
-    "focus_changed_callback" : "SydneyHUDPanelFocus",
     "items": [
         {
-            "type": "multiple_choice",
-            "id": "waypoint_color",
-            "description": "waypoint_color_desc",
-            "title": "",
-            "items": [
-                "waypoint_color"
-            ],
-            "value": "waypoint_color"
-        },
-        {
-            "type": "slider",
-            "id": "waypoint_color_r",
-            "title": "color_red",
-            "description": "",
-            "callback": "callback_waypoint_color_r",
-            "value": "waypoint_color_r",
-            "max": 2.55,
-            "min": 0,
-            "step": 0.01,
-            "default_value": 0
-        },
-        {
-            "type": "slider",
-            "id": "waypoint_color_g",
-            "title": "color_green",
-            "description": "",
-            "callback": "callback_waypoint_color_g",
-            "value": "waypoint_color_g",
-            "max": 2.55,
-            "min": 0,
-            "step": 0.01,
-            "default_value": 1.27
-        },
-        {
-            "type": "slider",
-            "id": "waypoint_color_b",
-            "title": "color_blue",
-            "description": "",
-            "callback": "callback_waypoint_color_b",
-            "value": "waypoint_color_b",
-            "max": 2.55,
-            "min": 0,
-            "step": 0.01,
-            "default_value": 2.55
+            "type" : "color_select",
+            "id" : "waypoint_color",
+            "title" : "waypoint_color",
+            "description" : "waypoint_color_desc",
+            "value" : "waypoint_color",
+            "value_extension" : "",
+            "default_value" : [0, 127, 255],
+            "callback" : "SetWaypointColor"
         },
         {
             "type": "toggle",
             "id": "waypoint_deploy",
             "title": "waypoint_deploy",
             "description": "waypoint_deploy_desc",
-            "callback": "callback_show_deployable_waypoint",
+            "callback": "SetValue",
             "value": "show_deployable_waypoint",
             "default_value": true
         },
@@ -65,7 +28,7 @@
             "id": "waypoint_timer",
             "title": "waypoint_timer",
             "description": "waypoint_timer_desc",
-            "callback": "callback_show_timer_waypoint",
+            "callback": "SetValue",
             "value": "show_timer_waypoint",
             "default_value": true
         },
@@ -78,7 +41,7 @@
             "id": "custom_waypoint_offscreen_type",
             "title": "custom_waypoint_offscreen_type",
             "description": "custom_waypoint_offscreen_type_desc",
-            "callback": "callback_custom_waypoint_offscreen_type",
+            "callback": "SetValue",
             "items": [
                 "custom_waypoint_offscreen_type_circle",
                 "custom_waypoint_offscreen_type_ellipse",
@@ -92,11 +55,11 @@
             "id": "custom_waypoint_offscreen_radius_scale",
             "title": "custom_waypoint_offscreen_radius_scale",
             "description": "custom_waypoint_offscreen_radius_scale_desc",
-            "callback": "callback_custom_waypoint_offscreen_radius_scale",
+            "callback": "SetValue",
             "value": "offscreen_radius_scale",
             "max": 2,
             "min": 1,
-            "step": 0.01,
+            "step": 2,
             "default_value": 1
         },
         {
@@ -104,11 +67,11 @@
             "id": "custom_waypoint_transit_speed",
             "title": "custom_waypoint_transit_speed",
             "description": "custom_waypoint_transit_speed_desc",
-            "callback": "callback_custom_waypoint_transit_speed",
+            "callback": "SetValue",
             "value": "transit_speed",
             "max": 1,
             "min": 0,
-            "step": 0.01,
+            "step": 2,
             "default_value": 0.35
         }
     ]

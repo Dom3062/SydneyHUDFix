@@ -1,6 +1,6 @@
 {
 	"menu_id": "sydneyhud_gadget_options_player",
-	"parent_menu_id": "sydneyhud_gadget_options",
+	"parent_menu": "sydneyhud_gadget_options",
 	"title": "sydneyhud_gadget_options_player",
 	"description": "sydneyhud_gadget_options_player_desc",
 	"items": [
@@ -9,7 +9,7 @@
 			"id": "laser_color_rainbow",
 			"title": "laser_color_rainbow",
 			"description": "laser_color_rainbow_desc",
-			"callback": "callback_laser_color_rainbow",
+			"callback": "SetValue",
 			"value": "laser_color_rainbow_default",
 			"default_value": true
 		},
@@ -18,11 +18,11 @@
 			"id": "laser_color_a",
 			"title": "laser_color_ray_alpha",
 			"description": "laser_color_ray_alpha_desc",
-			"callback": "callback_laser_color_a",
+			"callback": "SetValue",
 			"value": "laser_color_a_default",
 			"max": 1,
 			"min": 0,
-			"step": 0.01,
+			"step": 2,
 			"default_value": 0.5
 		},
 		{
@@ -30,11 +30,11 @@
 			"id": "laser_glow",
 			"title": "laser_glow",
 			"description": "laser_glow_desc",
-			"callback": "callback_laser_glow",
+			"callback": "SetValue",
 			"value": "laser_glow_default",
 			"max": 1,
 			"min": 0,
-			"step": 0.01,
+			"step": 2,
 			"default_value": 1
 		},
 		{
@@ -42,11 +42,11 @@
 			"id": "laser_light",
 			"title": "laser_light",
 			"description": "laser_light_desc",
-			"callback": "callback_laser_light",
+			"callback": "SetValue",
 			"value": "laser_light_default",
 			"max": 10,
 			"min": 0,
-			"step": 0.01,
+			"step": 2,
 			"default_value": 10
 		}
 	]

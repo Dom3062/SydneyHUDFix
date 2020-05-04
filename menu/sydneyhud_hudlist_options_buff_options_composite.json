@@ -1,6 +1,6 @@
 {
     "menu_id": "sydneyhud_hudlist_options_buff_options_composite",
-    "parent_menu_id": "sydneyhud_hudlist_options_buff_options_buff",
+    "parent_menu": "sydneyhud_hudlist_options_buff_options",
     "title": "sydneyhud_hudlist_options_buff_options_composite",
     "items": [
         {
@@ -8,7 +8,7 @@
             "id": "hudlist_ignore_buff_damage_bonus",
             "title": "sydneyhud_hudlist_ignore_buff_damage_bonus",
             "description": "sydneyhud_hudlist_ignore_buff_damage_bonus_desc",
-            "callback": "callback_ignore_buff_damage_bonus",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_damage_bonus",
             "default_value": false
         },
@@ -17,7 +17,7 @@
             "id": "hudlist_ignore_buff_received_damage_reduction",
             "title": "sydneyhud_hudlist_ignore_buff_received_damage_reduction",
             "description": "sydneyhud_hudlist_ignore_buff_received_damage_reduction_desc",
-            "callback": "callback_ignore_buff_received_damage_reduction",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_received_damage_reduction",
             "default_value": false
         },
@@ -26,7 +26,7 @@
             "id": "hudlist_ignore_buff_melee_damage_increase",
             "title": "sydneyhud_hudlist_ignore_buff_melee_damage_increase",
             "description": "sydneyhud_hudlist_ignore_buff_melee_damage_increase_desc",
-            "callback": "callback_ignore_buff_melee_damage_increase",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_melee_damage_increase",
             "default_value": false
         },
@@ -35,7 +35,7 @@
             "id": "hudlist_ignore_buff_health_regeneration",
             "title": "sydneyhud_hudlist_ignore_buff_health_regeneration",
             "description": "sydneyhud_hudlist_ignore_buff_health_regeneration_desc",
-            "callback": "callback_ignore_buff_health_regeneration",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_health_regeneration",
             "default_value": false
         }

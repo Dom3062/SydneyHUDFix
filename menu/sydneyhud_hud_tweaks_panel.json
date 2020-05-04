@@ -1,6 +1,6 @@
 {
     "menu_id": "sydneyhud_hud_tweaks_panel",
-    "parent_menu_id": "sydneyhud_hud_tweaks",
+    "parent_menu": "sydneyhud_hud_tweaks",
     "title": "sydneyhud_hud_tweaks_panel",
     "description": "sydneyhud_hud_tweaks_panel_desc",
     "items": [
@@ -9,11 +9,11 @@
             "id": "counter_font_size",
             "title": "counter_font_size",
             "description": "counter_font_size_desc",
-            "callback": "callback_counter_font_size",
+            "callback": "SetValue",
             "value": "counter_font_size",
             "max": 24,
             "min": 14,
-            "step": 1,
+            "step": 0,
             "default_value": 14
         },
         {
@@ -21,7 +21,7 @@
             "id": "show_stamina_meter",
             "title": "show_stamina_meter",
             "description": "show_stamina_meter_desc",
-            "callback": "callback_show_stamina_meter",
+            "callback": "SetValue",
             "value": "show_stamina_meter",
             "default_value": true
         },
@@ -30,7 +30,7 @@
             "id": "show_armor_timer",
             "title": "show_armor_timer",
             "description": "show_armor_timer_desc",
-            "callback": "callback_show_armor_timer",
+            "callback": "SetValue",
             "value": "show_armor_timer",
             "default_value": true
         },
@@ -39,7 +39,7 @@
             "id": "show_detection_rate",
             "title": "show_detection_rate",
             "description": "show_detection_rate_desc",
-            "callback": "callback_show_detection_rate",
+            "callback": "SetValue",
             "value": "show_detection_rate",
             "default_value": true
         },
@@ -48,7 +48,7 @@
             "id": "show_downs_left",
             "title": "show_downs_left",
             "description": "show_downs_left_desc",
-            "callback": "callback_show_downs_left",
+            "callback": "SetValue",
             "value": "show_downs_left",
             "default_value": true
         },
@@ -57,7 +57,7 @@
             "id": "show_underdog_aced",
             "title": "show_underdog_aced",
             "description": "show_underdog_aced_desc",
-            "callback": "callback_show_underdog_aced",
+            "callback": "SetValue",
             "value": "show_underdog_aced",
             "default_value": true
         },
@@ -66,7 +66,7 @@
             "id": "show_inspire_timer",
             "title": "show_inspire_timer",
             "description": "show_inspire_timer",
-            "callback": "callback_show_inspire_timer",
+            "callback": "SetValue",
             "value": "show_inspire_timer",
             "default_value": true
         },
@@ -75,7 +75,7 @@
             "id": "improved_ammo_count",
             "title": "improved_ammo_count",
             "description": "improved_ammo_count_desc",
-            "callback": "callback_improved_ammo_count",
+            "callback": "SetValue",
             "value": "improved_ammo_count",
             "default_value": true
         }

@@ -1,6 +1,6 @@
 {
     "menu_id": "sydneyhud_hudlist_options_left",
-    "parent_menu_id": "sydneyhud_hudlist_options",
+    "parent_menu": "sydneyhud_hudlist_options",
     "title": "sydneyhud_hudlist_options_left",
     "description": "sydneyhud_hudlist_options_left_desc",
     "items": [
@@ -9,11 +9,11 @@
             "id": "hudlist_left_list_scale",
             "title": "sydneyhud_hudlist_scale",
             "description": "sydneyhud_hudlist_left_list_scale_desc",
-            "callback": "callback_left_list_scale",
+            "callback": "SetValue",
             "value": "hudlist_left_list_scale",
             "max": 2,
             "min": 0.5,
-            "step": 0.05,
+            "step": 2,
             "default_value": 1
         },
         {
@@ -31,7 +31,7 @@
                 "sydneyhud_hudlist_aggregate"
             ],
             "callback": "callback_show_ammo_bags",
-            "value": "hudlist_show_ammo_bags",
+            "value": "SetValue",
             "default_value": 3
         },
         {
@@ -44,7 +44,7 @@
                 "sydneyhud_hudlist_all",
                 "sydneyhud_hudlist_aggregate"
             ],
-            "callback": "callback_show_doc_bags",
+            "callback": "SetValue",
             "value": "hudlist_show_doc_bags",
             "default_value": 3
         },
@@ -58,7 +58,7 @@
                 "sydneyhud_hudlist_all",
                 "sydneyhud_hudlist_aggregate"
             ],
-            "callback": "callback_show_body_bags",
+            "callback": "SetValue",
             "value": "hudlist_show_body_bags",
             "default_value": 3
         },
@@ -72,7 +72,7 @@
                 "sydneyhud_hudlist_all",
                 "sydneyhud_hudlist_aggregate"
             ],
-            "callback": "callback_show_grenade_crates",
+            "callback": "SetValue",
             "value": "hudlist_show_grenade_crates",
             "default_value": 3
         },
@@ -86,7 +86,7 @@
                 "sydneyhud_hudlist_all",
                 "sydneyhud_hudlist_player_only"
             ],
-            "callback": "callback_show_sentries",
+            "callback": "SetValue",
             "value": "hudlist_show_sentries",
             "default_value": 3
         },
@@ -100,7 +100,7 @@
                 "sydneyhud_hudlist_all",
                 "sydneyhud_hudlist_player_only"
             ],
-            "callback": "callback_show_minions",
+            "callback": "SetValue",
             "value": "hudlist_show_minions",
             "default_value": 3
         },
@@ -109,7 +109,7 @@
             "id": "hudlist_show_timers",
             "title": "sydneyhud_hudlist_show_timers",
             "description": "sydneyhud_hudlist_show_timers_desc",
-            "callback": "callback_show_timers",
+            "callback": "SetValue",
             "value": "hudlist_show_timers",
             "default_value": true
         },
@@ -118,7 +118,7 @@
             "id": "hudlist_show_ecms",
             "title": "sydneyhud_hudlist_show_ecms",
             "description": "sydneyhud_hudlist_show_ecms_desc",
-            "callback": "callback_show_ecms",
+            "callback": "SetValue",
             "value": "hudlist_show_ecms",
             "default_value": true
         },
@@ -127,7 +127,7 @@
             "id": "hudlist_show_ecm_retrigger",
             "title": "sydneyhud_hudlist_show_ecm_retrigger",
             "description": "sydneyhud_hudlist_show_ecm_retrigger_desc",
-            "callback": "callback_show_ecm_retrigger",
+            "callback": "SetValue",
             "value": "hudlist_show_ecm_retrigger",
             "default_value": true
         },
@@ -136,7 +136,7 @@
             "id": "hudlist_show_pagers",
             "title": "sydneyhud_hudlist_show_pagers",
             "description": "sydneyhud_hudlist_show_pagers_desc",
-            "callback": "callback_show_pagers",
+            "callback": "SetValue",
             "value": "hudlist_show_pagers",
             "default_value": true
         },
@@ -145,7 +145,7 @@
             "id": "hudlist_show_tape_loop",
             "title": "sydneyhud_hudlist_show_tape_loop",
             "description": "sydneyhud_hudlist_show_tape_loop_desc",
-            "callback": "callback_show_tape_loop",
+            "callback": "SetValue",
             "value": "hudlist_show_tape_loop",
             "default_value": true
         }

@@ -1,6 +1,6 @@
 {
     "menu_id": "sydneyhud_gameplay_tweaks",
-    "parent_menu_id": "sydneyhud_options",
+    "parent_menu": "sydneyhud_menu",
     "title": "sydneyhud_gameplay_tweaks",
     "description": "sydneyhud_gameplay_tweaks_desc",
     "items": [
@@ -9,7 +9,7 @@
             "id": "remove_answered_pager_contour",
             "title": "remove_answered_pager_contour",
             "description": "remove_answered_pager_contour_desc",
-            "callback": "callback_remove_answered_pager_contour",
+            "callback": "SetValue",
             "value": "remove_answered_pager_contour",
             "default_value": true
         },
@@ -22,7 +22,7 @@
             "id": "swansong_effect",
             "title": "swansong_effect",
             "description": "swansong_effect_desc",
-            "callback": "callback_swansong_effect",
+            "callback": "SetValue",
             "value": "swansong_effect",
             "default_value": true
         },
@@ -35,7 +35,7 @@
             "id": "anti_bobble",
             "title": "anti_bobble",
             "description": "anti_bobble_desc",
-            "callback": "callback_anti_bobble",
+            "callback": "SetValue",
             "value": "anti_bobble",
             "default_value": true
         },
@@ -48,7 +48,7 @@
             "id": "anti_stealth_grenades",
             "title": "anti_stealth_grenades",
             "description": "anti_stealth_grenades_desc",
-            "callback": "callback_anti_stealth_grenades",
+            "callback": "SetValue",
             "value": "anti_stealth_grenades",
             "default_value": true
         },
@@ -61,7 +61,7 @@
             "id": "auto_sentry_ap",
             "title": "auto_sentry_ap",
             "description": "auto_sentry_ap_desc",
-            "callback": "callback_auto_sentry_ap",
+            "callback": "SetValue",
             "value": "auto_sentry_ap",
             "default_value": true
         }

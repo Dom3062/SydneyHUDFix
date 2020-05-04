@@ -1,6 +1,6 @@
 {
     "menu_id": "sydneyhud_hud_tweaks_kill_counter",
-    "parent_menu_id": "sydneyhud_hud_tweaks",
+    "parent_menu": "sydneyhud_hud_tweaks",
     "title": "sydneyhud_hud_tweaks_kill_counter",
     "description": "sydneyhud_hud_tweaks_kill_counter_desc",
     "items": [
@@ -9,9 +9,10 @@
             "id": "enable_kill_counter",
             "title": "enable_kill_counter",
             "description": "enable_kill_counter_desc",
-            "callback": "callback_enable_kill_counter",
+            "callback": "SetValue",
             "value": "enable_kill_counter",
-            "default_value": true
+            "default_value": true,
+            "is_parent" : true
         },
         {
             "type": "divider",
@@ -22,27 +23,30 @@
             "id": "show_special_kills",
             "title": "show_special_kills",
             "description": "show_special_kills_desc",
-            "callback": "callback_show_special_kills",
+            "callback": "SetValue",
             "value": "show_special_kills",
-            "default_value": true
+            "default_value": true,
+            "parent" : "enable_kill_counter"
         },
         {
             "type": "toggle",
             "id": "show_headshot_kills",
             "title": "show_headshot_kills",
             "description": "show_headshot_kills_desc",
-            "callback": "callback_show_headshot_kills",
+            "callback": "SetValue",
             "value": "show_headshot_kills",
-            "default_value": true
+            "default_value": true,
+            "parent" : "enable_kill_counter"
         },
         {
             "type": "toggle",
             "id": "show_ai_kills",
             "title": "show_ai_kills",
             "description": "show_ai_kills_desc",
-            "callback": "callback_show_ai_kills",
+            "callback": "SetValue",
             "value": "show_ai_kills",
-            "default_value": true
+            "default_value": true,
+            "parent" : "enable_kill_counter"
         }
     ]
 }

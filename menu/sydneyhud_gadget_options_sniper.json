@@ -1,107 +1,78 @@
 {
     "menu_id": "sydneyhud_gadget_options_sniper",
-    "parent_menu_id": "sydneyhud_gadget_options",
+    "parent_menu": "sydneyhud_gadget_options",
     "title": "sydneyhud_gadget_options_sniper",
     "description": "sydneyhud_gadget_options_sniper_desc",
-    "focus_changed_callback" : "SydneyHUDPanelFocus",
     "items": [
         {
             "type": "toggle",
             "id": "enable_laser_options_snipers",
             "title": "enable_laser_options_snipers",
             "description": "enable_laser_options_snipers_desc",
-            "callback": "callback_enable_laser_options_snipers",
+            "callback": "SetValue",
             "value": "enable_laser_options_snipers",
-            "default_value": true
+            "default_value": true,
+            "is_parent" : true
         },
         {
-            "type": "divider",
-            "size": 32
-        },
-        {
-            "type": "slider",
-            "id": "laser_color_r_snipers",
-            "title": "color_red",
-            "description": "laser_color_laser_color",
-            "callback": "callback_laser_color_r_snipers",
-            "value": "laser_color_r_snipers",
-            "max": 2.55,
-            "min": 0,
-            "step": 0.01,
-            "default_value": 0
-        },
-        {
-            "type": "slider",
-            "id": "laser_color_g_snipers",
-            "title": "color_green",
-            "description": "laser_color_laser_color",
-            "callback": "callback_laser_color_g_snipers",
-            "value": "laser_color_g_snipers",
-            "max": 2.55,
-            "min": 0,
-            "step": 0.01,
-            "default_value": 2.55
-        },
-        {
-            "type": "slider",
-            "id": "laser_color_b_snipers",
-            "title": "color_blue",
-            "description": "laser_color_laser_color",
-            "callback": "callback_laser_color_b_snipers",
-            "value": "laser_color_b_snipers",
-            "max": 2.55,
-            "min": 0,
-            "step": 0.01,
-            "default_value": 0
-        },
-        {
-            "type": "divider",
-            "size": 16
+            "type" : "color_select",
+            "id" : "laser_color_snipers",
+            "title" : "enable_laser_options_snipers",
+            "description" : "laser_color_laser_color",
+            "value" : "laser_color",
+            "value_extension" : "_snipers",
+            "default_value" : [255, 0, 0],
+            "callback" : "SetSniperColor",
+            "parent" : "enable_laser_options_snipers"
         },
         {
             "type": "toggle",
             "id": "laser_color_rainbow_snipers",
             "title": "laser_color_rainbow",
             "description": "laser_color_rainbow_desc",
-            "callback": "callback_laser_color_rainbow_snipers",
+            "callback": "SetValue",
             "value": "laser_color_rainbow_snipers",
-            "default_value": true
+            "default_value": true,
+            "parent" : "enable_laser_options_snipers"
         },
         {
             "type": "slider",
             "id": "laser_color_a_snipers",
             "title": "laser_color_ray_alpha",
             "description": "laser_color_ray_alpha_desc",
-            "callback": "callback_laser_color_a_snipers",
+            "callback": "SetValue",
             "value": "laser_color_a_snipers",
             "max": 2.55,
             "min": 0,
-            "step": 0.01,
-            "default_value": 0.38
+            "step": 2,
+            "default_value": 0.38,
+            "parent" : "enable_laser_options_snipers"
         },
         {
             "type": "slider",
             "id": "laser_glow_snipers",
             "title": "laser_glow",
             "description": "laser_glow_desc",
-            "callback": "callback_laser_glow_snipers",
+            "callback": "SetValue",
             "value": "laser_glow_snipers",
             "max": 2.55,
             "min": 0,
-            "step": 0.01,
-            "default_value": 0.51
+            "step": 2,
+            "default_value": 0.51,
+            "parent" : "enable_laser_options_snipers"
         },
         {
             "type": "slider",
             "id": "laser_light_snipers",
             "title": "laser_light",
             "description": "laser_light_desc",
-            "callback": "callback_laser_light_snipers",
+            "callback": "SetValue",
             "value": "laser_light_snipers",
             "max": 10,
             "min": 0,
-            "step": 0.01,
-            "default_value": 10
+            "step": 1,
+            "default_value": 10,
+            "parent" : "enable_laser_options_snipers"
         }
     ]
 }

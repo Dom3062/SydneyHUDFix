@@ -1,6 +1,6 @@
 {
     "menu_id": "sydneyhud_hudlist_options_buff_options_perks",
-    "parent_menu_id": "sydneyhud_hudlist_options_buff_options_buff",
+    "parent_menu": "sydneyhud_hudlist_options_buff_options",
     "title": "menu_specialization",
     "items": [
         {
@@ -8,7 +8,7 @@
             "id": "hudlist_ignore_buff_armor_break_invulnerability",
             "title": "sydneyhud_hudlist_ignore_buff_armor_break_invulnerability",
             "description": "sydneyhud_hudlist_ignore_buff_armor_break_invulnerability_desc",
-            "callback": "callback_ignore_buff_armor_break_invulnerability",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_armor_break_invulnerability",
             "default_value": false
         },
@@ -17,7 +17,7 @@
             "id": "hudlist_ignore_buff_armor_break_invulnerability_cooldown",
             "title": "sydneyhud_hudlist_ignore_buff_armor_break_invulnerability_cooldown",
             "description": "sydneyhud_hudlist_ignore_buff_armor_break_invulnerability_cooldown_desc",
-            "callback": "callback_ignore_buff_armor_break_invulnerability_cooldown",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_armor_break_invulnerability_cooldown",
             "default_value": true
         },
@@ -26,9 +26,124 @@
             "id": "hudlist_ignore_buff_close_contact_no_talk",
             "title": "sydneyhud_hudlist_ignore_buff_close_contact_no_talk",
             "description": "sydneyhud_hudlist_ignore_buff_close_contact_no_talk_desc",
-            "callback": "callback_ignore_buff_close_contact_no_talk",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_close_contact_no_talk",
             "default_value": true
+        },
+        {
+            "type" : "divider"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_hudlist_options_buff_options_perks_crew_chief",
+            "title" : "menu_st_spec_1",
+            "description" : "",
+            "next_menu" : "sydneyhud_hudlist_options_buff_options_perks_crew_chief"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_hudlist_options_buff_options_perks_muscle",
+            "title" : "menu_st_spec_2",
+            "description" : "",
+            "next_menu" : "sydneyhud_hudlist_options_buff_options_perks_muscle"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_hudlist_options_buff_options_perks_armorer",
+            "title" : "menu_st_spec_3",
+            "description" : "",
+            "next_menu" : "sydneyhud_hudlist_options_buff_options_perks_armorer"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_hudlist_options_buff_options_perks_hitman",
+            "title" : "menu_st_spec_5",
+            "description" : "",
+            "next_menu" : "sydneyhud_hudlist_options_buff_options_perks_hitman"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_hudlist_options_buff_options_perks_infiltrator",
+            "title" : "menu_st_spec_8",
+            "description" : "",
+            "next_menu" : "sydneyhud_hudlist_options_buff_options_perks_infiltrator"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_hudlist_options_buff_options_perks_sociopath",
+            "title" : "menu_st_spec_9",
+            "description" : "",
+            "next_menu" : "sydneyhud_hudlist_options_buff_options_perks_sociopath"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_hudlist_options_buff_options_perks_gambler",
+            "title" : "menu_st_spec_10",
+            "description" : "",
+            "next_menu" : "sydneyhud_hudlist_options_buff_options_perks_gambler"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_hudlist_options_buff_options_perks_grinder",
+            "title" : "menu_st_spec_11",
+            "description" : "",
+            "next_menu" : "sydneyhud_hudlist_options_buff_options_perks_grinder"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_hudlist_options_buff_options_perks_yakuza",
+            "title" : "menu_st_spec_12",
+            "description" : "",
+            "next_menu" : "sydneyhud_hudlist_options_buff_options_perks_yakuza"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_hudlist_options_buff_options_perks_maniac",
+            "title" : "menu_st_spec_14",
+            "description" : "",
+            "next_menu" : "sydneyhud_hudlist_options_buff_options_perks_maniac"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_hudlist_options_buff_options_perks_anarchist",
+            "title" : "menu_st_spec_15",
+            "description" : "",
+            "next_menu" : "sydneyhud_hudlist_options_buff_options_perks_anarchist"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_hudlist_options_buff_options_perks_biker",
+            "title" : "menu_st_spec_16",
+            "description" : "",
+            "next_menu" : "sydneyhud_hudlist_options_buff_options_perks_biker"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_hudlist_options_buff_options_perks_kingpin",
+            "title" : "menu_st_spec_17",
+            "description" : "",
+            "next_menu" : "sydneyhud_hudlist_options_buff_options_perks_kingpin"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_hudlist_options_buff_options_perks_sicario",
+            "title" : "menu_st_spec_18",
+            "description" : "",
+            "next_menu" : "sydneyhud_hudlist_options_buff_options_perks_sicario"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_hudlist_options_buff_options_perks_stoic",
+            "title" : "menu_st_spec_19",
+            "description" : "",
+            "next_menu" : "sydneyhud_hudlist_options_buff_options_perks_stoic"
+        },
+        {
+            "type" : "button",
+            "id" : "sydneyhud_hudlist_options_buff_options_perks_hacker",
+            "title" : "menu_st_spec_21",
+            "description" : "",
+            "next_menu" : "sydneyhud_hudlist_options_buff_options_perks_hacker"
         }
     ]
 }

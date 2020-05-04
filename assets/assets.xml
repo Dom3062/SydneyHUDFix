@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<assets base_path="assets/" load="startup">
+    <group name="guis/textures/pd2_mod_sydneyhud/" path="assets/guis/textures/pd2_mod_sydneyhud/">
+        <file :name="menu_background.texture" :path="menu_background.texture"/>
+        <file :name="hud_corner.texture" :path="hud_corner.texture"/>
+        <file :name="check_bg.texture" :path="check_bg.texture"/>
+        <file :name="check.texture" :path="check.texture"/>
+    </group>
+</assets>

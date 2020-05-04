@@ -1,6 +1,6 @@
 {
     "menu_id": "sydneyhud_hudlist_options_buff_options_perks_sicario",
-    "parent_menu_id": "sydneyhud_hudlist_options_buff_options_perks",
+    "parent_menu": "sydneyhud_hudlist_options_buff_options_perks",
     "title": "menu_st_spec_18",
     "items": [
         {
@@ -8,7 +8,7 @@
             "id": "hudlist_ignore_buff_smoke_grenade",
             "title": "sydneyhud_hudlist_ignore_buff_smoke_grenade",
             "description": "sydneyhud_hudlist_ignore_buff_smoke_grenade_desc",
-            "callback": "callback_ignore_buff_smoke_grenade",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_smoke_grenade",
             "default_value": true
         },
@@ -17,7 +17,7 @@
             "id": "hudlist_ignore_buff_smoke_screen",
             "title": "sydneyhud_hudlist_ignore_buff_smoke_screen",
             "description": "sydneyhud_hudlist_ignore_buff_smoke_screen_desc",
-            "callback": "callback_ignore_buff_smoke_screen",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_smoke_screen",
             "default_value": false
         },
@@ -25,7 +25,8 @@
             "type": "toggle",
             "id": "hudlist_ignore_buff_twitch",
             "title": "menu_deck18_3",
-            "callback": "callback_ignore_buff_twitch",
+            "description" : "",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_twitch",
             "default_value": true
         },
@@ -34,7 +35,7 @@
             "id": "hudlist_ignore_buff_twitch_cooldown",
             "title": "sydneyhud_hudlist_ignore_buff_twitch_cooldown",
             "description": "sydneyhud_hudlist_ignore_buff_twitch_cooldown_desc",
-            "callback": "callback_ignore_buff_twitch_cooldown",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_twitch_cooldown",
             "default_value": false
         }

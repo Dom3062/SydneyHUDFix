@@ -1,3 +1,5 @@
+dofile(SydneyHUD._lua_path .. "SydneyMenu.lua")
+
 local is_dlc_latest_locked_original = MenuCallbackHandler.is_dlc_latest_locked
 function MenuCallbackHandler:is_dlc_latest_locked(...)
     return SydneyHUD:GetOption("remove_ads") and false or is_dlc_latest_locked_original(self, ...)
@@ -76,14 +78,26 @@ Hooks:Add("MenuManagerBuildCustomMenus", "MenuManagerBuildCustomMenus_SydneyHUD"
     end
 end)
 
---[[
-    Setup our menu callbacks and build the menu from our json file.
-]]
-Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_SydneyHUD", function(menu_manager)
+Hooks:Add("MenuManagerBuildCustomMenus", "MenuManagerBuildCustomMenus_SydneyHUD", function(menu_manager, nodes)
     --[[
         Setup our callbacks as defined in our item callback keys, and perform our logic on the data retrieved.
     ]]
-    MenuCallbackHandler.SydneyHUDChangedFocus = function(node, focus)
+    MenuCallbackHandler.OpenSydneyHUDModOptions = function(self, item)
+        SydneyHUD.Menu = SydneyHUD.Menu or SydneyMenu:new()
+		SydneyHUD.Menu:Open()
+	end
+	
+	local node = nodes["blt_options"]
+
+	local item_params = {
+		name = "SydneyHUD_OpenMenu",
+		text_id = "sydneyhud_options",
+		help_id = "sydneyhud_options_desc",
+		callback = "OpenSydneyHUDModOptions",
+		localize = true,
+	}
+    node:add_item(node:create_item({type = "CoreMenuItem.Item"}, item_params))
+    --[[MenuCallbackHandler.SydneyHUDChangedFocus = function(node, focus)
         if focus then
             SydneyHUD:CreatePanel()
             SydneyHUD:CreateBitmaps()
@@ -1149,11 +1163,6 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_SydneyHUD", function(m
         SydneyHUD._data.block_shields = item:value() == "on"
     end
 
-    -- SydneyHUD
-    MenuCallbackHandler.callback_sydneyhud_language = function(self, item)
-        SydneyHUD._data.language = item:value()
-    end
-
     MenuCallbackHandler.callback_sydneyhud_reset = function(self, item)
         local menu_title = managers.localization:text("sydneyhud_reset")
         local menu_message = managers.localization:text("sydneyhud_reset_message")
@@ -1182,5 +1191,11 @@ Hooks:Add("MenuManagerInitialize", "MenuManagerInitialize_SydneyHUD", function(m
         end
     end
 
-    SydneyHUD:InitAllMenus()
+    SydneyHUD:InitAllMenus()]]
+end)
+
+Hooks:PostHook(MenuManager, "update", "update_menu_SydneyHUD", function(self, t, dt)
+	if SydneyHUD.Menu and SydneyHUD.Menu.update and SydneyHUD.Menu._enabled then
+		SydneyHUD.Menu:update(t, dt)
+	end
 end)

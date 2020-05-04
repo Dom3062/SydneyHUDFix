@@ -1,6 +1,6 @@
 {
     "menu_id": "sydneyhud_music_tweaks",
-    "parent_menu_id": "sydneyhud_options",
+    "parent_menu": "sydneyhud_menu",
     "title": "sydneyhud_music_tweaks",
     "description": "sydneyhud_music_tweaks_desc",
     "items": [
@@ -9,7 +9,7 @@
             "id": "music_on_steam_overlay",
             "title": "sydneyhud_music_on_steam_overlay",
             "description": "sydneyhud_music_on_steam_overlay_desc",
-            "callback": "callback_music_on_steam_overlay",
+            "callback": "SetValue",
             "value": "music_on_steam_overlay",
             "default_value": true
         },
@@ -18,7 +18,7 @@
             "id" : "shuffle_music",
             "title" : "sydneyhud_shuffle_music",
             "description" : "sydneyhud_shuffle_music_desc",
-            "callback" : "callback_shuffle_music",
+            "callback" : "SetValue",
             "value" : "shuffle_music",
             "default_value" : true
         }

@@ -1,6 +1,6 @@
 {
     "menu_id": "sydneyhud_hudlist_options_buff_options_perks_sociopath",
-    "parent_menu_id": "sydneyhud_hudlist_options_buff_options_perks",
+    "parent_menu": "sydneyhud_hudlist_options_buff_options_perks",
     "title": "menu_st_spec_9",
     "items": [
         {
@@ -8,7 +8,7 @@
             "id": "hudlist_ignore_buff_sociopath_cooldown",
             "title": "sydneyhud_hudlist_ignore_buff_sociopath_cooldown",
             "description": "sydneyhud_hudlist_ignore_buff_sociopath_cooldown_desc",
-            "callback": "callback_ignore_buff_sociopath_cooldown",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_sociopath_cooldown",
             "default_value": false
         }
