@@ -213,7 +213,7 @@ if not SydneyHUD then
     end
 
     function SydneyHUD:LoadDefaults()
-        local default_file = io.open(self._path .."menu/default_values.json")
+        local default_file = io.open(self.ModPath .."menu/default_values.json")
         self.settings = json.decode(default_file:read("*all"))
         default_file:close()
     end
