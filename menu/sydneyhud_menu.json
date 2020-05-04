@@ -1,7 +1,7 @@
 {
     "menu_id": "sydneyhud_menu",
-    "title": "sydneyhud_options",
-    "description": "sydneyhud_options_desc",
+    "title": "sydneyhud_menu",
+    "description": "sydneyhud_menu_desc",
     "items": [
         {
             "type" : "button",

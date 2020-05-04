@@ -458,8 +458,8 @@
     "sydneyhud_savedata_not_compatible_desc" : "Похоже что внутренние настройки мода изменили ваш файл настроек и он стал несовместимый с этой версией мода(SydneyHUD). Мне жаль, что я не могу загрузить ваш файл настроек, но по крайней мере я загрузил стандартные настройки, чтобы избежать вылета игры.\n\nИзвините за неудобство.",
 
     "sydneyhud_ok" : "Ok",
-    "sydneyhud_options": "Настройка SydneyHUD",
-    "sydneyhud_options_desc": "Детальные настройки SydneyHUD.",
+    "sydneyhud_menu": "Настройка SydneyHUD",
+    "sydneyhud_menu_desc": "Детальные настройки SydneyHUD.",
     "sydneyhud_pocohud_config_fixed" : "SydneyHUD: PocoHUD фикс конфига",
     "sydneyhud_pocohud_config_fixed_desc" : "Конфиг исправлен. Необходимо перезапустить игру ПРЯМО СЕЙЧАС, чтобы завершить процесс!",
     "sydneyhud_pocohud_conflicts_found" : "SydneyHUD: PocoHUD несовместимость конфига",

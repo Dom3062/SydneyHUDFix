@@ -67,7 +67,7 @@ if not SydneyHUD then
     SydneyHUD._poco_path = SavePath .. "hud3_config.json"
     SydneyHUD._data = {}
     SydneyHUD._menus = {
-        "sydneyhud_options",
+        "sydneyhud_menu",
         "sydneyhud_core",
 
         "sydneyhud_gadget_options",

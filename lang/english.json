@@ -484,8 +484,8 @@
     "sydneyhud_optimization_tweaks_block_shields" : "Block Shields",
     "sydneyhud_optimization_tweaks_block_shields_desc" : "Blocks lying shields on the ground",
 
-    "sydneyhud_options": "SydneyHUD",
-    "sydneyhud_options_desc": "SydneyHUD options",
+    "sydneyhud_menu": "SydneyHUD",
+    "sydneyhud_menu_desc": "SydneyHUD options",
     "sydneyhud_pocohud_config_fixed" : "SydneyHUD: PocoHUD config fixed",
     "sydneyhud_pocohud_config_fixed_desc" : "Config fixed. You NEED to restart the game NOW, to finish the process.",
     "sydneyhud_pocohud_conflicts_found" : "SydneyHUD: PocoHUD config incompatible",

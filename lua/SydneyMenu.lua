@@ -706,7 +706,7 @@ function SydneyMenu:GetMenuFromJson(path)
         local focus_changed_callback = content.focus_changed_callback
         local items = content.items
         
-        if content.title == "sydneyhud_options" then
+        if content.title == "sydneyhud_menu" then
             menu_title = menu_title .. " v" .. SydneyHUD:GetVersion()
         end
         

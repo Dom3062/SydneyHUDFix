@@ -91,8 +91,8 @@ Hooks:Add("MenuManagerBuildCustomMenus", "MenuManagerBuildCustomMenus_SydneyHUD"
 
 	local item_params = {
 		name = "SydneyHUD_OpenMenu",
-		text_id = "sydneyhud_options",
-		help_id = "sydneyhud_options_desc",
+		text_id = "sydneyhud_menu",
+		help_id = "sydneyhud_menu_desc",
 		callback = "OpenSydneyHUDModOptions",
 		localize = true,
 	}
