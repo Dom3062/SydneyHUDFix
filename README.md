@@ -32,6 +32,7 @@ Fixed version of SydneyHUD after former team stopped updating this HUD
 * ChatTime
 * Contract broker quick link
 * Corpse Remover Plus
+* Custom Menu
 * Damage Pop-up
 * Down Counter / Detection risk indicator
 * Down Warning
@@ -105,6 +106,7 @@ So, Big credit to these guys!
 * 💉**FAK-Notifier** by SlashNephy [🔗](https://github.com/SlashNephy/FAK-Notifier)
 * 💬**Chat Info** by Nebby [🔗](https://modworkshop.net/mydownloads.php?action=view_down&did=19181)
 * 🔺**Better Assault Indicator** by Dom [🔗](https://modworkshop.net/mydownloads.php?action=view_down&did=22712)
+* Menu code from **VoidUI** by VoidUI Team [🔗](https://modworkshop.net/mod/20997)
 * many of inspired mod
 
 ###Removed mods from SydneyHUD
