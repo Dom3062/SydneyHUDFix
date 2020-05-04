@@ -299,31 +299,3 @@ function PlayerStandard:getUnitRotation(unit)
     local rotation = math.floor(vector:to_polar_with_reference(forward, math.UP).spin)
     return -(rotation + 180)
 end
-
-local _get_interaction_target_original = PlayerStandard._get_interaction_target
-function PlayerStandard:_get_interaction_target(char_table, my_head_pos, cam_fwd, ...)
-    if SydneyHUD:GetOption("civilian_spot") then
-        local range = tweak_data.player.long_dis_interaction.highlight_range * managers.player:upgrade_value("player", "intimidate_range_mul", 1) * managers.player:upgrade_value("player", "passive_intimidate_range_mul", 1)
-        for u_key, u_data in pairs(managers.enemy:all_civilians()) do
-            if u_data.unit:movement():cool() then
-                self:_add_unit_to_char_table(char_table, u_data.unit, 1, range, false, false, 0.001, my_head_pos, cam_fwd)
-            end
-        end
-    end
-    return _get_interaction_target_original(self, char_table, my_head_pos, cam_fwd, ...)
-end
-
-PlayerStandard.MARK_CIVILIANS_VOCAL = SydneyHUD:GetOption("civilian_spot_voice")
-local _get_intimidation_action_original = PlayerStandard._get_intimidation_action
-function PlayerStandard:_get_intimidation_action(prime_target, ...)
-    if SydneyHUD:GetOption("civilian_spot") then
-        if prime_target and prime_target.unit_type == 1 and prime_target.unit:movement():cool() and managers.player:has_category_upgrade("player", "sec_camera_highlight_mask_off") then
-            if not PlayerStandard.MARK_CIVILIANS_VOCAL then
-                prime_target.unit:contour():add(managers.player:has_category_upgrade("player", "marked_enemy_extra_damage") and "mark_enemy_damage_bonus" or "mark_enemy", true, managers.player:upgrade_value("player", "mark_enemy_time_multiplier", 1))
-            end
-            return PlayerStandard.MARK_CIVILIANS_VOCAL and "mark_cop_quiet" or nil, false, prime_target
-        end
-    end
-
-    return _get_intimidation_action_original(self, prime_target, ...)
-end

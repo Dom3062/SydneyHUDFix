@@ -33,13 +33,6 @@
         },
         {
             "type" : "button",
-            "id" : "sydneyhud_experimental",
-            "title" : "sydneyhud_experimental",
-            "description" : "sydneyhud_experimental_desc",
-            "next_menu" : "sydneyhud_experimental"
-        },
-        {
-            "type" : "button",
             "id" : "sydneyhud_gameplay_tweaks",
             "title" : "sydneyhud_gameplay_tweaks",
             "description" : "sydneyhud_gameplay_tweaks_desc",
