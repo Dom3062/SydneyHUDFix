@@ -77,8 +77,8 @@ function SydneyMenu:SydneyHUDHUDTweaksAssaultMenuCreatedCallback()
         UpdateOneItem(self, menu, "enhanced_assault_time", false)
         UpdateOneItem(self, menu, "time_format", false)
         UpdateOneItem(self, menu, "enhanced_assault_count", false)
-    --else
-        --menu.items[9].panel:set_alpha(0)
+    else
+        menu.items[9].panel:set_alpha(0)
     end
 end
 

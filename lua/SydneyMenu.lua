@@ -763,7 +763,8 @@ function SydneyMenu:GetMenuFromJson(path)
                     menu_id = menu_id,
                     enabled = enabled,
                     title = managers.localization:text(title),
-                    parent = item.parent
+                    parent = item.parent,
+                    h = item.h
                 })
             elseif item_type == "divider" then
                 self:CreateDivider({menu_id = menu_id})
@@ -982,7 +983,7 @@ function SydneyMenu:CreateLabel(params)
     local label_panel = menu_panel:panel({
         name = "label_"..tostring(#self._menus[params.menu_id].items),
         y = self:GetLastPosInMenu(params.menu_id),
-        h = 25,
+        h = params.h or 25,
         layer = 2,
         alpha = params.enabled and 1 or 0.5
     })
