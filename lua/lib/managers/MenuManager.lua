@@ -20,7 +20,7 @@ end
 Hooks:Add("LocalizationManagerPostInit", "LocalizationManagerPostInit_sydneyhud", function(loc)
     if SydneyHUD:GetOption("language") == 1 then
         local language_filename = nil
-        for _, filename in pairs(file.GetFiles(SydneyHUD._path .. "lang/")) do
+        for _, filename in pairs(file.GetFiles(SydneyHUD._path .. "loc/")) do
             local str = filename:match('^(.*).json$')
             if str and Idstring(str) and Idstring(str):key() == SystemInfo:language():key() then
                 language_filename = str
@@ -28,23 +28,23 @@ Hooks:Add("LocalizationManagerPostInit", "LocalizationManagerPostInit_sydneyhud"
             end
         end
         if language_filename then
-            loc:load_localization_file(SydneyHUD._path .. "lang/" .. language_filename .. ".json")
+            loc:load_localization_file(SydneyHUD._path .. "loc/" .. language_filename .. ".json")
         end
     else
         local langid = SydneyHUD:GetOption("language") - 1
-        for _, filename in pairs(file.GetFiles(SydneyHUD._path .. "lang/")) do
+        for _, filename in pairs(file.GetFiles(SydneyHUD._path .. "loc/")) do
             local str = filename:match('^(.*).json$')
             -- if str and Idstring(str) and Idstring(str):key() == SystemInfo:language():key() then
             -- log(SydneyHUD.dev..langid)
             if str == SydneyHUD._language[langid] then
-                loc:load_localization_file(SydneyHUD._path .. "lang/" .. filename)
+                loc:load_localization_file(SydneyHUD._path .. "loc/" .. filename)
                 log(SydneyHUD.info .. "language: " .. filename)
                 break
             end
         end
     end
-    loc:load_localization_file(SydneyHUD._path .. "lang/english.json", false)
-    loc:load_localization_file(SydneyHUD._path .. "lang/languages.json")
+    loc:load_localization_file(SydneyHUD._path .. "loc/english.json", false)
+    loc:load_localization_file(SydneyHUD._path .. "loc/languages.json")
 end)
 
 Hooks:Add("MenuManagerBuildCustomMenus", "MenuManagerBuildCustomMenus_SydneyHUD", function(menu_manager, nodes)

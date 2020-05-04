@@ -63,6 +63,7 @@ if not SydneyHUD then
     SydneyHUD.assets_path = "./assets/mod_overrides/"
     SydneyHUD._path = ModPath
     SydneyHUD._lua_path = ModPath .. "lua/"
+    SydneyHUD.LocPath = ModPath .. "loc/"
     SydneyHUD._data_path = SavePath .. "SydneyHUD.json"
     SydneyHUD._poco_path = SavePath .. "hud3_config.json"
     SydneyHUD._data = {}
