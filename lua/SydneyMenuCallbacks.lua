@@ -9,55 +9,55 @@ end
 
 -- Shared functions
 function SydneyMenu:SetValue(value, id)
-    SydneyHUD._data[id] = value
+    SydneyHUD.settings[id] = value
 end
 
 function SydneyMenu:SetSniperColor(color)
-    SydneyHUD._data.laser_color_r_snipers = color.red
-    SydneyHUD._data.laser_color_g_snipers = color.green
-    SydneyHUD._data.laser_color_b_snipers = color.blue
+    SydneyHUD.settings.laser_color_r_snipers = color.red
+    SydneyHUD.settings.laser_color_g_snipers = color.green
+    SydneyHUD.settings.laser_color_b_snipers = color.blue
 end
 
 function SydneyMenu:SetTurretColor(color)
-    SydneyHUD._data.laser_color_r_turret = color.red
-    SydneyHUD._data.laser_color_g_turret = color.green
-    SydneyHUD._data.laser_color_b_turret = color.blue
+    SydneyHUD.settings.laser_color_r_turret = color.red
+    SydneyHUD.settings.laser_color_g_turret = color.green
+    SydneyHUD.settings.laser_color_b_turret = color.blue
 end
 
 function SydneyMenu:SetTurretrColor(color)
-    SydneyHUD._data.laser_color_r_turretr = color.red
-    SydneyHUD._data.laser_color_g_turretr = color.green
-    SydneyHUD._data.laser_color_b_turretr = color.blue
+    SydneyHUD.settings.laser_color_r_turretr = color.red
+    SydneyHUD.settings.laser_color_g_turretr = color.green
+    SydneyHUD.settings.laser_color_b_turretr = color.blue
 end
 
 function SydneyMenu:SetTurretmColor(color)
-    SydneyHUD._data.laser_color_r_turretm = color.red
-    SydneyHUD._data.laser_color_g_turretm = color.green
-    SydneyHUD._data.laser_color_b_turretm = color.blue
+    SydneyHUD.settings.laser_color_r_turretm = color.red
+    SydneyHUD.settings.laser_color_g_turretm = color.green
+    SydneyHUD.settings.laser_color_b_turretm = color.blue
 end
 
 function SydneyMenu:SetCivilianColor(color)
-    SydneyHUD._data.civilian_color_r = color.red
-    SydneyHUD._data.civilian_color_g = color.green
-    SydneyHUD._data.civilian_color_b = color.blue
+    SydneyHUD.settings.civilian_color_r = color.red
+    SydneyHUD.settings.civilian_color_g = color.green
+    SydneyHUD.settings.civilian_color_b = color.blue
 end
 
 function SydneyMenu:SetEnemyColor(color)
-    SydneyHUD._data.enemy_color_r = color.red
-    SydneyHUD._data.enemy_color_g = color.green
-    SydneyHUD._data.enemy_color_b = color.blue
+    SydneyHUD.settings.enemy_color_r = color.red
+    SydneyHUD.settings.enemy_color_g = color.green
+    SydneyHUD.settings.enemy_color_b = color.blue
 end
 
 function SydneyMenu:SetInteractColor(color)
-    SydneyHUD._data.interact_color_r = color.red
-    SydneyHUD._data.interact_color_g = color.green
-    SydneyHUD._data.interact_color_b = color.blue
+    SydneyHUD.settings.interact_color_r = color.red
+    SydneyHUD.settings.interact_color_g = color.green
+    SydneyHUD.settings.interact_color_b = color.blue
 end
 
 function SydneyMenu:SetWaypointColor(color)
-    SydneyHUD._data.waypoint_color_r = color.red
-    SydneyHUD._data.waypoint_color_g = color.green
-    SydneyHUD._data.waypoint_color_b = color.blue
+    SydneyHUD.settings.waypoint_color_r = color.red
+    SydneyHUD.settings.waypoint_color_g = color.green
+    SydneyHUD.settings.waypoint_color_b = color.blue
 end
 
 function SydneyMenu:HUDListOptionsRightCreated()

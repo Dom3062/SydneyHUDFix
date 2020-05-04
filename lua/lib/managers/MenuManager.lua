@@ -1,4 +1,4 @@
-dofile(SydneyHUD._lua_path .. "SydneyMenu.lua")
+dofile(SydneyHUD.LuaPath .. "SydneyMenu.lua")
 
 local is_dlc_latest_locked_original = MenuCallbackHandler.is_dlc_latest_locked
 function MenuCallbackHandler:is_dlc_latest_locked(...)
@@ -20,7 +20,7 @@ end
 Hooks:Add("LocalizationManagerPostInit", "LocalizationManagerPostInit_sydneyhud", function(loc)
     if SydneyHUD:GetOption("language") == 1 then
         local language_filename = nil
-        for _, filename in pairs(file.GetFiles(SydneyHUD._path .. "loc/")) do
+        for _, filename in pairs(file.GetFiles(SydneyHUD.LocPath)) do
             local str = filename:match('^(.*).json$')
             if str and Idstring(str) and Idstring(str):key() == SystemInfo:language():key() then
                 language_filename = str
@@ -28,23 +28,23 @@ Hooks:Add("LocalizationManagerPostInit", "LocalizationManagerPostInit_sydneyhud"
             end
         end
         if language_filename then
-            loc:load_localization_file(SydneyHUD._path .. "loc/" .. language_filename .. ".json")
+            loc:load_localization_file(SydneyHUD.LocPath .. language_filename .. ".json")
         end
     else
         local langid = SydneyHUD:GetOption("language") - 1
-        for _, filename in pairs(file.GetFiles(SydneyHUD._path .. "loc/")) do
+        for _, filename in pairs(file.GetFiles(SydneyHUD.LocPath)) do
             local str = filename:match('^(.*).json$')
             -- if str and Idstring(str) and Idstring(str):key() == SystemInfo:language():key() then
             -- log(SydneyHUD.dev..langid)
             if str == SydneyHUD._language[langid] then
-                loc:load_localization_file(SydneyHUD._path .. "loc/" .. filename)
+                loc:load_localization_file(SydneyHUD.LocPath .. filename)
                 log(SydneyHUD.info .. "language: " .. filename)
                 break
             end
         end
     end
-    loc:load_localization_file(SydneyHUD._path .. "loc/english.json", false)
-    loc:load_localization_file(SydneyHUD._path .. "loc/languages.json")
+    loc:load_localization_file(SydneyHUD.LocPath .. "english.json", false)
+    loc:load_localization_file(SydneyHUD.LocPath .. "languages.json")
 end)
 
 Hooks:Add("MenuManagerBuildCustomMenus", "MenuManagerBuildCustomMenus_SydneyHUD", function(menu_manager, nodes)

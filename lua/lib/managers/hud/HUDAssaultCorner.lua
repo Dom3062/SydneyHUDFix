@@ -22,11 +22,11 @@ function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
         self.CompatibleHost = false
         self.BAIHost = false
         self.send_time_left = true
-        dofile(SydneyHUD._lua_path .. "lib/managers/LocalizationManager.lua")
-        dofile(SydneyHUD._lua_path .. "lib/managers/hud/HUDAssaultCorner_AssaultStates.lua")
-        dofile(SydneyHUD._lua_path .. "lib/managers/hud/HUDAssaultCorner_AssaultTime.lua")
-        dofile(SydneyHUD._lua_path .. "lib/managers/group_ai_states/GroupAIStateBesiege.lua")
-        dofile(SydneyHUD._lua_path .. "SydneyAnimation.lua")
+        dofile(SydneyHUD.LuaPath .. "lib/managers/LocalizationManager.lua")
+        dofile(SydneyHUD.LuaPath .. "lib/managers/hud/HUDAssaultCorner_AssaultStates.lua")
+        dofile(SydneyHUD.LuaPath .. "lib/managers/hud/HUDAssaultCorner_AssaultTime.lua")
+        dofile(SydneyHUD.LuaPath .. "lib/managers/group_ai_states/GroupAIStateBesiege.lua")
+        dofile(SydneyHUD.LuaPath .. "SydneyAnimation.lua")
         if self.is_client then
             -- Safe House Nightmare, The Biker Heist Day 2, Cursed Kill Room, Escape: Garage, Escape: Cafe, Escape: Cafe (Day)
             self.heists_with_endless_assaults = { "haunted", "chew", "hvh", "escape_garage", "escape_cafe", "escape_cafe_day" }

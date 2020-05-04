@@ -171,7 +171,7 @@ function MenuNodeMainGui:_setup_item_rows(node, ...)
                 [3] = {
                     text = managers.localization:text("sydneyhud_pocohud_recommendations_found_keep_and_dont_remind"),
                     callback = function()
-                        SydneyHUD._data.show_poco_recommendations = false
+                        SydneyHUD.settings.show_poco_recommendations = false
                         SydneyHUD:Save()
                     end
                 }

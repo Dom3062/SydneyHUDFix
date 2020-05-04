@@ -134,7 +134,7 @@ function SydneyMenu:init()
     end
     
     for _, menu in ipairs(SydneyHUD._menus) do
-        self:GetMenuFromJson(SydneyHUD._path .. "menu/" .. menu .. ".json")
+        self:GetMenuFromJson(SydneyHUD.ModPath .. "menu/" .. menu .. ".json")
     end
     
     self:OpenMenu("sydneyhud_menu")
@@ -698,7 +698,7 @@ function SydneyMenu:GetMenuFromJson(path)
         local file_content = file:read("*all")
         file:close()
 
-        local values = SydneyHUD._data
+        local values = SydneyHUD.settings
         local content = json.decode(file_content)
         local menu_id = content.menu_id
         local parent_menu = content.parent_menu or nil
@@ -2050,4 +2050,4 @@ function SydneyMenu:InitTextures()
     self._menu_captain_panel_disabled:set_right(right)
 end
 
-dofile(SydneyHUD._lua_path .. "SydneyMenuCallbacks.lua")
+dofile(SydneyHUD.LuaPath .. "SydneyMenuCallbacks.lua")

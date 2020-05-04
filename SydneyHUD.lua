@@ -21,137 +21,138 @@ end
 ]]
 
 if not SydneyHUD then
-    SydneyHUD = {}
-
-    --[[
-        Alias for EZ to write log
-
-        Info: Information Log. Something succeeded.
-        Warn: Warning Log. Something Errored, but can keep working.
-        Error: Error Log. Something Errored. Can not keep working.
-        Dev: Develop Log. Printing var, Breakpoint.
-    ]]
-    SydneyHUD.info = "[SydneyHUD Info] "
-    SydneyHUD.warn = "[SydneyHUD Warn] "
-    SydneyHUD.error = "[SydneyHUD Error] "
-    SydneyHUD.dev = "[SydneyHUD Dev] "
-
-    SydneyHUD.SaveDataVer = 3
-
-    SydneyHUD.ModVersion = nil -- Used for caching mod version
-
-    SydneyHUD.EasterEgg = 
+    SydneyHUD =
     {
-        FSS =
+        --[[
+            Alias for EZ to write log
+
+            Info: Information Log. Something succeeded.
+            Warn: Warning Log. Something Errored, but can keep working.
+            Error: Error Log. Something Errored. Can not keep working.
+            Dev: Develop Log. Printing var, Breakpoint.
+        ]]
+        info = "[SydneyHUD Info] ",
+        warn = "[SydneyHUD Warn] ",
+        error = "[SydneyHUD Error] ",
+        dev = "[SydneyHUD Dev] ",
+
+        SaveDataVer = 3,
+
+        ModVersion = nil, -- Used for caching mod version
+    
+        EasterEgg =
         {
-            AIReactionTimeTooHigh = false
-        }
-    }
-
-    SydneyHUD._down_count = {}
-
-    SydneyHUD._language =
-    {
-        [1] = "english",
-        [2] = "japanese",
-        [3] = "french",
-        [4] = "russian",
-        [5] = "portuguese"
-    }
-
-    -- var for util
-    SydneyHUD.assets_path = "./assets/mod_overrides/"
-    SydneyHUD._path = ModPath
-    SydneyHUD._lua_path = ModPath .. "lua/"
-    SydneyHUD.LocPath = ModPath .. "loc/"
-    SydneyHUD._data_path = SavePath .. "SydneyHUD.json"
-    SydneyHUD._poco_path = SavePath .. "hud3_config.json"
-    SydneyHUD._data = {}
-    SydneyHUD._menus = {
-        "sydneyhud_menu",
-        "sydneyhud_core",
-
-        "sydneyhud_gadget_options",
-        "sydneyhud_gadget_options_player",
-        "sydneyhud_gadget_options_sniper",
-        "sydneyhud_gadget_options_turret",
-
-        "sydneyhud_hudlist_options",
-        "sydneyhud_hudlist_options_left",
-        "sydneyhud_hudlist_options_right",
-        "sydneyhud_hudlist_options_right_ignore",
-        "sydneyhud_hudlist_options_buff",
-        "sydneyhud_hudlist_options_buff_options",
-        "sydneyhud_hudlist_options_buff_options_skills",
-        "sydneyhud_hudlist_options_buff_options_skills_mastermind",
-        "sydneyhud_hudlist_options_buff_options_skills_enforcer",
-        "sydneyhud_hudlist_options_buff_options_skills_technician",
-        "sydneyhud_hudlist_options_buff_options_skills_ghost",
-        "sydneyhud_hudlist_options_buff_options_skills_fugitive",
-        "sydneyhud_hudlist_options_buff_options_composite",
-        "sydneyhud_hudlist_options_buff_options_perks",
-        "sydneyhud_hudlist_options_buff_options_perks_crew_chief",
-        "sydneyhud_hudlist_options_buff_options_perks_muscle",
-        "sydneyhud_hudlist_options_buff_options_perks_armorer",
-        "sydneyhud_hudlist_options_buff_options_perks_hitman",
-        "sydneyhud_hudlist_options_buff_options_perks_infiltrator",
-        "sydneyhud_hudlist_options_buff_options_perks_sociopath",
-        "sydneyhud_hudlist_options_buff_options_perks_gambler",
-        "sydneyhud_hudlist_options_buff_options_perks_grinder",
-        "sydneyhud_hudlist_options_buff_options_perks_yakuza",
-        "sydneyhud_hudlist_options_buff_options_perks_maniac",
-        "sydneyhud_hudlist_options_buff_options_perks_anarchist",
-        "sydneyhud_hudlist_options_buff_options_perks_biker",
-        "sydneyhud_hudlist_options_buff_options_perks_kingpin",
-        "sydneyhud_hudlist_options_buff_options_perks_sicario",
-        "sydneyhud_hudlist_options_buff_options_perks_stoic",
-        "sydneyhud_hudlist_options_buff_options_perks_hacker",
-        "sydneyhud_hudlist_options_buff_options_boosts",
-        "sydneyhud_hudlist_options_buff_player_actions",
-        "sydneyhud_hudlist_options_civilian_color",
-        "sydneyhud_hudlist_options_enemy_color",
-
-        "sydneyhud_chat_info",
-        "sydneyhud_experimental",
-        "sydneyhud_gameplay_tweaks",
-        "sydneyhud_interact_tweaks",
-
-        "sydneyhud_menu_tweaks",
-
-        "sydneyhud_hud_tweaks",
-        "sydneyhud_hud_tweaks_assault",
-        "sydneyhud_hud_tweaks_interact",
-        "sydneyhud_hud_tweaks_name",
-        "sydneyhud_hud_tweaks_panel",
-        "sydneyhud_hud_tweaks_waypoint",
-        "sydneyhud_hud_tweaks_kill_counter",
-        "sydneyhud_hud_tweaks_hps_meter",
-
-        "sydneyhud_music_tweaks",
-
-        "sydneyhud_optimization_tweaks"
-    }
-
-    SydneyHUD._poco_conflicting_defaults = {
-        buff = {
-            mirrorDirection = true,
-            showBoost = true,
-            showCharge = true,
-            showECM = true,
-            showInteraction = true,
-            showReload = true,
-            showShield = true,
-            showStamina = true,
-            showSwanSong = true,
-            showTapeLoop = true,
-            simpleBusyIndicator = true
+            FSS =
+            {
+                AIReactionTimeTooHigh = false
+            }
         },
-        game = {
-            interactionClickStick = true
+    
+        _down_count = {},
+    
+        _language =
+        {
+            [1] = "english",
+            [2] = "japanese",
+            [3] = "french",
+            [4] = "russian",
+            [5] = "portuguese"
         },
-        playerBottom = {
-            showRank = true,
-            uppercaseNames = true
+    
+        -- var for util
+        assets_path = "./assets/mod_overrides/",
+        ModPath = ModPath,
+        LuaPath = ModPath .. "lua/",
+        LocPath = ModPath .. "loc/",
+        SaveDataPath = SavePath .. "SydneyHUD.json",
+        PocoPath = SavePath .. "hud3_config.json",
+        settings = {},
+        _menus = {
+            "sydneyhud_menu",
+            "sydneyhud_core",
+    
+            "sydneyhud_gadget_options",
+            "sydneyhud_gadget_options_player",
+            "sydneyhud_gadget_options_sniper",
+            "sydneyhud_gadget_options_turret",
+    
+            "sydneyhud_hudlist_options",
+            "sydneyhud_hudlist_options_left",
+            "sydneyhud_hudlist_options_right",
+            "sydneyhud_hudlist_options_right_ignore",
+            "sydneyhud_hudlist_options_buff",
+            "sydneyhud_hudlist_options_buff_options",
+            "sydneyhud_hudlist_options_buff_options_skills",
+            "sydneyhud_hudlist_options_buff_options_skills_mastermind",
+            "sydneyhud_hudlist_options_buff_options_skills_enforcer",
+            "sydneyhud_hudlist_options_buff_options_skills_technician",
+            "sydneyhud_hudlist_options_buff_options_skills_ghost",
+            "sydneyhud_hudlist_options_buff_options_skills_fugitive",
+            "sydneyhud_hudlist_options_buff_options_composite",
+            "sydneyhud_hudlist_options_buff_options_perks",
+            "sydneyhud_hudlist_options_buff_options_perks_crew_chief",
+            "sydneyhud_hudlist_options_buff_options_perks_muscle",
+            "sydneyhud_hudlist_options_buff_options_perks_armorer",
+            "sydneyhud_hudlist_options_buff_options_perks_hitman",
+            "sydneyhud_hudlist_options_buff_options_perks_infiltrator",
+            "sydneyhud_hudlist_options_buff_options_perks_sociopath",
+            "sydneyhud_hudlist_options_buff_options_perks_gambler",
+            "sydneyhud_hudlist_options_buff_options_perks_grinder",
+            "sydneyhud_hudlist_options_buff_options_perks_yakuza",
+            "sydneyhud_hudlist_options_buff_options_perks_maniac",
+            "sydneyhud_hudlist_options_buff_options_perks_anarchist",
+            "sydneyhud_hudlist_options_buff_options_perks_biker",
+            "sydneyhud_hudlist_options_buff_options_perks_kingpin",
+            "sydneyhud_hudlist_options_buff_options_perks_sicario",
+            "sydneyhud_hudlist_options_buff_options_perks_stoic",
+            "sydneyhud_hudlist_options_buff_options_perks_hacker",
+            "sydneyhud_hudlist_options_buff_options_boosts",
+            "sydneyhud_hudlist_options_buff_player_actions",
+            "sydneyhud_hudlist_options_civilian_color",
+            "sydneyhud_hudlist_options_enemy_color",
+    
+            "sydneyhud_chat_info",
+            "sydneyhud_experimental",
+            "sydneyhud_gameplay_tweaks",
+            "sydneyhud_interact_tweaks",
+    
+            "sydneyhud_menu_tweaks",
+    
+            "sydneyhud_hud_tweaks",
+            "sydneyhud_hud_tweaks_assault",
+            "sydneyhud_hud_tweaks_interact",
+            "sydneyhud_hud_tweaks_name",
+            "sydneyhud_hud_tweaks_panel",
+            "sydneyhud_hud_tweaks_waypoint",
+            "sydneyhud_hud_tweaks_kill_counter",
+            "sydneyhud_hud_tweaks_hps_meter",
+    
+            "sydneyhud_music_tweaks",
+    
+            "sydneyhud_optimization_tweaks"
+        },
+    
+        _poco_conflicting_defaults = {
+            buff = {
+                mirrorDirection = true,
+                showBoost = true,
+                showCharge = true,
+                showECM = true,
+                showInteraction = true,
+                showReload = true,
+                showShield = true,
+                showStamina = true,
+                showSwanSong = true,
+                showTapeLoop = true,
+                simpleBusyIndicator = true
+            },
+            game = {
+                interactionClickStick = true
+            },
+            playerBottom = {
+                showRank = true,
+                uppercaseNames = true
+            }
         }
     }
 
@@ -159,11 +160,11 @@ if not SydneyHUD then
         A simple save function that json encodes our _data table and saves it to a file.
     ]]
     function SydneyHUD:Save()
-        local file = io.open(self._data_path, "w+")
+        local file = io.open(self.SaveDataPath, "w+")
         if file then
-            self._data.SaveDataVer = self.SaveDataVer
-            self._data.SydneyHUDVersion = self:GetVersion()
-            file:write(json.encode(self._data))
+            self.settings.SaveDataVer = self.SaveDataVer
+            self.settings.SydneyHUDVersion = self:GetVersion()
+            file:write(json.encode(self.settings))
             file:close()
         end
     end
@@ -173,14 +174,14 @@ if not SydneyHUD then
     ]]
     function SydneyHUD:Load()
         self:LoadDefaults()
-        local file = io.open(self._data_path, "r")
+        local file = io.open(self.SaveDataPath, "r")
         if file then
             local table = json.decode(file:read("*all")) or {}
             file:close()
             if table.SaveDataVer and table.SaveDataVer == self.SaveDataVer then
                 for k, v in pairs(table) do
-                    if self._data[k] ~= nil then
-                        self._data[k] = v
+                    if self.settings[k] ~= nil then
+                        self.settings[k] = v
                     end
                 end
             else
@@ -192,7 +193,7 @@ if not SydneyHUD then
     end
 
     function SydneyHUD:GetOption(id)
-        return self._data[id]
+        return self.settings[id]
     end
 
     function SydneyHUD:GetModOption(mod_name, id)
@@ -213,12 +214,12 @@ if not SydneyHUD then
 
     function SydneyHUD:LoadDefaults()
         local default_file = io.open(self._path .."menu/default_values.json")
-        self._data = json.decode(default_file:read("*all"))
+        self.settings = json.decode(default_file:read("*all"))
         default_file:close()
     end
 
     function SydneyHUD:CheckPoco()
-        local file = io.open(self._poco_path)
+        local file = io.open(self.PocoPath)
         if file then
             self._poco_conf = json.decode(file:read("*all"))
             file:close()
@@ -226,7 +227,7 @@ if not SydneyHUD then
     end
 
     function SydneyHUD:ApplyFixedPocoSettings()
-        local file = io.open(self._poco_path, "w+")
+        local file = io.open(self.PocoPath, "w+")
         if file and self._fixed_poco_conf then
             file:write(json.encode(self._fixed_poco_conf))
             file:close()
@@ -392,7 +393,7 @@ if not SydneyHUD then
             return Color.white
         end
         extension = extension or ""
-        return Color(255, self._data[color .. "_r" .. extension], self._data[color .. "_g" .. extension], self._data[color .. "_b" .. extension]) / 255
+        return Color(255, self.settings[color .. "_r" .. extension], self.settings[color .. "_g" .. extension], self.settings[color .. "_b" .. extension]) / 255
     end
 
     function SydneyHUD:IsOr(string, ...)

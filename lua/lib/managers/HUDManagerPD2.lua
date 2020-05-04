@@ -399,7 +399,7 @@ function HUDManager:UpdateHUDListSettings()
     end
 end
 
-dofile(SydneyHUD._lua_path .. "lib/managers/HUDList.lua")
+dofile(SydneyHUD.LuaPath .. "lib/managers/HUDList.lua")
 
 local _setup_player_info_hud_pd2_original = HUDManager._setup_player_info_hud_pd2
 function HUDManager:_setup_player_info_hud_pd2()
