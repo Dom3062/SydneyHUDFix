@@ -82,6 +82,12 @@ function SydneyMenu:SydneyHUDHUDTweaksAssaultMenuCreatedCallback()
     end
 end
 
+function SydneyMenu:MoveLPIBox()
+    if managers.menu_component._contract_gui and managers.menu_component._contract_gui.UpdateTeamBox then
+        managers.menu_component._contract_gui:UpdateTeamBox()
+    end
+end
+
 function SydneyMenu:SydneyHUDReset()
     local menu_title = managers.localization:text("sydneyhud_reset")
     local menu_message = managers.localization:text("sydneyhud_reset_message")

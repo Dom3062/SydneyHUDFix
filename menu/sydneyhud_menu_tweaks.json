@@ -41,7 +41,7 @@
             "id": "move_lpi_lobby_box",
             "title": "move_lpi_lobby_box",
             "description": "move_lpi_lobby_box_desc",
-            "callback": "SetValue",
+            "callback": ["SetValue", "MoveLPIBox"],
             "value": "move_lpi_lobby_box",
             "default_value": true
         },
