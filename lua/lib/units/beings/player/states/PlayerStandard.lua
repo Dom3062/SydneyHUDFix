@@ -42,7 +42,7 @@ function PlayerStandard:_start_action_melee(t, input, instant)
         managers.gameinfo:event("player_action", "activate", "melee_charge")
         managers.gameinfo:event("player_action", "set_duration", "melee_charge", { duration = duration })
         if SydneyHUD:GetOption("show_melee_interaction") then
-            managers.hud:animate_interaction_bar(0, duration, true)
+            managers.hud:animate_interaction_bar(duration, true)
             self._state_data.charging_melee = true
         end
     end
@@ -174,7 +174,7 @@ function PlayerStandard:_start_action_reload(t, ...)
     if self._equipped_unit:base():can_reload() then
         if managers.player:current_state() ~= "bleed_out" and SydneyHUD:GetOption("show_reload_interaction") then
             self._state_data._isReloading = true
-            managers.hud:animate_interaction_bar(0, self._state_data.reload_expire_t - t)
+            managers.hud:animate_interaction_bar(self._state_data.reload_expire_t - t)
         end
         managers.gameinfo:event("player_action", "activate", "reload", { duration = self._state_data.reload_expire_t - t })
     end

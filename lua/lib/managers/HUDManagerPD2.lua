@@ -237,6 +237,10 @@ function HUDManager:show_interact(data)
 end
 
 function HUDManager:animate_interaction_bar(current, total, hide)
+    if not total then
+        total = current
+        current = 0
+    end
     self:show_interaction_bar(current, total)
     self._hud_interaction._animated = true
 
