@@ -150,6 +150,7 @@ function HUDTeammate:_init_killcount()
     })
     local player_panel = self._panel:child("player")
     local name_label = self._panel:child("name")
+    local color = SydneyHUD:GetColor("kill_counter_color")
     self._kills_panel:set_rightbottom(player_panel:right(), name_label:bottom())
     self._kill_icon = self._kills_panel:bitmap({
         texture = "guis/textures/pd2/cn_miniskull",
@@ -159,13 +160,13 @@ function HUDTeammate:_init_killcount()
         alpha = 1,
         blend_mode = "add",
         layer = 1,
-        color = Color(1, 1, 0.65882355, 0)
+        color = color
     })
     self._kills_text = self._kills_panel:text({
         name = "kills_text",
         text = "-",
         layer = 4,
-        color = Color(1, 1, 0.65882355, 0),
+        color = color,
         w = self._kills_panel:w() - self._kill_icon:w() - 4,
         h = self._kills_panel:h(),
         vertical = "center",
@@ -646,8 +647,8 @@ function HUDTeammate:set_name(teammate_name, ...)
         local rank = nil
         local level = nil
         if self._main_player and SydneyHUD:GetOption("show_own_rank") then
-        rank = managers.experience:current_rank()
-        level = managers.experience:current_level()
+            rank = managers.experience:current_rank()
+            level = managers.experience:current_level()
         elseif self._peer_id and SydneyHUD:GetOption("show_client_ranks") then
             local peer = self._peer_id and managers.network:session():peer(self._peer_id)
             if peer and peer:level() then

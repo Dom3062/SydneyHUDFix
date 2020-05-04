@@ -47,6 +47,17 @@
             "value": "show_ai_kills",
             "default_value": true,
             "parent" : "enable_kill_counter"
+        },
+        {
+            "type" : "color_select",
+            "id" : "kill_counter_color",
+            "title" : "kill_counter_color",
+            "description" : "kill_counter_color_desc",
+            "value" : "kill_counter_color",
+            "value_extension" : "",
+            "default_value" : [255, 168, 0],
+            "callback" : "SetKillCounterColor",
+            "parent" : "enable_kill_counter"
         }
     ]
 }

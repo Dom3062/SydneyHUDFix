@@ -88,6 +88,12 @@ function SydneyMenu:MoveLPIBox()
     end
 end
 
+function SydneyMenu:SetKillCounterColor(color)
+    SydneyHUD.settings.kill_counter_color_r = color.red
+    SydneyHUD.settings.kill_counter_color_g = color.green
+    SydneyHUD.settings.kill_counter_color_b = color.blue
+end
+
 function SydneyMenu:SydneyHUDReset()
     local menu_title = managers.localization:text("sydneyhud_reset")
     local menu_message = managers.localization:text("sydneyhud_reset_message")
