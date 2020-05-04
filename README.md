@@ -75,19 +75,22 @@ Join SydneyMOD [Steam Group](https://steamcommunity.com/groups/SydneyMOD) and re
 * Dom's Discord [🔗](https://discord.gg/8CryHkM)
 * Twitter [🔗](https://twitter.com/SydneyMOD)
 
-### Contributers
-* katabame: Former Main Developer
-* BangL: Former Main Developer
+### Contributors
+# Current
 * Dom: Main Developer & English Translator
-* kash: Former Japanese Translator & Developer
-* IPowis: Former English Translator & Developer
 * PoorPockets McNewHold: French Translator & Community Manager
-* hexco321: Former Feature contributer
-* STaJIKeR1: Former Russian Translator
-* exp1os1on: Former Russian Translator
 * Sylvanas Windrunner: Russian Translator
-* Kazenin: Former Portuguese Translator
-* Nox-404: Former Bug fixer
+
+# Former
+* katabame: Main Developer
+* BangL: Main Developer
+* kash: Japanese Translator & Developer
+* IPowis: English Translator & Developer
+* hexco321: Feature contributer
+* STaJIKeR1: Russian Translator
+* exp1os1on: Russian Translator
+* Kazenin: Portuguese Translator
+* Nox-404: Bug fixer
 
 ### Special Thanks
 SydneyHUD is using the following mods, codes & textures.
