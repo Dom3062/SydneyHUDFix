@@ -330,7 +330,6 @@ function HUDManager:SydneyHUDUpdate()
     end
 end
 
-
 if not SydneyHUD:GetOption("hudlist_enabled") then
     return
 end
