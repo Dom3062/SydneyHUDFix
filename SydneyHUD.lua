@@ -405,6 +405,10 @@ if not SydneyHUD then
         return false
     end
 
+    function SydneyHUD:DelayCall(name, t, func)
+        DelayedCalls:Add(name, t, func)
+    end
+
     function SydneyHUD:Hook(object, func, post_call)
         Hooks:PostHook(object, func, "SydneyHUD_" .. func, post_call)
     end

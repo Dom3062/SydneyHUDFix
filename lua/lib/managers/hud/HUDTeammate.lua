@@ -16,6 +16,15 @@ end
 
 function HUDTeammate:SydneyHUDUpdate()
     self:refresh_kill_count_visibility()
+    if self._kills_panel then
+        local color = SydneyHUD:GetColor("kill_counter_color")
+        if self._kills_panel:child("kills_icon") then
+            self._kills_panel:child("kills_icon"):set_color(color)
+        end
+        if self._kills_panel:child("kills_text") then
+            self._kills_panel:child("kills_text"):set_color(color)
+        end
+    end
 end
 
 function HUDTeammate:inject_health_glow()
@@ -153,6 +162,7 @@ function HUDTeammate:_init_killcount()
     local color = SydneyHUD:GetColor("kill_counter_color")
     self._kills_panel:set_rightbottom(player_panel:right(), name_label:bottom())
     self._kill_icon = self._kills_panel:bitmap({
+        name = "kills_icon",
         texture = "guis/textures/pd2/cn_miniskull",
         w = self._kills_panel:h() * 0.75,
         h = self._kills_panel:h(),

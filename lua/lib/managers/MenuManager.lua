@@ -10,7 +10,9 @@ function MenuCallbackHandler:resume_game()
     old_resume(self)
     if SydneyHUD.Update then
         SydneyHUD.Update = false
-        managers.hud:SydneyHUDUpdate()
+        SydneyHUD:DelayCall("SydneyHUDUpdate", 0.2, function()
+            managers.hud:SydneyHUDUpdate()
+        end)
     end
 end
 
