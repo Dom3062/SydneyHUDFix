@@ -1,5 +1,7 @@
-4.2.0 (xx. 05. 2020):
+4.2.0 (08. 05. 2020):
+Added "Kill Counter Color" option
 Redesigned mod options
+Removed "Experimental Tweaks"
 Fixed a crash when you were client
 
 4.1.9 (30. 04. 2020):
