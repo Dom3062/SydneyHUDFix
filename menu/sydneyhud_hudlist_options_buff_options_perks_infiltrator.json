@@ -17,7 +17,7 @@
             "id": "hudlist_ignore_buff_overdog_damage_reduction",
             "title": "sydneyhud_hudlist_ignore_buff_overdog_damage_reduction",
             "description": "sydneyhud_hudlist_ignore_buff_overdog_damage_reduction_desc",
-            "callback": "callback_ignore_buff_overdog_damage_reduction",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_overdog_damage_reduction",
             "default_value": true
         },
@@ -26,7 +26,7 @@
             "id": "hudlist_ignore_buff_overdog_melee_damage",
             "title": "sydneyhud_hudlist_ignore_buff_overdog_melee_damage",
             "description": "sydneyhud_hudlist_ignore_buff_overdog_melee_damage_desc",
-            "callback": "callback_ignore_buff_overdog_melee_damage",
+            "callback": "SetValue",
             "value": "hudlist_ignore_buff_overdog_melee_damage",
             "default_value": true
         }
