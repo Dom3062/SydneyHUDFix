@@ -30,8 +30,8 @@
                 "sydneyhud_hudlist_all",
                 "sydneyhud_hudlist_aggregate"
             ],
-            "callback": "callback_show_ammo_bags",
-            "value": "SetValue",
+            "callback": "SetValue",
+            "value": "hudlist_show_ammo_bags",
             "default_value": 3
         },
         {
