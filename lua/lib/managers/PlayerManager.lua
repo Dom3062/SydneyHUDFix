@@ -24,10 +24,10 @@ local IS_SOCIOPATH = false
 
 function PlayerManager:check_skills(...)
     check_skills_original(self, ...)
-    
+
     managers.gameinfo:event("buff", (self._messiah_charges > 0) and "activate" or "deactivate", "messiah")
     managers.gameinfo:event("buff", "set_stack_count", "messiah", { stack_count = self._messiah_charges })
-    
+
     IS_SOCIOPATH = self:has_category_upgrade("player", "killshot_regen_armor_bonus") or
         self:has_category_upgrade("player", "killshot_close_regen_armor_bonus") or
         self:has_category_upgrade("player", "killshot_close_panic_chance") or
@@ -36,7 +36,7 @@ end
 
 function PlayerManager:activate_temporary_upgrade(category, upgrade, ...)
     activate_temporary_upgrade_original(self, category, upgrade, ...)
-    
+
     local data = self._temporary_upgrades[category] and self._temporary_upgrades[category][upgrade]
     if data then
         local level = self:upgrade_level(category, upgrade, 0)
@@ -48,7 +48,7 @@ end
 
 function PlayerManager:activate_temporary_upgrade_by_level(category, upgrade, level, ...)
     activate_temporary_upgrade_by_level_original(self, category, upgrade, level, ...)
-    
+
     local data = self._temporary_upgrades[category] and self._temporary_upgrades[category][upgrade]
     if data then
         local level = self:upgrade_level(category, upgrade, 0)
@@ -64,13 +64,13 @@ function PlayerManager:deactivate_temporary_upgrade(category, upgrade, ...)
         local level = self:upgrade_level(category, upgrade, 0)
         managers.gameinfo:event("temporary_buff", "deactivate", category, upgrade, level)
     end
-    
+
     return deactivate_temporary_upgrade_original(self, category, upgrade, ...)
 end
 
 function PlayerManager:disable_cooldown_upgrade(category, upgrade, ...)
     disable_cooldown_upgrade_original(self, category, upgrade, ...)
-    
+
     local data = self._global.cooldown_upgrades[category] and self._global.cooldown_upgrades[category][upgrade]
     if data then
         local level = self:upgrade_level(category, upgrade, 0)
@@ -82,35 +82,35 @@ end
 function PlayerManager:replenish_grenades(cooldown, ...)
     if not self:has_active_timer("replenish_grenades") then
         local id = managers.blackmarket:equipped_grenade()
-        
+
         if id then
             managers.gameinfo:event("buff", "activate", id .. "_use")
             managers.gameinfo:event("buff", "set_duration", id .. "_use", { duration = cooldown })
         end
     end
-    
+
     return replenish_grenades_original(self, cooldown, ...)
 end
 
 function PlayerManager:_on_grenade_cooldown_end(...)
     local id = managers.blackmarket:equipped_grenade()
-    
+
     if id then
         managers.gameinfo:event("buff", "deactivate", id .. "_use")
     end
-    
+
     return _on_grenade_cooldown_end_original(self, ...)
 end
 
 function PlayerManager:speed_up_grenade_cooldown(t, ...)
     if self:has_active_timer("replenish_grenades") then
         local id = managers.blackmarket:equipped_grenade()
-        
+
         if id then
             managers.gameinfo:event("buff", "change_expire", id .. "_use", { difference = -t })
         end
     end
-    
+
     return speed_up_grenade_cooldown_original(self, t, ...)
 end
 
@@ -136,7 +136,7 @@ function PlayerManager:peer_dropped_out(peer, ...)
             managers.gameinfo:event("team_buff", "deactivate", peer_id, category, upgrade, 1)
         end
     end
-    
+
     return peer_dropped_out_original(self, peer, ...)
 end
 
@@ -152,19 +152,19 @@ function PlayerManager:_dodge_shot_gain(gain_value, ...)
             managers.gameinfo:event("buff", "deactivate", "sicario_dodge")
         end
     end
-    
+
     return _dodge_shot_gain_original(self, gain_value, ...)
 end
 
 function PlayerManager:on_killshot(...)
     local last_killshot = self._on_killshot_t
     local result = on_killshot_original(self, ...)
-    
+
     if IS_SOCIOPATH and self._on_killshot_t ~= last_killshot then
         managers.gameinfo:event("buff", "activate", "sociopath_debuff")
         managers.gameinfo:event("buff", "set_duration", "sociopath_debuff", { expire_t = self._on_killshot_t })
     end
-    
+
     return result
 end
 
@@ -174,7 +174,7 @@ function PlayerManager:on_headshot_dealt(...)
         managers.gameinfo:event("buff", "activate", "bullseye_debuff")
         managers.gameinfo:event("buff", "set_duration", "bullseye_debuff", { duration = tweak_data.upgrades.on_headshot_dealt_cooldown or 0 })
     end
-    
+
     return on_headshot_dealt_original(self, ...)
 end
 
@@ -187,7 +187,7 @@ end
 
 function PlayerManager:use_messiah_charge(...)
     use_messiah_charge_original(self, ...)
-    
+
     managers.gameinfo:event("buff", (self._messiah_charges > 0) and "activate" or "deactivate", "messiah")
     managers.gameinfo:event("buff", "set_stack_count", "messiah", { stack_count = self._messiah_charges })
 end
@@ -216,14 +216,14 @@ end
 
 function PlayerManager:set_synced_cocaine_stacks(...)
     set_synced_cocaine_stacks_original(self, ...)
-    
+
     local max_stack = 0
     for peer_id, data in pairs(self._global.synced_cocaine_stacks) do
         if data.in_use and data.amount > max_stack then
             max_stack = data.amount
         end
     end
-    
+
     local ratio = max_stack / tweak_data.upgrades.max_total_cocaine_stacks
     managers.gameinfo:event("buff", ratio > 0 and "activate" or "deactivate", "maniac")
     managers.gameinfo:event("buff", "set_value", "maniac", { value = max_stack } )
@@ -235,7 +235,7 @@ function PlayerManager:chk_wild_kill_counter(...)
     local expire_t
     local old_stacks = 0
     local do_check = alive(player) and (managers.player:has_category_upgrade("player", "wild_health_amount") or managers.player:has_category_upgrade("player", "wild_armor_amount"))
-    
+
     if do_check then
         local dmg = player:character_damage()
         local missing_health_ratio = math.clamp(1 - dmg:health_ratio(), 0, 1)
@@ -252,9 +252,9 @@ function PlayerManager:chk_wild_kill_counter(...)
             local missing_armor_stacks = math.floor(missing_armor_ratio / less_armor_wild_cooldown[1])
             trigger_cooldown = trigger_cooldown - less_armor_wild_cooldown[2] * missing_armor_stacks
         end
-        
+
         expire_t = t + math.max(trigger_cooldown, 0)
-    
+
         if self._wild_kill_triggers then
             old_stacks = #self._wild_kill_triggers
             for i = 1, #self._wild_kill_triggers, 1 do
@@ -265,9 +265,9 @@ function PlayerManager:chk_wild_kill_counter(...)
             end
         end
     end
-    
+
     chk_wild_kill_counter_original(self, ...)
-    
+
     if do_check and self._wild_kill_triggers and #self._wild_kill_triggers > old_stacks then
         managers.gameinfo:event("timed_stack_buff", "add_timed_stack", "biker", { t = t, expire_t = expire_t })
     end
@@ -276,20 +276,20 @@ end
 function PlayerManager:update_hostage_skills()
     local stack_count = (managers.groupai:state():hostage_count() or 0) + (self:num_local_minions() or 0)
     local has_hostage = stack_count > 0
-    
+
     if self:has_team_category_upgrade("health", "hostage_multiplier") or self:has_team_category_upgrade("stamina", "hostage_multiplier") or self:has_team_category_upgrade("damage_dampener", "hostage_multiplier") then
         managers.gameinfo:event("buff", has_hostage and "activate" or "deactivate", "hostage_situation")
-        
+
         if has_hostage then
             local value = self:team_upgrade_value("damage_dampener", "hostage_multiplier", 0)
             managers.gameinfo:event("buff", "set_stack_count", "hostage_situation", { stack_count = stack_count })
             managers.gameinfo:event("buff", "set_value", "hostage_situation", { value = value })
         end
     end
-    
+
     if PlayerManager.HAS_HOSTAGE ~= has_hostage then
         PlayerManager.HAS_HOSTAGE = has_hostage
-        
+
         if alive(self:player_unit()) then
             self:player_unit():character_damage():check_passive_regen_buffs("hostage_taker")
         end

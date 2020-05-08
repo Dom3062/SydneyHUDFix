@@ -16,7 +16,7 @@ if RequiredScript == "lib/setups/setup" and Setup then
 else
 
     GameInfoManager = GameInfoManager or class()
-    local plugin = 
+    local plugin =
     {
         "timers",
         "deployables",
@@ -1112,9 +1112,9 @@ else
 				self._cameras[key].tape_loop_expire_t = nil
 				self._cameras[key].tape_loop_start_t = nil
 			end
-			
+
 			self:_listener_callback("camera", event, key, self._cameras[key])
-			
+
 			if event == "destroy" then
 				self._cameras[key] = nil
 			end
