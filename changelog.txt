@@ -1,3 +1,9 @@
+4.2.1 (08. 05. 2020):
+Fixed an issue where some text got mixed up in Custom Turret Color
+Fixed an issue "Ammo Bags" option in HUDList is not loading and saving correctly
+Fixed a crash when you changed "Ammo Bags" option in HUDList
+Fixed a crash when you changed options in Infiltrator in HUDList
+
 4.2.0 (08. 05. 2020):
 Added "Kill Counter Color" option
 Redesigned mod options
