@@ -42,7 +42,7 @@ function PlayerStandard:_start_action_melee(t, input, instant)
         managers.gameinfo:event("player_action", "activate", "melee_charge")
         managers.gameinfo:event("player_action", "set_duration", "melee_charge", { duration = duration })
         if SydneyHUD:GetOption("show_melee_interaction") then
-            managers.hud:animate_interaction_bar(duration, true)
+            managers.hud:animate_interaction_bar(duration, nil, true)
             self._state_data.charging_melee = true
         end
     end
