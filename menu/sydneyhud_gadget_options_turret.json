@@ -90,7 +90,7 @@
         {
             "type" : "color_select",
             "id" : "laser_color_turretr",
-            "title" : "enable_laser_options_turretm",
+            "title" : "enable_laser_options_turretr",
             "description" : "laser_color_laser_color",
             "value" : "laser_color",
             "value_extension" : "_turretr",
@@ -163,7 +163,7 @@
         {
             "type" : "color_select",
             "id" : "laser_color_turretm",
-            "title" : "enable_laser_options_turretr",
+            "title" : "enable_laser_options_turretm",
             "description" : "laser_color_laser_color",
             "value" : "laser_color",
             "value_extension" : "_turretm",
