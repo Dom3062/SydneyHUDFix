@@ -47,6 +47,13 @@
         },
         {
             "type" : "button",
+            "id" : "sydneyhud_menu_tweaks",
+            "title" : "sydneyhud_menu_tweaks",
+            "description" : "sydneyhud_menu_tweaks_desc",
+            "next_menu" : "sydneyhud_menu_tweaks"
+        },
+        {
+            "type" : "button",
             "id" : "sydneyhud_hud_tweaks",
             "title" : "sydneyhud_hud_tweaks",
             "description" : "sydneyhud_hud_tweaks_desc",
