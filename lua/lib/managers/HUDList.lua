@@ -329,7 +329,9 @@ HUDListManager.LOOT_TYPES = {
 	weapon_glock =				"weapon",
 	weapon_scar =				"weapon",
 	women_shoes =				"shoes",
-	yayo =						"coke",
+    yayo =						"coke",
+    faberge_egg = "faberge_egg",
+    treasure = "romanov_treasure"
 }
 
 HUDListManager.POTENTIAL_LOOT_TYPES = {
@@ -3469,7 +3471,7 @@ HUDList.LootItem.MAP = {
     painting =		{ text = "Painting" },
     pig =				{ text = "Pig" },
     present =		{ text = "Present" },
-    prototype =		{ text = "Prototype" },
+    prototype =		{ text = "Prototype" },     
     safe =			{ text = "Safe" },
     server =			{ text = "Server" },
     shell =			{ text = "Shell" },
@@ -3481,7 +3483,9 @@ HUDList.LootItem.MAP = {
     warhead =		{ text = "Warhead" },
     weapon =			{ text = "Weapon" },
     wine =			{ text = "Wine" },
-    
+    faberge_egg = { text = "Fabergé Egg"},
+    romanov_treasure = { text = "Romanov Tre."},
+
     aggregate =		{ text = "" },	--Aggregated loot
     body_stealth =	{ icon = { skills_new = {7, 2} } },	--Bodies for stealth
 }
