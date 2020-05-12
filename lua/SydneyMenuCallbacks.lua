@@ -49,9 +49,9 @@ function SydneyMenu:SetEnemyColor(color)
 end
 
 function SydneyMenu:SetInteractColor(color)
-    SydneyHUD.settings.interact_color_r = color.red
-    SydneyHUD.settings.interact_color_g = color.green
-    SydneyHUD.settings.interact_color_b = color.blue
+    SydneyHUD.settings.interaction_color_r = color.red
+    SydneyHUD.settings.interaction_color_g = color.green
+    SydneyHUD.settings.interaction_color_b = color.blue
 end
 
 function SydneyMenu:SetWaypointColor(color)

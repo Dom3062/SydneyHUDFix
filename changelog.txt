@@ -1,3 +1,6 @@
+4.2.2 (xx. 05. 2020):
+Fixed saving interaction color; now it is loaded and saved properly
+
 4.2.1 (08. 05. 2020):
 Fixed an issue where some text got mixed up in Custom Turret Color
 Fixed an issue "Ammo Bags" option in HUDList is not loading and saving correctly
