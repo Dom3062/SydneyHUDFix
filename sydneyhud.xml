@@ -22,7 +22,7 @@
                     <post :hook_id="hudinteraction" :script_path="HUDInteraction.lua"/>
                     <post :hook_id="hudobjectives" :script_path="HUDObjectives.lua"/>
                     <post :hook_id="hudstatsscreen" :script_path="HUDStatsScreen.lua"/>
-                    <post :hook_id="hudsuspicious" :script_path="HUDSuspicious.lua"/>
+                    <post :hook_id="hudsuspicion" :script_path="HUDSuspicion.lua"/>
                     <post :hook_id="hudteammate" :script_path="HUDTeammate.lua"/>
                 </group>
 
