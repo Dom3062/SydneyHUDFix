@@ -21,7 +21,7 @@
             "description" : "minion_color_desc",
             "value" : "minion_color",
             "value_extension" : "",
-            "default_value" : [0, 255, 255],
+            "default_value" : [0, 255, 0],
             "callback" : "SetMinionColor"
         },
         {

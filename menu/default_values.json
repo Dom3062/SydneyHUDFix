@@ -220,7 +220,7 @@
     "loot_screen_skip": 2,
     "minion_color_r" : 0,
     "minion_color_g" : 255,
-    "minion_color_b" : 255,
+    "minion_color_b" : 0,
     "move_lpi_lobby_box": true,
     "music_on_steam_overlay" : true,
     "offscreen_type": 3,
