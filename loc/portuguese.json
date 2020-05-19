@@ -206,11 +206,6 @@
     "sydneyhud_hud_tweaks_hps_meter": "Configurações do medidor de HPS",
     "sydneyhud_hud_tweaks_hps_meter_desc": "Configura o medidor de cura por segundo",
 
-    "sydneyhud_hudlist_options_civilian_color": "Configurar a cor do civil",
-    "sydneyhud_hudlist_options_civilian_color_desc": "Configura a cor do civil no HUD",
-    "sydneyhud_hudlist_options_enemy_color": "Configurar a cor do inimigo",
-    "sydneyhud_hudlist_options_enemy_color_desc": "Configura a cor dos inimigos",
-
     "sydneyhud_hud_tweaks": "Melhorias do HUD",
     "sydneyhud_hud_tweaks_assault": "Configurações do Assault Banner melhorado",
     "sydneyhud_hud_tweaks_assault_desc": "Configura o Assault Banner melhorado",

@@ -205,10 +205,6 @@
     "sydneyhud_gameplay_tweaks_desc": "ゲームプレイを調整します。",
     "sydneyhud_hud_tweaks_hps_meter": "HPS値の設定",
     "sydneyhud_hud_tweaks_hps_meter_desc": "Heal per second値設定します。",
-    
-    "sydneyhud_hudlist_options_civilian_color": "民間人カラーの設定",
-    "sydneyhud_hudlist_options_civilian_color_desc": "HUD上の民間人カラーの設定を変更します。",
-    "sydneyhud_hudlist_options_enemy_color_desc": "敵カラーの設定を変更します。",
 
     "sydneyhud_hud_tweaks": "HUDの調整",
     "sydneyhud_hud_tweaks_assault": "強化Assaultバナーの設定",

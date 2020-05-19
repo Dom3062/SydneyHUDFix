@@ -3501,7 +3501,7 @@ function HUDList.LootItem:init(id, ppanel, members)
         self._icon:set_center_x(self._panel:w() / 2)
         self._default_icon = true
     end
-    
+
     self._loot_types = {}
     self._bagged_count = 0
     self._unbagged_count = 0
@@ -3524,11 +3524,11 @@ function HUDList.LootItem:init(id, ppanel, members)
         self._name_text:set_center_x(self._icon:center_x())
         self._name_text:set_y(self._name_text:y() + self._icon:h() * 0.1)
     end
-    
+
     for _, loot_id in pairs(members) do
         self._loot_types[loot_id] = true
     end
-    
+
     self._listener_clbks = {
         {
             name = string.format("HUDList_%s_loot_count_listener", id),
@@ -3559,7 +3559,7 @@ end
 function HUDList.LootItem:update_value()
     local total_unbagged = 0
     local total_bagged = 0
-    
+
     for _, data in pairs(managers.gameinfo:get_loot()) do
         if self._loot_types[data.carry_id] and self:_check_loot_condition(data) then
             if data.bagged then
@@ -3576,7 +3576,7 @@ end
 function HUDList.LootItem:set_count(unbagged, bagged)
     self._unbagged_count = unbagged
     self._bagged_count = bagged
-    
+
     local total = self._unbagged_count + self._bagged_count
     self._text:set_text(HUDListManager.ListOptions.separate_bagged_loot and (self._unbagged_count .. "/" .. self._bagged_count) or total)
     self:set_active(total > 0)
@@ -3584,7 +3584,7 @@ end
 
 function HUDList.LootItem:_change_loot_count(data, value)
     if not self:_check_loot_condition(data) then return end
-    
+
     self:set_count(
         self._unbagged_count + (data.bagged and 0 or value), 
         self._bagged_count + (data.bagged and value or 0)
@@ -3618,6 +3618,7 @@ local special_color = enemy_color
 local turret_color = enemy_color
 local thug_color = enemy_color
 local civilian_color = SydneyHUD:GetColor("civilian_color")
+local minion_color = SydneyHUD:GetColor("minion_color")
 local hostage_color = civilian_color
 
 HUDList.UnitCountItem = HUDList.UnitCountItem or class(HUDList.CounterItem)
@@ -3625,7 +3626,7 @@ HUDList.UnitCountItem.MAP = {
     --TODO: Security and cop are both able to be dominate/jokered. Specials could cause issues if made compatible. Straight subtraction won't work. Should be fine for aggregated enemy counter
     enemies =	{ priority = 0,	class = "DominatableCountItem",	icon = { skills = {0, 5}, color = enemy_color } },	--Aggregated enemies
     hostages =	{ priority = 6,	class = "UnitCountItem",			icon = { skills = {4, 7}, color = hostage_color } },	--Aggregated hostages
-    
+
     cop =		{ priority = 2,	class = "DominatableCountItem",	icon = { skills = {0, 5}, color = enemy_color } },
     security =	{ priority = 3,	class = "DominatableCountItem",	icon = { perks = {1, 4}, color = guard_color } },
     thug =		{ priority = 3,	class = "UnitCountItem",			icon = { skills = {4, 12}, color = thug_color } },
@@ -3639,25 +3640,25 @@ HUDList.UnitCountItem.MAP = {
     sniper =	{ priority = 1,	class = "UnitCountItem",			icon = { skills = {6, 5}, color = special_color } },
     medic =		{ priority = 1,	class = "UnitCountItem",			icon = { skills = {5, 7}, color = special_color } },
     phalanx =	{ priority = 0,	class = "UnitCountItem",			icon = { texture = "guis/textures/pd2/hud_buff_shield", color = special_color } },
-    
+
     turret =		{ priority = 3,	class = "UnitCountItem",		icon = { skills = {7, 5}, color = turret_color } },
     unique =		{ priority = 4,	class = "UnitCountItem",		icon = { skills = {3, 8}, color = civilian_color } },
     civ =			{ priority = 4,	class = "CivilianCountItem",	icon = { skills = {6, 7}, color = civilian_color } },
     cop_hostage =	{ priority = 5,	class = "UnitCountItem",		icon = { skills = {2, 8}, color = hostage_color } },
     civ_hostage =	{ priority = 6,	class = "UnitCountItem",		icon = { skills = {4, 7}, color = hostage_color } },
-    minion =		{ priority = 7,	class = "UnitCountItem",		icon = { skills = {6, 8}, color = hostage_color } }
+    minion =		{ priority = 7,	class = "UnitCountItem",		icon = { skills = {6, 8}, color = minion_color } }
 }
 function HUDList.UnitCountItem:init(id, ppanel, members)
     local data = HUDList.UnitCountItem.MAP[id]
     HUDList.UnitCountItem.super.init(self, id, ppanel, data)
-    
+
     self._unit_types = {}
-    
+
     for _, unit_id in pairs(members) do
         self._unit_types[unit_id] = true
         self._count = self._count + managers.gameinfo:get_unit_count(unit_id)
     end
-    
+
     self._listener_clbks = {
         {
             name = string.format("HUDList_%s_unit_count_listener", id),
@@ -3665,7 +3666,7 @@ function HUDList.UnitCountItem:init(id, ppanel, members)
             event = { "change" },
             clbk = callback(self, self, "_change_count"),
             keys = members,
-        },
+        }
     }
 end
 
@@ -3681,7 +3682,7 @@ end
 HUDList.ShieldCountItem = HUDList.ShieldCountItem or class(HUDList.UnitCountItem)
 function HUDList.ShieldCountItem:init(...)
     HUDList.ShieldCountItem.super.init(self, ...)
-    
+
     self._shield_filler = self._panel:rect({
         name = "shield_filler",
         w = self._icon:w() * 0.4,
@@ -3699,7 +3700,7 @@ end
 HUDList.CivilianCountItem = HUDList.CivilianCountItem or class(HUDList.UnitCountItem)
 function HUDList.CivilianCountItem:init(...)
     HUDList.CivilianCountItem.super.init(self, ...)
-    
+
     table.insert(self._listener_clbks, {
         name = string.format("HUDList_%s_civ_count_listener", self:id()),
         source = "unit_count",
@@ -3721,10 +3722,10 @@ end
 HUDList.DominatableCountItem = HUDList.DominatableCountItem or class(HUDList.UnitCountItem)
 function HUDList.DominatableCountItem:init(id, ppanel, members)
     HUDList.DominatableCountItem.super.init(self, id, ppanel, members)
-    
+
     self._hostage_offset = 0
     self._joker_offset = 0
-    
+
     table.insert(self._listener_clbks, {
         name = string.format("HUDList_%s_dominatable_count_listener", id),
         source = "unit_count",
@@ -3754,7 +3755,7 @@ end
 
 function HUDList.DominatableCountItem:_change_dominatable_count(...)
     local offset = 0
-    
+
     for u_key, u_data in pairs(managers.enemy:all_enemies()) do
         local unit = u_data.unit
         if alive(unit) and self._unit_types[unit:base()._tweak_table] then
@@ -3769,7 +3770,7 @@ function HUDList.DominatableCountItem:_change_dominatable_count(...)
             end
         end
     end
-    
+
     if self._hostage_offset ~= offset then
         self._hostage_offset = offset
         self:set_count(self._count)
@@ -3793,24 +3794,24 @@ HUDList.SpecialPickupItem.MAP = {
     keycard =					{ icon = { hud_icons = "equipment_bank_manager_key" } },
     planks =						{ icon = { hud_icons = "equipment_planks" } },
     meth_ingredients =		{ icon = { hud_icons = "pd2_methlab" } },
-    secret_item =				{ icon = { hud_icons = "pd2_question" } },	
+    secret_item =				{ icon = { hud_icons = "pd2_question" } },
 }
 
 function HUDList.SpecialPickupItem:init(id, ppanel, members)
     HUDList.SpecialPickupItem.super.init(self, id, ppanel, HUDList.SpecialPickupItem.MAP[id])
-    
+
     self._pickup_types = {}
-    
+
     for _, pickup_id in pairs(members) do
         self._pickup_types[pickup_id] = true
     end
-    
+
     for _, data in pairs(managers.gameinfo:get_special_equipment()) do
         if self._pickup_types[data.interact_id] then
             self._count = self._count + 1
         end
     end
-    
+
     self._listener_clbks = {
         {
             name = string.format("HUDList_%s_special_pickup_count_listener", id),
@@ -3834,25 +3835,25 @@ end
 local PanelFrame = class()
 function PanelFrame:init(parent, settings)
     settings = settings or {}
-    
+
     local h = settings.h or parent:h()
     local w = settings.w or parent:w()
     local total = 2*w + 2*h
-    
+
     self._panel = parent:panel({
         w = w,
         h = h,
         alpha = settings.alpha or 1,
         visible = settings.visible,
     })
-    
+
     self._invert_progress = settings.invert_progress
     self._stages = { 0, w/total, (w+h)/total, (2*w+h)/total, 1 }
     self._top = self._panel:rect({})
     self._bottom = self._panel:rect({})
     self._left = self._panel:rect({})
     self._right = self._panel:rect({})
-    
+
     self:set_width(settings.bar_w or 2)
     self:set_color(settings.color or Color.white)
     self:reset()
@@ -3895,11 +3896,11 @@ function PanelFrame:set_ratio(r)
     if self._invert_progress then
         r = 1-r
     end
-    
+
     if r < self._stages[self._current_stage] then
         self:reset()
     end
-    
+
     while r > self._stages[self._current_stage + 1] do
         if self._current_stage == 1 then
             self._top:set_w(0)
@@ -3912,11 +3913,11 @@ function PanelFrame:set_ratio(r)
         end
         self._current_stage = self._current_stage + 1
     end
-    
+
     local low = self._stages[self._current_stage]
     local high = self._stages[self._current_stage + 1]
     local stage_progress = (r - low) / (high - low)
-    
+
     if self._current_stage == 1 then
         self._top:set_w(self._panel:w() * (1-stage_progress))
         self._top:set_right(self._panel:w())
@@ -3929,7 +3930,6 @@ function PanelFrame:set_ratio(r)
         self._left:set_h(self._panel:h() * (1-stage_progress))
     end
 end
-
 
 local function buff_value_standard(item, buffs)
     local value = 0
@@ -4227,7 +4227,7 @@ HUDList.BuffItemBase.MAP = {
         priority = 3,
         menu_data = { grouping = { "perks", "yakuza" } },
     },
-    
+
     --Debuffs
     ammo_give_out_debuff = {
         perks = {5, 5},
@@ -4352,7 +4352,7 @@ HUDList.BuffItemBase.MAP = {
         menu_data = { grouping = { "perks", "stoic" } },
         show_value = buff_value_standard,
     },
-    
+
     --Team buffs
     armorer = {
         perks = {6, 0},
@@ -4380,7 +4380,7 @@ HUDList.BuffItemBase.MAP = {
         priority = 1,
         menu_data = { grouping = { "skills", "enforcer" } },
     },
-    
+
     --Composite buffs
     damage_increase = {
         perks = {7, 0},
@@ -4429,10 +4429,10 @@ HUDList.BuffItemBase.BUFF_COLORS = {
 HUDList.BuffItemBase.PROGRESS_BAR_WIDTH = 2
 function HUDList.BuffItemBase:init(id, ppanel, members, item_data)
     HUDList.BuffItemBase.super.init(self, id, ppanel, { h = ppanel:h(), w = ppanel:h() * 0.6, priority = -item_data.priority })
-    
+
     self:set_fade_rate(100)
     self:set_move_rate(nil)
-    
+
     self._member_data = {}
     self._active_buffs = {}
     self._active_debuffs = {}
@@ -4441,14 +4441,14 @@ function HUDList.BuffItemBase:init(id, ppanel, members, item_data)
     self._show_stack_count = self._show_stack_count or item_data.show_stack_count
     self._show_value = self._show_value or item_data.show_value
     self._timed = self._timed or item_data.timed
-    
+
     for _, buff in ipairs(members) do
         self._member_data[buff] = {}
     end
-    
+
     local icon_size = self._panel:w() - HUDList.BuffItemBase.PROGRESS_BAR_WIDTH * 3 - 5
     local texture, texture_rect = get_icon_data(item_data)
-    
+
     self._icon = self._panel:bitmap({
         texture = texture,
         texture_rect = texture_rect,
@@ -4458,7 +4458,7 @@ function HUDList.BuffItemBase:init(id, ppanel, members, item_data)
         rotation = item_data.icon_rotation or 0,
     })
     self._icon:set_center(self._panel:w() / 2, self._panel:h() / 2)
-    
+
     self._bg = self._panel:rect({
         h = self._icon:h(),
         w = self._icon:w(),
@@ -4467,7 +4467,7 @@ function HUDList.BuffItemBase:init(id, ppanel, members, item_data)
         alpha = 0.2,
     })
     self._bg:set_center(self._icon:center())
-    
+
     if item_data.ace_icon then
         self._ace_icon = self._panel:bitmap({
             texture = "guis/textures/pd2/skilltree_2/ace_symbol",
@@ -4478,7 +4478,7 @@ function HUDList.BuffItemBase:init(id, ppanel, members, item_data)
         })
         self._ace_icon:set_center(self._icon:center())
     end
-    
+
     if self._show_stack_count then
         self._stack_panel = self._panel:panel({
             w = self._icon:w() * 0.4,
@@ -4488,7 +4488,7 @@ function HUDList.BuffItemBase:init(id, ppanel, members, item_data)
         })
         self._stack_panel:set_right(self._icon:right())
         self._stack_panel:set_bottom(self._icon:bottom())
-    
+
         self._stack_panel:bitmap({
             w = self._stack_panel:w(),
             h = self._stack_panel:h(),
@@ -4496,7 +4496,7 @@ function HUDList.BuffItemBase:init(id, ppanel, members, item_data)
             texture_rect = { 5, 5, 22, 22 },
             alpha = 0.8,
         })
-        
+
         self._stack_text = self._stack_panel:text({
             valign = "center",
             align = "center",
@@ -4509,11 +4509,11 @@ function HUDList.BuffItemBase:init(id, ppanel, members, item_data)
             font_size = self._stack_panel:h() * 0.85,
         })
     end
-    
+
     if self._timed then
         self._expire_data = {}
         self._progress_bars = {}
-        
+
         for i = 1, 3, 1 do
             local progress_bar = PanelFrame:new(self._panel, { 
                 bar_w = self.PROGRESS_BAR_WIDTH, 
@@ -4522,14 +4522,14 @@ function HUDList.BuffItemBase:init(id, ppanel, members, item_data)
                 visible = false,
             })
             progress_bar:panel():set_center(self._icon:center())
-            
+
             table.insert(self._progress_bars, progress_bar)
         end
     end
-    
+
     if self._timed or self._show_value then
         local h = (self._panel:h() - self._icon:h()) / 2
-        
+
         self._value_text = self._panel:text({
             align = "center",
             vertical = "bottom",
@@ -4540,10 +4540,10 @@ function HUDList.BuffItemBase:init(id, ppanel, members, item_data)
         })
         self._value_text:set_bottom(self._panel:h())
     end
-    
+
     if item_data.title then
         local h = (self._panel:h() - self._icon:h()) / 2
-        
+
         self._title_text = self._panel:text({
             text = item_data.title,
             align = "center",
@@ -4554,13 +4554,13 @@ function HUDList.BuffItemBase:init(id, ppanel, members, item_data)
             font_size = 0.7 * h,
         })
     end
-    
+
     local listener_id = string.format("HUDList_buff_listener_%s", id)
     local events = {
         set_value = self._show_value and callback(self, self, "_set_value_clbk") or nil,
         set_stack_count = self._show_stack_count and callback(self, self, "_set_stack_count_clbk") or nil,
     }
-    
+
     for event, clbk in pairs(events) do
         table.insert(self._listener_clbks, { name = listener_id, source = "buff", event = { event }, clbk = clbk, keys = members })
     end
@@ -4582,19 +4582,19 @@ end
 
 function HUDList.BuffItemBase:set_buff_active(id, status, data, is_debuff)
     local active_table = is_debuff and self._active_debuffs or self._active_buffs
-    
+
     if status then
         self._member_data[id].active = status and true or false
         table.insert(active_table, id)
     elseif table.contains(active_table, id) then
         self._member_data[id].active = status and true or false
         table.delete(active_table, id)
-        
+
         if self._timed then
             self:_update_expire_data()
         end
     end
-    
+
     self:set_active(#self._active_debuffs + #self._active_buffs > 0)
 end
 
@@ -4603,21 +4603,21 @@ function HUDList.BuffItemBase:update(t, dt)
         if self._timed then
             local text = ""
             local debuff_start_index
-        
+
             for i, data in ipairs(self._expire_data) do
                 local total = data.expire_t - data.t
                 local current = t - data.t
                 local remaining = total - current
-                
+
                 self._progress_bars[i]:set_ratio(current/total)
-                
+
                 debuff_start_index = data.is_debuff and string.len(text) or debuff_start_index
                 text = text .. format_time_string(remaining)
                 if i < #self._expire_data then
                     text = text .. "/"
                 end
             end
-            
+
             if not self._show_value then
                 self._value_text:set_text(text)
                 if debuff_start_index then
@@ -4626,7 +4626,7 @@ function HUDList.BuffItemBase:update(t, dt)
             end
         end
     end
-    
+
     return HUDList.BuffItemBase.super.update(self, t, dt)
 end
 
@@ -4648,14 +4648,14 @@ end
 
 function HUDList.BuffItemBase:_update_expire_data()
     self._expire_data = {}
-    
+
     local min_t, min_expire_t, max_t, max_expire_t
     local debuff_t, debuff_expire_t
-    
+
     if #self._active_buffs > 0 then
         for _, id in ipairs(self._active_buffs) do
             local data = self._member_data[id]
-            
+
             if data.expire_t then
                 if not max_expire_t or data.expire_t > max_expire_t then
                     max_t = data.t
@@ -4667,7 +4667,7 @@ function HUDList.BuffItemBase:_update_expire_data()
                 end
             end
         end
-        
+
         if min_expire_t then
             table.insert(self._expire_data, { t = min_t, expire_t = min_expire_t })
             if math.abs(max_expire_t - min_expire_t) > 0.01 then
@@ -4675,11 +4675,11 @@ function HUDList.BuffItemBase:_update_expire_data()
             end
         end
     end
-    
+
     if #self._active_debuffs > 0 then
         for _, id in ipairs(self._active_debuffs) do
             local data = self._member_data[id]
-            
+
             if data.expire_t and data.t then
                 if not debuff_expire_t or data.expire_t > debuff_expire_t then
                     debuff_t = data.t
@@ -4687,18 +4687,18 @@ function HUDList.BuffItemBase:_update_expire_data()
                 end
             end
         end
-        
+
         if debuff_expire_t then
             table.insert(self._expire_data, { t = debuff_t, expire_t = debuff_expire_t, is_debuff = true })
         end
     end
-    
+
     for i, progress_bar in ipairs(self._progress_bars) do
         local expire_data = self._expire_data[i]
         progress_bar:panel():set_visible(expire_data and true or false)
         progress_bar:set_color(expire_data and expire_data.is_debuff and self.BUFF_COLORS.debuff or self._standard_color)
     end
-    
+
     self:_set_icon_color((debuff_expire_t and (not min_expire_t or min_expire_t > debuff_expire_t)) and self._debuff_color or self._standard_color)
 end
 
@@ -4720,7 +4720,6 @@ function HUDList.BuffItemBase:_set_icon_color(color)
     end
 end
 
-
 HUDList.BerserkerBuffItem = HUDList.BerserkerBuffItem or class(HUDList.BuffItemBase)
 function HUDList.BerserkerBuffItem:init(...)
     self._show_value = self._show_value_function
@@ -4729,30 +4728,29 @@ end
 
 function HUDList.BerserkerBuffItem._show_value_function(item, buffs)
     local values = {}
-    
+
     for buff, data in pairs(buffs) do
         if data.active and data.value then
             table.insert(values, data.value)
         end
     end
-    
+
     return values
 end
 
 function HUDList.BerserkerBuffItem:_update_value_text()
     local values = self._show_value(self, self._member_data)
     local text = ""
-    
+
     for i, value in ipairs(values) do
         text = text .. tostring_trimmed(value, 2)
         if i < #values then
             text = text .. " / "
         end
     end
-    
+
     self._value_text:set_text(text)
 end
-
 
 HUDList.TeamBuffItem = HUDList.TeamBuffItem or class(HUDList.BuffItemBase)
 HUDList.TeamBuffItem.BUFF_LEVELS = {
@@ -4773,11 +4771,11 @@ end
 
 function HUDList.TeamBuffItem._show_value_function(item, buffs)
     local level = 0
-    
+
     --printf("Updating team buff level: %s", tostring(item:id()))
     for id, data in pairs(buffs) do
         level = math.max(level, data.active and HUDList.TeamBuffItem.BUFF_LEVELS[id] or 0)
-        
+
         --if data.active then
         --	printf("\tActive buff: %s / %s", id, tostring(HUDList.TeamBuffItem.BUFF_LEVELS[id]))
         --end
@@ -4800,7 +4798,7 @@ HUDList.TimedBuffItem = HUDList.TimedBuffItem or class(HUDList.BuffItemBase)
 function HUDList.TimedBuffItem:init(id, ppanel, members, item_data)
     self._timed = true
     HUDList.TimedBuffItem.super.init(self, id, ppanel, members, item_data)
-    
+
     table.insert(self._listener_clbks, {
         name = string.format("HUDList_buff_listener_%s", id),
         source = "buff",
@@ -4816,13 +4814,13 @@ function HUDList.TimedStackBuffItem:init(id, ppanel, members, item_data)
     self._show_stack_count = self._show_stack_count_function
     self._stack_count = 0
     HUDList.TimedStackBuffItem.super.init(self, id, ppanel, members, item_data)
-    
+
     local listener_id = string.format("HUDList_buff_listener_%s", id)
     local events = {
         add_timed_stack = callback(self, self, "_stack_changed_clbk"),
         remove_timed_stack = callback(self, self, "_stack_changed_clbk"),
     }
-    
+
     for event, clbk in pairs(events) do
         table.insert(self._listener_clbks, { name = listener_id, source = "buff", event = { event }, clbk = clbk, keys = members })
     end
@@ -4830,7 +4828,7 @@ end
 
 function HUDList.TimedStackBuffItem:apply_current_values(id, data)
     HUDList.TimedStackBuffItem.super.apply_current_values(self, id, data)
-    
+
     if data then
         if data.stacks then
             self:_stack_changed_clbk("add_timed_stack", id, data)
@@ -4846,7 +4844,7 @@ function HUDList.TimedStackBuffItem:_stack_changed_clbk(event, id, data)
     --This is a simplification which assumes only one buff is present with timed stacks, which is the case currently for grinder/biker
     self._stacks = data.stacks
     self._stack_count = table.size(self._stacks)
-    
+
     self._member_data[id].stacks = data.stacks
     self:_update_expire_data()
     self:_update_stack_count()
@@ -4854,10 +4852,10 @@ end
 
 function HUDList.TimedStackBuffItem:_update_expire_data()
     self._expire_data = {}
-    
+
     local min_t, min_expire_t, max_t, max_expire_t
     local debuff_t, debuff_expire_t
-    
+
     if self._stack_count > 0 then
         for _, data in pairs(self._stacks) do
             if data.expire_t then
@@ -4871,7 +4869,7 @@ function HUDList.TimedStackBuffItem:_update_expire_data()
                 end
             end
         end
-        
+
         if min_expire_t then
             table.insert(self._expire_data, { t = min_t, expire_t = min_expire_t })
             if max_expire_t ~= min_expire_t then
@@ -4879,11 +4877,11 @@ function HUDList.TimedStackBuffItem:_update_expire_data()
             end
         end
     end
-    
+
     if #self._active_debuffs > 0 then
         for _, id in ipairs(self._active_debuffs) do
             local data = self._member_data[id]
-            
+
             if data.expire_t and data.t then
                 if not debuff_expire_t or data.expire_t > debuff_expire_t then
                     debuff_t = data.t
@@ -4891,18 +4889,18 @@ function HUDList.TimedStackBuffItem:_update_expire_data()
                 end
             end
         end
-        
+
         if debuff_expire_t then
             table.insert(self._expire_data, { t = debuff_t, expire_t = debuff_expire_t, is_debuff = true })
         end
     end
-    
+
     for i, progress_bar in ipairs(self._progress_bars) do
         local expire_data = self._expire_data[i]
         progress_bar:panel():set_visible(expire_data and true or false)
         progress_bar:set_color(expire_data and expire_data.is_debuff and self.BUFF_COLORS.debuff or self._standard_color)
     end
-    
+
     self:_set_icon_color((debuff_expire_t and (not min_expire_t or min_expire_t > debuff_expire_t)) and self._debuff_color or self._standard_color)
 end
 
@@ -4911,7 +4909,6 @@ function HUDList.BikerBuffItem:_stack_changed_clbk(...)
     HUDList.BikerBuffItem.super._stack_changed_clbk(self, ...)
     self:_set_icon_color((self._stack_count >= tweak_data.upgrades.wild_max_triggers_per_time) and self._debuff_color or self._standard_color)
 end
-
 
 HUDList.CompositeBuffItemBase = HUDList.CompositeBuffItemBase or class(HUDList.TimedBuffItem)
 function HUDList.CompositeBuffItemBase:init(...)
@@ -4957,7 +4954,7 @@ HUDList.DamageIncreaseBuffItem.WEAPON_REQUIREMENT = {
 }
 function HUDList.DamageIncreaseBuffItem:init(...)
     HUDList.DamageIncreaseBuffItem.super.init(self, ...)
-    
+
     table.insert(self._listener_clbks, {
         name = "HUDList_DamageIncreaseBuffItem_weapon_equipped_listener",
         source = "player_weapon",
@@ -4969,49 +4966,49 @@ end
 
 function HUDList.DamageIncreaseBuffItem._show_value_function(item, buffs)
     local weapon = managers.player:equipped_weapon_unit()
-    
+
     if alive(weapon) then
         local categories = weapon:base():weapon_tweak_data().categories
         local value = 1
-        
+
         for buff, data in pairs(buffs) do
             local include_data = item.WEAPON_REQUIREMENT.include[buff]
             local exclude_data = item.WEAPON_REQUIREMENT.exclude[buff]
             local include = not include_data
             local exclude = false
-            
+
             if include_data then
                 for _, category in ipairs(categories) do
                     include = include or include_data[category]
                 end
             end
-            
+
             if exclude_data then
                 for _, category in ipairs(categories) do
                     exclude = exclude or exclude_data[category]
                 end
             end
-            
+
             if include and not exclude then
                 value = value * (data.active and data.value or 1)
             end
         end
-        
+
         return value, tweak and tweak.ignore_damage_upgrades
     end
-    
+
     return 1
 end
 
 function HUDList.DamageIncreaseBuffItem:_update_value_text()
     local value, ignores_upgrades = self._show_value(self, self._member_data)
     local str = tostring_trimmed(value, 2)
-    
+
     local text = string.format("x%s", str)
     if ignores_upgrades then
         text = string.format("(%s)", text)
     end
-    
+
     self._value_text:set_text(text)
 end
 

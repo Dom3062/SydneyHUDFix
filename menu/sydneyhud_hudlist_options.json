@@ -48,18 +48,10 @@
         },
         {
             "type" : "button",
-            "id" : "sydneyhud_hudlist_options_civilian_color",
-            "title" : "sydneyhud_hudlist_options_civilian_color",
-            "description" : "sydneyhud_hudlist_options_civilian_color_desc",
-            "next_menu" : "sydneyhud_hudlist_options_civilian_color",
-            "parent" : "hudlist_enabled"
-        },
-        {
-            "type" : "button",
-            "id" : "sydneyhud_hudlist_options_enemy_color",
-            "title" : "sydneyhud_hudlist_options_enemy_color",
-            "description" : "sydneyhud_hudlist_options_enemy_color_desc",
-            "next_menu" : "sydneyhud_hudlist_options_enemy_color",
+            "id" : "sydneyhud_hudlist_options_color",
+            "title" : "sydneyhud_hudlist_options_color",
+            "description" : "sydneyhud_hudlist_options_color_desc",
+            "next_menu" : "sydneyhud_hudlist_options_color",
             "parent" : "hudlist_enabled"
         }
     ]
