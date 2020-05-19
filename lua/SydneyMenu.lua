@@ -16,7 +16,7 @@ local function make_fine_text(text_obj)
     text_obj:set_position(math.round(text_obj:x()), math.round(text_obj:y()))
 end
 
-function do_animation(TOTAL_T, clbk)
+local function do_animation(TOTAL_T, clbk)
     local t = 0
     while t < TOTAL_T do
         coroutine.yield() 
@@ -745,7 +745,7 @@ function SydneyMenu:GetMenuFromJson(path)
             elseif item.enabled ~= nil then
                 enabled = item.enabled
             end
-            
+
             --[[if parents ~= nil and type(parents) == "string" and VoidUI.options[parents] ~= nil then
                 enabled = VoidUI.options[parents]
             elseif parents ~= nil and type(parents) == "table" then
@@ -757,7 +757,7 @@ function SydneyMenu:GetMenuFromJson(path)
             elseif item.enabled ~= nil then
                 enabled = item.enabled
             end]]
-            
+
             if item_type == "label" then
                 self:CreateLabel({
                     menu_id = menu_id,
@@ -817,7 +817,7 @@ function SydneyMenu:GetMenuFromJson(path)
                 for k = 1, #item.items do
                     item.items[k] = managers.localization:text(item.items[k])
                 end
-                
+
                 self:CreateMultipleChoice({
                     menu_id = menu_id,
                     id = id,
