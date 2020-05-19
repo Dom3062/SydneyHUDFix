@@ -1,4 +1,4 @@
-4.2.2 (16. 05. 2020):
+4.2.2 (19. 05. 2020):
 Added trackers for the new loot added in San Martín Bank Heist
 Added HUDList Minion Color
 Merged HUDList's Civilian Color and Enemy Color into one menu

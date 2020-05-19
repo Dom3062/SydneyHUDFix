@@ -415,7 +415,7 @@ if not SydneyHUD then
     function SydneyHUD:PreHook(object, func, pre_call)
         Hooks:PreHook(object, func, "SydneyHUD_Pre_" .. func, pre_call)
     end
-    
+
 --[[     function SydneyHUD:Unhook(mod, id)
         Hooks:RemovePostHook((mod and (mod .. "_") or "BAI_") .. id)
     end ]]

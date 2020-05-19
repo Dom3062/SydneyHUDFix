@@ -42,7 +42,7 @@ function SydneyMenu:SetCivilianColor(color)
     SydneyHUD.settings.civilian_color_b = color.blue
 end
 
-function SydneyHUD:SetMinionColor(color)
+function SydneyMenu:SetMinionColor(color)
     SydneyHUD.settings.minion_color_r = color.red
     SydneyHUD.settings.minion_color_g = color.green
     SydneyHUD.settings.minion_color_b = color.blue
