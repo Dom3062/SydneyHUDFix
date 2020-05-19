@@ -39,7 +39,7 @@ if not SydneyHUD then
         SaveDataVer = 3,
 
         ModVersion = nil, -- Used for caching mod version
-    
+
         EasterEgg =
         {
             FSS =
@@ -47,9 +47,9 @@ if not SydneyHUD then
                 AIReactionTimeTooHigh = false
             }
         },
-    
+
         _down_count = {},
-    
+
         _language =
         {
             [1] = "english",
@@ -58,7 +58,7 @@ if not SydneyHUD then
             [4] = "russian",
             [5] = "portuguese"
         },
-    
+
         -- var for util
         assets_path = "./assets/mod_overrides/",
         ModPath = ModPath,
@@ -70,12 +70,12 @@ if not SydneyHUD then
         _menus = {
             "sydneyhud_menu",
             "sydneyhud_core",
-    
+
             "sydneyhud_gadget_options",
             "sydneyhud_gadget_options_player",
             "sydneyhud_gadget_options_sniper",
             "sydneyhud_gadget_options_turret",
-    
+
             "sydneyhud_hudlist_options",
             "sydneyhud_hudlist_options_left",
             "sydneyhud_hudlist_options_right",
@@ -108,16 +108,15 @@ if not SydneyHUD then
             "sydneyhud_hudlist_options_buff_options_perks_hacker",
             "sydneyhud_hudlist_options_buff_options_boosts",
             "sydneyhud_hudlist_options_buff_player_actions",
-            "sydneyhud_hudlist_options_civilian_color",
-            "sydneyhud_hudlist_options_enemy_color",
-    
+            "sydneyhud_hudlist_options_color",
+
             "sydneyhud_chat_info",
             "sydneyhud_experimental",
             "sydneyhud_gameplay_tweaks",
             "sydneyhud_interact_tweaks",
-    
+
             "sydneyhud_menu_tweaks",
-    
+
             "sydneyhud_hud_tweaks",
             "sydneyhud_hud_tweaks_assault",
             "sydneyhud_hud_tweaks_interact",
@@ -126,12 +125,12 @@ if not SydneyHUD then
             "sydneyhud_hud_tweaks_waypoint",
             "sydneyhud_hud_tweaks_kill_counter",
             "sydneyhud_hud_tweaks_hps_meter",
-    
+
             "sydneyhud_music_tweaks",
-    
+
             "sydneyhud_optimization_tweaks"
         },
-    
+
         _poco_conflicting_defaults = {
             buff = {
                 mirrorDirection = true,

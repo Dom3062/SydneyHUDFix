@@ -392,7 +392,7 @@ function HUDManager:UpdateHUDListSettings()
         k2 = tbl[k] or k
         managers.hudlist:change_ignore_buff_setting(k, SydneyHUD:GetHUDListBuffOption(k2))
     end
-    
+
     for k, _ in pairs(options.ignore_player_actions) do
         managers.hudlist:change_ignore_player_action_setting(k, SydneyHUD:GetHUDListPlayerActionOption(k))
     end

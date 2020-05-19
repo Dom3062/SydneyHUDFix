@@ -14,7 +14,7 @@ local function make_fine_text(text_obj)
 
     text_obj:set_size(w, h)
     text_obj:set_position(math.round(text_obj:x()), math.round(text_obj:y()))
-end	
+end
 
 function do_animation(TOTAL_T, clbk)
     local t = 0
@@ -198,7 +198,7 @@ function SydneyMenu:update(t, dt)
             self:MenuLeftRight(-1)
             self:SetAxisTimer("x", 0.12, 0.22, "menu_left")
         end
-        
+
         if not managers.menu:is_pc_controller() and self._controller:get_input_bool("next_page") then
             self:MenuLeftRight(10)
             self:SetAxisTimer("x", 0.12, 0.22, "next_page")
@@ -207,7 +207,7 @@ function SydneyMenu:update(t, dt)
             self:SetAxisTimer("x", 0.12, 0.22, "previous_page")
         end
     end
-    
+
     self._axis_timer.y = math.max(self._axis_timer.y - dt, 0)
     self._axis_timer.x = math.max(self._axis_timer.x - dt, 0)
 end
@@ -244,7 +244,7 @@ function SydneyMenu:Open()
     self._panel:stop()
     self._panel:animate(function(o)
         local a = self._panel:alpha()
-        
+
         do_animation(0.2, function (p)
             self._panel:set_alpha(math.lerp(a, 1, p))
         end)
@@ -361,12 +361,12 @@ function SydneyMenu:mouse_press(o, button, x, y)
                         elseif item:name() == "reset_panel" then
                             self:ResetColorMenu()
                         else
-                            self:CloseColorMenu(true)
+                            self:CloseColorMenu()
                         end
                     end
                 end
             else
-                self:CloseColorMenu(false)
+                self:CloseColorMenu()
             end
         elseif self._input then
             if self._input.panel:inside(x, y) then
@@ -847,7 +847,7 @@ function SydneyMenu:GetMenuFromJson(path)
                 })
             elseif item_type == "color_select" then
                 value = SydneyHUD:GetColor(item.value, item.value_extension)
-                
+
                 self:CreateColorSelect({
                     menu_id = menu_id,
                     id = id,
@@ -860,7 +860,7 @@ function SydneyMenu:GetMenuFromJson(path)
                     callback = item.callback,
                     callback_arguments = item.callback_arguments or item.value or nil,
                     texture = item.texture
-                })	
+                })
             end
         end
         menu.panel:set_h(content.h or menu.items[#menu.items].panel:bottom())
@@ -874,7 +874,7 @@ function SydneyMenu:CreateMenu(params)
     if self._options_panel:child("menu_"..tostring(params.menu_id)) or self._menus[params.menu_id] then
         return
     end
-    
+
     local menu_panel = self._options_panel:panel({
         name = "menu_"..tostring(params.menu_id),
         x = self._options_panel:w(),
@@ -1625,11 +1625,11 @@ end
 
 -- Custom Color Items
 function SydneyMenu:CreateColorSelect(params)
-    local menu_panel = self._options_panel:child("menu_"..tostring(params.menu_id))
+    local menu_panel = self._options_panel:child("menu_" .. tostring(params.menu_id))
     if not menu_panel or not self._menus[params.menu_id] then
         return
     end
-    local texture = params.texture or nil
+    local texture = params.texture
     if texture and type(texture) == "table" then
         texture = texture[math.random(#texture)] -- Randomize texture
     end
@@ -1909,7 +1909,7 @@ function SydneyMenu:OpenColorMenu(item)
         layer = 3
     })
 
-    self._open_color_dialog = { 
+    self._open_color_dialog = {
         parent_item = item,
         panel = dialog,
         color = item.value,
@@ -1922,8 +1922,8 @@ function SydneyMenu:OpenColorMenu(item)
             reset_panel
         }
     }
-    
-    dialog:animate(function(o)	
+
+    dialog:animate(function(o)
         local h = o:h()
         do_animation(0.1, function (p)
             o:set_alpha(math.lerp(0, 1, p))
@@ -1935,6 +1935,7 @@ function SydneyMenu:OpenColorMenu(item)
         bg:set_h(border:h() - 4)
     end)
 end
+
 function SydneyMenu:SetColorSlider(item, x, type, add)
     local panel_min, panel_max = item:world_x(), item:world_x() + item:w()
     x = math.clamp(x, panel_min, panel_max)
@@ -1953,9 +1954,9 @@ function SydneyMenu:SetColorSlider(item, x, type, add)
     self._open_color_dialog.parent_item.panel:child("color"):set_color(self._open_color_dialog.color)
 end
 
-function SydneyMenu:CloseColorMenu(save)	
+function SydneyMenu:CloseColorMenu()
     self._open_color_dialog.panel:stop()
-    self._open_color_dialog.panel:animate(function(o)	
+    self._open_color_dialog.panel:animate(function(o)
         local h = o:h()
         local alpha = o:alpha()
         local border = o:child("border")

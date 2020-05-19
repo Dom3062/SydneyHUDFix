@@ -7,8 +7,8 @@ function EnemyManager:init()
     end
     if SydneyHUD:GetOption("block_shields") then
         self._shield_disposal_upd_interval = 0
-		self._shield_disposal_lifetime = 0
-		self._MAX_NR_SHIELDS = 0
+        self._shield_disposal_lifetime = 0
+        self._MAX_NR_SHIELDS = 0
     end
     if SydneyHUD:GetOption("block_magazines") then
         self.MAX_MAGAZINES = 0
@@ -45,13 +45,13 @@ function EnemyManager:on_civilian_destroyed(unit, ...)
     return on_civilian_destroyed_original(self, unit, ...)
 end
 
-function EnemyManager:get_delayed_clbk_expire_t(clbk_id)	
-    for _, clbk in ipairs(self._delayed_clbks) do	
-        if clbk[1] == clbk_id then	
-            return clbk[2]	
-        end	
-    end	
-end 
+function EnemyManager:get_delayed_clbk_expire_t(clbk_id)
+    for _, clbk in ipairs(self._delayed_clbks) do
+        if clbk[1] == clbk_id then
+            return clbk[2]
+        end
+    end
+end
 
 if SydneyHUD:GetOption("block_corpses") then
     function EnemyManager:corpse_limit()
