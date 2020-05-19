@@ -740,6 +740,9 @@ function HUDAssaultCorner:_animate_update_assault_hud_color(color)
 end
 
 Hooks:Add("NetworkReceivedData", "NetworkReceivedData_BAI", function(sender, id, data)
+    if not managers.hud then
+        return
+    end
     if id == "BAI_Message" then
         if data == "endless_triggered" then -- Client
             managers.hud._hud_assault_corner:SetEndlessClient(true)

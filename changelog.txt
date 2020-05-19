@@ -1,6 +1,10 @@
-4.2.2 (xx. 05. 2020):
-Fixed an issue, where interaction color is not saved properly
-Fixed an issue, where options related to "Suspicion" are not working properly
+4.2.2 (16. 05. 2020):
+Added trackers for the new loot added in San Martín Bank Heist
+Added HUDList Minion Color
+Merged HUDList's Civilian Color and Enemy Color into one menu
+Fixed an issue where interaction color is not saved properly
+Fixed an issue where options related to "Suspicion" are not working properly
+Possible fix for 'mods/SydneyHUD/lua/lib/managers/hud/HUDAssaultCorner.lua:801: attempt to index field 'hud' (a nil value)'
 
 4.2.1 (08. 05. 2020):
 Fixed an issue where some text got mixed up in Custom Turret Color
