@@ -55,6 +55,7 @@
     "flashlight_angle": 60,
     "flashlight_range": 1000,
     "health_bar_color": 2,
+    "hide_hostage_panel" : false,
     "hold_to_pick": true,
     "hold_to_pick_delay": 0.1,
     "hps_refresh_rate": 1,

@@ -15,6 +15,21 @@
             "default_value": true
         },
         {
+            "type" : "divider"
+        },
+        {
+            "type": "toggle",
+            "id": "hide_hostage_panel",
+            "title": "hide_hostage_panel",
+            "description": "hide_hostage_panel_desc",
+            "callback": "SetValue",
+            "value": "hide_hostage_panel",
+            "default_value": false
+        },
+        {
+            "type" : "divider"
+        },
+        {
             "type" : "toggle",
             "id" : "show_assault_states",
             "title" : "sydneyhud_show_assault_states",
