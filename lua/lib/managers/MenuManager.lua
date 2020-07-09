@@ -5,17 +5,6 @@ function MenuCallbackHandler:is_dlc_latest_locked(...)
     return SydneyHUD:GetOption("remove_ads") and false or is_dlc_latest_locked_original(self, ...)
 end
 
-local old_resume = MenuCallbackHandler.resume_game
-function MenuCallbackHandler:resume_game()
-    old_resume(self)
-    if SydneyHUD.Update then
-        SydneyHUD.Update = false
-        SydneyHUD:DelayCall("SydneyHUDUpdate", 0.2, function()
-            managers.hud:SydneyHUDUpdate()
-        end)
-    end
-end
-
 --[[
     Load our localization keys for our menu, and menu items.
 ]]
