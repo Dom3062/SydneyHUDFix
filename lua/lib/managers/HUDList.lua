@@ -31,7 +31,7 @@ function HUDListManager:post_init()
 	for _, clbk in ipairs(HUDListManager.post_init_events or {}) do
 		clbk()
 	end
-	
+
 	HUDListManager.post_init_events = nil
 end
 
@@ -75,9 +75,9 @@ HUDListManager.ListOptions = HUDListManager.ListOptions or {
         courier = SydneyHUD:GetHUDListItemOption("courier"),
         planks = SydneyHUD:GetHUDListItemOption("planks"),
         meth_ingredients = SydneyHUD:GetHUDListItemOption("meth_ingredients"),
-        secret_item = SydneyHUD:GetHUDListItemOption("secret_item"),	--Biker heist bottle / BoS rings
+        secret_item = SydneyHUD:GetHUDListItemOption("secret_item"),	--Biker heist bottle / BoS rings / Federali Medals
     },
-	
+
 	--Buff list
 	show_buffs = SydneyHUD:GetModOption("hudlist", "show_buffs"),	--Show active effects (buffs/debuffs)
     ignore_buffs = {	--Exclude specific effects from showing
@@ -123,7 +123,7 @@ HUDListManager.ListOptions = HUDListManager.ListOptions or {
         uppers = SydneyHUD:GetHUDListBuffOption("uppers"),
         up_you_go = SydneyHUD:GetHUDListBuffOption("up_you_go"),	--true,
         yakuza = SydneyHUD:GetHUDListBuffOption("yakuza"),
-        
+
         ammo_give_out_debuff = SydneyHUD:GetHUDListBuffOption("ammo_give_out_cooldown"),
         anarchist_armor_recovery_debuff = SydneyHUD:GetHUDListBuffOption("lust_for_life_cooldown"),
         armor_break_invulnerable_debuff = SydneyHUD:GetHUDListBuffOption("armor_break_invulnerability_cooldown"),	--Composite
@@ -141,17 +141,17 @@ HUDListManager.ListOptions = HUDListManager.ListOptions or {
         some_invulnerability_debuff = SydneyHUD:GetHUDListBuffOption("some_invulnerability_cooldown"),
         unseen_strike_debuff = SydneyHUD:GetHUDListBuffOption("unseen_strike_cooldown"),	--Composite
         uppers_debuff = SydneyHUD:GetHUDListBuffOption("uppers_cooldown"),	--Composite
-        
+
         armorer = SydneyHUD:GetHUDListBuffOption("liquid_armor"),
         crew_chief = SydneyHUD:GetHUDListBuffOption("crew_chief_level"),
         forced_friendship = SydneyHUD:GetHUDListBuffOption("forced_friendship"),
         shock_and_awe = SydneyHUD:GetHUDListBuffOption("shock_and_awe"),
-    
+
         damage_increase = SydneyHUD:GetHUDListBuffOption("damage_bonus"),
         damage_reduction = SydneyHUD:GetHUDListBuffOption("received_damage_reduction"),
         melee_damage_increase = SydneyHUD:GetHUDListBuffOption("melee_damage_increase"),
         passive_health_regen = SydneyHUD:GetHUDListBuffOption("health_regeneration"),
-        
+
         --Custom buffs
         crew_inspire = SydneyHUD:GetHUDListBuffOption("ai_inspire_cooldown")
     },
@@ -250,7 +250,7 @@ HUDListManager.UNIT_TYPES = {
 	--boris = 						{ type_id = "unique",		category = "civilians",	long_name = "Boris" },	--Goat sim
 	--spa_vip = 					{ type_id = "unique",			category = "civilians",	long_name = "Charon" },	--10-10
 	--spa_vip_hurt = 			{ type_id = "unique",			category = "civilians",	long_name = "Charon" },	--10-10
-	
+
 	--Custom unit definitions
 	turret = 					{ type_id = "turret",		category = "turrets",	long_name = "SWAT Turret" },
 	minion =						{ type_id = "minion",		category = "minions",	long_name = "Joker" },
@@ -269,7 +269,9 @@ HUDListManager.SPECIAL_PICKUP_TYPES = {
 	hydrogen_chloride =				"meth_ingredients",
 	caustic_soda =						"meth_ingredients",
 	press_pick_up =					"secret_item",		--Biker heist bottle
-	ring_band = 						"secret_item",		--BoS rings
+    ring_band = 						"secret_item",		--BoS rings
+    pex_medal = "secret_item", -- Federal Medals in Breakfast in Tijuana Job
+    federali_medal = "secret_item"
 }
 
 HUDListManager.LOOT_TYPES = {
@@ -330,8 +332,9 @@ HUDListManager.LOOT_TYPES = {
 	weapon_scar =				"weapon",
 	women_shoes =				"shoes",
     yayo =						"coke",
-    faberge_egg = "faberge_egg",
-    treasure = "romanov_treasure"
+    roman_armor = "armor", -- Roman Armor in Border Crossing
+    faberge_egg = "faberge_egg", -- Fabergé Egg in San Martín Bank
+    treasure = "romanov_treasure" -- Romanov Treasure in San Martín Bank
 }
 
 HUDListManager.POTENTIAL_LOOT_TYPES = {
@@ -342,7 +345,7 @@ HUDListManager.POTENTIAL_LOOT_TYPES = {
 }
 
 HUDListManager.LOOT_CONDITIONS = {
-	body = function(data) 
+	body = function(data)
 		return (managers.job:current_level_id() == "mad") and (data.bagged or data.unit:editor_id() ~= -1)
 	end,
 }
@@ -430,7 +433,7 @@ HUDListManager.BUFFS = {
 	virtue_debuff =							{ "virtue_debuff", is_debuff = true },
 	yakuza_recovery =							{ "yakuza" },
     yakuza_speed =								{ "yakuza" },
-    
+
     --Custom buffs
     crew_inspire = { "crew_inspire", is_debuff = true }
 }
@@ -519,7 +522,7 @@ function HUDListManager:add_list(id, class, ...)
 		self._lists[id] = class:new(id, self._hud_panel, ...)
 		self._lists[id]:post_init(...)
 	end
-	
+
 	return self._lists[id]
 end
 
@@ -575,34 +578,34 @@ function HUDListManager:_setup_left_list()
 	local list_w = self._hud_panel:w()
 	local list_h = self._hud_panel:h()
 	local x = 0
-	
-	local list = self:add_list("left_list", HUDList.VerticalList, { 
-		valign = "top", 
-		halign = "left", 
-		x = x, 
-		w = list_w, 
-		h = list_h, 
+
+	local list = self:add_list("left_list", HUDList.VerticalList, {
+		valign = "top",
+		halign = "left",
+		x = x,
+		w = list_w,
+		h = list_h,
 		item_margin = 5
 	})
 	self:_set_left_list_y()
-	
+
 	local function list_config_template(size, prio, ...)
 		return {
-			halign = "left", 
-			valign = "center", 
-			w = list_w, 
-			h = size--[[ * scale]], 
+			halign = "left",
+			valign = "center",
+			w = list_w,
+			h = size--[[ * scale]],
 			priority = prio,
-			item_margin = 3, 
+			item_margin = 3,
 			static_item = {
-				class = HUDList.StaticItem, 
+				class = HUDList.StaticItem,
 				data = { 30--[[ * scale]], ... },
 			}
 		}
 	end
 
 	if GameInfoManager.plugin_active("deployables") then
-		list:add_item("equipment", HUDList.RescalableHorizontalList, list_config_template(40, 8, 
+		list:add_item("equipment", HUDList.RescalableHorizontalList, list_config_template(40, 8,
 			{ h_scale = 0.55, w_scale = 0.55, skills = HUDListManager.EQUIPMENT_TABLE.ammo_bag.skills, valign = "top", halign = "right" },
 			{ h_scale = 0.55, w_scale = 0.55, skills = HUDListManager.EQUIPMENT_TABLE.doc_bag.skills, valign = "top", halign = "left" },
 			{ h_scale = 0.55, w_scale = 0.55, preplanning = HUDListManager.EQUIPMENT_TABLE.grenade_crate.preplanning, valign = "bottom", halign = "right" },
@@ -612,34 +615,34 @@ function HUDListManager:_setup_left_list()
 		self:_set_show_body_bags()
 		self:_set_show_grenade_crates()
 	end
-	
+
 	if GameInfoManager.plugin_active("sentries") then
 		list:add_item("sentries", HUDList.RescalableHorizontalList, list_config_template(40, 7, { skills = HUDListManager.EQUIPMENT_TABLE.sentry.skills })):rescale(scale)
 		self:_set_show_sentries()
 	end
-	
+
 	if GameInfoManager.plugin_active("timers") then
 		list:add_item("timers", HUDList.TimerList, list_config_template(60, 6, { skills = { 3, 6 } })):rescale(scale)
 		self:_set_show_timers()
 	end
-	
+
 	if GameInfoManager.plugin_active("units") then
 		list:add_item("minions", HUDList.RescalableHorizontalList, list_config_template(45, 5, { skills = { 6, 8 } })):rescale(scale)
 		self:_set_show_minions()
 	end
-	
+
 	if GameInfoManager.plugin_active("ecms") then
 		list:add_item("ecm_retrigger", HUDList.RescalableHorizontalList, list_config_template(40, 4, { skills = { 6, 2 } })):rescale(scale)
 		list:add_item("ecms", HUDList.RescalableHorizontalList, list_config_template(40, 3, { skills = { 1, 4 } })):rescale(scale)
 		self:_set_show_ecms()
 		self:_set_show_ecm_retrigger()
 	end
-	
+
 	if GameInfoManager.plugin_active("cameras") then
 		list:add_item("tape_loop", HUDList.RescalableHorizontalList, list_config_template(40, 2, { skills = { 4, 2 } })):rescale(scale)
 		self:_set_show_tape_loop()
 	end
-	
+
 	if GameInfoManager.plugin_active("pagers") then
 		list:add_item("pagers", HUDList.RescalableHorizontalList, list_config_template(40, 1, { perks = { 1, 4 } })):rescale(scale)
 		self:_set_show_pagers()
@@ -652,27 +655,27 @@ function HUDListManager:_setup_right_list()
 	local list_h = self._hud_panel:h()
 	local x = 0
 
-	local list = self:add_list("right_list", HUDList.VerticalList, { 
-		valign = "top", 
-		halign = "right", 
-		x = x, 
-		w = list_w, 
-		h = list_h, 
+	local list = self:add_list("right_list", HUDList.VerticalList, {
+		valign = "top",
+		halign = "right",
+		x = x,
+		w = list_w,
+		h = list_h,
 		item_margin = 5,
 	})
 	self:_set_right_list_y()
-	
+
 	local function list_config_template(prio)
 		return {
-			halign = "right", 
-			valign = "center", 
-			w = list_w, 
-			h = 50--[[ * scale]], 
-			item_margin = 3, 
+			halign = "right",
+			valign = "center",
+			w = list_w,
+			h = 50--[[ * scale]],
+			item_margin = 3,
 			priority = prio,
 		}
 	end
-	
+
 	if GameInfoManager.plugin_active("units") then
 		list:add_item("unit_count_list", HUDList.RescalableHorizontalList, list_config_template(4)):rescale(scale)
 		self:_set_show_enemies()
@@ -681,20 +684,20 @@ function HUDListManager:_setup_right_list()
 		self:_set_show_hostages()
 		self:_set_show_minion_count()
 	end
-	
+
 	if GameInfoManager.plugin_active("loot") then
 		list:add_item("loot_list", HUDList.RescalableHorizontalList, list_config_template(3)):rescale(scale)
 		self:_set_show_loot()
 	end
-	
+
 	if GameInfoManager.plugin_active("pickups") then
 		list:add_item("special_pickup_list", HUDList.RescalableHorizontalList, list_config_template(2)):rescale(scale)
 		self:_set_show_special_pickups()
 	end
-	
+
 	if GameInfoManager.plugin_active("loot") or GameInfoManager.plugin_active("pagers") or GameInfoManager.plugin_active("cameras") then
 		list:add_item("stealth_list", HUDList.StealthList, list_config_template(1)):rescale(scale)
-		
+
 		if GameInfoManager.plugin_active("loot") then
 			self:_set_show_body_count()
 		end
@@ -712,13 +715,13 @@ function HUDListManager:_setup_buff_list()
 	local list_w = self._hud_panel:w()
 	local list_h = 70 * scale
 	local x = 0
-	
-	self:add_list("buff_list", HUDList.HorizontalList, { 
-		halign = "center", 
+
+	self:add_list("buff_list", HUDList.HorizontalList, {
+		halign = "center",
 		valign = "center",
 		x = x,
-		w = list_w, 
-		h = list_h, 
+		w = list_w,
+		h = list_h,
 		item_margin = 0,
 	})
 	self:_set_buff_list_y()
@@ -751,10 +754,10 @@ function HUDListManager:_set_buff_list_y()
 	local y = self._hud_panel:bottom() - ((HUDListManager.ListOptions.buff_list_y or 80) + list_h)
 
 	if HUDManager.CUSTOM_TEAMMATE_PANEL then
-		local teammate_panel = managers.hud._teammate_panels_custom or managers.hud._teammate_panels 
+		local teammate_panel = managers.hud._teammate_panels_custom or managers.hud._teammate_panels
 		y = teammate_panel[HUDManager.PLAYER_PANEL]:panel():top() - (list_h + 5)
 	end
-	
+
 	list_panel:set_y(y)
 end
 
@@ -773,7 +776,7 @@ function HUDListManager:_set_right_list_scale()
 end
 
 function HUDListManager:_set_buff_list_scale()
-	
+
 end
 
 --Left list config
@@ -790,7 +793,7 @@ function HUDListManager:_set_show_timers()
 			managers.gameinfo:unregister_listener(listener_id, "timer", event)
 		end
 	end
-	
+
 	for key, data in pairs(managers.gameinfo:get_timers()) do
 		if HUDListManager.ListOptions.show_timers then
 			clbk("set_active", key, data)
@@ -821,7 +824,7 @@ function HUDListManager:_set_show_sentries()
 	local listener_id = "HUDListManager_sentry_listener"
 	local events = { "set_active" }
 	local clbk = callback(self, self, "_sentry_equipment_event")
-	
+
 	for _, event in pairs(events) do
 		if HUDListManager.ListOptions.show_sentries > 0 then
 			managers.gameinfo:register_listener(listener_id, "sentry", event, clbk)
@@ -829,7 +832,7 @@ function HUDListManager:_set_show_sentries()
 			managers.gameinfo:unregister_listener(listener_id, "sentry", event)
 		end
 	end
-	
+
 	for key, data in pairs(managers.gameinfo:get_deployables("sentry")) do
 		if HUDListManager.ListOptions.show_sentries > 0 then
 			clbk("set_active", key, data)
@@ -851,7 +854,7 @@ function HUDListManager:_set_show_minions()
 			managers.gameinfo:unregister_listener(listener_id, "minion", event)
 		end
 	end
-	
+
 	for key, data in pairs(managers.gameinfo:get_minions()) do
 		clbk(HUDListManager.ListOptions.show_minions > 0 and "add" or "remove", key, data)
 	end
@@ -870,7 +873,7 @@ function HUDListManager:_set_show_pagers()
 			managers.gameinfo:unregister_listener(listener_id, "pager", event)
 		end
 	end
-	
+
 	for key, data in pairs(managers.gameinfo:get_pagers()) do
 		if HUDListManager.ListOptions.show_pagers then
 			if data.active then
@@ -885,7 +888,7 @@ end
 function HUDListManager:_set_show_ecms()
 	local list = self:list("left_list"):item("ecms")
 	local listener_id = "HUDListManager_ecm_listener"
-	local events = { "set_jammer_active" } 
+	local events = { "set_jammer_active" }
 	local clbk = callback(self, self, "_ecm_event")
 
 	for _, event in pairs(events) do
@@ -895,7 +898,7 @@ function HUDListManager:_set_show_ecms()
 			managers.gameinfo:unregister_listener(listener_id, "ecm", event)
 		end
 	end
-	
+
 	for key, data in pairs(managers.gameinfo:get_ecms()) do
 		if HUDListManager.ListOptions.show_ecms then
 			clbk("set_jammer_active", key, data)
@@ -908,9 +911,9 @@ end
 function HUDListManager:_set_show_ecm_retrigger()
 	local list = self:list("left_list"):item("ecm_retrigger")
 	local listener_id = "HUDListManager_ecm_listener"
-	local events = { "set_retrigger_active" } 
+	local events = { "set_retrigger_active" }
 	local clbk = callback(self, self, "_ecm_retrigger_event")
-	
+
 	for _, event in pairs(events) do
 		if HUDListManager.ListOptions.show_ecm_retrigger then
 			managers.gameinfo:register_listener(listener_id, "ecm", event, clbk)
@@ -933,7 +936,7 @@ function HUDListManager:_set_show_tape_loop()
 	local listener_id = "HUDListManager_tape_loop_listener"
 	local events = { "start_tape_loop", "stop_tape_loop" }
 	local clbk = callback(self, self, "_tape_loop_event")
-	
+
 	for _, event in pairs(events) do
 		if HUDListManager.ListOptions.show_tape_loop then
 			managers.gameinfo:register_listener(listener_id, "camera", event, clbk)
@@ -941,7 +944,7 @@ function HUDListManager:_set_show_tape_loop()
 			managers.gameinfo:unregister_listener(listener_id, "camera", event)
 		end
 	end
-	
+
 	for key, data in pairs(managers.gameinfo:get_cameras()) do
 		if data.tape_loop_expire_t and HUDListManager.ListOptions.show_tape_loop then
 			clbk("start_tape_loop", key, data)
@@ -956,7 +959,7 @@ function HUDListManager:_show_bag_deployable_by_type(deployable_type, option_val
 	local listener_id = string.format("HUDListManager_%s_listener", deployable_type)
 	local events = { "set_active" }
 	local clbk = callback(self, self, "_deployable_equipment_event")
-	
+
 	for _, event in pairs(events) do
 		if option_value > 0 then
 			managers.gameinfo:register_listener(listener_id, deployable_type, event, clbk)
@@ -964,13 +967,13 @@ function HUDListManager:_show_bag_deployable_by_type(deployable_type, option_val
 			managers.gameinfo:unregister_listener(listener_id, deployable_type, event)
 		end
 	end
-	
+
 	for id, item in pairs(list:items()) do
 		if item:equipment_type() == deployable_type then
 			item:delete(true)
 		end
 	end
-	
+
 	if option_value > 0 then
 		for key, data in pairs(managers.gameinfo:get_deployables(deployable_type)) do
 			clbk("set_active", key, data)
@@ -982,12 +985,12 @@ end
 function HUDListManager:_set_show_enemies()
 	local list = self:list("right_list"):item("unit_count_list")
 	local all_types, all_ids = self:_get_units_by_category("enemies")
-	
+
 	for unit_type, unit_ids in pairs(all_types) do
 		list:remove_item(unit_type, true)
 	end
 	list:remove_item("enemies", true)
-	
+
 	if HUDListManager.ListOptions.show_enemies == 1 then
 		for unit_type, unit_ids in pairs(all_types) do
 			self:_update_unit_count_list_items(list, unit_type, unit_ids, true)
@@ -1000,7 +1003,7 @@ end
 function HUDListManager:_set_show_civilians()
 	local list = self:list("right_list"):item("unit_count_list")
 	local all_types, all_ids = self:_get_units_by_category("civilians")
-	
+
 	for unit_type, unit_ids in pairs(all_types) do
 		self:_update_unit_count_list_items(list, unit_type, unit_ids, HUDListManager.ListOptions.show_civilians)
 	end
@@ -1009,12 +1012,12 @@ end
 function HUDListManager:_set_show_hostages()
 	local list = self:list("right_list"):item("unit_count_list")
 	local all_types, all_ids = self:_get_units_by_category("hostages")
-	
+
 	for unit_type, unit_ids in pairs(all_types) do
 		list:remove_item(unit_type, true)
 	end
 	list:remove_item("hostages", true)
-	
+
 	if HUDListManager.ListOptions.show_hostages == 1 then
 		for unit_type, unit_ids in pairs(all_types) do
 			self:_update_unit_count_list_items(list, unit_type, unit_ids, true)
@@ -1027,7 +1030,7 @@ end
 function HUDListManager:_set_show_minion_count()
 	local list = self:list("right_list"):item("unit_count_list")
 	local all_types, all_ids = self:_get_units_by_category("minions")
-	
+
 	for unit_type, unit_ids in pairs(all_types) do
 		self:_update_unit_count_list_items(list, unit_type, unit_ids, HUDListManager.ListOptions.show_minion_count)
 	end
@@ -1036,15 +1039,15 @@ end
 function HUDListManager:_set_show_turrets()
 	local list = self:list("right_list"):item("unit_count_list")
 	local all_types, all_ids = self:_get_units_by_category("turrets")
-	
+
 	for unit_type, unit_ids in pairs(all_types) do
 		self:_update_unit_count_list_items(list, unit_type, unit_ids, HUDListManager.ListOptions.show_turrets)
 	end
-end	
+end
 
 function HUDListManager:_set_show_pager_count()
 	local list = self:list("right_list"):item("stealth_list")
-	
+
 	if HUDListManager.ListOptions.show_pager_count then
 		list:add_item("PagerCount", HUDList.UsedPagersItem)
 	else
@@ -1054,7 +1057,7 @@ end
 
 function HUDListManager:_set_show_camera_count()
 	local list = self:list("right_list"):item("stealth_list")
-	
+
 	if HUDListManager.ListOptions.show_camera_count then
 		list:add_item("CameraCount", HUDList.CameraCountItem)
 	else
@@ -1066,13 +1069,13 @@ function HUDListManager:_set_show_special_pickups()
 	local list = self:list("right_list"):item("special_pickup_list")
 	local all_ids = {}
 	local all_types = {}
-	
+
 	for pickup_id, pickup_type in pairs(HUDListManager.SPECIAL_PICKUP_TYPES) do
 		all_types[pickup_type] = all_types[pickup_type] or {}
 		table.insert(all_types[pickup_type], pickup_id)
 		table.insert(all_ids, pickup_id)
 	end
-	
+
 	for pickup_type, members in pairs(all_types) do
 		if HUDListManager.ListOptions.show_special_pickups and not HUDListManager.ListOptions.ignore_special_pickups[pickup_type] then
 			list:add_item(pickup_type, HUDList.SpecialPickupItem, members)
@@ -1090,18 +1093,18 @@ function HUDListManager:_set_show_loot()
 	local list = self:list("right_list"):item("loot_list")
 	local all_ids = {}
 	local all_types = {}
-	
+
 	for loot_id, loot_type in pairs(HUDListManager.LOOT_TYPES) do
 		all_types[loot_type] = all_types[loot_type] or {}
 		table.insert(all_types[loot_type], loot_id)
 		table.insert(all_ids, loot_id)
 	end
-	
+
 	for loot_type, loot_ids in pairs(all_types) do
 		list:remove_item(loot_type, true)
 	end
 	list:remove_item("aggregate", true)
-	
+
 	if HUDListManager.ListOptions.show_loot == 1 then
 		for loot_type, loot_ids in pairs(all_types) do
 			list:add_item(loot_type, HUDList.LootItem, loot_ids)
@@ -1120,7 +1123,7 @@ end
 function HUDListManager:_get_units_by_category(category)
 	local all_types = {}
 	local all_ids = {}
-	
+
 	for unit_id, data in pairs(HUDListManager.UNIT_TYPES) do
 		if data.category == category then
 			all_types[data.type_id] = all_types[data.type_id] or {}
@@ -1128,7 +1131,7 @@ function HUDListManager:_get_units_by_category(category)
 			table.insert(all_ids, unit_id)
 		end
 	end
-	
+
 	return all_types, all_ids
 end
 
@@ -1143,7 +1146,7 @@ end
 
 function HUDListManager:_set_show_body_count()
 	local list = self:list("right_list"):item("stealth_list")
-	
+
 	if HUDListManager.ListOptions.show_body_count then
 		list:add_item("body_stealth", HUDList.BodyCountItem)
 	else
@@ -1158,7 +1161,7 @@ function HUDListManager:_set_show_buffs()
 	local events = { "activate", "deactivate" }
 	local clbk = callback(self, self, "_buff_event")
 	local list = self:list("buff_list")
-	
+
 	for _, event in ipairs(events) do
 		if HUDListManager.ListOptions.show_buffs then
 			managers.gameinfo:register_listener(listener_id, src, event, clbk)
@@ -1166,7 +1169,7 @@ function HUDListManager:_set_show_buffs()
 			managers.gameinfo:unregister_listener(listener_id, src, event)
 		end
 	end
-	
+
 	for buff_id, data in pairs(managers.gameinfo:get_buffs()) do
 		if HUDListManager.ListOptions.show_buffs then
 			clbk("activate", buff_id, data)
@@ -1178,7 +1181,7 @@ end
 
 function HUDListManager:_set_ignored_buff(item_id, value)
 	local list = self:list("buff_list")
-	
+
 	if HUDListManager.ListOptions.show_buffs then
 		if not value then
 			local members = {}
@@ -1187,13 +1190,13 @@ function HUDListManager:_set_ignored_buff(item_id, value)
 					table.insert(members, id)
 				end
 			end
-			
+
 			local item_data = HUDList.BuffItemBase.MAP[item_id]
 			local item = item_data and list:add_item(item_id, item_data.class or "BuffItemBase", members, item_data)
-			
+
 			for _, member_id in ipairs(members) do
 				local buff_data = managers.gameinfo:get_buffs(member_id)
-				
+
 				if item and buff_data then
 					local is_debuff = HUDListManager.BUFFS[member_id].is_debuff
 					item:set_buff_active(member_id, true, buff_data, is_debuff)
@@ -1210,27 +1213,27 @@ function HUDListManager:_get_buff_items(id)
 	local buff_list = self:list("buff_list")
 	local items = {}
 	local is_debuff = false
-	
+
 	local function create_item(item_id)
 		if HUDListManager.ListOptions.ignore_buffs[item_id] then return end
-		
+
 		local item_data = HUDList.BuffItemBase.MAP[item_id]
-		
+
 		if item_data then
 			local members = {}
-		
+
 			for buff_id, data in pairs(HUDListManager.BUFFS) do
 				if table.contains(data, item_id) and not table.contains(members, buff_id) then
 					table.insert(members, buff_id)
 				end
 			end
-			
+
 			return buff_list:add_item(item_id, item_data.class or "BuffItemBase", members, item_data)
 		end
-		
+
 		printf("(%.2f) HUDListManager:_get_buff_items(%s): No map entry for item", Application:time(), tostring(item_id))
 	end
-	
+
 	if HUDListManager.BUFFS[id] then
 		for _, item_id in ipairs(HUDListManager.BUFFS[id]) do
 			local item = buff_list:item(item_id) or create_item(item_id)
@@ -1242,7 +1245,7 @@ function HUDListManager:_get_buff_items(id)
 	else
 		printf("(%.2f) HUDListManager:_get_buff_items(%s): No definition for buff", Application:time(), tostring(id))
 	end
-	
+
 	return items, is_debuff
 end
 
@@ -1252,7 +1255,7 @@ function HUDListManager:_set_show_player_actions()
 	local events = { "activate", "deactivate" }
 	local clbk = callback(self, self, "_player_action_event")
 	local list = self:list("buff_list")
-	
+
 	for _, event in ipairs(events) do
 		if HUDListManager.ListOptions.show_player_actions then
 			managers.gameinfo:register_listener(listener_id, src, event, clbk)
@@ -1260,7 +1263,7 @@ function HUDListManager:_set_show_player_actions()
 			managers.gameinfo:unregister_listener(listener_id, src, event)
 		end
 	end
-	
+
 	for action_id, data in pairs(managers.gameinfo:get_player_actions()) do
 		if HUDListManager.ListOptions.show_player_actions then
 			clbk("activate", action_id, data)
@@ -1272,11 +1275,11 @@ end
 
 function HUDListManager:_set_ignored_player_action(id, value)
 	local list = self:list("buff_list")
-	
+
 	if HUDListManager.ListOptions.show_player_actions then
 		if not value then
 			local action_data = managers.gameinfo:get_player_actions(id)
-			
+
 			if action_data then
 				self:_player_action_event("activate", id, action_data)
 			end
@@ -1289,10 +1292,10 @@ end
 --Event handlers
 function HUDListManager:_timer_event(event, key, data)
 	local settings = HUDListManager.TIMER_SETTINGS[data.id] or {}
-	
+
 	if not settings.ignore then
 		local timer_list = self:list("left_list"):item("timers")
-		
+
 		if event == "set_active" then
 			if data.active then
 				local class = settings.class or (HUDList.TimerItem.DEVICE_TYPES[data.device_type] or HUDList.TimerItem.DEVICE_TYPES.default).class
@@ -1316,13 +1319,13 @@ function HUDListManager:_deployable_equipment_event(event, key, data)
 			body_bag = HUDListManager.ListOptions.show_body_bags,
 			grenade_crate = HUDListManager.ListOptions.show_grenade_crates,
 		}
-		
+
 		if type_to_option[data.type] == 2 then
 			item_id = data.type
 		elseif HUDListManager.FORCE_AGGREGATE_EQUIPMENT[level_id] and HUDListManager.FORCE_AGGREGATE_EQUIPMENT[level_id][editor_id] then
 			item_id = HUDListManager.FORCE_AGGREGATE_EQUIPMENT[level_id][editor_id]
 		end
-	
+
 		if data.active then
 			local class = HUDListManager.EQUIPMENT_TABLE[data.type].class
 			local item = equipment_list:add_item(item_id, class, data.type)
@@ -1338,7 +1341,7 @@ end
 
 function HUDListManager:_sentry_equipment_event(event, key, data)
 	local sentry_list = self:list("left_list"):item("sentries")
-	
+
 	if event == "set_active" then
 		if data.active then
 			local class = HUDListManager.EQUIPMENT_TABLE[data.type].class
@@ -1352,7 +1355,7 @@ end
 
 function HUDListManager:_minion_event(event, key, data)
 	local minion_list = self:list("left_list"):item("minions")
-	
+
 	if event == "add" then
 		local item = minion_list:add_item(key, HUDList.MinionItem, data)
 		item:set_active(HUDListManager.ListOptions.show_minions < 2 or item:is_player_owner())
@@ -1363,7 +1366,7 @@ end
 
 function HUDListManager:_pager_event(event, key, data)
 	local pager_list = self:list("left_list"):item("pagers")
-	
+
 	if event == "add" then
 		pager_list:add_item(key, HUDList.PagerItem, data):activate()
 	elseif event == "remove" then
@@ -1373,7 +1376,7 @@ end
 
 function HUDListManager:_ecm_event(event, key, data)
 	local list = self:list("left_list"):item("ecms")
-	
+
 	if event == "set_jammer_active" then
 		if data.jammer_active then
 			list:add_item(key, data.is_pocket_ecm and HUDList.PocketECMItem or HUDList.ECMItem, data):activate()
@@ -1385,7 +1388,7 @@ end
 
 function HUDListManager:_ecm_retrigger_event(event, key, data)
 	local list = self:list("left_list"):item("ecm_retrigger")
-	
+
 	if event == "set_retrigger_active" then
 		if data.retrigger_active then
 			list:add_item(key, HUDList.ECMRetriggerItem, data):activate()
@@ -1397,7 +1400,7 @@ end
 
 function HUDListManager:_tape_loop_event(event, key, data)
 	local list = self:list("left_list"):item("tape_loop")
-	
+
 	if event == "start_tape_loop" then
 		list:add_item(key, HUDList.TapeLoopItem, data):activate()
 	elseif event == "stop_tape_loop" then
@@ -1408,7 +1411,7 @@ end
 function HUDListManager:_buff_event(event, id, data)
 	local items, is_debuff = self:_get_buff_items(id)
 	local active = event == "activate" and true or false
-	
+
 	for _, item in ipairs(items) do
 		item:set_buff_active(id, active, data, is_debuff)
 		if active then
@@ -1421,7 +1424,7 @@ function HUDListManager:_player_action_event(event, id, data)
 	if not HUDListManager.ListOptions.ignore_player_actions[id] then
 		local item_data = HUDList.PlayerActionItemBase.MAP[id]
 		local activate = event == "activate" and true or false
-	
+
 		if item_data then
 			local item = self:list("buff_list"):add_item(id, item_data.class or "PlayerActionItemBase", data, item_data)
 			if item_data.delay then
@@ -1440,7 +1443,7 @@ end
 function HUDListManager:change_ignore_buff_setting(buff, value)
 	if HUDListManager.ListOptions.ignore_buffs[buff] ~= value then
 		HUDListManager.ListOptions.ignore_buffs[buff] = value
-		
+
 		if managers.hudlist then
 			managers.hudlist:_set_ignored_buff(buff, value)
 		end
@@ -1450,7 +1453,7 @@ end
 function HUDListManager:change_ignore_player_action_setting(action, value)
 	if HUDListManager.ListOptions.ignore_player_actions[action] ~= value then
 		HUDListManager.ListOptions.ignore_player_actions[action] = value
-		
+
 		if managers.hudlist then
 			managers.hudlist:_set_ignored_player_action(action, value)
 		end
@@ -1460,7 +1463,7 @@ end
 function HUDListManager:change_ignore_special_pickup_setting(pickup, value)
 	if HUDListManager.ListOptions.ignore_special_pickups[pickup] ~= value then
 		HUDListManager.ListOptions.ignore_special_pickups[pickup] = value
-		
+
 		if managers.hudlist then
 			managers.hudlist:_set_ignored_special_pickup(pickup, value)
 		end
@@ -1493,13 +1496,13 @@ local function get_icon_data(icon)
         local x, y = unpack(icon.preplanning)
         texture_rect = { x * 48, y * 48, 48, 48 }
     end
-    
+
     return texture, texture_rect
 end
 
 local function format_time_string(t)
     t = math.floor(t * 10) / 10
-    
+
     if t < 0 then
         return string.format("%.1f", 0)
     elseif t < 10 then
@@ -1521,20 +1524,20 @@ local function get_color_from_table(value, max_value, color_table, default_color
     local ratio = math.clamp(value / max_value, 0 , 1)
     local tmp_color = color_table[#color_table].color
     local color = default_color or Color(tmp_color.alpha, tmp_color.red, tmp_color.green, tmp_color.blue)
-    
+
     for i, data in ipairs(color_table) do
         if ratio < data.ratio then
             local nxt = color_table[math.clamp(i-1, 1, #color_table)]
             local scale = (ratio - data.ratio) / (nxt.ratio - data.ratio)
             color = Color(
-                (data.color.alpha or 1) * (1-scale) + (nxt.color.alpha or 1) * scale, 
-                (data.color.red or 0) * (1-scale) + (nxt.color.red or 0) * scale, 
-                (data.color.green or 0) * (1-scale) + (nxt.color.green or 0) * scale, 
+                (data.color.alpha or 1) * (1-scale) + (nxt.color.alpha or 1) * scale,
+                (data.color.red or 0) * (1-scale) + (nxt.color.red or 0) * scale,
+                (data.color.green or 0) * (1-scale) + (nxt.color.green or 0) * scale,
                 (data.color.blue or 0) * (1-scale) + (nxt.color.blue or 0) * scale)
             break
         end
     end
-    
+
     return color
 end
 
@@ -1555,7 +1558,7 @@ local function make_circle_gui(panel, size, add_bg, add_bg_circle, x, y)
     if x and y then
         circle:set_position(x, y)
     end
-    
+
     if add_bg then
         local texture, texture_rect = get_icon_data({ hudtabs = { 84, 34, 19, 19 } })
         bg = panel:bitmap({
@@ -1575,7 +1578,7 @@ local function make_circle_gui(panel, size, add_bg, add_bg_circle, x, y)
         local cx, cy = circle:position()
         bg:set_position(cx - diff, cy - diff)
     end
-    
+
     if add_bg_circle then
         bg_circle = panel:bitmap({
             texture = "guis/textures/pd2/hud_progress_active",
@@ -1589,7 +1592,7 @@ local function make_circle_gui(panel, size, add_bg, add_bg_circle, x, y)
         })
         bg_circle:set_position(circle:position())
     end
-    
+
     return circle, bg, bg_circle
 end
 
@@ -1601,7 +1604,7 @@ local function get_distance_and_rotation(camera, unit)
     mvector3.subtract(dir, camera:position())
     local distance = mvector3.normalize(dir)
     local rotation = math.atan2(fwd.x*dir.y - fwd.y*dir.x, fwd.x*dir.x + fwd.y*dir.y)
-    
+
     return distance, rotation
 end
 
@@ -1641,7 +1644,7 @@ function HUDList.Base:init(id, ppanel, data)
         move_rate = data.fade_rate or 100,
         temp_instant_positioning = true,
     }
-    
+
     self._panel = self._internal.parent_panel:panel({
         name = id,
         visible = false,
@@ -1651,7 +1654,7 @@ function HUDList.Base:init(id, ppanel, data)
         x = data.x or 0,
         y = data.y or 0,
     })
-    
+
     if data.bg then
         self._panel:rect({
             name = "bg",
@@ -1662,7 +1665,7 @@ function HUDList.Base:init(id, ppanel, data)
             layer = -100,
         })
     end
-    
+
     HUDList.Base._item_number = HUDList.Base._item_number + 1
 end
 
@@ -1682,7 +1685,7 @@ end
 
 function HUDList.Base:delete(instant)
     self._internal.deleted = true
-    
+
     if instant or not self._internal.fade_rate or not self:visible() then
         self:_visibility_state_changed(false)
     else
@@ -1712,14 +1715,14 @@ function HUDList.Base:set_target_position(x, y, instant)
             over(math.abs(init - target) / rate, function(r)
                 move_func(o, math.lerp(init, target, r))
             end)
-            
+
             move_func(o, target)
         end
-        
+
         self._move_thread_x = self._panel:animate(do_move, self._panel:x(), x, self._internal.move_rate, function(o, v) o:set_x(v) end)
         self._move_thread_y = self._panel:animate(do_move, self._panel:y(), y, self._internal.move_rate, function(o, v) o:set_y(v) end)
     end
-    
+
     self._internal.temp_instant_positioning = nil
 end
 
@@ -1733,9 +1736,9 @@ function HUDList.Base:set_target_alpha(alpha, instant)
         self._panel:stop(self._fade_thread)
         self._fade_thread = nil
     end
-    
+
     self:_set_visible(alpha > 0 or self._panel:alpha() > 0)
-    
+
     if instant or not self._internal.fade_rate then
         self._panel:set_alpha(alpha)
         self:_set_visible(alpha > 0)
@@ -1745,21 +1748,21 @@ function HUDList.Base:set_target_alpha(alpha, instant)
                 local a = math.lerp(init, target, r)
                 o:set_alpha(a)
             end)
-            
+
             o:set_alpha(target)
             self:_set_visible(target > 0)
         end
-        
+
         self._fade_thread = self._panel:animate(do_fade, self._panel:alpha(), alpha, self._internal.fade_rate)
     end
 end
 
 function HUDList.Base:set_priority(priority)
     local priority = priority or 0
-    
+
     if self._internal.priority ~= priority then
         self._internal.priority = priority
-        
+
         if self._internal.parent_list then
             self._internal.parent_list:rearrange()
         end
@@ -1769,10 +1772,10 @@ end
 function HUDList.Base:set_active(state, reason)
     local state = not (state and true or false)
     local reason = reason or "default"
-    
+
     self._internal.inactive_reasons[reason] = state and true or nil
     local active = not next(self._internal.inactive_reasons)
-    
+
     if self._internal.active ~= active then
         self._internal.active = active
         self:set_target_alpha(active and 1 or 0)
@@ -1782,10 +1785,10 @@ end
 function HUDList.Base:set_enabled(state, reason)
     local state = not (state and true or false)
     local reason = reason or "default"
-    
+
     self._internal.disabled_reasons[reason] = state and true or nil
     local enabled = not next(self._internal.disabled_reasons)
-    
+
     if self._internal.enabled ~= enabled then
         self._internal.enabled = enabled
         self:_set_visible(self._panel:alpha() > 0)
@@ -1817,13 +1820,13 @@ function HUDList.Base:_delete()
     else
         managers.hudlist:remove_list(self._internal.id)
     end
-    
+
     self:destroy()
 end
 
 function HUDList.Base:_set_visible(state)
     local state = state and self:enabled() and true or false
-    
+
     if self._internal.visible ~= state then
         self._internal.visible = state
         self._panel:set_visible(state)
@@ -1835,7 +1838,7 @@ function HUDList.Base:_visibility_state_changed(state)
     if not state and self._internal.deleted then
         self:_delete()
     end
-    
+
     if self._internal.parent_list then
         self._internal.parent_list:item_visibility_state_changed(self._internal.id, state)
     end
@@ -1845,18 +1848,18 @@ end
 HUDList.ListBase = HUDList.ListBase or class(HUDList.Base)
 function HUDList.ListBase:init(id, ppanel, data)
     HUDList.ListBase.super.init(self, id, ppanel, data)
-    
+
     self:set_fade_rate(nil)
-    
+
     self._item_margin = data and data.item_margin or 0
     self._max_items = data and data.max_items
     self._valign = data and data.valign
     self._halign = data and data.halign
-    
+
     self._items = {}
     self._item_index = {}	--Read using self:_get_item_index() to ensure it updates if necessary before reading
     self._item_order = {}
-    
+
     if data.static_item then
         local class = HUDListManager.get_class(data.static_item.class)
         self._static_item = class:new(
@@ -1864,7 +1867,7 @@ function HUDList.ListBase:init(id, ppanel, data)
             self._panel,
             unpack(data.static_item.data or {}))
     end
-    
+
     if data.expansion_indicator then
         --TODO
         --self._expansion_indicator = HUDList.ExpansionIndicator:new("expansion_indicator", self._panel)
@@ -1874,7 +1877,7 @@ end
 
 function HUDList.ListBase:post_init(...)
     HUDList.ListBase.super.post_init(self)
-    
+
     if self._static_item then
         self._static_item:activate()
         self:_update_item_order()
@@ -1893,15 +1896,15 @@ function HUDList.ListBase:expansion_indicator() return self._expansion_indicator
 
 function HUDList.ListBase:update(t, dt)
     HUDList.ListBase.super.update(self, t, dt)
-    
+
     for _, id in ipairs(self:_get_item_index()) do
         local item = self._items[id]
-        
+
         if item and item:active() then
             item:update(t, dt)
         end
     end
-    
+
     if self._internal.rearrange_needed then
         self:_update_item_order()
         self:_rearrange()
@@ -1918,7 +1921,7 @@ function HUDList.ListBase:add_item(id, class, ...)
     else
         self._items[id]._internal.deleted = nil
     end
-    
+
     return self._items[id]
 end
 
@@ -1941,7 +1944,7 @@ end
 
 function HUDList.ListBase:item_visibility_state_changed(id, state)
     self:rearrange()
-    
+
     if state then
         self:set_active(true)
     else
@@ -1962,41 +1965,41 @@ function HUDList.ListBase:_get_item_index()
     if self._index_update_needed then
         self._item_index = {}
         self._index_update_needed = nil
-        
+
         for id, item in pairs(self._items) do
             table.insert(self._item_index, id)
         end
     end
-    
+
     return self._item_index
 end
 
 function HUDList.ListBase:_update_item_order()
     local new_order = {}
-    
+
     for id, item in pairs(self._items) do
         local insert_at = #new_order + 1
         local new_data = { id = id, prio = item:priority(), no = item:item_number() }
-        
+
         for i, data in ipairs(new_order) do
             if (data.prio < new_data.prio) or ((data.prio == new_data.prio) and (data.no > new_data.no)) then
                 insert_at = i
                 break
             end
         end
-        
+
         table.insert(new_order, insert_at, new_data)
     end
-    
+
     local total_items = #new_order
     local list_maxed = self._max_items and (total_items > self._max_items) or false
-    
+
     self._item_order = {}
     for i, data in ipairs(new_order) do
         table.insert(self._item_order, data.id)
         self._items[data.id]:set_active(not list_maxed or i <= self._max_items, "list_full")
     end
-    
+
     if self._expansion_indicator then
         self._expansion_indicator:set_active(list_maxed)
         if list_maxed then
@@ -2004,11 +2007,11 @@ function HUDList.ListBase:_update_item_order()
             table.insert(self._item_order, self._max_items + 1, self._expansion_indicator:id())
         end
     end
-    
+
     if self._static_item and self._static_item:visible() then
         table.insert(self._item_order, 1, self._static_item:id())
     end
-    
+
     return self._item_order
 end
 
@@ -2020,32 +2023,32 @@ end
 
 function HUDList.HorizontalList:_rearrange()
     local w = 0
-    
+
     if self._halign == "center"  then
         local total_w = 0
-        
+
         for _, id in ipairs(self._item_order) do
             local item = self:item(id) or id == "static" and self._static_item or id == "expansion_indicator" and self._expansion_indicator
-            
+
             if item:visible() then
                 total_w = total_w + self._item_margin + item:panel():w()
             end
         end
-        
+
         w = (self._panel:w() - total_w + self._item_margin) / 2
     end
-    
+
     for _, id in ipairs(self._item_order) do
         local x, y
         local item = self:item(id) or id == "static" and self._static_item or id == "expansion_indicator" and self._expansion_indicator
         local p = item:panel()
-        
+
         if self._halign == "right" then
             x = self._panel:w() - w - p:w()
         else
             x = w
         end
-        
+
         if self._valign == "top" then
             y = 0
         elseif self._valign == "bottom" then
@@ -2053,9 +2056,9 @@ function HUDList.HorizontalList:_rearrange()
         else
             y = (self._panel:h() - p:h()) / 2
         end
-        
+
         item:set_target_position(x, y)
-        
+
         if item:visible() then
             w = w + p:w() + self._item_margin
         end
@@ -2073,29 +2076,29 @@ function HUDList.VerticalList:_rearrange()
 
     if self._valign == "center"  then
         local total_h = 0
-        
+
         for _, id in ipairs(self._item_order) do
             local item = self:item(id) or id == "static" and self._static_item or id == "expansion_indicator" and self._expansion_indicator
-            
+
             if item:visible() then
                 total_h = total_h + self._item_margin + item:panel():h()
             end
         end
-        
+
         h = (self._panel:h() - total_h + self._item_margin) / 2
     end
-    
+
     for _, id in ipairs(self._item_order) do
         local x, y
         local item = self:item(id) or id == "static" and self._static_item or id == "expansion_indicator" and self._expansion_indicator
         local p = item:panel()
-        
+
         if self._valign == "bottom" then
             y = self._panel:h() - h - p:h()
         else
             y = h
         end
-        
+
         if self._halign == "left" then
             x = 0
         elseif self._halign == "right" then
@@ -2103,9 +2106,9 @@ function HUDList.VerticalList:_rearrange()
         else
             x = (self._panel:w() - p:w()) / 2
         end
-        
+
         item:set_target_position(x, y)
-        
+
         if item:visible() then
             h = h + p:h() + self._item_margin
         end
@@ -2115,12 +2118,12 @@ end
 HUDList.StaticItem = HUDList.StaticItem or class(HUDList.Base)
 function HUDList.StaticItem:init(id, ppanel, size, ...)
     HUDList.StaticItem.super.init(self, id, ppanel, { w = size, h = size })
-    
+
     self._base_size = size
-    
+
     for i, icon in ipairs({ ... }) do
         local texture, texture_rect = get_icon_data(icon)
-        
+
         local bitmap = self._panel:bitmap({
             texture = texture,
             texture_rect = texture_rect,
@@ -2131,15 +2134,15 @@ function HUDList.StaticItem:init(id, ppanel, size, ...)
             valign = "scale",
             halign = "scale",
         })
-        
+
         bitmap:set_center(self._panel:center())
-        
-        if icon.valign == "top" then 
+
+        if icon.valign == "top" then
             bitmap:set_top(self._panel:top())
-        elseif icon.valign == "bottom" then 
+        elseif icon.valign == "bottom" then
             bitmap:set_bottom(self._panel:bottom())
         end
-        
+
         if icon.halign == "left" then
             bitmap:set_left(self._panel:left())
         elseif icon.halign == "right" then
@@ -2156,7 +2159,7 @@ end
 HUDList.RescalableHorizontalList = HUDList.RescalableHorizontalList or class(HUDList.HorizontalList)
 function HUDList.RescalableHorizontalList:init(...)
     HUDList.RescalableHorizontalList.super.init(self, ...)
-    
+
     self._current_scale = 1
     self._base_h = self._panel:h()
 end
@@ -2165,20 +2168,20 @@ function HUDList.RescalableHorizontalList:rescale(scale)
     if self._current_scale ~= scale then
         local h = self._base_h * scale
         self._current_scale = scale
-        
+
         self._panel:set_h(h)
         for id, item in pairs(self:items()) do
             item:rescale(scale)
         end
-        
+
         if self._static_item then
             self._static_item:rescale(scale)
         end
-        
+
         if self._expansion_indicator then
             self._expansion_indicator:rescale(scale)
         end
-        
+
         self:rearrange()
     end
 end
@@ -2225,21 +2228,21 @@ HUDList.TimerList = HUDList.TimerList or class(HUDList.RescalableHorizontalList)
 HUDList.TimerList.RECHECK_INTERVAL = 1
 function HUDList.TimerList:update(t, dt, ...)
     self._recheck_order_t = (self._recheck_order_t or 0) - dt
-    
+
     if self._recheck_order_t < 0 then
         for i = 2, #self._item_order, 1 do
             local prev = self:item(self._item_order[i-1])
             local cur = self:item(self._item_order[i])
-            
+
             if prev and cur and prev:priority() < cur:priority() then
                 self:rearrange()
                 break
             end
         end
-        
+
         self._recheck_order_t = self.RECHECK_INTERVAL
     end
-    
+
     return HUDList.TimerList.super.update(self, t, dt, ...)
 end
 
@@ -2253,7 +2256,7 @@ HUDList.TimerItem.COLORS = {
 HUDList.TimerItem.FLASH_SPEED = 2
 HUDList.TimerItem.DEVICE_TYPES = {
     default =		{ class = "TimerItem",					title = "Timer" },
-    digital =		{ class = "TimerItem",					title = "Timer" }, 
+    digital =		{ class = "TimerItem",					title = "Timer" },
     timer =			{ class = "TimerItem",					title = "Timer" },
     hack =			{ class = "TimerItem",					title = "Hack" },
     securitylock =	{ class = "TimerItem",					title = "Hack" },
@@ -2264,10 +2267,10 @@ function HUDList.TimerItem:init(id, ppanel, timer_data)
     local diameter = ppanel:h() * 2/3
 
     HUDList.TimerItem.super.init(self, id, ppanel, { w = diameter, h = ppanel:h() })
-    
+
     self._unit = timer_data.unit
     self._remaining = math.huge
-    
+
     self._type_text = self._panel:text({
         name = "type_text",
         text = self.DEVICE_TYPES[timer_data.device_type].title or self.DEVICE_TYPES.default.title,
@@ -2279,12 +2282,12 @@ function HUDList.TimerItem:init(id, ppanel, timer_data)
         h = (self._panel:h() - diameter) * 0.6,
         font_size = (self._panel:h() - diameter) * 0.6,
         font = tweak_data.hud_corner.assault_font,
-    })	
-    
+    })
+
     self._circle, self._bg, self._circle_bg = make_circle_gui(self._panel, diameter, true, true, 0, self._type_text:h())
     self._circle_bg:set_visible(false)
     self._circle_bg:set_color(Color.red)
-    
+
     local arrow_w = diameter * 0.25
     self._arrow = self._panel:bitmap({
         name = "arrow",
@@ -2324,12 +2327,12 @@ function HUDList.TimerItem:init(id, ppanel, timer_data)
         font_size = diameter * 0.3,
     })
     self._secondary_text:set_top(self._arrow:bottom() + 1)
-    
+
     self._flash_color_table = {
         { ratio = 0.0, color = self.COLORS.disabled },
         { ratio = 1.0, color = self.COLORS.standard }
     }
-    
+
     local key = tostring(self._unit:key())
     local listener_id = string.format("HUDList_timer_listener_%s", key)
     local events = {
@@ -2337,7 +2340,7 @@ function HUDList.TimerItem:init(id, ppanel, timer_data)
         set_jammed = callback(self, self, "_set_jammed"),
         set_unpowered = callback(self, self, "_set_unpowered"),
     }
-    
+
     for event, clbk in pairs(events) do
         table.insert(self._listener_clbks, { name = listener_id, source = "timer", event = { event }, clbk = clbk, keys = { key }, data_only = true })
     end
@@ -2345,7 +2348,7 @@ end
 
 function HUDList.TimerItem:post_init(timer_data, ...)
     HUDList.TimerItem.super.post_init(self, timer_data, ...)
-    
+
     self:_set_jammed(timer_data)
     self:_set_unpowered(timer_data)
     self:_update_timer(timer_data)
@@ -2362,10 +2365,10 @@ function HUDList.TimerItem:update(t, dt)
             local new_color = get_color_from_table(math.sin(t*360 * self.FLASH_SPEED) * 0.5 + 0.5, 1, self._flash_color_table, self.COLORS.standard)
             self:_set_colors(new_color)
         end
-        
+
         self:_update_distance(t, dt)
     end
-    
+
     return HUDList.TimerItem.super.update(self, t, dt)
 end
 
@@ -2380,7 +2383,7 @@ function HUDList.TimerItem:_update_timer(data)
     if data.timer_value then
         self._remaining = data.timer_value
         self._main_text:set_text(format_time_string(self._remaining))
-        
+
         if data.progress_ratio then
             self._circle:set_current(1 - data.progress_ratio)
         elseif data.duration then
@@ -2427,10 +2430,10 @@ end
 HUDList.UpgradeableTimerItem = HUDList.UpgradeableTimerItem or class(HUDList.TimerItem)
 function HUDList.UpgradeableTimerItem:init(id, ppanel, timer_data)
     HUDList.UpgradeableTimerItem.super.init(self, id, ppanel, timer_data)
-    
+
     self._upgrades = {"faster", "silent", "restarter"}
     self._upgrade_icons = {}
-    
+
     local icon_size = self._panel:h() - self._type_text:h() - self._circle_bg:h()
     for _, upgrade in ipairs(self._upgrades) do
         self._upgrade_icons[upgrade] = self._panel:bitmap{
@@ -2445,14 +2448,14 @@ function HUDList.UpgradeableTimerItem:init(id, ppanel, timer_data)
             visible = false,
         }
     end
-    
+
     local key = tostring(timer_data.unit:key())
     local listener_id = string.format("HUDList_timer_listener_%s", key)
     local events = {
         set_upgradable = callback(self, self, "_set_upgradable"),
         set_acquired_upgrades = callback(self, self, "_set_acquired_upgrades"),
     }
-    
+
     for event, clbk in pairs(events) do
         table.insert(self._listener_clbks, { name = listener_id, source = "timer", event = { event }, clbk = clbk, keys = { key }, data_only = true })
     end
@@ -2460,7 +2463,7 @@ end
 
 function HUDList.UpgradeableTimerItem:post_init(timer_data, ...)
     HUDList.UpgradeableTimerItem.super.post_init(self, timer_data, ...)
-    
+
     self:_set_upgradable(timer_data)
     self:_set_acquired_upgrades(timer_data)
     self._upgradable_timer_data = nil
@@ -2475,11 +2478,11 @@ end
 
 function HUDList.UpgradeableTimerItem:_set_acquired_upgrades(data)
     local x = 0
-    
+
     for _, upgrade in ipairs(self._upgrades) do
         local icon = self._upgrade_icons[upgrade]
         local level =  data.acquired_upgrades and data.acquired_upgrades[upgrade] or 0
-        
+
         icon:set_visible(level > 0)
         if level > 0 then
             icon:set_color(TimerGui.upgrade_colors["upgrade_color_" .. level] or Color.white)
@@ -2494,21 +2497,21 @@ function HUDList.TemperatureGaugeItem:init(id, ppanel, timer_data, timer_params)
     self._start = timer_params.start
     self._goal = timer_params.goal
     self._last_value = self._start
-    
+
     HUDList.TemperatureGaugeItem.super.init(self, id, ppanel, timer_data)
-    
+
     self._type_text:set_text("Temp")
 end
 
 function HUDList.TemperatureGaugeItem:update(t, dt)
     if self._estimated_t then
         self._estimated_t = self._estimated_t - dt
-        
+
         if self:visible() then
             self._main_text:set_text(format_time_string(self._estimated_t))
         end
     end
-    
+
     return HUDList.TemperatureGaugeItem.super.update(self, t, dt)
 end
 
@@ -2520,12 +2523,12 @@ function HUDList.TemperatureGaugeItem:_update_timer(data)
     if data.timer_value then
         local dv = math.abs(self._last_value - data.timer_value)
         local remaining = math.abs(self._goal - data.timer_value)
-        
+
         if dv > 0 then
             self._estimated_t = remaining / dv
             self._circle:set_current(remaining / math.abs(self._goal - self._start))
         end
-        
+
         self._last_value = data.timer_value
     end
 end
@@ -2534,12 +2537,12 @@ end
 HUDList.SentryEquipmentItem = HUDList.SentryEquipmentItem or class(HUDList.EventItemBase)
 function HUDList.SentryEquipmentItem:init(id, ppanel, sentry_data)
     local equipment_settings = HUDListManager.EQUIPMENT_TABLE.sentry
-    
+
     HUDList.SentryEquipmentItem.super.init(self, id, ppanel, { w = ppanel:h(), h = ppanel:h(), priority = equipment_settings.priority })
-    
+
     self._unit = sentry_data.unit
     self._type = sentry_data.type
-    
+
     self._ammo_bar = self._panel:bitmap({
         name = "radial_ammo",
         texture = "guis/dlcs/coco/textures/pd2/hud_absorb_shield",
@@ -2552,7 +2555,7 @@ function HUDList.SentryEquipmentItem:init(id, ppanel, sentry_data)
         valign = "scale",
         halign = "scale",
     })
-    
+
     self._ammo_bar_bg = self._panel:bitmap({
         name = "radial_ammo_bg",
         texture = "guis/textures/pd2/endscreen/exp_ring",
@@ -2568,7 +2571,7 @@ function HUDList.SentryEquipmentItem:init(id, ppanel, sentry_data)
         layer = -1,
     })
     self._ammo_bar_bg:set_center(self._panel:w() / 2, self._panel:h() / 2)
-    
+
     self._health_bar = self._panel:bitmap({
         name = "radial_health",
         texture = "guis/textures/pd2/hud_health",
@@ -2581,7 +2584,7 @@ function HUDList.SentryEquipmentItem:init(id, ppanel, sentry_data)
         valign = "scale",
         halign = "scale",
     })
-    
+
     local texture, texture_rect = get_icon_data({ hudtabs = { 84, 34, 19, 19 } })
     self._owner_icon = self._panel:bitmap({
         name = "owner_icon",
@@ -2597,7 +2600,7 @@ function HUDList.SentryEquipmentItem:init(id, ppanel, sentry_data)
         alpha = 0.25,
     })
     self._owner_icon:set_center(self._panel:w() / 2, self._panel:h() / 2)
-    
+
     self._kills = self._panel:text({
         name = "kills",
         text = "0",
@@ -2611,7 +2614,7 @@ function HUDList.SentryEquipmentItem:init(id, ppanel, sentry_data)
         font = tweak_data.hud_corner.assault_font,
         font_size = self._panel:h() * 0.5,
     })
-    
+
     local listener_id = string.format("HUDList_sentry_listener_%s", id)
     local events = {
         set_ammo_ratio = callback(self, self, "_set_ammo_ratio"),
@@ -2619,7 +2622,7 @@ function HUDList.SentryEquipmentItem:init(id, ppanel, sentry_data)
         increment_kills = callback(self, self, "_set_kills"),
         set_owner = callback(self, self, "_set_owner"),
     }
-    
+
     for event, clbk in pairs(events) do
         table.insert(self._listener_clbks, { name = listener_id, source = "sentry", event = { event }, clbk = clbk, keys = { id }, data_only = true })
     end
@@ -2649,24 +2652,24 @@ function HUDList.SentryEquipmentItem:_set_owner(data)
         self._owner_icon:set_alpha(0.75)
         self._owner_icon:set_color(self._owner and self._owner > 0 and tweak_data.chat_colors[self._owner]:with_alpha(1) or Color.white)
     end
-    
+
     self:set_active(HUDListManager.ListOptions.show_sentries < 2 or self:is_player_owner())
 end
 
 function HUDList.SentryEquipmentItem:_set_ammo_ratio(data)
     if data.ammo_ratio then
         self._ammo_bar:set_color(Color(data.ammo_ratio, 1, 1))
-        
-        
+
+
         if data.ammo_ratio <= 0 then
             self:set_active(self:is_player_owner())
-            
+
             self._ammo_bar_bg:animate(function(o)
                 local bc = o:color()
                 local t = 0
-                
+
                 o:set_visible(true)
-                
+
                 while true do
                     local r = math.sin(t*720) * 0.25 + 0.25
                     o:set_alpha(r)
@@ -2674,7 +2677,7 @@ function HUDList.SentryEquipmentItem:_set_ammo_ratio(data)
                 end
             end)
         end
-        
+
     end
 end
 
@@ -2692,22 +2695,22 @@ end
 HUDList.BagEquipmentItem = HUDList.BagEquipmentItem or class(HUDList.EventItemBase)
 function HUDList.BagEquipmentItem:init(id, ppanel, equipment_type)
     local equipment_settings = HUDListManager.EQUIPMENT_TABLE[equipment_type]
-    
+
     HUDList.BagEquipmentItem.super.init(self, id, ppanel, { w = ppanel:h() * 0.8, h = ppanel:h(), priority = equipment_settings.priority })
-    
+
     self._units = {}
     self._type = equipment_type
     self._max_amount = 0
     self._amount = 0
     self._amount_offset = 0
-    
+
     self._box = HUDBGBox_create_rescalable(self._panel, {
             w = self._panel:w(),
             h = self._panel:h(),
             halign = "scale",
             valign = "scale",
         }, {})
-    
+
     local texture, texture_rect = get_icon_data(equipment_settings)
     self._icon = self._panel:bitmap({
         name = "icon",
@@ -2722,7 +2725,7 @@ function HUDList.BagEquipmentItem:init(id, ppanel, equipment_type)
         layer = 1,
     })
     self._icon:set_center_x(self._panel:center_x())
-    
+
     self._info_text = self._panel:text({
         name = "info",
         align = "center",
@@ -2772,14 +2775,14 @@ function HUDList.BagEquipmentItem:_generate_listeners_table()
     for key, data in pairs(self._units) do
         table.insert(keys, key)
     end
-    
+
     local listener_id = string.format("HUDList_bag_listener_%s", self:id())
     local events = {
         set_max_amount = callback(self, self, "_update_info"),
         set_amount = callback(self, self, "_update_info"),
         set_amount_offset = callback(self, self, "_update_info"),
     }
-    
+
     for event, clbk in pairs(events) do
         table.insert(self._listener_clbks, { name = listener_id, source = self._type, event = { event }, clbk = clbk, keys = keys, data_only = true })
     end
@@ -2789,13 +2792,13 @@ function HUDList.BagEquipmentItem:_update_info(...)
     local max_amount = 0
     local amount = 0
     local amount_offset = 0
-    
+
     for key, data in pairs(self._units) do
         max_amount = max_amount + (data.max_amount or 0)
         amount = amount + (data.amount or 0)
         amount_offset = amount_offset + (data.amount_offset or 0)
     end
-    
+
     self._max_amount = max_amount
     self._amount = amount
     self._amount_offset = amount_offset
@@ -2807,7 +2810,7 @@ function HUDList.BagEquipmentItem:_update_text()
     self._info_text:set_text(string.format("%.0f", self._amount + self._amount_offset))
 end
 
-HUDList.AmmoBagItem = HUDList.AmmoBagItem or class(HUDList.BagEquipmentItem)	
+HUDList.AmmoBagItem = HUDList.AmmoBagItem or class(HUDList.BagEquipmentItem)
 function HUDList.AmmoBagItem:_update_text()
     self._info_text:set_text(string.format("%.0f%%", (self._amount + self._amount_offset) * 100))
 end
@@ -2815,7 +2818,7 @@ end
 HUDList.BodyBagItem = HUDList.BodyBagItem or class(HUDList.BagEquipmentItem)
 function HUDList.BodyBagItem:_generate_listeners_table()
     HUDList.BodyBagItem.super._generate_listeners_table(self)
-    
+
     table.insert(self._listener_clbks, {
         name = string.format("HUDList_bag_listener_%s", self:id()),
         source = "whisper_mode",
@@ -2837,7 +2840,7 @@ end
 HUDList.MinionItem = HUDList.MinionItem or class(HUDList.EventItemBase)
 function HUDList.MinionItem:init(id, ppanel, minion_data)
     HUDList.MinionItem.super.init(self, id, ppanel, { w = ppanel:h() * 0.8, h = ppanel:h() })
-    
+
     self._unit = minion_data.unit
     local type_string = HUDListManager.UNIT_TYPES[minion_data.type] and HUDListManager.UNIT_TYPES[minion_data.type].long_name or "UNDEF"
 
@@ -2857,7 +2860,7 @@ function HUDList.MinionItem:init(id, ppanel, minion_data)
         halign = "scale",
     })
     self._health_bar:set_bottom(self._panel:bottom())
-    
+
     self._hit_indicator = self._panel:bitmap({
         name = "radial_health",
         texture = "guis/textures/pd2/hud_radial_rim",
@@ -2890,7 +2893,7 @@ function HUDList.MinionItem:init(id, ppanel, minion_data)
         color = Color(0.8, 0.8, 1.0),
     })
     self._outline:set_center(self._health_bar:center())
-    
+
     self._damage_upgrade_text = self._panel:text({
         name = "type",
         text = "W",
@@ -2906,7 +2909,7 @@ function HUDList.MinionItem:init(id, ppanel, minion_data)
         alpha  = 0.5
     })
     self._damage_upgrade_text:set_bottom(self._panel:bottom())
-    
+
     self._unit_type = self._panel:text({
         name = "type",
         text = type_string,
@@ -2920,7 +2923,7 @@ function HUDList.MinionItem:init(id, ppanel, minion_data)
         font = tweak_data.hud_corner.assault_font,
         font_size = math.min(8 / string.len(type_string), 1) * 0.25 * self._panel:h(),
     })
-    
+
     self._kills = self._panel:text({
         name = "kills",
         text = "0",
@@ -2935,7 +2938,7 @@ function HUDList.MinionItem:init(id, ppanel, minion_data)
         font_size = self._panel:w() * 0.4,
     })
     self._kills:set_center(self._health_bar:center())
-    
+
     local key = tostring(self._unit:key())
     local listener_id = string.format("HUDList_minion_listener_%s", key)
     local events = {
@@ -2945,7 +2948,7 @@ function HUDList.MinionItem:init(id, ppanel, minion_data)
         set_damage_resistance = callback(self, self, "_set_damage_resistance"),
         set_damage_multiplier = callback(self, self, "_set_damage_multiplier"),
     }
-    
+
     for event, clbk in pairs(events) do
         table.insert(self._listener_clbks, { name = listener_id, source = "minion", event = { event }, clbk = clbk, keys = { key }, data_only = true })
     end
@@ -2990,7 +2993,7 @@ function HUDList.MinionItem:_set_owner(data)
         self._owner = data.owner
         self._unit_type:set_color(tweak_data.chat_colors[data.owner]:with_alpha(1) or Color(1, 1, 1, 1))
     end
-    
+
     self:set_active(HUDListManager.ListOptions.show_minions < 2 or self:is_player_owner())
 end
 
@@ -3013,15 +3016,15 @@ HUDList.PagerItem = HUDList.PagerItem or class(HUDList.EventItemBase)
 HUDList.PagerItem.FLASH_SPEED = 2
 function HUDList.PagerItem:init(id, ppanel, pager_data)
     HUDList.PagerItem.super.init(self, id, ppanel, { w = ppanel:h(), h = ppanel:h() })
-    
+
     self._unit = pager_data.unit
     self._start_t = pager_data.start_t
     self._expire_t = pager_data.expire_t
     self._duration = pager_data.expire_t - pager_data.start_t
     self._remaining = pager_data.expire_t - Application:time()
-    
+
     self._circle, self._bg, self._circle_bg = make_circle_gui(self._panel, self._panel:h(), true, true)
-    
+
     local arrow_w = self._panel:w() * 0.25
     self._arrow = self._panel:bitmap({
         name = "arrow",
@@ -3061,14 +3064,14 @@ function HUDList.PagerItem:init(id, ppanel, pager_data)
         font_size = self._panel:h() * 0.3,
     })
     self._distance_text:set_top(self._arrow:bottom() + 1)
-    
+
     local key = tostring(self._unit:key())
-    table.insert(self._listener_clbks, { 
-        name = string.format("HUDList_pager_listener_%s", key), 
-        source = "pager", 
-        event = { "set_answered" }, 
-        clbk = callback(self, self, "_set_answered"), 
-        keys = { key }, 
+    table.insert(self._listener_clbks, {
+        name = string.format("HUDList_pager_listener_%s", key),
+        source = "pager",
+        event = { "set_answered" },
+        clbk = callback(self, self, "_set_answered"),
+        keys = { key },
         data_only = true
     })
 end
@@ -3082,7 +3085,7 @@ end
 function HUDList.PagerItem:_set_answered()
     self._answered = true
     self._time_text:set_color(Color(1, 0.1, 0.9, 0.1))
-    
+
     self._circle_bg:set_color(Color.green)
     self._circle_bg:set_alpha(0.8)
     self._circle_bg:set_visible(true)
@@ -3091,22 +3094,22 @@ end
 function HUDList.PagerItem:update(t, dt)
     if not self._answered then
         self._remaining = math.max(self._remaining - dt, 0)
-        
+
         if self:visible() then
             self._ratio = self._remaining / self._duration
-            
+
             local color = get_color_from_table(self._remaining, self._duration)
             self._time_text:set_text(format_time_string(self._remaining))
             self._time_text:set_color(color)
             self._circle_bg:set_color(color)
             self._circle:set_current(self._ratio)
-            
+
             if self._ratio <= 0.25 then
                 self._circle_bg:set_alpha(math.sin(t*360 * self.FLASH_SPEED) * 0.3 + 0.5)
             end
         end
     end
-    
+
     if self:visible() then
         local camera = managers.viewport:get_current_camera()
         if camera and alive(self._unit) then
@@ -3115,20 +3118,20 @@ function HUDList.PagerItem:update(t, dt)
             self._arrow:set_rotation(270 - rotation)
         end
     end
-    
+
     return HUDList.PagerItem.super.update(self, t, dt)
-end	
+end
 
 
 HUDList.ECMItem = HUDList.ECMItem or class(HUDList.EventItemBase)
 function HUDList.ECMItem:init(id, ppanel, ecm_data)
     HUDList.ECMItem.super.init(self, id, ppanel, { w = ppanel:h(), h = ppanel:h() })
-    
+
     self._unit = ecm_data.unit
     self._max_duration = ecm_data.max_duration or tweak_data.upgrades.ecm_jammer_base_battery_life
-    
+
     self._circle, self._bg = make_circle_gui(self._panel, self._panel:h(), true)
-    
+
     self._text = self._panel:text({
         name = "text",
         align = "center",
@@ -3141,7 +3144,7 @@ function HUDList.ECMItem:init(id, ppanel, ecm_data)
         layer = 10,
         font_size = self._panel:h() * 0.4,
     })
-    
+
     local texture, texture_rect = get_icon_data({ skills_new = { 3, 4 } })
     self._pager_block_icon = self._panel:bitmap({
         name = "pager_block_icon",
@@ -3157,14 +3160,14 @@ function HUDList.ECMItem:init(id, ppanel, ecm_data)
     })
     self._pager_block_icon:set_bottom(self._panel:h() * 1.1)
     self._pager_block_icon:set_right(self._panel:w() * 1.1)
-    
+
     local key = tostring(self._unit:key())
     local listener_id = string.format("HUDList_ecm_jammer_listener_%s", key)
     local events = {
         set_upgrade_level = callback(self, self, "_set_upgrade_level"),
         set_jammer_battery = callback(self, self, "_set_jammer_battery"),
     }
-    
+
     for event, clbk in pairs(events) do
         table.insert(self._listener_clbks, { name = listener_id, source = "ecm", event = { event }, clbk = clbk, keys = { key }, data_only = true })
     end
@@ -3201,14 +3204,14 @@ end
 HUDList.PocketECMItem = HUDList.PocketECMItem or class(HUDList.ECMItem)
 function HUDList.PocketECMItem:init(id, ppanel, ecm_data)
     HUDList.PocketECMItem.super.init(self, id, ppanel, ecm_data)
-    
+
     self._start_t = ecm_data.t
     self._expire_t = ecm_data.expire_t
 end
 
 function HUDList.PocketECMItem:update(...)
     HUDList.PocketECMItem.super.update(self, ...)
-    
+
     local t = Application:time()
     local remaining = self._expire_t - t
     self:_set_jammer_battery({ jammer_battery = remaining })
@@ -3218,12 +3221,12 @@ end
 HUDList.ECMRetriggerItem = HUDList.ECMRetriggerItem or class(HUDList.EventItemBase)
 function HUDList.ECMRetriggerItem:init(id, ppanel, ecm_data)
     HUDList.ECMRetriggerItem.super.init(self, id, ppanel, { w = ppanel:h(), h = ppanel:h() })
-    
+
     self._unit = ecm_data.unit
     self._max_duration = tweak_data.upgrades.ecm_feedback_retrigger_interval or 60
-    
+
     self._circle, self._bg = make_circle_gui(self._panel, self._panel:h(), true)
-    
+
     self._text = self._panel:text({
         name = "text",
         align = "center",
@@ -3236,14 +3239,14 @@ function HUDList.ECMRetriggerItem:init(id, ppanel, ecm_data)
         layer = 10,
         font_size = self._panel:h() * 0.4,
     })
-    
+
     local key = tostring(self._unit:key())
-    table.insert(self._listener_clbks, { 
-        name = string.format("HUDList_ecm_retrigger_listener_%s", key), 
-        source = "ecm", 
-        event = { "set_retrigger_delay" }, 
-        clbk = callback(self, self, "_set_retrigger_delay"), 
-        keys = { key }, 
+    table.insert(self._listener_clbks, {
+        name = string.format("HUDList_ecm_retrigger_listener_%s", key),
+        source = "ecm",
+        event = { "set_retrigger_delay" },
+        clbk = callback(self, self, "_set_retrigger_delay"),
+        keys = { key },
         data_only = true
     })
 end
@@ -3272,14 +3275,14 @@ end
 HUDList.TapeLoopItem = HUDList.TapeLoopItem or class(HUDList.EventItemBase)
 function HUDList.TapeLoopItem:init(id, ppanel, tape_loop_data)
     HUDList.TapeLoopItem.super.init(self, id, ppanel, { w = ppanel:h(), h = ppanel:h() })
-    
+
     self._unit = tape_loop_data.unit
     self._start_t = tape_loop_data.tape_loop_start_t
     self._expire_t = tape_loop_data.tape_loop_expire_t
     self._duration = self._expire_t - self._start_t
-    
+
     self._circle, self._bg = make_circle_gui(self._panel, self._panel:h(), true)
-    
+
     self._text = self._panel:text({
         name = "text",
         align = "center",
@@ -3300,7 +3303,7 @@ function HUDList.TapeLoopItem:update(t, dt)
         self._text:set_text(format_time_string(remaining))
         self._circle:set_current(remaining / self._duration)
     end
-    
+
     return HUDList.TapeLoopItem.super.update(self, t, dt)
 end
 
@@ -3339,7 +3342,7 @@ function HUDList.CounterItem:init(id, ppanel, data)
         halign = "scale",
         valign = "scale",
     })
-    
+
     self._box = HUDBGBox_create_rescalable(self._panel, {
             w = self._panel:w(),
             h = self._panel:w(),
@@ -3347,7 +3350,7 @@ function HUDList.CounterItem:init(id, ppanel, data)
             valign = "scale",
         }, {})
     self._box:set_bottom(self._panel:bottom())
-    
+
     self._text = self._box:text({
         name = "text",
         align = "center",
@@ -3359,7 +3362,7 @@ function HUDList.CounterItem:init(id, ppanel, data)
         font = tweak_data.hud_corner.assault_font,
         font_size = self._box:h() * 0.6
     })
-    
+
     self._count = 0
 end
 
@@ -3382,7 +3385,7 @@ end
 HUDList.UsedPagersItem = HUDList.UsedPagersItem or class(HUDList.CounterItem)
 function HUDList.UsedPagersItem:init(id, ppanel)
     HUDList.UsedPagersItem.super.init(self, id, ppanel, { icon = { perks = {1, 4} } })
-    
+
     self._listener_clbks = {
         {
             name = "HUDList_pager_count_listener",
@@ -3405,7 +3408,7 @@ end
 
 function HUDList.UsedPagersItem:set_count(num)
     HUDList.UsedPagersItem.super.set_count(self, num)
-    
+
     if self._count >= #tweak_data.player.alarm_pager.bluff_success_chance - 1 then
         self._text:set_color(Color.red)
     end
@@ -3415,7 +3418,7 @@ end
 HUDList.CameraCountItem = HUDList.CameraCountIteM or class(HUDList.CounterItem)
 function HUDList.CameraCountItem:init(id, ppanel)
     HUDList.CameraCountItem.super.init(self, id, ppanel, { icon = { skills = {4, 2} } })
-    
+
     self._listener_clbks = {
         {
             name = "HUDList_camera_count_listener",
@@ -3471,7 +3474,7 @@ HUDList.LootItem.MAP = {
     painting =		{ text = "Painting" },
     pig =				{ text = "Pig" },
     present =		{ text = "Present" },
-    prototype =		{ text = "Prototype" },     
+    prototype =		{ text = "Prototype" },
     safe =			{ text = "Safe" },
     server =			{ text = "Server" },
     shell =			{ text = "Shell" },
@@ -3586,7 +3589,7 @@ function HUDList.LootItem:_change_loot_count(data, value)
     if not self:_check_loot_condition(data) then return end
 
     self:set_count(
-        self._unbagged_count + (data.bagged and 0 or value), 
+        self._unbagged_count + (data.bagged and 0 or value),
         self._bagged_count + (data.bagged and value or 0)
     )
 end
@@ -3671,7 +3674,7 @@ function HUDList.UnitCountItem:init(id, ppanel, members)
 end
 
 function HUDList.UnitCountItem:post_init(...)
-    HUDList.UnitCountItem.super.post_init(self, ...)	
+    HUDList.UnitCountItem.super.post_init(self, ...)
     self:set_count(self._count)
 end
 
@@ -4515,8 +4518,8 @@ function HUDList.BuffItemBase:init(id, ppanel, members, item_data)
         self._progress_bars = {}
 
         for i = 1, 3, 1 do
-            local progress_bar = PanelFrame:new(self._panel, { 
-                bar_w = self.PROGRESS_BAR_WIDTH, 
+            local progress_bar = PanelFrame:new(self._panel, {
+                bar_w = self.PROGRESS_BAR_WIDTH,
                 w = self._icon:w() + self.PROGRESS_BAR_WIDTH * (i-1) * 2,
                 h = self._icon:h() + self.PROGRESS_BAR_WIDTH * (i-1) * 2,
                 visible = false,
@@ -5072,20 +5075,20 @@ HUDList.PlayerActionItemBase.MAP = {
         title = "Interact",
         min_duration = 0.5,
     },
-}	
+}
 function HUDList.PlayerActionItemBase:init(id, ppanel, action_data, item_data)
     HUDList.PlayerActionItemBase.super.init(self, id, ppanel, { h = ppanel:h(), w = ppanel:h() * 0.6, priority = -item_data.priority })
-    
+
     self:set_fade_rate(100)
     self:set_move_rate(nil)
-    
+
     self._min_duration = item_data.min_duration
     self._delay = item_data.delay
     self._standard_color = Color.white
-    
+
     local icon_size = self._panel:w() - HUDList.BuffItemBase.PROGRESS_BAR_WIDTH * 3 - 5
     local texture, texture_rect = get_icon_data(item_data)
-    
+
     self._icon = self._panel:bitmap({
         texture = texture,
         texture_rect = texture_rect,
@@ -5095,7 +5098,7 @@ function HUDList.PlayerActionItemBase:init(id, ppanel, action_data, item_data)
         rotation = item_data.icon_rotation or 0,
     })
     self._icon:set_center(self._panel:w() / 2, self._panel:h() / 2)
-    
+
     self._bg = self._panel:rect({
         h = icon_size,
         w = icon_size,
@@ -5104,16 +5107,16 @@ function HUDList.PlayerActionItemBase:init(id, ppanel, action_data, item_data)
         alpha = 0.2,
     })
     self._bg:set_center(self._icon:center())
-    
-    self._progress_bar = PanelFrame:new(self._panel, { 
-        bar_w = self.PROGRESS_BAR_WIDTH, 
+
+    self._progress_bar = PanelFrame:new(self._panel, {
+        bar_w = self.PROGRESS_BAR_WIDTH,
         w = icon_size,
         h = icon_size,
         visible = true,
         invert_progress = item_data.invert,
     })
     self._progress_bar:panel():set_center(self._icon:center())
-    
+
     local text_h = (self._panel:h() - icon_size) / 2
     self._value_text = self._panel:text({
         align = "center",
@@ -5124,10 +5127,10 @@ function HUDList.PlayerActionItemBase:init(id, ppanel, action_data, item_data)
         font_size = 0.7 * text_h,
     })
     self._value_text:set_bottom(self._panel:h())
-    
+
     if item_data.title then
         local h = (self._panel:h() - icon_size) / 2
-        
+
         self._title_text = self._panel:text({
             text = item_data.title,
             align = "center",
@@ -5138,14 +5141,14 @@ function HUDList.PlayerActionItemBase:init(id, ppanel, action_data, item_data)
             font_size = 0.7 * h,
         })
     end
-    
+
     self:_set_duration_clbk(action_data)
-    
+
     local listener_id = string.format("HUDList_buff_listener_%s", id)
     local events = {
         set_duration = callback(self, self, "_set_duration_clbk")
     }
-    
+
     for event, clbk in pairs(events) do
         table.insert(self._listener_clbks, { name = listener_id, source = "player_action", event = { event }, clbk = clbk, keys = { id }, data_only = true })
     end
@@ -5162,9 +5165,9 @@ function HUDList.PlayerActionItemBase:update(t, dt)
             local total = self._expire_t - self._t
             local current = t - self._t
             local remaining = total - current
-            
+
             self._progress_bar:set_ratio(current/total)
-            
+
             if remaining <= 0 then
                 self._t = nil
                 self._expire_t = nil
@@ -5174,19 +5177,19 @@ function HUDList.PlayerActionItemBase:update(t, dt)
             end
         end
     end
-    
+
     return HUDList.PlayerActionItemBase.super.update(self, t, dt)
 end
 
 function HUDList.PlayerActionItemBase:_set_duration_clbk(data)
     self._t = data.t
     self._expire_t = data.expire_t
-    
+
     if self._t and self._expire_t then
         if self._delay then
             self._delayed_activation_t = self._t + self._delay
         end
-        
+
         if self._min_duration and self._min_duration < (self._expire_t - self._t) then
             self:enable("insufficient_duration")
         end
@@ -5196,14 +5199,14 @@ end
 HUDList.ArmorRegenActionItem = HUDList.ArmorRegenActionItem or class(HUDList.PlayerActionItemBase)
 function HUDList.ArmorRegenActionItem:init(...)
     HUDList.ArmorRegenActionItem.super.init(self, ...)
-    
+
     local listener_id = "HUDList_armor_regen_tooth_and_claw_listener"
     local events = {
         --activate = callback(self, self, "_tooth_and_claw_event"),
         deactivate = callback(self, self, "_tooth_and_claw_event"),
         set_duration = callback(self, self, "_tooth_and_claw_event"),
     }
-    
+
     for event, clbk in pairs(events) do
         table.insert(self._listener_clbks, { name = listener_id, source = "buff", event = { event }, clbk = clbk, keys = { "tooth_and_claw" } })
     end
@@ -5240,7 +5243,7 @@ function HUDList.AITimedBuffItem:init(id, ppanel, members, item_data)
     if item_data.title then
         local icon_size = self._panel:w() - HUDList.BuffItemBase.PROGRESS_BAR_WIDTH * 3 - 5
         local h = (self._panel:h() - icon_size) / 2
-        
+
         self._title_text = self._panel:text({
             text = item_data.title,
             align = "center",
@@ -5251,7 +5254,7 @@ function HUDList.AITimedBuffItem:init(id, ppanel, members, item_data)
             font_size = 0.7 * h,
         })
     end
-    
+
     table.insert(self._listener_clbks, {
         name = string.format("HUDList_buff_listener_%s", id),
         source = "buff",

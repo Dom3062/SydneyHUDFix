@@ -121,7 +121,7 @@ else
 			stop = function(timers, key)
 				GameInfoManager._TIMER_CALLBACKS.default.set_active(timers, key, false)
 			end,
-			
+
 			--General functions
 			update = function(timers, key, t, timer, progress_ratio)
 				if timers[key] then
@@ -180,7 +180,7 @@ else
 			stop_on_pause = function(...)
 				GameInfoManager._TIMER_CALLBACKS.default.stop(...)
 			end,
-		
+
 			[132864] = {	--Meltdown vault temperature
 				set = function(timers, key, timer)
 					if timer > 0 then
@@ -229,11 +229,11 @@ else
 			[140823] = { pause = function(...) GameInfoManager._TIMER_CALLBACKS.overrides.stop_on_pause(...) end },	--Cursed kill room safe 5 timer
 		}
 	}
-    
+
     function GameInfoManager:init_timers_plugin()
 		self._timers = self._timers or {}
 	end
-	
+
 	function GameInfoManager:get_timers(key)
 		if key then
 			return self._timers[key]
@@ -244,9 +244,9 @@ else
 
 	function GameInfoManager:_timer_event(event, key, ...)
 		if event == "create" then
-			if not self._timers[key] then	
+			if not self._timers[key] then
 				local unit, ext, device_type = ...
-				local id = unit:editor_id()		
+				local id = unit:editor_id()
 				self._timers[key] = { unit = unit, ext = ext, device_type = device_type, id = id, jammed = false, powered = true, upgradable = false }
 				self:_listener_callback("timer", "create", key, self._timers[key])
 			end
@@ -259,7 +259,7 @@ else
 		elseif self._timers[key] then
 			local timer_id = self._timers[key].id
 			local timer_override = GameInfoManager._TIMER_CALLBACKS.overrides[timer_id]
-			
+
 			if timer_override and timer_override[event] then
 				timer_override[event](self._timers, key, ...)
 			else
@@ -267,7 +267,7 @@ else
 			end
 		end
     end
-    
+
     GameInfoManager._DEPLOYABLES = {
 		interaction_ids = {
 			firstaid_box =		"doc_bag",
@@ -297,7 +297,7 @@ else
 			}
 		},
     }
-    
+
     function GameInfoManager:init_deployables_plugin()
 		self._deployables = self._deployables or {}
 		self._deployables.ammo_bag = self._deployables.ammo_bag or {}
@@ -305,7 +305,7 @@ else
 		self._deployables.body_bag = self._deployables.body_bag or {}
 		self._deployables.grenade_crate = self._deployables.grenade_crate or {}
 	end
-	
+
 	function GameInfoManager:get_deployables(type, key)
 		if type and key then
 			return self._deployables[type][key]
@@ -315,40 +315,40 @@ else
 			return self._deployables
 		end
 	end
-	
+
 	function GameInfoManager:_deployable_interaction_handler(event, key, data)
 		local type = GameInfoManager._DEPLOYABLES.interaction_ids[data.interact_id]
-		
+
 		if self._deployables[type][key] then
 			local active = event == "add"
-			
+
 			if active then
 				local offset = GameInfoManager._DEPLOYABLES.amount_offsets[tostring(data.unit:name())] or 0
 				if offset ~= 0 then
 					self:_bag_deployable_event("set_amount_offset", key, { amount_offset = offset }, type)
 				end
 			end
-			
+
 			self:_bag_deployable_event("set_active", key, { active = active }, type)
 		end
 	end
-	
+
 	function GameInfoManager:_doc_bag_event(event, key, data)
 		self:_bag_deployable_event(event, key, data, "doc_bag")
 	end
-	
+
 	function GameInfoManager:_ammo_bag_event(event, key, data)
 		self:_bag_deployable_event(event, key, data, "ammo_bag")
 	end
-	
+
 	function GameInfoManager:_body_bag_event(event, key, data)
 		self:_bag_deployable_event(event, key, data, "body_bag")
 	end
-	
+
 	function GameInfoManager:_grenade_crate_event(event, key, data)
 		self:_bag_deployable_event(event, key, data, "grenade_crate")
 	end
-	
+
 	function GameInfoManager:_bag_deployable_event(event, key, data, type)
 		if event == "create" then
 			if self._deployables[type][key] then return end
@@ -369,57 +369,57 @@ else
 			elseif event == "set_upgrades" then
 				self._deployables[type][key].upgrades = data.upgrades
 			end
-			
+
 			self:_listener_callback(type, event, key, self._deployables[type][key])
-			
+
 			if event == "destroy" then
 				self._deployables[type][key] = nil
 			end
 		end
 	end
-	
+
 	function GameInfoManager:_interactive_unit_event(event, key, data)
 		if GameInfoManager._DEPLOYABLES.interaction_ids[data.interact_id] then
 			local ignore_lookup = GameInfoManager._DEPLOYABLES.ignore_ids
 			local level_id = managers.job:current_level_id()
-			
+
 			if not (ignore_lookup[level] and ignore_lookup[level][data.editor_id]) then
 				self:_deployable_interaction_handler(event, key, data)
 			end
         end
-        
+
         local lookup = GameInfoManager._LOOT
-		local carry_id = data.unit:carry_data() and data.unit:carry_data():carry_id() or 
-			lookup.interaction_to_carry[data.interact_id] or 
+		local carry_id = data.unit:carry_data() and data.unit:carry_data():carry_id() or
+			lookup.interaction_to_carry[data.interact_id] or
 			(self._loot[key] and self._loot[key].carry_id)
-		
+
 		if carry_id then
 			local level_id = managers.job:current_level_id()
-			
+
 			if not (lookup.ignore_ids[level_id] and lookup.ignore_ids[level_id][data.editor_id]) and not (lookup.conditional_ignore_ids[data.editor_id] and lookup.conditional_ignore_ids[data.editor_id]()) then
 				data.carry_id = carry_id
 				self:_loot_interaction_handler(event, key, data)
 			end
         end
-        
+
         if GameInfoManager._PICKUPS.interaction_ids[data.interact_id] then
 			local level_id = managers.job:current_level_id()
-			
+
 			if not (GameInfoManager._PICKUPS.ignore_ids[level_id] and GameInfoManager._PICKUPS.ignore_ids[level_id][data.editor_id]) then
 				self:_special_equipment_interaction_handler(event, key, data)
 			end
         end
-        
+
         if data.interact_id == "corpse_alarm_pager" then
 			self:_pager_event(event, key, data)
 		end
     end
-    
+
     function GameInfoManager:init_sentry_plugin()
 		self._deployables = self._deployables or {}
 		self._deployables.sentry = self._deployables.sentry or {}
 	end
-	
+
 	function GameInfoManager:get_deployables(type, key)
 		if type and key then
 			return self._deployables[type][key]
@@ -433,7 +433,7 @@ else
 	function GameInfoManager:_sentry_event(event, key, data)
 		if event == "create" then
 			local sentry_type = data.unit:base() and data.unit:base():get_type()
-			
+
 			if not self._deployables.sentry[key] and (sentry_type == "sentry_gun" or sentry_type == "sentry_gun_silent") then
 				self._deployables.sentry[key] = { unit = data.unit, kills = 0, type = "sentry" }
 				self:_listener_callback("sentry", event, key, self._deployables.sentry[key])
@@ -451,15 +451,15 @@ else
 			elseif event == "set_owner" then
 				self._deployables.sentry[key].owner = data.owner
 			end
-			
+
 			self:_listener_callback("sentry", event, key, self._deployables.sentry[key])
-			
+
 			if event == "destroy" then
 				self._deployables.sentry[key] = nil
 			end
 		end
     end
-    
+
     GameInfoManager._LOOT = {
 		interaction_to_carry = {
 			weapon_case =				"weapon",
@@ -564,11 +564,11 @@ else
 	GameInfoManager._LOOT.ignore_ids.watchdogs_2_day = table.deep_map_copy(GameInfoManager._LOOT.ignore_ids.watchdogs_2)
 	GameInfoManager._LOOT.ignore_ids.welcome_to_the_jungle_1_night = table.deep_map_copy(GameInfoManager._LOOT.ignore_ids.welcome_to_the_jungle_1)
 	GameInfoManager._LOOT.ignore_ids.chill = table.deep_map_copy(GameInfoManager._LOOT.ignore_ids.chill_combat)
-	
+
 	function GameInfoManager:init_loot_plugin()
 		self._loot = self._loot or {}
 	end
-	
+
 	function GameInfoManager:get_loot(key)
 		if key then
 			return self._loot[key]
@@ -576,14 +576,14 @@ else
 			return self._loot
 		end
 	end
-	
+
 	function GameInfoManager:_loot_interaction_handler(event, key, data)
 		if event == "add" then
 			if not self._loot[key] then
 				local composite_lookup = GameInfoManager._LOOT.composite_loot_units
 				local count = composite_lookup[data.editor_id] or composite_lookup[data.interact_id] or 1
 				local bagged = GameInfoManager._LOOT.bagged_ids[data.interact_id] and true or false
-			
+
 				self._loot[key] = { unit = data.unit, carry_id = data.carry_id, count = count, bagged = bagged }
 				self:_listener_callback("loot", "add", key, self._loot[key])
 				self:_loot_count_event("change", key, self._loot[key].count)
@@ -596,7 +596,7 @@ else
 			end
 		end
 	end
-	
+
 	function GameInfoManager:_loot_count_event(event, key, value)
 		if event == "change" then
 			if value ~= 0 then
@@ -619,6 +619,8 @@ else
             caustic_soda =						"_special_equipment_interaction_handler",
             press_pick_up =						"_special_equipment_interaction_handler",
             ring_band = 						"_special_equipment_interaction_handler",
+            pex_medal =                         "_special_equipment_interaction_handler",
+            federali_medal =                    "_special_equipment_interaction_handler",
             firstaid_box =						"_deployable_interaction_handler",
             ammo_bag =							"_deployable_interaction_handler",
             doctor_bag =						"_deployable_interaction_handler",
@@ -827,7 +829,7 @@ else
 		self._minions = self._minions or {}
 		self._turrets = self._turrets or {}
 	end
-	
+
 	function GameInfoManager:get_units(key)
 		if key then
 			return self._units[key]
@@ -835,7 +837,7 @@ else
 			return self._units
 		end
 	end
-	
+
 	function GameInfoManager:get_unit_count(id)
 		if id then
 			return self._unit_count[id] or 0
@@ -843,7 +845,7 @@ else
 			return self._unit_count
 		end
 	end
-	
+
 	function GameInfoManager:get_minions(key)
 		if key then
 			return self._minions[key]
@@ -851,7 +853,7 @@ else
 			return self._minions
 		end
 	end
-	
+
 	function GameInfoManager:get_turrets(key)
 		if key then
 			return self._turrets[key]
@@ -859,7 +861,7 @@ else
 			return self._turrets
 		end
 	end
-	
+
 	function GameInfoManager:_unit_event(event, key, data)
 		if event == "add" then
 			if not self._units[key] then
@@ -873,14 +875,14 @@ else
 				self:_listener_callback("unit", event, key, self._units[key])
 				self:_unit_count_event("change", self._units[key].type, -1)
 				self._units[key] = nil
-				
+
 				if self._minions[key] then
 					self:_minion_event("remove", key)
 				end
 			end
 		end
 	end
-	
+
 	function GameInfoManager:_unit_count_event(event, unit_type, value)
 		if event == "change" then
 			if value ~= 0 then
@@ -891,7 +893,7 @@ else
 			self:_unit_count_event("change", unit_type, value - (self._unit_count[unit_type] or 0))
 		end
 	end
-	
+
 	function GameInfoManager:_minion_event(event, key, data)
 		if event == "add" then
 			if not self._minions[key] then
@@ -911,16 +913,16 @@ else
 			elseif event == "set_damage_multiplier" then
 				self._minions[key].damage_multiplier = data.damage_multiplier
 			end
-			
+
 			self:_listener_callback("minion", event, key, self._minions[key])
-			
+
 			if event == "remove" then
 				self:_unit_count_event("change", "minion", -1)
 				self._minions[key] = nil
 			end
 		end
 	end
-	
+
 	function GameInfoManager:_turret_event(event, key, unit)
 		if event == "add" then
 			if not self._turrets[key] then
@@ -947,7 +949,9 @@ else
 			hydrogen_chloride = true,
 			caustic_soda = true,
 			press_pick_up = true,
-			ring_band = true,
+            ring_band = true,
+            pex_medal = true,
+            federali_medal = true
 		},
 		ignore_ids = {
 			firestarter_2 = {	--Firestarter day 2 (1x keycard)
@@ -961,11 +965,11 @@ else
 			},
 		},
     }
-    
+
     function GameInfoManager:init_pickups_plugin()
 		self._special_equipment = self._special_equipment or {}
 	end
-	
+
 	function GameInfoManager:get_special_equipment(key)
 		if key then
 			return self._special_equipment[key]
@@ -973,7 +977,7 @@ else
 			return self._special_equipment
 		end
 	end
-	
+
 	function GameInfoManager:_special_equipment_interaction_handler(event, key, data)
 		if event == "add" then
 			if not self._special_equipment[key] then
@@ -989,7 +993,7 @@ else
 			end
 		end
 	end
-	
+
 	function GameInfoManager:_special_equipment_count_event(event, interact_id, value, data)
 		if event == "change" then
 			if value ~= 0 then
@@ -997,11 +1001,11 @@ else
 			end
 		end
 	end
-    
+
     function GameInfoManager:init_pagers_plugin()
 		self._pagers = self._pagers or {}
 	end
-	
+
 	function GameInfoManager:get_pagers(key)
 		if key then
 			return self._pagers[key]
@@ -1009,15 +1013,15 @@ else
 			return self._pagers
 		end
 	end
-	
+
 	function GameInfoManager:_pager_event(event, key, data)
 		if event == "add" then
 			if not self._pagers[key] then
 				local t = Application:time()
-				
-				self._pagers[key] = { 
-					unit = data.unit, 
-					active = true, 
+
+				self._pagers[key] = {
+					unit = data.unit,
+					active = true,
 					answered = false,
 					start_t = t,
 					expire_t = t + 12,
@@ -1038,11 +1042,11 @@ else
 			end
 		end
 	end
-    
+
     function GameInfoManager:init_ecms_plugin()
 		self._ecms = self._ecms or {}
 	end
-	
+
 	function GameInfoManager:get_ecms(key)
 		if key then
 			return self._ecms[key]
@@ -1050,7 +1054,7 @@ else
 			return self._ecms
 		end
 	end
-	
+
 	function GameInfoManager:_ecm_event(event, key, data)
 		if event == "create" then
 			if self._ecms[key] then return end
@@ -1074,19 +1078,19 @@ else
 			elseif event == "set_upgrade_level" then
 				self._ecms[key].upgrade_level = data.upgrade_level
 			end
-			
+
 			self:_listener_callback("ecm", event, key, self._ecms[key])
-			
+
 			if event == "destroy" then
 				self._ecms[key] = nil
 			end
 		end
     end
-    
+
     function GameInfoManager:init_cameras_plugin()
 		self._cameras = self._cameras or {}
 	end
-	
+
 	function GameInfoManager:get_cameras(key)
 		if key then
 			return self._cameras[key]
@@ -1094,7 +1098,7 @@ else
 			return self._cameras
 		end
 	end
-	
+
 	function GameInfoManager:_camera_event(event, key, data)
 		if event == "create" then
 			if not self._cameras[key] then
@@ -1211,11 +1215,11 @@ else
 			},
 		},
     }
-    
+
     function GameInfoManager:init_buffs_plugin()
 		self._buffs = self._buffs or {}
 		self._team_buffs = self._team_buffs or {}
-		
+
 		self:add_scheduled_callback("init_local_team_buffs", 0, function()
 			for category, data in pairs(Global.player_manager.team_upgrades or {}) do
 				for upgrade, value in pairs(data) do
@@ -1224,11 +1228,11 @@ else
 			end
 		end)
     end
-    
+
     function GameInfoManager:init_player_actions_plugin()
 		self._player_actions = self._player_actions or {}
 	end
-	
+
 	function GameInfoManager:get_buffs(id)
 		if id then
 			return self._buffs[id]
@@ -1236,7 +1240,7 @@ else
 			return self._buffs
 		end
 	end
-	
+
 	function GameInfoManager:get_player_actions(id)
 		if id then
 			return self._player_actions[id]
@@ -1244,8 +1248,8 @@ else
 			return self._player_actions
 		end
 	end
-	
-	
+
+
 	function GameInfoManager:_buff_event(event, id, data)
 		if event == "activate" then
 			if self._buffs[id] then return end
@@ -1254,17 +1258,17 @@ else
 			if event == "set_duration" then
 				local t = data.t or Application:time()
 				local expire_t = data.expire_t or (data.duration + t)
-				
-				if self._buffs[id].t == t and 
-					self._buffs[id].expire_t == expire_t and 
-					self._buffs[id].no_expire == data.no_expire then 
+
+				if self._buffs[id].t == t and
+					self._buffs[id].expire_t == expire_t and
+					self._buffs[id].no_expire == data.no_expire then
                         return
 				end
-				
+
 				self._buffs[id].t = t
 				self._buffs[id].expire_t = expire_t
                 self._buffs[id].no_expire = data.no_expire
-				
+
 				if not self._buffs[id].no_expire then
                     self:add_scheduled_callback(id .. "_expire", expire_t - Application:time(), callback(self, self, "_buff_event"), "deactivate", id)
 				end
@@ -1288,7 +1292,7 @@ else
 		else
 			return
 		end
-		
+
 		--printf("(%.2f) GameInfoManager:_buff_event(%s, %s)", Application:time(), event, id)
 		--[[
 		for k, v in pairs(self._buffs[id]) do
@@ -1296,12 +1300,12 @@ else
 		end
 		]]
 		self:_listener_callback("buff", event, id, self._buffs[id])
-		
+
 		local event_clbk = GameInfoManager._BUFFS.event_clbks[event] and GameInfoManager._BUFFS.event_clbks[event][id]
 		if event_clbk then
 			event_clbk(id, self._buffs[id])
 		end
-		
+
 		if event == "deactivate" then
 			if not self._buffs[id].no_expire then
 				self:remove_scheduled_callback(id .. "_expire")
@@ -1309,14 +1313,14 @@ else
 			self._buffs[id] = nil
 		end
 	end
-	
-	function GameInfoManager:_temporary_buff_event(event, category, upgrade, level, data)		
+
+	function GameInfoManager:_temporary_buff_event(event, category, upgrade, level, data)
 		local defs = GameInfoManager._BUFFS.definitions
 		local buff_data = defs[category] and defs[category][upgrade]
-		
+
 		if buff_data then
 			local id = buff_data[level or 1]
-			
+
 			if id and not buff_data.ignore then
 				self:_buff_event(event, id, data)
 			end
@@ -1324,24 +1328,24 @@ else
 			printf("(%.2f) GameInfoManager:_temporary_buff_event(%s): Unrecognized buff %s %s %s", Application:time(), event, tostring(category), tostring(upgrade), tostring(level))
 		end
 	end
-	
+
 	function GameInfoManager:_team_buff_event(event, peer_id, category, upgrade, level, data)
 		local defs = GameInfoManager._BUFFS.definitions.team
 		local id = defs[category] and defs[category][upgrade] and defs[category][upgrade][level]
-		
+
 		if id then
 			self._team_buffs[id] = self._team_buffs[id] or {}
 			local was_active = next(self._team_buffs[id])
-			
+
 			if event == "activate" then
 				self._team_buffs[id][peer_id] = true
-				
+
 				if not was_active then
 					self:_buff_event(event, id)
 				end
 			elseif event == "deactivate" then
 				self._team_buffs[id][peer_id] = nil
-				
+
 				if was_active and not next(self._team_buffs[id]) then
 					self:_buff_event(event, id)
 				end
@@ -1352,7 +1356,7 @@ else
 			printf("(%.2f) GameInfoManager:_team_buff_event(%s, %s): Unrecognized buff %s %s %s", Application:time(), event, tostring(peer_id), tostring(category), tostring(upgrade), tostring(level))
 		end
 	end
-	
+
 	local STACK_ID = 0
 	function GameInfoManager:_timed_stack_buff_event(event, id, data)
 		if event == "add_timed_stack" then
@@ -1360,16 +1364,16 @@ else
 				self:_buff_event("activate", id, data)
 				self._buffs[id].stacks = {}
 			end
-			
+
 			local ct = Application:time()
 			local t = data.t or ct
 			local expire_t = data.expire_t or (data.duration + t)
 			local value = data.value
 			self._buffs[id].stacks[STACK_ID] = { t = t, expire_t = expire_t, value = value }
 			self:add_scheduled_callback(string.format("%s_%s", id, STACK_ID), expire_t - ct, callback(self, self, "_timed_stack_buff_event"), "remove_timed_stack", id, { stack_id = STACK_ID })
-			
+
 			STACK_ID = (STACK_ID + 1) % 10000
-			
+
 			self:_listener_callback("buff", event, id, self._buffs[id])
 			--self:_buff_event("increment_stack_count", id)
 		elseif self._buffs[id] and self._buffs[id].stacks then
@@ -1379,7 +1383,7 @@ else
 					self:remove_scheduled_callback(id .. "_" .. data.stack_id)
 					self:_listener_callback("buff", event, id, self._buffs[id])
 					--self:_buff_event("decrement_stack_count", id)
-					
+
 					if not next(self._buffs[id].stacks) then
 						self:_buff_event("deactivate", id, data)
 					end
@@ -1387,7 +1391,7 @@ else
 			end
 		end
 	end
-	
+
 	function GameInfoManager:_player_weapon_event(event, key, data)
 		self:_listener_callback("player_weapon", event, key, data)
 	end
@@ -1422,14 +1426,14 @@ else
 		else
 			return
 		end
-		
+
 		--printf("(%.2f) GameInfoManager:_player_action_event(%s, %s)", Application:time(), event, id)
 		--for k, v in pairs(self._player_actions[id]) do
 		--	printf("\t%s: %s", tostring(k), tostring(v))
 		--end
-		
+
 		self:_listener_callback("player_action", event, id, self._player_actions[id])
-		
+
 		if event == "deactivate" then
 			self._player_actions[id] = nil
 		end
@@ -1445,7 +1449,7 @@ else
         for _, clbk in ipairs(HUDListManager.post_init_events or {}) do
             clbk()
         end
-        
+
         HUDListManager.post_init_events = nil
     end
 
@@ -1458,7 +1462,7 @@ else
             self._lists[id] = class:new(id, self._hud_panel, ...)
             self._lists[id]:post_init(...)
         end
-        
+
         return self._lists[id]
     end
 
@@ -1489,7 +1493,7 @@ else
         end
     end
 
-    
+
     HUDList = HUDList or {}
     HUDList.Base = HUDList.Base or class()
     HUDList.Base._item_number = 0	--Unique ID for all items created, incremented in HUDList.Base:init()
@@ -1510,7 +1514,7 @@ else
             move_rate = data.fade_rate or 100,
             temp_instant_positioning = true,
         }
-        
+
         self._panel = self._internal.parent_panel:panel({
             name = id,
             visible = false,
@@ -1520,7 +1524,7 @@ else
             x = data.x or 0,
             y = data.y or 0,
         })
-        
+
         if data.bg then
             self._panel:rect({
                 name = "bg",
@@ -1531,7 +1535,7 @@ else
                 layer = -100,
             })
         end
-        
+
         HUDList.Base._item_number = HUDList.Base._item_number + 1
     end
 
@@ -1551,7 +1555,7 @@ else
 
     function HUDList.Base:delete(instant)
         self._internal.deleted = true
-        
+
         if instant or not self._internal.fade_rate or not self:visible() then
             self:_visibility_state_changed(false)
         else
@@ -1581,14 +1585,14 @@ else
                 over(math.abs(init - target) / rate, function(r)
                     move_func(o, math.lerp(init, target, r))
                 end)
-                
+
                 move_func(o, target)
             end
-            
+
             self._move_thread_x = self._panel:animate(do_move, self._panel:x(), x, self._internal.move_rate, function(o, v) o:set_x(v) end)
             self._move_thread_y = self._panel:animate(do_move, self._panel:y(), y, self._internal.move_rate, function(o, v) o:set_y(v) end)
         end
-        
+
         self._internal.temp_instant_positioning = nil
     end
 
@@ -1602,9 +1606,9 @@ else
             self._panel:stop(self._fade_thread)
             self._fade_thread = nil
         end
-        
+
         self:_set_visible(alpha > 0 or self._panel:alpha() > 0)
-        
+
         if instant or not self._internal.fade_rate then
             self._panel:set_alpha(alpha)
             self:_set_visible(alpha > 0)
@@ -1614,21 +1618,21 @@ else
                     local a = math.lerp(init, target, r)
                     o:set_alpha(a)
                 end)
-                
+
                 o:set_alpha(target)
                 self:_set_visible(target > 0)
             end
-            
+
             self._fade_thread = self._panel:animate(do_fade, self._panel:alpha(), alpha, self._internal.fade_rate)
         end
     end
 
     function HUDList.Base:set_priority(priority)
         local priority = priority or 0
-        
+
         if self._internal.priority ~= priority then
             self._internal.priority = priority
-            
+
             if self._internal.parent_list then
                 self._internal.parent_list:rearrange()
             end
@@ -1638,10 +1642,10 @@ else
     function HUDList.Base:set_active(state, reason)
         local state = not (state and true or false)
         local reason = reason or "default"
-        
+
         self._internal.inactive_reasons[reason] = state and true or nil
         local active = not next(self._internal.inactive_reasons)
-        
+
         if self._internal.active ~= active then
             self._internal.active = active
             self:set_target_alpha(active and 1 or 0)
@@ -1651,10 +1655,10 @@ else
     function HUDList.Base:set_enabled(state, reason)
         local state = not (state and true or false)
         local reason = reason or "default"
-        
+
         self._internal.disabled_reasons[reason] = state and true or nil
         local enabled = not next(self._internal.disabled_reasons)
-        
+
         if self._internal.enabled ~= enabled then
             self._internal.enabled = enabled
             self:_set_visible(self._panel:alpha() > 0)
@@ -1686,13 +1690,13 @@ else
         else
             managers.hudlist:remove_list(self._internal.id)
         end
-        
+
         self:destroy()
     end
 
     function HUDList.Base:_set_visible(state)
         local state = state and self:enabled() and true or false
-        
+
         if self._internal.visible ~= state then
             self._internal.visible = state
             self._panel:set_visible(state)
@@ -1704,7 +1708,7 @@ else
         if not state and self._internal.deleted then
             self:_delete()
         end
-        
+
         if self._internal.parent_list then
             self._internal.parent_list:item_visibility_state_changed(self._internal.id, state)
         end
@@ -1714,18 +1718,18 @@ else
     HUDList.ListBase = HUDList.ListBase or class(HUDList.Base)
     function HUDList.ListBase:init(id, ppanel, data)
         HUDList.ListBase.super.init(self, id, ppanel, data)
-        
+
         self:set_fade_rate(nil)
-        
+
         self._item_margin = data and data.item_margin or 0
         self._max_items = data and data.max_items
         self._valign = data and data.valign
         self._halign = data and data.halign
-        
+
         self._items = {}
         self._item_index = {}	--Read using self:_get_item_index() to ensure it updates if necessary before reading
         self._item_order = {}
-        
+
         if data.static_item then
             local class = HUDListManager.get_class(data.static_item.class)
             self._static_item = class:new(
@@ -1733,7 +1737,7 @@ else
                 self._panel,
                 unpack(data.static_item.data or {}))
         end
-        
+
         if data.expansion_indicator then
             --TODO
             --self._expansion_indicator = HUDList.ExpansionIndicator:new("expansion_indicator", self._panel)
@@ -1743,7 +1747,7 @@ else
 
     function HUDList.ListBase:post_init(...)
         HUDList.ListBase.super.post_init(self)
-        
+
         if self._static_item then
             self._static_item:activate()
             self:_update_item_order()
@@ -1762,15 +1766,15 @@ else
 
     function HUDList.ListBase:update(t, dt)
         HUDList.ListBase.super.update(self, t, dt)
-        
+
         for _, id in ipairs(self:_get_item_index()) do
             local item = self._items[id]
-            
+
             if item and item:active() then
                 item:update(t, dt)
             end
         end
-        
+
         if self._internal.rearrange_needed then
             self:_update_item_order()
             self:_rearrange()
@@ -1787,7 +1791,7 @@ else
         else
             self._items[id]._internal.deleted = nil
         end
-        
+
         return self._items[id]
     end
 
@@ -1810,7 +1814,7 @@ else
 
     function HUDList.ListBase:item_visibility_state_changed(id, state)
         self:rearrange()
-        
+
         if state then
             self:set_active(true)
         else
@@ -1831,41 +1835,41 @@ else
         if self._index_update_needed then
             self._item_index = {}
             self._index_update_needed = nil
-            
+
             for id, item in pairs(self._items) do
                 table.insert(self._item_index, id)
             end
         end
-        
+
         return self._item_index
     end
 
     function HUDList.ListBase:_update_item_order()
         local new_order = {}
-        
+
         for id, item in pairs(self._items) do
             local insert_at = #new_order + 1
             local new_data = { id = id, prio = item:priority(), no = item:item_number() }
-            
+
             for i, data in ipairs(new_order) do
                 if (data.prio < new_data.prio) or ((data.prio == new_data.prio) and (data.no > new_data.no)) then
                     insert_at = i
                     break
                 end
             end
-            
+
             table.insert(new_order, insert_at, new_data)
         end
-        
+
         local total_items = #new_order
         local list_maxed = self._max_items and (total_items > self._max_items) or false
-        
+
         self._item_order = {}
         for i, data in ipairs(new_order) do
             table.insert(self._item_order, data.id)
             self._items[data.id]:set_active(not list_maxed or i <= self._max_items, "list_full")
         end
-        
+
         if self._expansion_indicator then
             self._expansion_indicator:set_active(list_maxed)
             if list_maxed then
@@ -1873,11 +1877,11 @@ else
                 table.insert(self._item_order, self._max_items + 1, self._expansion_indicator:id())
             end
         end
-        
+
         if self._static_item and self._static_item:visible() then
             table.insert(self._item_order, 1, self._static_item:id())
         end
-        
+
         return self._item_order
     end
 
@@ -1889,32 +1893,32 @@ else
 
     function HUDList.HorizontalList:_rearrange()
         local w = 0
-        
+
         if self._halign == "center"  then
             local total_w = 0
-            
+
             for _, id in ipairs(self._item_order) do
                 local item = self:item(id) or id == "static" and self._static_item or id == "expansion_indicator" and self._expansion_indicator
-                
+
                 if item:visible() then
                     total_w = total_w + self._item_margin + item:panel():w()
                 end
             end
-            
+
             w = (self._panel:w() - total_w + self._item_margin) / 2
         end
-        
+
         for _, id in ipairs(self._item_order) do
             local x, y
             local item = self:item(id) or id == "static" and self._static_item or id == "expansion_indicator" and self._expansion_indicator
             local p = item:panel()
-            
+
             if self._halign == "right" then
                 x = self._panel:w() - w - p:w()
             else
                 x = w
             end
-            
+
             if self._valign == "top" then
                 y = 0
             elseif self._valign == "bottom" then
@@ -1922,9 +1926,9 @@ else
             else
                 y = (self._panel:h() - p:h()) / 2
             end
-            
+
             item:set_target_position(x, y)
-            
+
             if item:visible() then
                 w = w + p:w() + self._item_margin
             end
@@ -1942,29 +1946,29 @@ else
 
         if self._valign == "center"  then
             local total_h = 0
-            
+
             for _, id in ipairs(self._item_order) do
                 local item = self:item(id) or id == "static" and self._static_item or id == "expansion_indicator" and self._expansion_indicator
-                
+
                 if item:visible() then
                     total_h = total_h + self._item_margin + item:panel():h()
                 end
             end
-            
+
             h = (self._panel:h() - total_h + self._item_margin) / 2
         end
-        
+
         for _, id in ipairs(self._item_order) do
             local x, y
             local item = self:item(id) or id == "static" and self._static_item or id == "expansion_indicator" and self._expansion_indicator
             local p = item:panel()
-            
+
             if self._valign == "bottom" then
                 y = self._panel:h() - h - p:h()
             else
                 y = h
             end
-            
+
             if self._halign == "left" then
                 x = 0
             elseif self._halign == "right" then
@@ -1972,9 +1976,9 @@ else
             else
                 x = (self._panel:w() - p:w()) / 2
             end
-            
+
             item:set_target_position(x, y)
-            
+
             if item:visible() then
                 h = h + p:h() + self._item_margin
             end
