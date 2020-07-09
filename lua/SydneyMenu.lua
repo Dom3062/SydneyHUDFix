@@ -19,7 +19,7 @@ end
 local function do_animation(TOTAL_T, clbk)
     local t = 0
     while t < TOTAL_T do
-        coroutine.yield() 
+        coroutine.yield()
         t = t + TimerManager:main():delta_time()
         clbk(t / TOTAL_T, t)
     end
@@ -34,7 +34,7 @@ function SydneyMenu:init()
     self._menus = {}
     self._axis_timer = { x = 0, y = 0 }
     self._panel = self._ws:panel():panel({
-        name = "SydneyMenu", 
+        name = "SydneyMenu",
         layer = 500,
         alpha = 0
     })
@@ -84,7 +84,7 @@ function SydneyMenu:init()
         w = self._panel:w() / 2.5,
         h = self._panel:h(),
     })
-    options_bg:set_right(self._panel:w())	
+    options_bg:set_right(self._panel:w())
     self._options_panel = self._panel:panel({
         name = "options_panel",
         y = 5,
@@ -132,11 +132,11 @@ function SydneyMenu:init()
         self._button_legends:set_right(self._options_panel:right() - 5)
         self._button_legends:set_top(self._options_panel:bottom())
     end
-    
+
     for _, menu in ipairs(SydneyHUD._menus) do
         self:GetMenuFromJson(SydneyHUD.ModPath .. "menu/" .. menu .. ".json")
     end
-    
+
     self:OpenMenu("sydneyhud_menu")
 
     --self:InitTextures()
@@ -261,17 +261,17 @@ function SydneyMenu:Close()
     end
     SydneyHUD:Save()
     if Utils:IsInHeist() then
-        SydneyHUD.Update = true
+        managers.hud:SydneyHUDUpdate()
     end
-    
+
     self._panel:stop()
     self._panel:animate(function(o)
         local a = self._panel:alpha()
-        
+
         do_animation(0.2, function (p)
             self._panel:set_alpha(math.lerp(a, 0, p))
         end)
-        
+
         self._panel:set_alpha(0)
         managers.menu._input_enabled = true
         for _, menu in ipairs(managers.menu._open_menus) do
@@ -336,7 +336,7 @@ end
 
 function SydneyMenu:mouse_press(o, button, x, y)
     x, y = managers.mouse_pointer:convert_fullscreen_16_9_mouse_pos(x, y)
-    if button == Idstring("0") then	
+    if button == Idstring("0") then
         if self._open_choice_dialog then
             if self._open_choice_dialog.panel:inside(x,y) then
                 for i, item in pairs(self._open_choice_dialog.items) do
@@ -382,7 +382,7 @@ end
 
 function SydneyMenu:mouse_release(o, button, x, y)
     x, y = managers.mouse_pointer:convert_fullscreen_16_9_mouse_pos(x, y)
-    if button == Idstring("0") then	
+    if button == Idstring("0") then
         if self._slider then
             self:CallCallback(self._slider, { to_n = true })
             self._slider = nil
@@ -515,7 +515,7 @@ function SydneyMenu:ActivateItem(item, x)
     if not self._highlighted_item then
         return
     end
-    
+
     if item.type == "button" then
         if item.next_menu and self._menus[item.next_menu] then
             self:OpenMenu(item.next_menu)
@@ -576,7 +576,7 @@ function SydneyMenu:AnimateItemEnabled(item, enabled)
         item.enabled = enabled
         item.panel:stop()
         item.panel:animate(function(o)
-            local alpha = o:alpha()		
+            local alpha = o:alpha()
             do_animation(0.2, function (p)
                 o:set_alpha(math.lerp(alpha, enabled and 1 or 0.5, p))
             end)
@@ -594,14 +594,14 @@ function SydneyMenu:HighlightItem(item)
     end
     item.panel:child("bg"):stop()
     item.panel:child("bg"):animate(function(o)
-        local alpha = o:alpha()		
+        local alpha = o:alpha()
         do_animation(0.2, function (p)
             o:set_alpha(math.lerp(alpha, 0.3, p))
         end)
         o:set_alpha(0.3)
     end)
     self._highlighted_item = item
-    
+
     self._tooltip:set_text(self._highlighted_item.desc or "")
     if item.focus_changed_callback then
         self[item.focus_changed_callback](self, true)
@@ -614,7 +614,7 @@ function SydneyMenu:UnhighlightItem(item)
     end
     item.panel:child("bg"):stop()
     item.panel:child("bg"):animate(function(o)
-        local alpha = o:alpha()		
+        local alpha = o:alpha()
         do_animation(0.20, function (p)
             o:set_alpha(math.lerp(alpha, 0, p))
         end)
@@ -649,7 +649,7 @@ function SydneyMenu:Cancel()
 end
 
 function SydneyMenu:SetItem(item, value, menu)
-    if item == nil or type(item) ~= "table" then 
+    if item == nil or type(item) ~= "table" then
         item = self._highlighted_item
         value = item.default_value
         menu = self._open_menu
@@ -657,10 +657,10 @@ function SydneyMenu:SetItem(item, value, menu)
     if item and type(item) == "table" and item.default_value ~= nil then
         if item.type == "toggle" then
             item.value = value
-            
+
             item.panel:child("check"):stop()
             item.panel:child("check"):animate(function(o)
-                local alpha = o:alpha()		
+                local alpha = o:alpha()
                 local w, h = o:size()
                 local check = item.panel:child("check_bg")
                 do_animation(0.1, function (p)
@@ -705,18 +705,18 @@ function SydneyMenu:GetMenuFromJson(path)
         local menu_title = managers.localization:text(content.title)
         local focus_changed_callback = content.focus_changed_callback
         local items = content.items
-        
+
         if content.title == "sydneyhud_menu" then
             menu_title = menu_title .. " v" .. SydneyHUD:GetVersion()
         end
-        
+
         local menu = self:CreateMenu({
             menu_id = menu_id,
             parent_menu = parent_menu,
             title = menu_title,
             focus_changed_callback = focus_changed_callback,
         })
-        
+
         for i, item in pairs(items) do
             local item_type = item.type
             local id = item.id
@@ -726,7 +726,7 @@ function SydneyMenu:GetMenuFromJson(path)
             local default_value = item.default_value
             local parents = item.parent
             local enabled = true
-            
+
             if values and values[item.value] ~= nil then
                 value = values[item.value]
             end
@@ -923,29 +923,29 @@ function SydneyMenu:OpenMenu(menu, close)
     next_menu.panel:stop()
     next_menu.panel:animate(function(o)
         local x = next_menu.panel:x()
-        local prev_x 
+        local prev_x
         if prev_menu then
             prev_x = prev_menu.panel:x()
         end
         next_menu.panel:set_visible(true)
-        
+
         do_animation(0.1, function (p)
             next_menu.panel:set_x(math.lerp(x, 0, p))
             if prev_menu then
                 prev_menu.panel:set_x(math.lerp(prev_x, close and prev_menu.panel:w() or -prev_menu.panel:w(), p))
             end
         end)
-        
+
         next_menu.panel:set_x(0)
         local opened
-        if prev_menu then 
+        if prev_menu then
             prev_menu.panel:set_visible(false)
             prev_menu.panel:set_x(close and prev_menu.panel:w() or -prev_menu.panel:w())
             opened = self._open_menu.id
         end
         self._open_menu = next_menu
         self._open_menu.id = menu
-        
+
         if close and opened ~= nil then
             for _, item in pairs(self._open_menu.items) do
                 if item.panel and item.panel:child("bg") and item.id == opened then
@@ -1015,7 +1015,7 @@ function SydneyMenu:CreateDivider(params)
     if not menu_panel or not self._menus[params.menu_id] then
         return
     end
-    
+
     local div = {
         id = "divider_"..tostring(#self._menus[params.menu_id].items),
         type = "divider",
@@ -1110,7 +1110,7 @@ function SydneyMenu:CreateToggle(params)
         y = 2,
         w = 22,
         h = 21,
-        layer = 1	
+        layer = 1
     })
     local check = toggle_panel:bitmap({
         name = "check",
@@ -1120,7 +1120,7 @@ function SydneyMenu:CreateToggle(params)
         w = params.value and 22 or 44,
         h = params.value and 21 or 42,
         alpha = params.value and 1 or 0,
-        layer = 2	
+        layer = 2
     })
     check:set_center(check_bg:center())
     local toggle = {
@@ -1225,7 +1225,7 @@ function SydneyMenu:CreateSlider(params)
 end
 
 function SydneyMenu:SetSlider(item, x, add)
-    local panel_min, panel_max = item.panel:world_x(), item.panel:world_x() + item.panel:w() 
+    local panel_min, panel_max = item.panel:world_x(), item.panel:world_x() + item.panel:w()
     x = math.clamp(x, panel_min, panel_max)
     local value_bar = item.panel:child("value_bar")
     local value_text = item.panel:child("value_text")
@@ -1237,7 +1237,7 @@ function SydneyMenu:SetSlider(item, x, add)
     else
         percentage = (x - panel_min) / (panel_max - panel_min)
     end
-    
+
     if percentage then
         local value = string.format("%." .. (item.step or 0) .. "f", item.min + (item.max - item.min) * percentage)
         value_bar:set_w(math.max(1,item.panel:w() * percentage))
@@ -1276,7 +1276,7 @@ function SydneyMenu:SetInput(item)
     if managers.menu:is_pc_controller() then
         managers.mouse_pointer:_deactivate()
     end
-    
+
     --self._esc_released_callback = callback(self, self, "esc_key_callback", row_item)
     --self._enter_callback = callback(self, self, "enter_key_callback", row_item)
 
@@ -1310,7 +1310,7 @@ function SydneyMenu:enter_text(item, o, s)
     local m = item.limit
     local n = utf8.len(text)
     s = utf8.sub(s, 1, m - n)
-    
+
     item.panel:child("value"):set_text(text .. s)
     item.value = text .. s
 end
@@ -1461,7 +1461,7 @@ function SydneyMenu:OpenMultipleChoicePanel(item)
         end
         table.insert(self._open_choice_dialog.items, title)
     end
-    choice_dialog:animate(function(o)	
+    choice_dialog:animate(function(o)
         local h = o:h()
         do_animation(0.1, function (p)
             o:set_alpha(math.lerp(0, 1, p))
@@ -1477,7 +1477,7 @@ end
 function SydneyMenu:CloseMultipleChoicePanel()
     self:SetItem(self._open_choice_dialog.parent_item, self._open_choice_dialog.parent_item.value)
     self._open_choice_dialog.panel:stop()
-    self._open_choice_dialog.panel:animate(function(o)	
+    self._open_choice_dialog.panel:animate(function(o)
         local h = o:h()
         local alpha = o:alpha()
         local border = o:child("border")
@@ -1572,7 +1572,7 @@ function SydneyMenu:CreateInput(params)
     })
 
     left_bottom:set_bottom(input_panel:h())
-    
+
     local right_top = input_panel:bitmap({
         texture = "guis/textures/pd2_mod_sydneyhud/hud_corner",
         name = "right_top",
@@ -1732,7 +1732,7 @@ function SydneyMenu:OpenColorMenu(item)
         y = 2,
         w = dialog:w() - 4,
         h = 0,
-    })	
+    })
     local color = item.value
     local red_panel = dialog:panel({
         name = "red_panel",
@@ -1752,7 +1752,7 @@ function SydneyMenu:OpenColorMenu(item)
     red_panel:bitmap({
         name = "bg",
         alpha = 0.1,
-    })	
+    })
     red_panel:text({
         name = "title",
         font_size = 18,
@@ -1790,7 +1790,7 @@ function SydneyMenu:OpenColorMenu(item)
         layer = 2,
         w =  math.max(1, green_panel:w() * (color.green / 1)),
         color = Color(0,color.green,0)
-    })	
+    })
     green_panel:bitmap({
         name = "bg",
         alpha = 0,
@@ -1832,7 +1832,7 @@ function SydneyMenu:OpenColorMenu(item)
         layer = 2,
         w = math.max(1, blue_panel:w() * (color.blue / 1)),
         color = Color(0,0,color.blue)
-    })	
+    })
     blue_panel:bitmap({
         name = "bg",
         alpha = 0,
