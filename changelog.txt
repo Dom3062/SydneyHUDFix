@@ -1,3 +1,9 @@
+4.2.3 (06. 07. 2020):
+Added trackers for Romanov Armor in Border Crossing heist and Federal Medals in Breakfast in Tijuana heist
+Improved options changing while you are in heíst
+Possible fix for a crash that could happen at the end of Holdout
+Menu: Fixed an issue where Color Selection for Enemy Snipers is cut off
+
 4.2.2 (19. 05. 2020):
 Added trackers for the new loot added in San Martín Bank Heist
 Added HUDList Minion Color
