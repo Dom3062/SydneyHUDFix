@@ -3,6 +3,7 @@
     "parent_menu": "sydneyhud_gadget_options",
     "title": "sydneyhud_gadget_options_sniper",
     "description": "sydneyhud_gadget_options_sniper_desc",
+    "h" : 500,
     "items": [
         {
             "type": "toggle",
