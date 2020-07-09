@@ -6,19 +6,6 @@ local sync_hostage_headcount_original = GroupAIStateBase.sync_hostage_headcount
 local convert_hostage_to_criminal_original = GroupAIStateBase.convert_hostage_to_criminal
 local sync_converted_enemy_original = GroupAIStateBase.sync_converted_enemy
 local _upd_criminal_suspicion_progress_original = GroupAIStateBase._upd_criminal_suspicion_progress
-local update_original = GroupAIStateBase.update
-function GroupAIStateBase:update(t, ...)
-    if self._client_hostage_count_expire_t then
-        if t < self._client_hostage_count_expire_t then
-            self:_client_hostage_count_cbk()
-        else
-            self._client_hostage_count_expire_t = nil
-        end
-    end
-    
-    return update_original(self, t, ...)
-end
-
 function GroupAIStateBase:update(t, ...)
     if self._client_hostage_count_expire_t and t < self._client_hostage_count_expire_t then
         self:_client_hostage_count_cbk()
