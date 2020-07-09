@@ -319,7 +319,7 @@ function HUDManager:set_teammate_custom_radial(i, data)
 end
 
 function HUDManager:SydneyHUDUpdate()
-    for _, panel in pairs(self._teammate_panels) do -- HUDTeammate
+    for _, panel in pairs(self._teammate_panels or {}) do -- HUDTeammate
         if panel then
             panel:SydneyHUDUpdate()
         end
