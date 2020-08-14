@@ -24,7 +24,6 @@ Fixed version of SydneyHUD after former team stopped updating this HUD
 * Armor/Inspire timers
 * Auto enable Sentry Gun AP
 * Auto laser on
-* Buy all assets
 * Changeable HUD scale
 * Changeable Waypoint Text Color
 * Chat feed system (Assault Phase / ECM battery / Inspire ACE CT / Down Warning)
@@ -57,7 +56,6 @@ Fixed version of SydneyHUD after former team stopped updating this HUD
 * Push to Interact
 * Push to Interact Delay
 * Reload interaction circle
-* Save/Load Preplanning
 * Screen Skipping
 * Some graphical tweaks
 * Spot Civilians
@@ -111,8 +109,5 @@ So, Big credit to these guys!
 * 🔺**Better Assault Indicator** by Dom [🔗](https://modworkshop.net/mydownloads.php?action=view_down&did=22712)
 * Menu code from **VoidUI** by VoidUI Team [🔗](https://modworkshop.net/mod/20997)
 * many of inspired mod
-
-###Removed mods from SydneyHUD
-* 🕗**Delayed Calls Fix** by SNH20 [🔗](https://paydaymods.com/mods/362/delayedcallsfix)
 
 **AND YOU.**
