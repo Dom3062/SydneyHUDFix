@@ -52,7 +52,7 @@ Hooks:Add("MenuManagerBuildCustomMenus", "MenuManagerBuildCustomMenus_SydneyHUD"
         SydneyHUD.Menu = SydneyHUD.Menu or SydneyMenu:new()
 		SydneyHUD.Menu:Open()
 	end
-	
+
 	local node = nodes["blt_options"]
 
 	local item_params = {
