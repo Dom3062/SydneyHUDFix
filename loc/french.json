@@ -441,8 +441,6 @@
     "sydneyhud_language": "Langue",
     "sydneyhud_language_desc": "Choisissez le language de votre choix pour SydneyHUD",
     "sydneyhud_language_autodetect": "Détecte automatiquement",
-    "sydneyhud_load_preplanning": "Charge la planification",
-    "sydneyhud_load_preplanning_desc": "Charge votre planification",
     "sydneyhud_menu_tweaks": "menu / Amélioration du lobby",
     "sydneyhud_menu_tweaks_desc": "Passe les écrans, Affiche/cache les armes",
 
@@ -471,8 +469,6 @@
     "sydneyhud_reset_desc": "Définis toutes les options de SydneyHUD par défaut",
     "sydneyhud_reset_message": "Êtes-vous sûr de réinitialiser toutes les options de SydneyHUD?\nNote: Redémarrage requis !",
     "sydneyhud_reset_yes": "Oui",
-    "sydneyhud_save_preplanning": "Sauvegarde la planification",
-    "sydneyhud_save_preplanning_desc": "Sauvegarde votre planification",
     "sydneyhud_show_assault_states": "Montrer les États d'assaut",
     "sydneyhud_show_assault_states_desc": "Montre les États d'assaut (Contrôle, Anticipation, Développement, Support et Retrait) dans la boîte d'assaut\nCette option n'est pas disponible en cas d'assaut sans fin et quand le capitaine est présent",
     "sydneyhud_time_format": "Format de Temps",

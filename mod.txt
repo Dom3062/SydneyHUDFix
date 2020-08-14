@@ -10,24 +10,6 @@
     "image": "logo.png",
     "keybinds": [
         {
-            "keybind_id": "save_pre",
-            "name": "sydneyhud_save_preplanning",
-            "description": "sydneyhud_save_preplanning_desc",
-            "script_path": "script/SavePreplanning.lua",
-            "run_in_menu": false,
-            "run_in_game": true,
-            "localized": true
-        },
-        {
-            "keybind_id": "load_pre",
-            "name": "sydneyhud_load_preplanning",
-            "description": "sydneyhud_load_preplanning_desc",
-            "script_path": "script/LoadPreplanning.lua",
-            "run_in_menu": false,
-            "run_in_game": true,
-            "localized": true
-        },
-        {
             "keybind_id": "check_ping",
             "name": "sydneyhud_ping",
             "description": "sydneyhud_ping_desc",

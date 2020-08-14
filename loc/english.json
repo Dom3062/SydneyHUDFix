@@ -451,8 +451,6 @@
     "sydneyhud_language": "Language",
     "sydneyhud_language_desc": "Choose the language you want to see in SydneyHUD",
     "sydneyhud_language_autodetect" : "Autodetect",
-    "sydneyhud_load_preplanning" : "Load Preplanning",
-    "sydneyhud_load_preplanning_desc" : "Loads your Preplanning",
     "sydneyhud_menu_tweaks": "Menu/lobby tweaks",
     "sydneyhud_menu_tweaks_desc": "Skip screens, show/hide weapons",
 
@@ -505,8 +503,6 @@
     "sydneyhud_reset_desc": "Sets all SydneyHUD options back to default",
     "sydneyhud_reset_message": "Are you sure you want to reset all SydneyHUD options?\nNote: Restart Required!",
     "sydneyhud_reset_yes": "Yes",
-    "sydneyhud_save_preplanning" : "Save Preplanning",
-    "sydneyhud_save_preplanning_desc" : "Save your Preplanning",
     "sydneyhud_show_assault_states" : "Show assault states",
     "sydneyhud_show_assault_states_desc" : "Show assault state (control, anticipation, build, sustain and fade) in the assault box\nThis option will not work on endless assault and when captain is present",
     "sydneyhud_time_format" : "Time Format",
