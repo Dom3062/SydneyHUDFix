@@ -184,6 +184,7 @@
     "kill_counter_color_r" : 255,
     "kill_counter_color_g" : 168,
     "kill_counter_color_b" : 0,
+    "kingpin_effect" : true,
     "language": 1,
     "laser_color_a_default" : 0.5,
     "laser_color_a_snipers": 0.38,

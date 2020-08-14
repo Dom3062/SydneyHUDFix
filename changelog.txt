@@ -1,4 +1,9 @@
-4.2.3 (06. 07. 2020):
+4.2.4 (xx. 07. 2020):
+Added Kingpin Effect
+Fixed an issue where Quick Fix buff did nothing in HUDList
+Fixed Swan Song flashing texture
+
+4.2.3 (09. 07. 2020):
 Added trackers for Romanov Armor in Border Crossing heist and Federal Medals in Breakfast in Tijuana heist
 Improved options changing while you are in heíst
 Possible fix for a crash that could happen at the end of Holdout

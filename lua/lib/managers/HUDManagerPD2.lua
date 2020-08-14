@@ -292,7 +292,7 @@ function HUDManager:set_teammate_custom_radial(i, data)
             local swan_song_left = hud.panel:bitmap({
                 name = "swan_song_left",
                 visible = false,
-                texture = "guis/textures/alphawipe_test",
+                texture = "guis/textures/pd2_mod_sydneyhud/alphawipe_test",
                 layer = 0,
                 color = Color(0, 0.7, 1),
                 blend_mode = "add",
@@ -316,6 +316,40 @@ function HUDManager:set_teammate_custom_radial(i, data)
         end
     end
     custom_radial_original(self, i, data)
+end
+
+local _f_set_player_ability_radial = HUDManager.set_player_ability_radial
+function HUDManager:set_player_ability_radial(data)
+    if SydneyHUD:GetOption("kingpin_effect") then
+        local hud = managers.hud:script( PlayerBase.PLAYER_INFO_HUD_FULLSCREEN_PD2)
+        if not hud.panel:child("chico_injector_left") then
+            local chico_injector_left = hud.panel:bitmap({
+                name = "chico_injector_left",
+                visible = false,
+                texture = "guis/textures/pd2_mod_sydneyhud/alphawipe_test",
+                layer = 0,
+                color = Color(1, 0.6, 0),
+                blend_mode = "add",
+                w = hud.panel:w(),
+                h = hud.panel:h(),
+                x = 0,
+                y = 0
+            })
+        end
+        local chico_injector_left = hud.panel:child("chico_injector_left")
+        if data.current < data.total and data.current > 0 and chico_injector_left then
+            chico_injector_left:set_visible(true)
+            local hudinfo = managers.hud:script(PlayerBase.PLAYER_INFO_HUD_PD2)
+            chico_injector_left:animate(hudinfo.flash_icon, 4000000000)
+        elseif hud.panel:child("chico_injector_left") then
+            chico_injector_left:stop()
+            chico_injector_left:set_visible(false)
+        end
+        if chico_injector_left and data.current == 0 then
+            chico_injector_left:set_visible(false)
+        end
+    end
+	_f_set_player_ability_radial(self, data)
 end
 
 function HUDManager:SydneyHUDUpdate()

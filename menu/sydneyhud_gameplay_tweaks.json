@@ -27,6 +27,15 @@
             "default_value": true
         },
         {
+            "type": "toggle",
+            "id": "kingpin_effect",
+            "title": "kingpin_effect",
+            "description": "kingpin_effect_desc",
+            "callback": "SetValue",
+            "value": "kingpin_effect",
+            "default_value": true
+        },
+        {
             "type": "divider",
             "size": 16
         },

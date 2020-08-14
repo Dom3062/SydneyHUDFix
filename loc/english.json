@@ -143,6 +143,8 @@
     "interact_time_hint_desc": "Show interact time when seeing interactable objects.",
     "kill_counter_color" : "Kill Counter Color",
     "kill_counter_color_desc" : "Changes Kill Counter color",
+    "kingpin_effect": "Kingpin Effect",
+    "kingpin_effect_desc": "Fullscreen effect when Kingpin is active",
     "laser_color_ray_alpha" : "Ray alpha",
     "laser_color_ray_alpha_desc" : "Ray alpha",
     "laser_color_laser_color": "Laser color",

@@ -5,5 +5,6 @@
         <file :name="hud_corner.texture" :path="hud_corner.texture"/>
         <file :name="check_bg.texture" :path="check_bg.texture"/>
         <file :name="check.texture" :path="check.texture"/>
+        <file :name="alphawipe_test.texture" :path="alphawipe_test.texture"/>
     </group>
 </assets>
