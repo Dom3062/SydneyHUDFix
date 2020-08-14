@@ -1,7 +1,8 @@
-4.2.4 (xx. 07. 2020):
+4.2.4 (xx. 08. 2020):
 Added Kingpin Effect
 Fixed an issue where Quick Fix buff did nothing in HUDList
 Fixed Swan Song flashing texture
+Removed "Buy all assets"
 
 4.2.3 (09. 07. 2020):
 Added trackers for Romanov Armor in Border Crossing heist and Federal Medals in Breakfast in Tijuana heist
