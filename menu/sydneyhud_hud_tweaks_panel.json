@@ -65,7 +65,7 @@
             "type": "toggle",
             "id": "show_inspire_timer",
             "title": "show_inspire_timer",
-            "description": "show_inspire_timer",
+            "description": "show_inspire_timer_desc",
             "callback": "SetValue",
             "value": "show_inspire_timer",
             "default_value": true

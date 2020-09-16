@@ -56,7 +56,8 @@ if not SydneyHUD then
             [2] = "japanese",
             [3] = "french",
             [4] = "russian",
-            [5] = "portuguese"
+            [5] = "portuguese",
+            [6] = "spanish"
         },
 
         -- var for util
