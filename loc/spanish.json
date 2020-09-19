@@ -104,9 +104,9 @@
     "hud_assault_assault_fss_mod_1" : "SUICIDIO EN MARCHA",
     "hud_assault_assault_fss_mod_2" : "MASOQUISMO EN MARCHA",
     "hud_assault_assault_fss_mod_3" : "¿TE GUSTA EL MASOQUISMO?",
-    "hud_assault_endless" : "ASALTO POLICIAL INFINITO EN MARCHA",
-    "hud_assault_endless_fss_mod_1" : "SUICIDIO INFINITO EN MARCHA",
-    "hud_assault_endless_fss_mod_2" : "MASOQUISMO INFINITO EN MARCHA",
+    "hud_assault_endless" : "ASALTO SIN FIN EN MARCHA",
+    "hud_assault_endless_fss_mod_1" : "SUICIDIO SIN FIN EN MARCHA",
+    "hud_assault_endless_fss_mod_2" : "MASOQUISMO SIN FIN EN MARCHA",
     "hud_assault_endless_fss_mod_3" : "LO TUYO ES EL MASOQUISMO...",
     "hud_phase" : "Fase de asalto: ",
     "hud_control" : "Control",
@@ -357,7 +357,7 @@
     "sydneyhud_hudlist_options_buff_options_boosts_desc" : "Efectos potenciadores de Gage/IA",
     "sydneyhud_hudlist_ignore_buff_combat_medic_desc" : "También incluida en el efecto compuesto de reducción de daño.",
     "sydneyhud_hudlist_ignore_buff_forced_friendship_desc" : "Efecto de equipo.",
-    "sydneyhud_hudlist_ignore_buff_hostage_taker_desc" : "También incluida en el efecto compuesto de regeneración de salud."
+    "sydneyhud_hudlist_ignore_buff_hostage_taker_desc" : "También incluida en el efecto compuesto de regeneración de salud.",
     "sydneyhud_hudlist_ignore_buff_inspire_boost_cooldown" : "Tiempo de espera para potenciar con Inspiración",
     "sydneyhud_hudlist_ignore_buff_inspire_revive_cooldown" : "Tiempo de espera para revivir con Inspiración",
     "sydneyhud_hudlist_ignore_buff_painkillers_desc" : "También incluida en el efecto compuesto de reducción de daño.",
@@ -366,12 +366,12 @@
     "sydneyhud_hudlist_ignore_buff_uppers_cooldown_desc" : "Efecto compuesto, aparecerá dentro del icono principal de efectos aunque se desactive esta opción.",
     "sydneyhud_hudlist_ignore_buff_bullseye_cooldown" : "Tiempo de espera de Implacable",
     "sydneyhud_hudlist_ignore_buff_die_hard_desc" : "También incluida en el efecto compuesto de reducción de daño.",
-    "sydneyhud_hudlist_ignore_buff_overkill_desc" : "También incluida en el efecto compuesto de potenciación de daño."
+    "sydneyhud_hudlist_ignore_buff_overkill_desc" : "También incluida en el efecto compuesto de potenciación de daño.",
     "sydneyhud_hudlist_ignore_buff_shock_and_awe_desc" : "Efecto de equipo.",
-    "sydneyhud_hudlist_ignore_buff_underdog_desc" : "También incluida en los efectos compuestos de reducción de daño y potenciación de daño por armas."
+    "sydneyhud_hudlist_ignore_buff_underdog_desc" : "También incluida en los efectos compuestos de reducción de daño y potenciación de daño por armas.",
     "sydneyhud_hudlist_ignore_buff_unseen_strike_cooldown" : "Tiempo de espera de Ataque sorpresa",
     "sydneyhud_hudlist_ignore_buff_unseen_strike_cooldown_desc" : "Efecto perjudicial compuesto, aparecerá dentro del icono principal de efectos aunque se desactive esta opción.",
-    "sydneyhud_hudlist_ignore_buff_berserker_desc" : "También incluida en los efectos compuestos de potenciación de daño por armas de fuego y de ataques cuerpo a cuerpo."
+    "sydneyhud_hudlist_ignore_buff_berserker_desc" : "También incluida en los efectos compuestos de potenciación de daño por armas de fuego y de ataques cuerpo a cuerpo.",
     "sydneyhud_hudlist_ignore_buff_bloodthirst_basic" : "Sed de sangre (básica)",
     "sydneyhud_hudlist_ignore_buff_bloodthirst_basic_desc" : "También incluída en el efecto compuesto de potenciación de daños cuerpo a cuerpo.",
     "sydneyhud_hudlist_ignore_buff_bloodthirst_aced" : "Sed de sangre (as)",
