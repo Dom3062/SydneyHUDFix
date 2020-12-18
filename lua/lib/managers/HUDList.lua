@@ -211,6 +211,7 @@ HUDListManager.UNIT_TYPES = {
 	security = 					{ type_id = "security",		category = "enemies",	long_name = "Sec. Guard" },
     security_undominatable ={ type_id = "security",		category = "enemies",	long_name = "Sec. Guard" },
     security_mex = { type_id = "security", category = "enemies", long_name = "Sp. Sec. G." },
+    security_mex_no_pager = { type_id = "cop", category = "enemies", long_name = "S. G. (No Pager)"},
 	gensec = 					{ type_id = "security",		category = "enemies",	long_name = "GenSec" },
 	bolivian =					{ type_id = "thug",			category = "enemies",	long_name = "Sosa Thug" },
 	gangster = 					{ type_id = "thug",			category = "enemies",	long_name = "Gangster" },
@@ -1753,6 +1754,30 @@ function HUDList.Base:set_target_alpha(alpha, instant)
             self:_set_visible(target > 0)
         end
 
+        if not alive(self._panel) or not self._panel then
+            log(SydneyHUD.error .. " Panel is dead or nil")
+            return
+        end
+        if not do_fade then
+            log(SydneyHUD.error .. " Animate function is nil")
+            return
+        end
+        if not self._panel.alpha then
+            log(SydneyHUD.error .. " Panel does not have alpha function")
+            return
+        end
+        if not alpha then
+            log(SydneyHUD.error .. " alpha is nil")
+            return
+        end
+        if not self._internal then
+            log(SydneyHUD.error .. " Internal panel info is nil")
+            return
+        end
+        if not self._internal.fade_rate then
+            log(SydneyHUD.error .. " Fade rate is nil")
+            return
+        end
         self._fade_thread = self._panel:animate(do_fade, self._panel:alpha(), alpha, self._internal.fade_rate)
     end
 end
