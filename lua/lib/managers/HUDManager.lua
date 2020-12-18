@@ -84,6 +84,7 @@ local CharacterData = {
     ["shadow_spooc"] = "ARK GUARDIAN",
     ["bolivian_indoors_mex"] = "BOLIVIAN GUARD",
     ["security_mex"] = "SPANISH SECURITY GUARD",
+    ["security_mex_no_pager"] = "SPANISH SECURITY GUARD (NO PAGER)",
     ["civilian_mariachi"] = "MARIACHI CIVILIAN"
 }
 
@@ -110,7 +111,7 @@ local function FixNames()
         CharacterData["swat"] = "MURKYWATER LIGHT" -- Death Sentence
         CharacterData["heavy_swat"] = "MURKYWATER HEAVY" -- Death Sentence
         return
-    elseif faction == "russian" then -- Every mission with Russian enemies
+    elseif faction == "russia" then -- Every mission with Russian enemies
         CharacterData["fbi_swat"] = "RUSSIAN LIGHT"
         CharacterData["city_swat"] = "RUSSIAN LIGHT"
         CharacterData["fbi_heavy_swat"] = "RUSSIAN HEAVY"
