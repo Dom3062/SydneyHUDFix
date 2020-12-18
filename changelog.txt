@@ -1,3 +1,13 @@
+4.2.5 (18. 12. 2020):
+Added Spanish translation
+Added trackers for the enemies in Buluc's Mansion
+Possible fix for crash "set_target_alpha()"
+Fixed an issue where teammate's downs were not counted
+Fixed an issue where Russian enemies did not have proper name
+Fixed an issue where "Hide Hostage Panel" option did not work
+Menu: Fixed an issue where a description text was not used
+Menu: Fixed an issue an error string in the assault panel options 
+
 4.2.4 (14. 08. 2020):
 Added Kingpin Effect
 Fixed an issue where Quick Fix buff did nothing in HUDList
