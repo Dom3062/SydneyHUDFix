@@ -1,9 +1,18 @@
+local function HideHostages(self)
+    self:_hide_hostages()
+    self._hide_hostages = function() end
+    self._show_hostages = function() end
+end
+
 local init_original = HUDAssaultCorner.init
 function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
     init_original(self, hud, full_hud, tweak_hud)
     self.center_assault_banner = SydneyHUD:GetOption("center_assault_banner")
     self.hudlist_enemy = SydneyHUD:GetModOption("hudlist", "show_enemies")
     self.hudlist_enabled = SydneyHUD:GetModOption("hudlist", "enabled")
+    if SydneyHUD:GetOption("hide_hostage_panel") then
+        HideHostages(self)
+    end
     if not BAI then -- Initialize these variables when BAI is not installed or running
         self._assault_endless_color = Color.red
         self._state_control_color = Color.white
@@ -53,7 +62,7 @@ function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
         }
     end
     if self._hud_panel:child("hostages_panel") and self.hudlist_enabled then
-        self:_hide_hostages()
+        HideHostages(self)
     end
     if self.center_assault_banner then
         self._hud_panel:child("assault_panel"):set_right(self._hud_panel:w() / 2 + 150)
@@ -99,10 +108,10 @@ function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
                 w = 145,
                 h = 38
             })
-    
+
             wave_panel:set_top(0)
             wave_panel:set_right(self._hud_panel:child("hostages_panel"):left() + 75)
-    
+
             local waves_icon = wave_panel:bitmap({
                 texture = "guis/textures/pd2/specialization/icons_atlas",
                 name = "waves_icon",
@@ -125,11 +134,11 @@ function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
                 y = 0,
                 h = wave_h
             }, {blend_mode = "add"})
-    
+
             waves_icon:set_right(wave_panel:w())
             waves_icon:set_center_y(self._wave_bg_box:h() * 0.5)
             self._wave_bg_box:set_right(waves_icon:left())
-    
+
             local num_waves = self._wave_bg_box:text({
                 vertical = "center",
                 name = "num_waves",
