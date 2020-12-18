@@ -1,6 +1,7 @@
 local init_original = HUDManager.init
 function HUDManager:init(...)
     init_original(self, ...)
+    SydneyHUD:Init()
     self._deferred_detections = {}
 end
 

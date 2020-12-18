@@ -317,8 +317,8 @@ if not SydneyHUD then
             end
             -- NOTE: Display 0 instead of nil
             local message = peer:name() .. " +" .. tostring(self._down_count[peer_id] or 0) .. " " .. down
-            local is_feed = SydneyHUD:GetOption("replenished_chat_info_feed")
-            if SydneyHUD:GetOption("replenished_chat_info") then
+            local is_feed = self:GetOption("replenished_chat_info_feed")
+            if self:GetOption("replenished_chat_info") then
                 self:SendChatMessage("Replenished", message, is_feed, "00ff04")
             end
             self._down_count[peer_id] = 0
@@ -335,16 +335,16 @@ if not SydneyHUD then
                 warn_down = warn_down + nine_lives
             end
 
-            SydneyHUD._down_count[peer_id] = (SydneyHUD._down_count[peer_id] or 0) + 1
+            self._down_count[peer_id] = (self._down_count[peer_id] or 0) + 1
             local is_feed
 
-            if SydneyHUD._down_count[peer_id] == warn_down and SydneyHUD:GetOption("critical_down_warning_chat_info") then
-                local message = peer:name() .. " was downed " .. tostring(SydneyHUD._down_count[peer_id]) .. " times"
-                is_feed = SydneyHUD:GetOption("critical_down_warning_chat_info_feed")
+            if self._down_count[peer_id] == warn_down and self:GetOption("critical_down_warning_chat_info") then
+                local message = peer:name() .. " was downed " .. tostring(self._down_count[peer_id]) .. " times"
+                is_feed = self:GetOption("critical_down_warning_chat_info_feed")
                 self:SendChatMessage("Warning!", message, is_feed, "ff0000")
-            elseif SydneyHUD:GetOption("down_warning_chat_info") then
-                local message = peer:name() .. " was downed (" .. tostring(SydneyHUD._down_count[peer_id]) .. "/" .. warn_down .. ")"
-                is_feed = SydneyHUD:GetOption("down_warning_chat_info_feed")
+            elseif self:GetOption("down_warning_chat_info") then
+                local message = peer:name() .. " was downed (" .. tostring(self._down_count[peer_id]) .. "/" .. warn_down .. ")"
+                is_feed = self:GetOption("down_warning_chat_info_feed")
                 self:SendChatMessage("Warning", message, is_feed, "ff0000")
             end
         end
@@ -438,6 +438,19 @@ if not SydneyHUD then
                 LuaNetworking:SendToPeers("SyncAssaultPhase", state) -- KineticHUD and NobleHUD
             end
         end
+    end
+
+    function SydneyHUD:Init()
+        managers.mission:add_global_event_listener("SydneyHUD_OnPeerRemoved", {
+		    "on_peer_removed"
+        }, callback(self, self, "OnPeerLeft"))
+    end
+
+    function SydneyHUD:OnPeerLeft(peer_id)
+        if not peer_id then -- Just in case
+            return
+        end
+        self._down_count[peer_id] = nil
     end
 
     SydneyHUD:Load()
