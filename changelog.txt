@@ -1,3 +1,8 @@
+4.2.6 (04. 04. 2021):
+Added name for the Triad Thugs
+Fixed an issue where kills are counted as double kills
+Dragon Heist: Fixed an issue where C4 Timer is stucked in HUDList when picked up
+
 4.2.5 (18. 12. 2020):
 Added Spanish translation
 Added trackers for the enemies in Buluc's Mansion

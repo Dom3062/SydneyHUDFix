@@ -36,6 +36,8 @@ if not SydneyHUD then
         error = "[SydneyHUD Error] ",
         dev = "[SydneyHUD Dev] ",
 
+        _cache = {},
+
         SaveDataVer = 3,
 
         ModVersion = nil, -- Used for caching mod version

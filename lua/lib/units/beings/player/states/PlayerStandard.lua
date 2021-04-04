@@ -5,7 +5,7 @@ function PlayerStandard:_do_action_intimidate(t, interact_type, ...)
         managers.gameinfo:event("buff", "activate", "inspire_debuff")
         managers.gameinfo:event("buff", "set_duration", "inspire_debuff", { duration = duration })
     end
-    
+
     return _do_action_intimidate_original(self, t, interact_type, ...)
 end
 
@@ -19,11 +19,11 @@ function PlayerStandard:_do_melee_damage(t, ...)
         self._state_data.charging_melee = false
     end
     local result = _do_melee_damage_original(self, t, ...)
-		
+
     local stack = self._state_data.stacking_dmg_mul and self._state_data.stacking_dmg_mul.melee
     if stack then
         managers.gameinfo:event("buff", stack[2] > 0 and "activate" or "deactivate", "melee_stack_damage")
-        
+
         if stack[2] > 0 then
             local value = managers.player:upgrade_value("melee", "stacking_hit_damage_multiplier", 0)
             managers.gameinfo:event("buff", "set_duration", "melee_stack_damage", { expire_t = stack[1] })
@@ -31,7 +31,7 @@ function PlayerStandard:_do_melee_damage(t, ...)
             managers.gameinfo:event("buff", "set_value", "melee_stack_damage", { value = 1 + stack[2] * value })
         end
     end
-    
+
     return result
 end
 
@@ -42,7 +42,7 @@ function PlayerStandard:_start_action_melee(t, input, instant)
         managers.gameinfo:event("player_action", "activate", "melee_charge")
         managers.gameinfo:event("player_action", "set_duration", "melee_charge", { duration = duration })
         if SydneyHUD:GetOption("show_melee_interaction") then
-            managers.hud:animate_interaction_bar(duration, nil, true)
+            managers.hud:animate_interaction_bar(duration)
             self._state_data.charging_melee = true
         end
     end
@@ -56,7 +56,7 @@ function PlayerStandard:_start_action_interact(...)
         managers.gameinfo:event("buff", "activate", "die_hard")
         managers.gameinfo:event("buff", "set_value", "die_hard", { value = value })
     end
-    
+
     return _start_action_interact_original(self, ...)
 end
 
@@ -65,7 +65,7 @@ function PlayerStandard:_interupt_action_interact(...)
     if self._interact_expire_t and managers.player:has_category_upgrade("player", "interacting_damage_multiplier") then
         managers.gameinfo:event("buff", "deactivate", "die_hard")
     end
-    
+
     return _interupt_action_interact_original(self, ...)
 end
 
@@ -86,26 +86,26 @@ end
 
 --OVERRIDE
 function PlayerStandard:_update_omniscience(t, dt)
-    local action_forbidden = 
-        not managers.player:has_category_upgrade("player", "standstill_omniscience") or 
-        managers.player:current_state() == "civilian" or 
-        self:_interacting() or 
-        self._ext_movement:has_carry_restriction() or 
-        self:is_deploying() or 
-        self:_changing_weapon() or 
-        self:_is_throwing_projectile() or 
-        self:_is_meleeing() or 
-        self:_on_zipline() or 
-        self._moving or 
-        self:running() or 
-        self:_is_reloading() or 
-        self:in_air() or 
-        self:in_steelsight() or 
-        self:is_equipping() or 
-        self:shooting() or 
-        not managers.groupai:state():whisper_mode() or 
+    local action_forbidden =
+        not managers.player:has_category_upgrade("player", "standstill_omniscience") or
+        managers.player:current_state() == "civilian" or
+        self:_interacting() or
+        self._ext_movement:has_carry_restriction() or
+        self:is_deploying() or
+        self:_changing_weapon() or
+        self:_is_throwing_projectile() or
+        self:_is_meleeing() or
+        self:_on_zipline() or
+        self._moving or
+        self:running() or
+        self:_is_reloading() or
+        self:in_air() or
+        self:in_steelsight() or
+        self:is_equipping() or
+        self:shooting() or
+        not managers.groupai:state():whisper_mode() or
         not tweak_data.player.omniscience
-    
+
     if action_forbidden then
         if self._state_data.omniscience_t then
             managers.gameinfo:event("buff", "deactivate", "sixth_sense")
@@ -113,18 +113,18 @@ function PlayerStandard:_update_omniscience(t, dt)
         end
         return
     end
-    
+
     if not self._state_data.omniscience_t then
         managers.gameinfo:event("buff", "activate", "sixth_sense")
         managers.gameinfo:event("buff", "set_duration", "sixth_sense", { duration = tweak_data.player.omniscience.start_t, no_expire = true })
         managers.gameinfo:event("buff", "set_stack_count", "sixth_sense", { stack_count = nil })
     end
-    
+
     self._state_data.omniscience_t = self._state_data.omniscience_t or t + tweak_data.player.omniscience.start_t
     if t >= self._state_data.omniscience_t then
         local sensed_targets = World:find_units_quick("sphere", self._unit:movement():m_pos(), tweak_data.player.omniscience.sense_radius, managers.slot:get_mask("trip_mine_targets"))
         managers.gameinfo:event("buff", "set_stack_count", "sixth_sense", { stack_count = #sensed_targets })
-        
+
         for _, unit in ipairs(sensed_targets) do
             if alive(unit) and not unit:base():char_tweak().is_escort then
                 self._state_data.omniscience_units_detected = self._state_data.omniscience_units_detected or {}
@@ -174,7 +174,7 @@ function PlayerStandard:_start_action_reload(t, ...)
     if self._equipped_unit:base():can_reload() then
         if managers.player:current_state() ~= "bleed_out" and SydneyHUD:GetOption("show_reload_interaction") then
             self._state_data._isReloading = true
-            managers.hud:animate_interaction_bar(self._state_data.reload_expire_t - t)
+            managers.hud:animate_interaction_bar(self._state_data.reload_expire_t - t, nil, true)
         end
         managers.gameinfo:event("player_action", "activate", "reload", { duration = self._state_data.reload_expire_t - t })
     end

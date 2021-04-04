@@ -245,7 +245,7 @@ function HUDManager:animate_interaction_bar(current, total, hide)
     self:show_interaction_bar(current, total)
     self._hud_interaction._animated = true
 
-    local function feed_circle(o, total, hide)
+    local function feed_circle(o)
 		local t = 0
 
 		while t < total do
@@ -258,13 +258,13 @@ function HUDManager:animate_interaction_bar(current, total, hide)
             self:hide_interaction_bar(true)
         end
     end
-    
+
     if _G.IS_VR then
 		return
 	end
 
 	self._hud_interaction._interact_circle._panel:stop()
-	self._hud_interaction._interact_circle._panel:animate(feed_circle, total, hide == nil)
+	self._hud_interaction._interact_circle._panel:animate(feed_circle)
 end
 
 local remove_interact_original = HUDManager.remove_interact
