@@ -85,7 +85,8 @@ local CharacterData = {
     ["bolivian_indoors_mex"] = "BOLIVIAN GUARD",
     ["security_mex"] = "SPANISH SECURITY GUARD",
     ["security_mex_no_pager"] = "SPANISH SECURITY GUARD (NO PAGER)",
-    ["civilian_mariachi"] = "MARIACHI CIVILIAN"
+    ["civilian_mariachi"] = "MARIACHI CIVILIAN",
+    ["triad"] = "TRIAD THUG"
 }
 
 local function FixNames()

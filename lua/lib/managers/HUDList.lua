@@ -209,7 +209,7 @@ HUDListManager.UNIT_TYPES = {
     bolivian_indoors =		{ type_id = "security",		category = "enemies",	long_name = "Sosa Security" },
     bolivian_indoors_mex =  { type_id = "security",         category = "enemies",   long_name = "Bolivian Guard" },
 	security = 					{ type_id = "security",		category = "enemies",	long_name = "Sec. Guard" },
-    security_undominatable ={ type_id = "security",		category = "enemies",	long_name = "Sec. Guard" },
+    security_undominatable = { type_id = "security",		category = "enemies",	long_name = "Sec. Guard" },
     security_mex = { type_id = "security", category = "enemies", long_name = "Sp. Sec. G." },
     security_mex_no_pager = { type_id = "cop", category = "enemies", long_name = "S. G. (No Pager)"},
 	gensec = 					{ type_id = "security",		category = "enemies",	long_name = "GenSec" },
@@ -257,6 +257,7 @@ HUDListManager.UNIT_TYPES = {
 	minion =						{ type_id = "minion",		category = "minions",	long_name = "Joker" },
 	cop_hostage =				{ type_id = "cop_hostage",	category = "hostages",	long_name = "Dominated" },
 	civ_hostage =				{ type_id = "civ_hostage",	category = "hostages",	long_name = "Hostage" },
+    triad =                     { type_id = "thug", category = "enemies", long_name = "Triad Thug" }
 }
 
 HUDListManager.SPECIAL_PICKUP_TYPES = {
@@ -1756,10 +1757,6 @@ function HUDList.Base:set_target_alpha(alpha, instant)
 
         if not alive(self._panel) or not self._panel then
             log(SydneyHUD.error .. " Panel is dead or nil")
-            return
-        end
-        if not do_fade then
-            log(SydneyHUD.error .. " Animate function is nil")
             return
         end
         if not self._panel.alpha then
