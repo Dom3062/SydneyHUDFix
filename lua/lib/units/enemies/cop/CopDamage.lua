@@ -1,3 +1,17 @@
+--[[
+    Fixes an issue where kills are counted twice
+    This file is hooked twice.
+    First hook is in "lib/managers/statisticsmanager"
+    Second hook is called when a cop is spawned
+    The condition below fixes it, so the hooks below are only called once, not twice.
+    Resulting in kills getting doubled.
+]]
+if SydneyHUD._cache.CopDamage then
+    return
+else
+    SydneyHUD._cache.CopDamage = true
+end
+
 local convert_to_criminal_original = CopDamage.convert_to_criminal
 local _on_damage_received_original = CopDamage._on_damage_received
 local bullet_original = CopDamage.damage_bullet
@@ -131,7 +145,7 @@ function CopDamage:_process_kill(aggressor, i_body)
             local body_name = i_body and self._unit:body(i_body) and self._unit:body(i_body):name()
             local headshot = self._head_body_name and body_name and body_name == self._ids_head_body_name or false
             local is_special = managers.groupai:state()._special_unit_types[self._unit:base()._tweak_table] or false
-            if not CopDamage.is_civilian(self._unit:base()._tweak_table) then
+            if not self.is_civilian(self._unit:base()._tweak_table) then
                 managers.hud:increment_kill_count(panel_id, is_special, headshot)
             end
         end
