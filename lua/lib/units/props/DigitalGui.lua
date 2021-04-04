@@ -8,6 +8,7 @@ local timer_resume_original = DigitalGui.timer_resume
 local _timer_stop_original = DigitalGui._timer_stop
 local load_original = DigitalGui.load
 local destroy_original = DigitalGui.destroy
+local set_visible_original = DigitalGui.set_visible
 
 function DigitalGui:init(unit, ...)
     self._info_key = tostring(unit:key())
@@ -77,6 +78,13 @@ end
 function DigitalGui:destroy(...)
     self:_do_timer_callback("destroy")
     return destroy_original(self, ...)
+end
+
+function DigitalGui:set_visible(visible)
+    if not visible and managers.gameinfo then
+		self:_do_timer_callback("stop")
+	end
+	set_visible_original(self, visible)
 end
 
 function DigitalGui:_do_timer_callback(event, ...)
