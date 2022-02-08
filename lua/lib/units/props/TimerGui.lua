@@ -17,12 +17,12 @@ end
 
 function TimerGui:set_background_icons(...)
     local skills = self._unit:base().get_skill_upgrades and self._unit:base():get_skill_upgrades()
-    
+
     if skills then
         local can_upgrade = false
         local interact_ext = self._unit:interaction()
         local pinfo = interact_ext and interact_ext.get_player_info_id and interact_ext:get_player_info_id()
-        
+
         if skills and pinfo then
             for i, _ in pairs(interact_ext:split_info_id(pinfo)) do
                 if not skills[i] then
@@ -31,17 +31,17 @@ function TimerGui:set_background_icons(...)
                 end
             end
         end
-        
+
         local upgrade_table = {
             restarter = (skills.auto_repair_level_1 or 0) + (skills.auto_repair_level_2 or 0),
             faster = (skills.speed_upgrade_level or 0),
             silent = (skills.reduced_alert and 1 or 0) + (skills.silent_drill and 1 or 0),
         }
-        
+
         managers.gameinfo:event("timer", "set_upgradable", self._info_key, can_upgrade)
         managers.gameinfo:event("timer", "set_acquired_upgrades", self._info_key, upgrade_table)
     end
-    
+
     return set_background_icons_original(self, ...)
 end
 
