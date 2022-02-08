@@ -242,7 +242,6 @@
     "show_damage_popup": true,
     "show_deployable_waypoint": true,
     "show_detection_rate": true,
-    "show_downs_left" : true,
     "show_enemy_health": true,
     "show_headshot_kills": true,
     "show_heist_time": true,

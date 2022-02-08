@@ -197,8 +197,6 @@
     "show_damage_popup_desc": "Mostrar el indicador emergente de daño.",
     "show_detection_rate": "Mostrar riesgo de detección (sigilo)",
     "show_detection_rate_desc": "Mostrar tu riesgo de detección.",
-    "show_downs_left" : "Mostrar incapacitaciones restantes (combate)",
-    "show_downs_left_desc" : "Mostrar tus incapacitaciones restantes.",
     "show_enemy_health": "Barra de salud de enemigos",
     "show_enemy_health_desc": "Mostrar la barra de salud de enemigos.",
     "show_grenades_in_preplanning" : "Mostrar granadas en la planificación previa",

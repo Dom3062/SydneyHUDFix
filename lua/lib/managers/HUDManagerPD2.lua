@@ -132,36 +132,25 @@ function HUDManager:teammate_progress(peer_id, type_index, enabled, tweak_data_i
 end
 
 function HUDManager:_mugshot_id_to_panel_id(id)
-    for _, data in pairs(managers.criminals:characters()) do
-        if data and data.data and data.data.mugshot_id == id then
-            return data.data.panel_id
+    for _, char in pairs(managers.criminals:characters()) do
+        if char and char.data and char.data.mugshot_id == id then
+            return char.data.panel_id
         end
     end
 end
 
 function HUDManager:_mugshot_id_to_unit(id)
-    for _, data in pairs(managers.criminals:characters()) do
-        if data and data.data and data.data.mugshot_id == id then
-            return data.unit
+    for _, char in pairs(managers.criminals:characters()) do
+        if char and char.data and char.data.mugshot_id == id then
+            return char.unit
         end
     end
-end
-
-local set_mugshot_downed_original = HUDManager.set_mugshot_downed
-function HUDManager:set_mugshot_downed(id)
-    local panel_id = self:_mugshot_id_to_panel_id(id)
-    local unit = self:_mugshot_id_to_unit(id)
-    if panel_id and unit and unit:movement().current_state_name and unit:movement():current_state_name() == "bleed_out" then
-        self._teammate_panels[panel_id]:increment_revives()
-    end
-    set_mugshot_downed_original(self, id)
 end
 
 local set_mugshot_custody_original = HUDManager.set_mugshot_custody
 function HUDManager:set_mugshot_custody(id)
     local panel_id = self:_mugshot_id_to_panel_id(id)
     if panel_id then
-        self._teammate_panels[panel_id]:reset_revives()
         self._teammate_panels[panel_id]:set_player_in_custody(true)
     end
     set_mugshot_custody_original(self, id)
@@ -174,12 +163,6 @@ function HUDManager:set_mugshot_normal(id)
         self._teammate_panels[panel_id]:set_player_in_custody(false)
     end
     set_mugshot_normal_original(self, id)
-end
-
-function HUDManager:reset_teammate_revives(panel_id)
-    if self._teammate_panels[panel_id] then
-        self._teammate_panels[panel_id]:reset_revives()
-    end
 end
 
 function HUDManager:set_mugshot_voice(id, active)
@@ -245,6 +228,10 @@ function HUDManager:animate_interaction_bar(current, total, hide)
     self:show_interaction_bar(current, total)
     self._hud_interaction._animated = true
 
+    if _G.IS_VR then
+		return
+	end
+
     local function feed_circle(o)
 		local t = 0
 
@@ -259,12 +246,10 @@ function HUDManager:animate_interaction_bar(current, total, hide)
         end
     end
 
-    if _G.IS_VR then
-		return
-	end
-
-	self._hud_interaction._interact_circle._panel:stop()
-	self._hud_interaction._interact_circle._panel:animate(feed_circle)
+    if self._hud_interaction._interact_circle then
+        self._hud_interaction._interact_circle._panel:stop()
+        self._hud_interaction._interact_circle._panel:animate(feed_circle)
+    end
 end
 
 local remove_interact_original = HUDManager.remove_interact
@@ -308,7 +293,7 @@ function HUDManager:set_teammate_custom_radial(i, data)
             swan_song_left:set_visible(true)
             local hudinfo = managers.hud:script(PlayerBase.PLAYER_INFO_HUD_PD2)
             swan_song_left:animate(hudinfo.flash_icon, 4000000000)
-        elseif hud.panel:child("swan_song_left") then
+        elseif swan_song_left then
             swan_song_left:stop()
             swan_song_left:set_visible(false)
         end
@@ -322,7 +307,7 @@ end
 local _f_set_player_ability_radial = HUDManager.set_player_ability_radial
 function HUDManager:set_player_ability_radial(data)
     if SydneyHUD:GetOption("kingpin_effect") then
-        local hud = managers.hud:script( PlayerBase.PLAYER_INFO_HUD_FULLSCREEN_PD2)
+        local hud = managers.hud:script(PlayerBase.PLAYER_INFO_HUD_FULLSCREEN_PD2)
         if not hud.panel:child("chico_injector_left") then
             local chico_injector_left = hud.panel:bitmap({
                 name = "chico_injector_left",
@@ -342,7 +327,7 @@ function HUDManager:set_player_ability_radial(data)
             chico_injector_left:set_visible(true)
             local hudinfo = managers.hud:script(PlayerBase.PLAYER_INFO_HUD_PD2)
             chico_injector_left:animate(hudinfo.flash_icon, 4000000000)
-        elseif hud.panel:child("chico_injector_left") then
+        elseif chico_injector_left then
             chico_injector_left:stop()
             chico_injector_left:set_visible(false)
         end
@@ -353,84 +338,22 @@ function HUDManager:set_player_ability_radial(data)
 	_f_set_player_ability_radial(self, data)
 end
 
-function HUDManager:SydneyHUDUpdate()
-    for _, panel in pairs(self._teammate_panels or {}) do -- HUDTeammate
-        if panel then
-            panel:SydneyHUDUpdate()
-        end
+if not BAI then
+    function HUDManager:SetEndlessClient()
+        self._hud_assault_corner:SetEndlessClient(true)
     end
-    self._hud_interaction:SydneyHUDUpdate() -- HUDInteraction
-    if self.UpdateHUDListSettings then
-        --self:UpdateHUDListSettings()
+
+    function HUDManager:StartEndlessAssault()
+        self._hud_assault_corner:StartEndlessAssaultClient()
+    end
+
+    function HUDManager:SetNormalAssaultOverride()
+        self._hud_assault_corner:SetNormalAssaultOverride()
     end
 end
 
 if not SydneyHUD:GetOption("hudlist_enabled") then
     return
-end
-
-function HUDManager:UpdateHUDListSettings()
-    local options = HUDListManager.ListOptions
-    local avoid = --not changeable by the player
-    {
-        ["right_list_y"] = true,
-        ["left_list_y"] = true
-    }
-    local minus_one = --multichoice
-    {
-        ["show_ammo_bags"] = true,
-        ["show_doc_bags"] = true,
-        ["show_body_bags"] = true,
-        ["show_grenade_crates"] = true,
-        ["show_sentries"] = true,
-        ["show_minions"] = true,
-        ["show_enemies"] = true,
-        ["show_hostages"] = true,
-        ["show_loot"] = true
-    }
-    local k2
-    for k, _ in pairs(options) do
-        if type(options[k]) ~= "table" and not avoid[k] then
-            if minus_one[k] then
-                managers.hudlist:change_setting(k, SydneyHUD:GetModOption("hudlisk", k) - 1)
-            else
-                managers.hudlist:change_setting(k, SydneyHUD:GetModOption("hudlist", k))
-            end
-            log(SydneyHUD.dev .. "k: " .. k)
-        else
-            log(SydneyHUD.dev .. "k is table; skipping")
-        end
-    end
-    for k, _ in pairs(options.ignore_special_pickups) do
-        managers.hudlist:change_ignore_special_pickup_setting(k, SydneyHUD:GetHUDListItemOption(k))
-    end
-    local tbl =
-    {
-        ["aggressive_reload_aced"] = "aggressive_reload",
-        ["armor_break_invulnerable"] = "armor_break_invulnerability",
-        ["biker"] = "prospect",
-        ["chico_injector"] = "injector",
-        ["close_contact"] = "close_contact_no_talk",
-        ["grinder"] = "histamine",
-        ["maniac"] = "excitement",
-        ["melee_stack_damage"] = "overdog_melee_damage",
-        ["muscle_regen"] = "800_pound_gorilla",
-        ["overdog"] = "overdog_damage_reduction",
-        ["pain_killers"] = "painkillers",
-        ["running_from_death"] = "running_from_death_basic",
-        ["sicario_dodge"] = "twitch",
-
-        -- Custom buff
-        ["crew_inspire"] = "ai_inspire_cooldown"
-    }
-    for k, _ in pairs(options.ignore_buffs) do
-        k2 = tbl[k] or k
-        managers.hudlist:change_ignore_buff_setting(k, SydneyHUD:GetHUDListBuffOption(k2))
-    end
-
-    for k, _ in pairs(options.ignore_player_actions) do
-        managers.hudlist:change_ignore_player_action_setting(k, SydneyHUD:GetHUDListPlayerActionOption(k))
-    end
 end
 
 dofile(SydneyHUD.LuaPath .. "lib/managers/HUDList.lua")

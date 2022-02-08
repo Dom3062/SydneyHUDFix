@@ -14,19 +14,6 @@ function HUDTeammate:init(i, ...)
     self:_init_revivecount()
 end
 
-function HUDTeammate:SydneyHUDUpdate()
-    self:refresh_kill_count_visibility()
-    if self._kills_panel then
-        local color = SydneyHUD:GetColor("kill_counter_color")
-        if self._kills_panel:child("kills_icon") then
-            self._kills_panel:child("kills_icon"):set_color(color)
-        end
-        if self._kills_panel:child("kills_text") then
-            self._kills_panel:child("kills_text"):set_color(color)
-        end
-    end
-end
-
 function HUDTeammate:inject_health_glow()
     local radial_health_panel = self._player_panel:child( "radial_health_panel" )
     local underdog_glow = radial_health_panel:bitmap({
@@ -126,23 +113,6 @@ function HUDTeammate:_init_revivecount()
         font_size = SydneyHUD:GetOption("counter_font_size"), -- default 14
         font = tweak_data.hud_players.ammo_font
     })
-    self._revives_counter = self._player_panel:child("radial_health_panel"):text({
-        name = "revives_counter",
-        alpha = 1,
-        visible = SydneyHUD:GetOption("show_downs_left") and not managers.groupai:state():whisper_mode() or false,
-        text = "0",
-        layer = 1,
-        color = Color.white,
-        w = self._player_panel:child("radial_health_panel"):w(),
-        x = 0,
-        y = 0,
-        h = self._player_panel:child("radial_health_panel"):h(),
-        vertical = "center",
-        align = "center",
-        font_size = SydneyHUD:GetOption("counter_font_size"), -- default 14
-        font = tweak_data.hud_players.ammo_font
-    })
-    self._revives_count = 0
     if self._main_player then
         self:set_detection_risk((managers.blackmarket:get_suspicion_offset_of_outfit_string(managers.blackmarket:unpack_outfit_from_string(managers.blackmarket:outfit_string()), tweak_data.player.SUSPICION_OFFSET_LERP or 0.75)))
     end
@@ -480,29 +450,6 @@ function HUDTeammate:set_stamina_meter_visibility(visible)
     end
 end
 
-function HUDTeammate:increment_revives()
-    if self._revives_counter then
-        self._revives_count = self._revives_count + 1
-        self._revives_counter:set_text(tostring(self._revives_count))
-    end
-end
-
-function HUDTeammate:UpdateRevives(new_downs)
-end
-
-function HUDTeammate:reset_revives()
-    if self._revives_counter then
-        self._revives_count = 0
-        if not self._main_player then
-            self._revives_counter:set_text(tostring(self._revives_count))
-        else
-            self._revives_counter:set_text(tostring(3 + managers.player:upgrade_value("player", "additional_lives", 0))
-            .. (managers.player:has_category_upgrade("player", "pistol_revive_from_bleed_out")
-            and ("/" .. managers.player:upgrade_value("player", "pistol_revive_from_bleed_out", 0)) or ""))
-        end
-    end
-end
-
 function HUDTeammate:set_armor_timer_visibility(visible)
     if self._armor_timer then
         self._armor_timer:set_visible(visible and not self._is_in_custody)
@@ -521,12 +468,6 @@ function HUDTeammate:set_inspire_timer_visibility(visible)
     end
 end
 
-function HUDTeammate:set_revive_visibility(visible)
-    if SydneyHUD:GetOption("show_downs_left") and self._revives_counter then
-        self._revives_counter:set_visible(not managers.groupai:state():whisper_mode() and visible and not self._is_in_custody)
-    end
-end
-
 function HUDTeammate:set_detection_visibility(visible)
     if SydneyHUD:GetOption("show_detection_rate") and self._detection_counter then
         self._detection_counter:set_visible(managers.groupai:state():whisper_mode() and visible and not self._is_in_custody)
@@ -535,7 +476,6 @@ end
 
 function HUDTeammate:set_player_in_custody(incustody)
     self._is_in_custody = incustody
-    self:set_revive_visibility(not incustody)
     self:set_detection_visibility(not incustody)
     self:set_stamina_meter_visibility(not incustody)
     if incustody then
@@ -574,22 +514,12 @@ end
 local set_health_original = HUDTeammate.set_health
 function HUDTeammate:set_health(data)
     if data.revives then
-        if self._revives_counter then
-            local revive_colors = { Color("FF8000"), Color("FFFF00"), Color("80FF00"), Color("00FF00") }
-            self._revives_counter:set_color(revive_colors[data.revives - 1] or Color.red)
-            if self._main_player and managers.player:has_category_upgrade("player", "messiah_revive_from_bleed_out") then
-                self._revives_counter:set_text(tostring(data.revives - 1) .. "/" .. tostring(managers.player._messiah_charges or 0))
-            else
-                self._revives_counter:set_text(tostring(data.revives - 1))
-            end
-        end
         self:set_player_in_custody(data.revives - 1 < 0)
     end
     return set_health_original(self, data)
 end
 
 function HUDTeammate:set_hud_mode(mode)
-    self:set_revive_visibility(mode ~= "stealth")
     self:set_detection_visibility(mode == "stealth")
 end
 
@@ -645,7 +575,6 @@ function HUDTeammate:set_name(teammate_name, ...)
     if teammate_name ~= self._name then
         self._name = teammate_name
         self:reset_kill_count()
-        self:reset_revives()
     end
     self._color_pos = 1
     local truncated_name = teammate_name:gsub('^%b[]',''):gsub('^%b==',''):gsub('^%s*(.-)%s*$','%1')
@@ -714,17 +643,21 @@ function HUDTeammate:_truncate_name()
 end
 
 function HUDTeammate:refresh_kill_count_visibility()
-    self._kills_panel:set_visible((not self._ai or SydneyHUD:GetOption("show_ai_kills")) and SydneyHUD:GetOption("enable_kill_counter"))
+    if self._kills_panel then
+        self._kills_panel:set_visible((not self._ai or SydneyHUD:GetOption("show_ai_kills")) and SydneyHUD:GetOption("enable_kill_counter"))
+    end
 end
 
 local set_state_original = HUDTeammate.set_state
 function HUDTeammate:set_state(...)
     set_state_original(self, ...)
     self:refresh_kill_count_visibility()
-    if self._ai then
-        self._kills_panel:set_bottom(self._panel:child("player"):bottom())
-    else
-        self._kills_panel:set_bottom(self._panel:child("name"):bottom())
+    if self._kills_panel then
+        if self._ai then
+            self._kills_panel:set_bottom(self._panel:child("player"):bottom())
+        else
+            self._kills_panel:set_bottom(self._panel:child("name"):bottom())
+        end
     end
 end
 

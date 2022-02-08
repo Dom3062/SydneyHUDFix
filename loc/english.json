@@ -197,8 +197,6 @@
     "show_damage_popup_desc": "Show damage popup",
     "show_detection_rate": "Show detection risk (stealth)",
     "show_detection_rate_desc": "Shows your detection risk",
-    "show_downs_left" : "Show downs left (loud)",
-    "show_downs_left_desc" : "Shows your remaining downs",
     "show_enemy_health": "Enemy health bar",
     "show_enemy_health_desc": "Show enemy health bar",
     "show_grenades_in_preplanning" : "Show Grenades In Preplanning",

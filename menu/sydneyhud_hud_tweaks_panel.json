@@ -45,15 +45,6 @@
         },
         {
             "type": "toggle",
-            "id": "show_downs_left",
-            "title": "show_downs_left",
-            "description": "show_downs_left_desc",
-            "callback": "SetValue",
-            "value": "show_downs_left",
-            "default_value": true
-        },
-        {
-            "type": "toggle",
             "id": "show_underdog_aced",
             "title": "show_underdog_aced",
             "description": "show_underdog_aced_desc",
