@@ -138,8 +138,6 @@ function SydneyMenu:init()
     end
 
     self:OpenMenu("sydneyhud_menu")
-
-    --self:InitTextures()
 end
 
 function SydneyMenu:CallCallback(item, params)
@@ -260,9 +258,6 @@ function SydneyMenu:Close()
         self._controller = nil
     end
     SydneyHUD:Save()
-    if Utils:IsInHeist() then
-        managers.hud:SydneyHUDUpdate()
-    end
 
     self._panel:stop()
     self._panel:animate(function(o)
@@ -1991,65 +1986,6 @@ function SydneyMenu:ResetColorMenu()
             self:SetColorSlider(v, math.lerp(world_x, world_x + v:w(), c[number] / 255), number)
         end
     end
-end
-
-function SydneyMenu:InitTextures()
-    local right = self._tooltip:right()
-    local panel = self._panel
-    self._menu_difficulty_name_enabled = panel:bitmap({
-        texture = "guis/textures/pd2_mod_bai/menu/difficulty_name_enabled",
-        valign = 'center',
-        halign = 'center',
-        visible = false,
-        layer = 500,
-        blend_mode = 'normal'
-    })
-    self._menu_difficulty_name_enabled:set_right(right)
-    self._menu_difficulty_name_disabled = panel:bitmap({
-        texture = "guis/textures/pd2_mod_bai/menu/difficulty_name_disabled",
-        valign = 'center',
-        halign = 'center',
-        visible = false,
-        layer = 500,
-        blend_mode = 'normal'
-    })
-    self._menu_difficulty_name_disabled:set_right(right)
-    self._menu_aai_panel_1 = panel:bitmap({
-        texture = "guis/textures/pd2_mod_bai/menu/aai_panel_1",
-        valign = 'center',
-        halign = 'center',
-        visible = false,
-        layer = 500,
-        blend_mode = 'normal'
-    })
-    self._menu_aai_panel_1:set_right(right)
-    self._menu_aai_panel_2 = panel:bitmap({
-        texture = "guis/textures/pd2_mod_bai/menu/aai_panel_2",
-        valign = 'center',
-        halign = 'center',
-        visible = false,
-        layer = 500,
-        blend_mode = 'normal'
-    })
-    self._menu_aai_panel_2:set_right(right)
-    self._menu_captain_panel_enabled = panel:bitmap({
-        texture = "guis/textures/pd2_mod_bai/menu/captain_panel_enabled",
-        valign = 'center',
-        halign = 'center',
-        visible = false,
-        layer = 500,
-        blend_mode = 'normal'
-    })
-    self._menu_captain_panel_enabled:set_right(right)
-    self._menu_captain_panel_disabled = panel:bitmap({
-        texture = "guis/textures/pd2_mod_bai/menu/captain_panel_disabled",
-        valign = 'center',
-        halign = 'center',
-        visible = false,
-        layer = 500,
-        blend_mode = 'normal'
-    })
-    self._menu_captain_panel_disabled:set_right(right)
 end
 
 dofile(SydneyHUD.LuaPath .. "SydneyMenuCallbacks.lua")

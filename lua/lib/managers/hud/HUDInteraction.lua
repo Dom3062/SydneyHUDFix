@@ -36,10 +36,6 @@ function HUDInteraction:init(hud, child_name)
     self._bgtext3:set_x(self._bgtext3:x() - 1)
     self._bgtext4:set_y(self._hud_panel:h() / 2 - 1)
     self._bgtext4:set_x(self._bgtext4:x() + 1)
-    self:SydneyHUDUpdate()
-end
-
-function HUDInteraction:SydneyHUDUpdate()
     self.show_interaction_circle = SydneyHUD:GetOption("show_interaction_circle")
     self.show_interaction_text = SydneyHUD:GetOption("show_interaction_text")
     self.show_text_borders = SydneyHUD:GetOption("show_text_borders")
