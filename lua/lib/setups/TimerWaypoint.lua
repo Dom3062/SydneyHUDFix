@@ -46,6 +46,8 @@ Ignore_Waypoints = {
 	[141322] = { ignore = true },							--Cursed kill room safe 4 timer
 	[140821] = { ignore = true },							--Cursed kill room safe 5 timer
 	[140822] = { ignore = true },							--Cursed kill room safe 5 timer
+    [138403] = { ignore = true },                           --Dragon Heist Wall C4 Escape Timer 1
+    [138404] = { ignore = true },                           --Dragon Heist Wall C4 Escape Timer 2
 }
 
 function TimerWaypoint:init(id, ws, data)
