@@ -54,9 +54,9 @@ function ECMJammerBase:update(unit, t, dt, ...)
         if not self._is_sent then
             if ecm_life_time == "5.0" and SydneyHUD:GetOption("ecm_battery_chat_info") then -- 5.0sec remining
                 if SydneyHUD:GetOption("ecm_battery_chat_info_feed") then
-                    SydneyHUD:SendChatMessage("ECM batt.", "5sec remining", true)
+                    SydneyHUD:SendChatMessage("ECM batt.", "5sec remaining", true)
                 else
-                    SydneyHUD:SendChatMessage("ECM batt.", "5sec remining")
+                    SydneyHUD:SendChatMessage("ECM batt.", "5sec remaining")
                 end
 
                 self._is_sent = true
