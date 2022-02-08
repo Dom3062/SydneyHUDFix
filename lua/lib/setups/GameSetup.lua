@@ -115,7 +115,7 @@ else
         self._id = id
         self._ws = ws
         self._panel = self._ws:panel():panel({ name = id, visible = false })
-        self._position = data.position and mvector3.copy(data.position)
+        self._position = data.position and mvector3.copy(data.position) or Vector3()
         self._show_offscreen = data.show_offscreen
         self._enabled = true
         self._visible = false
@@ -140,7 +140,7 @@ else
             [2] = "ellipse",
             [3] = "border"
         }
-        
+
         self.OFFSCREEN_TYPE = table[math.clamp(SydneyHUD:GetOption("offscreen_type"), 1, 3)]
         self.OFFSCREEN_RADIUS_SCALE = SydneyHUD:GetOption("offscreen_radius_scale")
         self.TRANSIT_SPEED = SydneyHUD:GetOption("transit_speed")

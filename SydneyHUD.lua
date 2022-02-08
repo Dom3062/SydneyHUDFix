@@ -234,7 +234,7 @@ if not SydneyHUD then
             file:write(json.encode(self._fixed_poco_conf))
             file:close()
             local menu_title = managers.localization:text("sydneyhud_pocohud_config_fixed")
-            local menu_message = managers.localization:text("sydneyhud_pocohud_confix_fixed_desc")
+            local menu_message = managers.localization:text("sydneyhud_pocohud_config_fixed_desc")
             local menu_options = {
                 [1] = {
                     text = managers.localization:text("sydneyhud_pocohud_i_understand"),
@@ -424,7 +424,7 @@ if not SydneyHUD then
     end ]]
 
     function SydneyHUD:EasterEggInit()
-        self.EasterEgg.FSS.AIReactionTimeTooHigh = (FullSpeedSwarm and (FullSpeedSwarm.settings.task_throughput > 600 or FullSpeedSwarm.settings.task_throughput == 0) and Network:is_server() and Global.game_settings.difficulty == "sm_wish") or
+        self.EasterEgg.FSS.AIReactionTimeTooHigh = (FullSpeedSwarm and (FullSpeedSwarm.settings.task_throughput ~= 60 and Network:is_server() and Global.game_settings.difficulty == "sm_wish")) or
             (managers.crime_spree and managers.crime_spree:is_active() and managers.crime_spree:server_spree_level() >= 500 or false)
     end
 
