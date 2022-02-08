@@ -42,6 +42,8 @@
                     <post :hook_id="stageendscreengui" :script_path="StageEndScreenGui.lua"/>
                 </group>
 
+                <post :hook_id="mission/elementaiglobalevent" :script_path="mission/ElementAiGlobalEvent.lua"/>
+
                 <post :hook_id="menumanager" :script_path="MenuManager.lua"/>
                 <post :hook_id="missionassetsmanager" :script_path="MissionAssetsManager.lua"/>
                 <post :hook_id="moneymanager" :script_path="MoneyManager.lua"/>

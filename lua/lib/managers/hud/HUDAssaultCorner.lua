@@ -30,7 +30,6 @@ function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
         self.is_crimespree = managers.crime_spree and managers.crime_spree:is_active() or false
         self.CompatibleHost = false
         self.BAIHost = false
-        self.send_time_left = true
         dofile(SydneyHUD.LuaPath .. "lib/managers/LocalizationManager.lua")
         dofile(SydneyHUD.LuaPath .. "lib/managers/hud/HUDAssaultCorner_AssaultStates.lua")
         dofile(SydneyHUD.LuaPath .. "lib/managers/hud/HUDAssaultCorner_AssaultTime.lua")
@@ -202,6 +201,14 @@ if BAI then -- Halt execution here, because the first four functions have nothin
     return
 end
 
+function HUDAssaultCorner:StartEndlessAssaultClient()
+    if self._assault_vip or self._point_of_no_return then
+        return
+    end
+    self:SetEndlessClient(true)
+    self:_start_endless_assault(self:_get_assault_endless_strings())
+end
+
 local old_sync_set_assault_mode = HUDAssaultCorner.sync_set_assault_mode
 function HUDAssaultCorner:sync_set_assault_mode(mode)
     old_sync_set_assault_mode(self, mode)
@@ -226,6 +233,9 @@ function HUDAssaultCorner:SetTimer()
             self.client_time_left = self.client_time_left + (sustain / 2)
         end
     end
+    SydneyHUD:DelayCall("SydneyHUD_RequestCurrentAssaultTimeLeft", 40, function()
+        LuaNetworking:SendToPeer(1, "BAI_Message", "RequestCurrentAssaultTimeLeft")
+    end)
 end
 
 function HUDAssaultCorner:SetTimeLeft(time)
@@ -276,10 +286,6 @@ function HUDAssaultCorner:GetAssaultTime(sender)
 end
 
 function HUDAssaultCorner:GetTimeLeft()
-    if self.send_time_left and (self.client_time_left - TimerManager:game():time() > 40) then
-        self.send_time_left = false
-        LuaNetworking:SendToPeer(1, "BAI_Message", "RequestCurrentAssaultTimeLeft")
-    end
 	return self.client_time_left - TimerManager:game():time()
 end
 
@@ -302,7 +308,7 @@ function HUDAssaultCorner:start_assault_callback()
                 if self.is_client then
                     LuaNetworking:SendToPeer(1, "BAI_Message", "RequestCurrentAssaultTimeLeft")
                 end
-            end    
+            end
         else
             if SydneyHUD:GetOption("show_assault_states") then
                 if self.is_host or (self.is_client and self.CompatibleHost) then
@@ -320,11 +326,8 @@ end
 
 function HUDAssaultCorner:GetEndlessAssault()
     if not self._no_endless_assault_override then
-        if Network:is_server() then
-            if managers.groupai:state():get_hunt_mode() then
-                LuaNetworking:SendToPeers("BAI_Message", "endless_triggered")
-                return true
-            end -- Returns false
+        if Network:is_server() and managers.groupai:state():get_hunt_mode() then
+            return true
         end
         return self.endless_client
     end
@@ -427,7 +430,7 @@ function HUDAssaultCorner:SetEndlessClient(setter, dont_override)
 end
 
 function HUDAssaultCorner:SetNormalAssaultOverride()
-    if self._assault_vip then
+    if self._assault_vip or not self._assault_endless then
         return
     end
     self:SetImage("assault")
@@ -710,15 +713,16 @@ function HUDAssaultCorner:SetCompatibleHost(BAIHost)
     end
 end
 
-function HUDAssaultCorner:show_point_of_no_return_timer()
+function HUDAssaultCorner:show_point_of_no_return_timer(id)
+    self._point_of_no_return = true
     local delay_time = self._assault and 1.2 or 0
     self:_close_assault_box()
+    self:_update_noreturn(id)
     local point_of_no_return_panel = self._hud_panel:child("point_of_no_return_panel")
     self:_hide_hostages()
     point_of_no_return_panel:stop()
     point_of_no_return_panel:animate(callback(self, self, "_animate_show_noreturn"), delay_time)
     self:_set_feedback_color(self._noreturn_color)
-    self._point_of_no_return = true
     self:HUDTimer(false)
 end
 
@@ -738,7 +742,7 @@ if SydneyHUD:GetOption("center_assault_banner") then
 end
 
 function HUDAssaultCorner:GetFactionAssaultText()
-    if SydneyHUD.EasterEgg.FSS.AIReactionTimeTooHigh and math.random(0, 100) % 25 == 0 then
+    if SydneyHUD.EasterEgg.FSS.AIReactionTimeTooHigh and math.random(0, 100) % 10 == 0 then
         return "_fss_mod_" .. math.random(1, 3)
     end
     return ""
@@ -753,22 +757,13 @@ Hooks:Add("NetworkReceivedData", "NetworkReceivedData_BAI", function(sender, id,
         return
     end
     if id == "BAI_Message" then
-        if data == "endless_triggered" then -- Client
-            managers.hud._hud_assault_corner:SetEndlessClient(true)
-        end
         if data == "BAI?" then -- Host
             LuaNetworking:SendToPeer(sender, id, "BAI!")
         end
         if data == "BAI!" then -- Client
             managers.hud._hud_assault_corner:SetCompatibleHost(true)
-            LuaNetworking:SendToPeer(1, id, "IsEndlessAssault?")
             LuaNetworking:SendToPeer(1, "BAI_EasterEgg", "AIReactionTimeTooHigh?")
             --LuaNetworking:SendToPeer(1, id, BAI.data.ResendAS)
-        end
-        if data == "IsEndlessAssault?" then -- Host
-            if managers.hud._hud_assault_corner:get_assault_mode() ~= "phalanx" and managers.groupai:state():get_hunt_mode() then -- Notifies drop-in client about Endless Assault in progress
-                LuaNetworking:SendToPeer(sender, id, "endless_triggered")
-            end
         end
         if data == "NormalAssaultOverride" then -- Client
             managers.hud._hud_assault_corner:SetNormalAssaultOverride()

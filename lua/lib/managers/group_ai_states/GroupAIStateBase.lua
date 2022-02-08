@@ -157,3 +157,18 @@ function GroupAIStateBase:register_ecm_jammer(unit, jam_settings, ...)
     end
     return register_ecm_jammer_original(self, unit, jam_settings, ...)
 end
+
+if not BAI then
+    local load_original = GroupAIStateBase.load
+    function GroupAIStateBase:load(load_data, ...)
+        load_original(self, load_data, ...)
+        local law1team = self._teams[tweak_data.levels:get_default_team_ID("combatant")]
+        if law1team then
+            if self._hunt_mode and not law1team.damage_reduction then
+                managers.hud:SetEndlessClient()
+            end
+        elseif self._hunt_mode then
+            managers.hud:SetEndlessClient()
+        end
+    end
+end
