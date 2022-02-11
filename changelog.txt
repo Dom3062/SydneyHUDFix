@@ -1,9 +1,10 @@
-4.2.7 (xx. 02. 2022):
+4.2.7 (11. 02. 2022):
 Updated BAI code to r134
 Removed Down Counter
 Fixed an error string in "Fixing PocoHUD settings conflict" screen
 Fixed 'mods/SydneyHUD/lua/HUDTeammate.lua:600: attempt to index field '_detection_counter' (a nil value)' crash
 Fixed a typo in "5sec remining" reminder
+Fixed a UI bug with weapon reload interaction when the weapon reload was interrupted
 
 4.2.6 (04. 04. 2021):
 Added name for the Triad Thugs
