@@ -20,9 +20,9 @@ function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
         self._state_build_color = Color(255, 255, 255, 0) / 255
         self._state_sustain_color = Color(255, 237, 127, 127) / 255
         self._state_fade_color = Color(255, 0, 255, 255) / 255
-        self.heists_with_fake_endless_assaults = { "framing_frame_1", "gallery", "watchdogs_2", "bph" } -- Framing Frame Day 1, Art Gallery, Watch Dogs Day 2, Hell's Island
         local level_id = Global.game_settings.level_id
-        self._no_endless_assault_override = table.contains(self.heists_with_fake_endless_assaults, level_id)
+        -- Framing Frame Day 1, Art Gallery, Watch Dogs Day 2, Hell's Island
+        self._no_endless_assault_override = table.contains({ "framing_frame_1", "gallery", "watchdogs_2", "bph" }, level_id)
         self.endless_client = false
         self.is_host = Network:is_server()
         self.is_client = not self.is_host
@@ -36,11 +36,6 @@ function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
         dofile(SydneyHUD.LuaPath .. "lib/managers/group_ai_states/GroupAIStateBesiege.lua")
         dofile(SydneyHUD.LuaPath .. "SydneyAnimation.lua")
         if self.is_client then
-            -- Safe House Nightmare, The Biker Heist Day 2, Cursed Kill Room, Escape: Garage, Escape: Cafe, Escape: Cafe (Day)
-            self.heists_with_endless_assaults = { "haunted", "chew", "hvh", "escape_garage", "escape_cafe", "escape_cafe_day" }
-            -- Pentpay Bank (Loud)
-            self.custom_heists_with_endless_assault = { "q_bank_sky_loud" }
-            self.endless_client = table.contains(self.heists_with_endless_assaults, level_id) or table.contains(self.custom_heists_with_endless_assault, level_id)
             self.diff = self:GetCorrectDiff(level_id)
         end
         self.assault_state = "nil"
@@ -79,11 +74,16 @@ function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
                 x = 4
             })
         }, tweak_hud)
-        self._assault_timer._timer_text:set_font_size(tweak_data.hud_corner.assault_size)
-        self._assault_timer._timer_text:set_font(Idstring(tweak_data.hud_corner.assault_font))
-        self._assault_timer._timer_text:set_align("left")
-        self._assault_timer._timer_text:set_vertical("center")
-        self._assault_timer._timer_text:set_color(Color.white:with_alpha(0.9))
+        if self._assault_timer and self._assault_timer._timer_text then
+            self._assault_timer._timer_text:set_font_size(tweak_data.hud_corner.assault_size)
+            self._assault_timer._timer_text:set_font(Idstring(tweak_data.hud_corner.assault_font))
+            self._assault_timer._timer_text:set_align("left")
+            self._assault_timer._timer_text:set_vertical("center")
+            self._assault_timer._timer_text:set_color(Color.white:with_alpha(0.9))
+        else
+            -- Other mod probably overrode "HUDHeistTimer" class, set this to "nil" to disable this timer
+            self._assault_timer = nil
+        end
         self._last_casing_timer_size = 0
         self._casing_timer = HUDHeistTimer:new({
             panel = self._casing_bg_box:panel({
@@ -91,11 +91,16 @@ function HUDAssaultCorner:init(hud, full_hud, tweak_hud)
                 x = 4
             })
         }, tweak_hud)
-        self._casing_timer._timer_text:set_font_size(tweak_data.hud_corner.assault_size)
-        self._casing_timer._timer_text:set_font(Idstring(tweak_data.hud_corner.assault_font))
-        self._casing_timer._timer_text:set_align("left")
-        self._casing_timer._timer_text:set_vertical("center")
-        self._casing_timer._timer_text:set_color(Color.white:with_alpha(0.9))
+        if self._casing_timer and self._casing_timer._timer_text then
+            self._casing_timer._timer_text:set_font_size(tweak_data.hud_corner.assault_size)
+            self._casing_timer._timer_text:set_font(Idstring(tweak_data.hud_corner.assault_font))
+            self._casing_timer._timer_text:set_align("left")
+            self._casing_timer._timer_text:set_vertical("center")
+            self._casing_timer._timer_text:set_color(Color.white:with_alpha(0.9))
+        else
+            -- Other mod probably overrode "HUDHeistTimer" class, set this to "nil" to disable this timer
+            self._casing_timer = nil
+        end
         if managers.skirmish and managers.skirmish:is_skirmish() and self.hudlist_enemy == 1 and self.center_assault_banner then
             if self._hud_panel:child("wave_panel") then
                 self._hud_panel:remove(self._hud_panel:child("wave_panel"))
