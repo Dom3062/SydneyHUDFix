@@ -17,7 +17,8 @@
                 "sydneyhud_language_french",
                 "sydneyhud_language_russian",
                 "sydneyhud_language_portuguese",
-                "sydneyhud_language_spanish"
+                "sydneyhud_language_spanish",
+                "sydneyhud_language_korean"
             ],
             "value": "language",
             "default_value": 1

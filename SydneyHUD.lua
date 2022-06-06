@@ -40,7 +40,7 @@ if not SydneyHUD then
 
         SaveDataVer = 3,
 
-        ModVersion = nil, -- Used for caching mod version
+        ModVersion = ModInstance and tostring(ModInstance:GetVersion()) or "N/A",
 
         EasterEgg =
         {
@@ -59,7 +59,8 @@ if not SydneyHUD then
             [3] = "french",
             [4] = "russian",
             [5] = "portuguese",
-            [6] = "spanish"
+            [6] = "spanish",
+            [7] = "korean"
         },
 
         -- var for util
@@ -263,18 +264,6 @@ if not SydneyHUD then
     end
 
     function SydneyHUD:GetVersion()
-        if self.ModVersion then -- Caching
-            return self.ModVersion
-        end
-        for _, mod in ipairs(BLT.Mods:Mods()) do
-            if mod:GetName() == "SydneyHUD" then -- I don't understand, why BLT is checking every mod it's identifier (mod folder name) and not mod name defined in mod.txt
-                self.ModVersion = tostring(mod:GetVersion() or "(n/a)")
-                break
-            end
-        end
-        if not self.ModVersion then
-            self.ModVersion = "(n/a)"
-        end
         return self.ModVersion
     end
 
