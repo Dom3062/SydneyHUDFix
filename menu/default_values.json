@@ -228,6 +228,7 @@
     "offscreen_radius_scale" : 1,
     "push_to_interact": true,
     "push_to_interact_delay": 5.0,
+    "reduce_shotgun_spam": false,
     "remove_ads": true,
     "remove_answered_pager_contour": true,
     "replenished_chat_info": false,

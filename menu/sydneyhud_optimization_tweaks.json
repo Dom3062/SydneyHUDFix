@@ -57,6 +57,15 @@
             "callback": "SetValue",
             "value": "block_shields",
             "default_value": false
+        },
+        {
+            "type": "toggle",
+            "id": "reduce_shotgun_spam",
+            "title": "sydneyhud_optimization_tweaks_reduce_shotgun_spam",
+            "description": "sydneyhud_optimization_tweaks_reduce_shotgun_spam_desc",
+            "callback": "SetValue",
+            "value": "reduce_shotgun_spam",
+            "default_value": false
         }
     ]
 }

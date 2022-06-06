@@ -1,3 +1,6 @@
+4.2.8 (xx. 06. 2022):
+Added "Reduce Shotgun Spam" optimization
+
 4.2.7 (11. 02. 2022):
 Updated BAI code to r134
 Removed Down Counter

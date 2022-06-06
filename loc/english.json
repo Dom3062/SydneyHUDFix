@@ -481,6 +481,8 @@
     "sydneyhud_optimization_tweaks_block_magazines_desc" : "Blocks empty magazines on the ground",
     "sydneyhud_optimization_tweaks_block_shields" : "Block Shields",
     "sydneyhud_optimization_tweaks_block_shields_desc" : "Blocks lying shields on the ground",
+    "sydneyhud_optimization_tweaks_reduce_shotgun_spam": "Reduce Shotgun Spam",
+    "sydneyhud_optimization_tweaks_reduce_shotgun_spam_desc": "Visually reduces shotgun spam from your teammates",
 
     "sydneyhud_menu": "SydneyHUD",
     "sydneyhud_menu_desc": "SydneyHUD options",
