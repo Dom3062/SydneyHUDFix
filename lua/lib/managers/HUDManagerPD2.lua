@@ -304,10 +304,10 @@ function HUDManager:set_teammate_custom_radial(i, data)
     custom_radial_original(self, i, data)
 end
 
-local _f_set_player_ability_radial = HUDManager.set_player_ability_radial
-function HUDManager:set_player_ability_radial(data)
-    if SydneyHUD:GetOption("kingpin_effect") then
-        local hud = managers.hud:script(PlayerBase.PLAYER_INFO_HUD_FULLSCREEN_PD2)
+if SydneyHUD:GetOption("kingpin_effect") then
+    local _f_set_player_ability_radial = HUDManager.set_player_ability_radial
+    function HUDManager:set_player_ability_radial(data)
+        local hud = self:script(PlayerBase.PLAYER_INFO_HUD_FULLSCREEN_PD2)
         if not hud.panel:child("chico_injector_left") then
             local chico_injector_left = hud.panel:bitmap({
                 name = "chico_injector_left",
@@ -325,7 +325,7 @@ function HUDManager:set_player_ability_radial(data)
         local chico_injector_left = hud.panel:child("chico_injector_left")
         if data.current < data.total and data.current > 0 and chico_injector_left then
             chico_injector_left:set_visible(true)
-            local hudinfo = managers.hud:script(PlayerBase.PLAYER_INFO_HUD_PD2)
+            local hudinfo = self:script(PlayerBase.PLAYER_INFO_HUD_PD2)
             chico_injector_left:animate(hudinfo.flash_icon, 4000000000)
         elseif chico_injector_left then
             chico_injector_left:stop()
